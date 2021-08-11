@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Backend.Models.ShopPanelModels
+﻿namespace Backend.Models.ShopPanelModels
 {
     public class EmployeeProfiles
     {
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+        public int ProfileId { get; set; }
+        public Profile Profile { get; set; } 
     }
 }

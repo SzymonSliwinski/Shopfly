@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Backend.Models.ShopPanelModels
+﻿namespace Backend.Models.ShopPanelModels
 {
     public class ProfilesPrivileges
     {
+        public int ProfileId { get; set; }
+        public Profile Profile { get; set; }
+        public int PrivilegeId { get; set; }
+        public Privilege Privilege { get; set; }
     }
 }
