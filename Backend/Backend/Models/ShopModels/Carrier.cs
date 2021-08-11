@@ -11,6 +11,6 @@ namespace Backend.Models.ShopModels
         public int DeliveryDaysMinimum { get; set; }
         public int DeliveryDaysMaximum { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Carrier> Carriers { get; set; }
+        public List<ProductsCarriers> ProductsCarriers { get; set; }
     }
 }

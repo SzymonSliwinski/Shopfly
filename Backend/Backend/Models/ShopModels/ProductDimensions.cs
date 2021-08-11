@@ -8,6 +8,6 @@ namespace Backend.Models.ShopModels
         public float Width { get; set; }
         public float Height { get; set; }
         public float Weight { get; set; }
-        public List<ProductsVariants> ProductsVariants { get; set; }
+        public List<ProductVariant> ProductsVariants { get; set; }
     }
 }

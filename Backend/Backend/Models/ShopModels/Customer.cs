@@ -10,8 +10,8 @@ namespace Backend.Models.ShopModels
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public bool IsNewsletterSubscribe { get; set; }
-        public DateTime CreateTime { get; set; }
+        public bool IsNewsletterSubscribed { get; set; }
+        public DateTime CreateDate { get; set; }
         public DateTime LastLoginDate { get; set; }
         // todo default language table (defaultLanguageId)
         public string Password { get; set; }    // todo password

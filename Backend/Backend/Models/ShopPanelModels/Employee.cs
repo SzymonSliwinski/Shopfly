@@ -1,4 +1,6 @@
-﻿namespace Backend.Models
+﻿using System.Collections.Generic;
+
+namespace Backend.Models.ShopPanelModels
 {
     public class Employee
     {
@@ -8,5 +10,6 @@
         public string Email { get; set; }
         public bool IsActive { get; set; }
         public string Password { get; set; }//todo
+        public List<EmployeesProfiles> EmployeesProfiles { get; set; }
     }
 }

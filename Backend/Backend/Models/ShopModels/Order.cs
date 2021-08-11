@@ -15,7 +15,7 @@ namespace Backend.Models.ShopModels
         public Carrier Carrier { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public float PriceTotal { get; set; }   // todo check: float or int?
+        public float PriceTotal { get; set; }
         public DateTime Date { get; set; }
         public string AdditionalDescription { get; set; } // todo length of string //optional
         public List<OrdersProducts> OrdersProducts { get; set; }
