@@ -1,5 +1,5 @@
+import { ProductVariant } from './product-variant.model';
 import { ProductsTags } from './products-tags.model';
-import { ProductsVariants } from './products-variants.model';
 import { ProductsCarriers } from './products-carriers.model';
 import { ProductsPayments } from './products-payments.model';
 import { OrdersProducts } from './orders-products.model';
@@ -31,5 +31,5 @@ export interface Product{
     productsPayments: ProductsPayments[];
     productsCarriers: ProductsCarriers[];
     productsTags: ProductsTags[];
-    productsVariants: ProductsVariants[];
+    productsVariants: ProductVariant[];
 }
