@@ -6,6 +6,6 @@ namespace Backend.Models.ShopPanelModels
     {
         public int Id { get; set; }
         public string Name { get; set; }    // todo length of string
-        public List<EmployeesProfiles> EmployeesProfiles { get; set; }
+        public List<ProfilesPrivileges> ProfilesPrivileges { get; set; }
     }
 }
