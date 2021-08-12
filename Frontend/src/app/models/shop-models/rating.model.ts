@@ -6,5 +6,5 @@ export interface Rating{
     customer: Customer;
     productId: number;
     product: Product;
-    rating: number;
+    rate: number;
 }

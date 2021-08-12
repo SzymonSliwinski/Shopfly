@@ -13,7 +13,7 @@ namespace Backend.Models.ShopModels
         public bool IsOnSale { get; set; }
         public int SalePercentage { get; set; }
         public int Quantity { get; set; }
-        public List<ProductsVariants> ProductsVariants { get; set; }    // todo prawdopodobnie ma jej nie być
         public List<ProductsVariantsPhotos> ProductsVariantsPhotos { get; set; }
+        public Product Product { get; set; }
     }
 }

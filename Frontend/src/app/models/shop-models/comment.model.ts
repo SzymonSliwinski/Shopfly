@@ -6,5 +6,5 @@ export interface Comment{
     customer: Customer;
     productId: number;
     product: Product;
-    comment: string;
+    content: string;
 }
