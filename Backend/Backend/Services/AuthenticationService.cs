@@ -8,11 +8,11 @@ namespace Backend.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private List<Token> listTokens;
+        private List<Token> _listTokens;
 
         public AuthenticationService()
         {
-            listTokens = new List<Token>();
+            _listTokens = new List<Token>();
         }
 
         public bool Authenticate(string loginOrEmail, string password)//todo password
@@ -35,13 +35,13 @@ namespace Backend.Services
                 ExpirationDate = DateTime.Now.AddMinutes(20).ToLocalTime()//to do dynamic
             };
 
-            listTokens.Add(token);
+            _listTokens.Add(token);
             return token;
         }
 
         public bool VerifyToken(string token)
         {
-            if (listTokens.Any(t => t.Value == token &&
+            if (_listTokens.Any(t => t.Value == token &&
                 t.ExpirationDate > DateTime.Now.ToLocalTime()))
                 return true;
 
