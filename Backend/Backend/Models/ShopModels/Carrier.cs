@@ -5,8 +5,8 @@ namespace Backend.Models.ShopModels
     public class Carrier
     {
         public int Id { get; set; }
-        public float Cost { get; set; } // todo check: ma być float czy int?
-        public string Name { get; set; }    // todo length of string
+        public float Cost { get; set; }
+        public string Name { get; set; }
         public string Logo { get; set; }
         public int DeliveryDaysMinimum { get; set; }
         public int DeliveryDaysMaximum { get; set; }

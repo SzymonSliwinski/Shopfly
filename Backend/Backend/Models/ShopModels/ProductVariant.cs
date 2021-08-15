@@ -7,7 +7,7 @@ namespace Backend.Models.ShopModels
         public int Id { get; set; }
         public int ColorId { get; set; }
         public ProductColor Color { get; set; }
-        public int DiemensionsId { get; set; }
+        public int DimensionId { get; set; }        // tutaj poprawiłem literówkę
         public ProductDimensions Dimension { get; set; }
         public float Price { get; set; }
         public bool IsOnSale { get; set; }
