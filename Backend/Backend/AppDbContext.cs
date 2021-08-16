@@ -58,17 +58,19 @@ namespace Backend
             ConfigureStatuses(modelBuilder);
             ConfigureTags(modelBuilder);
             ConfigureTaxes(modelBuilder);
+            ConfigureOrdersProducts(modelBuilder);
 
             //relations
             SetPrivilegesProfilesRelation(modelBuilder);
-            SetEmplooyesProfilesRelation(modelBuilder);
+            SetEmployeesProfilesRelation(modelBuilder);
             SetCommentsCustomersRelation(modelBuilder);
             SetCustomerFavouriteProductsRelation(modelBuilder);
             SetOrdersProductRelation(modelBuilder);
-            SetProductCarriersRelation(modelBuilder);
+            SetProductsCarriersRelation(modelBuilder);
             SetProductPaymentsRelation(modelBuilder);
             SetProductTagsRelation(modelBuilder);
             SetProductVariantsPhotosRelation(modelBuilder);
+            SetCustomersRatingsRelation(modelBuilder);
         }
 
         // ShopPanelModels configuration:
@@ -231,6 +233,12 @@ namespace Backend
                 .Property(t => t.Name).HasMaxLength(15);
         }
 
+        private void ConfigureOrdersProducts(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrdersProducts>()
+                .Property(op => op.ProductQuantity).IsRequired(false);
+        }
+
 
         // ShopPanelModels relations:
         private void SetPrivilegesProfilesRelation(ModelBuilder modelBuilder)
@@ -250,7 +258,7 @@ namespace Backend
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
-        private void SetEmplooyesProfilesRelation(ModelBuilder modelBuilder)
+        private void SetEmployeesProfilesRelation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EmployeesProfiles>()
                 .HasKey(ep => new { ep.EmployeeId, ep.ProfileId });
@@ -316,7 +324,7 @@ namespace Backend
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
-        private void SetProductCarriersRelation(ModelBuilder modelBuilder)
+        private void SetProductsCarriersRelation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductsCarriers>()
                 .HasKey(pc => new { pc.CarrierId, pc.ProductId });
@@ -377,6 +385,22 @@ namespace Backend
                 .HasOne(pvp => pvp.Photo)
                 .WithMany(pvp => pvp.ProductsVariantsPhotos)
                 .HasForeignKey(pvp => pvp.PhotoId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private void SetCustomersRatingsRelation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Rating>()
+                .HasKey(r => new { r.CustomerId, r.ProductId });
+            modelBuilder.Entity<Rating>()
+                .HasOne(r => r.Customer)
+                .WithMany(r => r.Ratings)
+                .HasForeignKey(r => r.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Rating>()
+                .HasOne(r => r.Product)
+                .WithMany(r => r.Ratings)
+                .HasForeignKey(r => r.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
