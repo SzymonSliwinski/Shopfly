@@ -17,7 +17,7 @@ namespace Backend.Models.ShopModels
         public Customer Customer { get; set; }
         public float PriceTotal { get; set; }
         public DateTime Date { get; set; }
-        public string AdditionalDescription { get; set; } // todo length of string //optional
+        public string AdditionalDescription { get; set; }
         public List<OrdersProducts> OrdersProducts { get; set; }
 
         // Delivery:
@@ -27,13 +27,13 @@ namespace Backend.Models.ShopModels
         public string DeliveryAddressCountry { get; set; }
 
         // Billing:
-        public string BillingAddressStreet { get; set; }   // all optional
+        public string BillingAddressStreet { get; set; }
         public string BillingAddressPostal { get; set; }
         public string BillingAddressCity { get; set; }
         public string BillingAddressCountry { get; set; }
 
         // Additional:
-        public string Nip { get; set; }    // all optional
+        public string Nip { get; set; }
         public string CompanyName { get; set; }
         public string CustomerPhoneNumber { get; set; }
         public string CustomerEmail { get; set; }
