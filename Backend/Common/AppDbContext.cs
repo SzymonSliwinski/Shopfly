@@ -137,7 +137,7 @@ namespace Backend
         {
             modelBuilder.Entity<Order>()
                 .Property(o => o.AdditionalDescription).HasMaxLength(200).IsRequired(false);
-            
+
             // Delivery:
             modelBuilder.Entity<Order>()
                 .Property(o => o.DeliveryAddressStreet).HasMaxLength(30);
@@ -204,7 +204,7 @@ namespace Backend
         private void ConfigureProductVariants(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductVariant>()
-                .Property(pv => pv.ColorId).IsRequired(false);    
+                .Property(pv => pv.ColorId).IsRequired(false);
             modelBuilder.Entity<ProductVariant>()
                 .Property(pv => pv.DimensionId).IsRequired(false);
             modelBuilder.Entity<ProductVariant>()
@@ -355,7 +355,7 @@ namespace Backend
                 .HasForeignKey(pp => pp.PaymentTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
-        
+
         private void SetProductTagsRelation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductsTags>()
