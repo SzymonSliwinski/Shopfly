@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Common.Models.ApiModels
 {
@@ -39,5 +36,7 @@ namespace Common.Models.ApiModels
     {
         public int Id { get; set; }
         public TableType TableType { get; set; }
+        public List<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
+
     }
 }

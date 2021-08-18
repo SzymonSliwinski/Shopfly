@@ -1,21 +1,19 @@
-﻿using Common.Models.ShopModels;
+﻿using Common.Models.ApiModels;
+using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
-using Common.Models.ApiModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Common
 {
     public class AppDbContext : DbContext
     {
+        // panel tables
         public DbSet<Privilege> Privileges { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<ProfilesPrivileges> ProfilesPrivileges { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeesProfiles> EmployeesProfiles { get; set; }
+        // shop tables
         public DbSet<Carrier> Carriers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -37,6 +35,12 @@ namespace Common
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Tax> Taxes { get; set; }
+
+        //ApiModels
+        public DbSet<Table> Tables { get; set; }
+        public DbSet<HttpMethod> HttpMethods { get; set; }
+        public ApiKeysTablesMethods ApiKeysTablesMethods { get; set; }
+        public ApiAccessKey ApiAccessKeys { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> option) : base(option) { }
 
@@ -95,7 +99,6 @@ namespace Common
                 .Property(e => e.Surname).HasMaxLength(50);
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Email).HasMaxLength(30);
-            // todo tutaj prawdopodobnie trzeba będzie zrobić właściwość do hasła
         }
 
 
@@ -189,9 +192,9 @@ namespace Common
             modelBuilder.Entity<Product>()
                 .Property(p => p.Name).HasMaxLength(30);
             modelBuilder.Entity<Product>()
-                .Property(p => p.IsLowStock).IsRequired(false);
+                .Property(p => p.IsLowStock);
             modelBuilder.Entity<Product>()
-                .Property(p => p.AdditionalShippingCost).IsRequired(false);
+                .Property(p => p.AdditionalShippingCost);
             modelBuilder.Entity<Product>()
                 .Property(p => p.Description).HasMaxLength(300);
         }
@@ -205,15 +208,15 @@ namespace Common
         private void ConfigureProductVariants(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductVariant>()
-                .Property(pv => pv.ColorId).IsRequired(false);
+                .Property(pv => pv.ColorId);
             modelBuilder.Entity<ProductVariant>()
-                .Property(pv => pv.DimensionId).IsRequired(false);
+                .Property(pv => pv.DimensionId);
             modelBuilder.Entity<ProductVariant>()
-                .Property(pv => pv.IsOnSale).IsRequired(false);
+                .Property(pv => pv.IsOnSale);
             modelBuilder.Entity<ProductVariant>()
-                .Property(pv => pv.SalePercentage).IsRequired(false);
+                .Property(pv => pv.SalePercentage);
             modelBuilder.Entity<ProductVariant>()
-                .Property(pv => pv.Quantity).IsRequired(false);
+                .Property(pv => pv.Quantity);
         }
 
         private void ConfigureStatuses(ModelBuilder modelBuilder)
@@ -237,7 +240,7 @@ namespace Common
         private void ConfigureOrdersProducts(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrdersProducts>()
-                .Property(op => op.ProductQuantity).IsRequired(false);
+                .Property(op => op.ProductQuantity);
         }
 
 

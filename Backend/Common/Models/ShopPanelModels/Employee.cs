@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Common.Models.ShopPanelModels
 {
@@ -9,7 +10,7 @@ namespace Common.Models.ShopPanelModels
         public string Surname { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
-        public string Password { get; set; }//todo
+        public MD5 Password { get; set; }
         public List<EmployeesProfiles> EmployeesProfiles { get; set; }
     }
 }
