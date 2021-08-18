@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Backend.Models.ShopModels
+namespace Common.Models.ShopModels
 {
     public class Customer
     {

@@ -1,10 +1,10 @@
-﻿using Backend.Interfaces;
-using Backend.Models.Token;
+﻿using ShopWebApi.Interfaces;
+using Common.Models.Token;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Backend.Services
+namespace ShopWebApi.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

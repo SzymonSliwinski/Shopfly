@@ -1,4 +1,4 @@
-﻿namespace Backend.Models.ShopModels
+﻿namespace Common.Models.ShopModels
 {
     public class CustomerFavouritesProducts
     {

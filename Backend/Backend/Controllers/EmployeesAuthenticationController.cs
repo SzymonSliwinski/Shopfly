@@ -1,14 +1,10 @@
 ﻿using Backend.Dtos;
-using Backend.Interfaces;
-using Backend.Models;
-using Backend.Services;
+using ShopWebApi.Interfaces;
+using Common.Models;
+using ShopWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Backend.Controllers
+namespace ShopWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

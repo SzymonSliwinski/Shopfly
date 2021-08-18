@@ -1,6 +1,6 @@
-﻿using Backend.Models.Token;
+﻿using Common.Models.Token;
 
-namespace Backend.Interfaces
+namespace ShopWebApi.Interfaces
 {
     public interface IAuthenticationService
     {

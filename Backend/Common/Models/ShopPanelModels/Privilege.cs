@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Backend.Models.ShopPanelModels
+namespace Common.Models.ShopPanelModels
 {
     public class Privilege
     {

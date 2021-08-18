@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Backend.Models.ShopModels
+namespace Common.Models.ShopModels
 {
     public class Product
     {
@@ -26,6 +26,6 @@ namespace Backend.Models.ShopModels
         public List<ProductsPayments> ProductsPayments { get; set; }
         public List<ProductsCarriers> ProductsCarriers { get; set; }
         public List<ProductsTags> ProductsTags { get; set; }
-        public List<ProductVariant> ProductsVariants { get; set; } 
+        public List<ProductVariant> ProductsVariants { get; set; }
     }
 }

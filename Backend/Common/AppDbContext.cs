@@ -1,12 +1,13 @@
-﻿using Backend.Models.ShopModels;
-using Backend.Models.ShopPanelModels;
+﻿using Common.Models.ShopModels;
+using Common.Models.ShopPanelModels;
+using Common.Models.ApiModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend
+namespace Common
 {
     public class AppDbContext : DbContext
     {
