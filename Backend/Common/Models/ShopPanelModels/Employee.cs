@@ -10,7 +10,7 @@ namespace Common.Models.ShopPanelModels
         public string Surname { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
-        public MD5 Password { get; set; }
+        public string Password { get; set; }
         public List<EmployeesProfiles> EmployeesProfiles { get; set; }
     }
 }

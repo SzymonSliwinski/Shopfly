@@ -64,6 +64,7 @@ namespace Common
             ConfigureTags(modelBuilder);
             ConfigureTaxes(modelBuilder);
             ConfigureOrdersProducts(modelBuilder);
+            ConfigureApiAccessKeys(modelBuilder);
 
             //relations
             SetPrivilegesProfilesRelation(modelBuilder);
@@ -76,6 +77,7 @@ namespace Common
             SetProductTagsRelation(modelBuilder);
             SetProductVariantsPhotosRelation(modelBuilder);
             SetCustomersRatingsRelation(modelBuilder);
+            SetApiKeysTablesMethodsRelation(modelBuilder);
         }
 
         // ShopPanelModels configuration:
@@ -126,6 +128,8 @@ namespace Common
         private void ConfigureCustomers(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>()
+                .HasKey(c => c.Id);
+            modelBuilder.Entity<Customer>()
                 .Property(c => c.Name).HasMaxLength(50);
             modelBuilder.Entity<Customer>()
                 .Property(c => c.Surname).HasMaxLength(50);
@@ -133,8 +137,6 @@ namespace Common
                 .Property(c => c.PhoneNumber).HasMaxLength(20);
             modelBuilder.Entity<Customer>()
                 .Property(c => c.Email).HasMaxLength(30);
-
-            // todo password
         }
 
         private void ConfigureOrders(ModelBuilder modelBuilder)
@@ -241,6 +243,12 @@ namespace Common
         {
             modelBuilder.Entity<OrdersProducts>()
                 .Property(op => op.ProductQuantity);
+        }
+
+        private void ConfigureApiAccessKeys(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApiAccessKey>()
+                .Property(aak => aak.Key).HasMaxLength(40);
         }
 
 
@@ -405,6 +413,26 @@ namespace Common
                 .HasOne(r => r.Product)
                 .WithMany(r => r.Ratings)
                 .HasForeignKey(r => r.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+        private void SetApiKeysTablesMethodsRelation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApiKeysTablesMethods>()
+                .HasKey(a => new { a.ApiAccessKeyId, a.HttpMethodId, a.TableId });
+            modelBuilder.Entity<ApiKeysTablesMethods>()
+                .HasOne(a => a.ApiAccessKey)
+                .WithMany(a => a.ApiKeysTablesMethods)
+                .HasForeignKey(a => a.ApiAccessKeyId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<ApiKeysTablesMethods>()
+                .HasOne(a => a.HttpMethod)
+                .WithMany(a => a.ApiKeysTablesMethods)
+                .HasForeignKey(a => a.HttpMethodId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<ApiKeysTablesMethods>()
+                .HasOne(a => a.Table)
+                .WithMany(a => a.ApiKeysTablesMethods)
+                .HasForeignKey(a => a.TableId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
