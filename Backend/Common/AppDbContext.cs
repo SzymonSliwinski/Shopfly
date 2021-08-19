@@ -39,8 +39,8 @@ namespace Common
         //ApiModels
         public DbSet<Table> Tables { get; set; }
         public DbSet<HttpMethod> HttpMethods { get; set; }
-        public ApiKeysTablesMethods ApiKeysTablesMethods { get; set; }
-        public ApiAccessKey ApiAccessKeys { get; set; }
+        public DbSet<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
+        public DbSet<ApiAccessKey> ApiAccessKeys { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> option) : base(option) { }
 

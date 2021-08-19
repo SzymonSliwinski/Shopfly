@@ -4,10 +4,10 @@ namespace Common.Models.ApiModels
 {
     public enum HttpMethodsType
     {
-        post,
-        get,
-        patch,
-        delete
+        post = 1,
+        get = 2,
+        patch = 3,
+        delete = 4
     }
 
     public class HttpMethod
