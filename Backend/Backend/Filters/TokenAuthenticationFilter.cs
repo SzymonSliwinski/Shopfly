@@ -1,10 +1,10 @@
-﻿using Backend.Interfaces;
+﻿using ShopWebApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
 
-namespace Backend.Filters
+namespace ShopWebApi.Filters
 {
     public class TokenAuthenticationFilter : Attribute, IAuthorizationFilter
     {

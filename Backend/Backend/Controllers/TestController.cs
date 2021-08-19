@@ -1,12 +1,8 @@
-﻿using Backend.Filters;
-using Microsoft.AspNetCore.Http;
+﻿using ShopWebApi.Filters;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Backend.Controllers
+
+namespace ShopWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

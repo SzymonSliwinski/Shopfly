@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "Backend\Backend.csproj", "{28D261CD-6186-48E4-9868-71246472FE59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopWebApi", "Backend\ShopWebApi.csproj", "{28D261CD-6186-48E4-9868-71246472FE59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWebApi", "OpenWebApi\OpenWebApi.csproj", "{C58EE678-A9BD-4197-BE17-937F0A01095F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D713671A-0BCB-46E3-BC3F-130FE311A17D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{28D261CD-6186-48E4-9868-71246472FE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D261CD-6186-48E4-9868-71246472FE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D261CD-6186-48E4-9868-71246472FE59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C58EE678-A9BD-4197-BE17-937F0A01095F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C58EE678-A9BD-4197-BE17-937F0A01095F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C58EE678-A9BD-4197-BE17-937F0A01095F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C58EE678-A9BD-4197-BE17-937F0A01095F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
