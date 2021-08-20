@@ -85,12 +85,18 @@ namespace Common
         {
             modelBuilder.Entity<Privilege>()
                 .Property(p => p.Name).HasMaxLength(30);
+            modelBuilder.Entity<Privilege>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
         }
 
         private void ConfigureProfiles(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Profile>()
                 .Property(p => p.Name).HasMaxLength(30);
+            modelBuilder.Entity<Profile>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
         }
 
         private void ConfigureEmployees(ModelBuilder modelBuilder)
@@ -101,6 +107,11 @@ namespace Common
                 .Property(e => e.Surname).HasMaxLength(50);
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Email).HasMaxLength(30);
+            modelBuilder.Entity<Employee>()
+                .HasIndex(e => e.Email)
+                .IsUnique();
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.Password).HasMaxLength(50);
         }
 
 
@@ -110,7 +121,13 @@ namespace Common
             modelBuilder.Entity<Carrier>()
                 .Property(c => c.Name).HasMaxLength(30);
             modelBuilder.Entity<Carrier>()
+                .HasIndex(e => e.Name)
+                .IsUnique();
+            modelBuilder.Entity<Carrier>()
                 .Property(c => c.Logo).HasMaxLength(50);
+            modelBuilder.Entity<Carrier>()
+                .HasIndex(e => e.Logo)
+                .IsUnique();
         }
 
         private void ConfigureCategories(ModelBuilder modelBuilder)
@@ -136,7 +153,15 @@ namespace Common
             modelBuilder.Entity<Customer>()
                 .Property(c => c.PhoneNumber).HasMaxLength(20);
             modelBuilder.Entity<Customer>()
-                .Property(c => c.Email).HasMaxLength(30);
+                .HasIndex(c => c.PhoneNumber)
+                .IsUnique();
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.Email).HasMaxLength(50);
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => c.Email)
+                .IsUnique();
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.Password).HasMaxLength(50);
         }
 
         private void ConfigureOrders(ModelBuilder modelBuilder)
@@ -187,6 +212,9 @@ namespace Common
         {
             modelBuilder.Entity<Photo>()
                 .Property(p => p.Path).HasMaxLength(50);
+            modelBuilder.Entity<Photo>()
+                .HasIndex(c => c.Path)
+                .IsUnique();
         }
 
         private void ConfigureProducts(ModelBuilder modelBuilder)
@@ -205,6 +233,9 @@ namespace Common
         {
             modelBuilder.Entity<ProductColor>()
                 .Property(pc => pc.HexValue).HasMaxLength(6);
+            modelBuilder.Entity<ProductColor>()
+                .HasIndex(c => c.HexValue)
+                .IsUnique();
         }
 
         private void ConfigureProductVariants(ModelBuilder modelBuilder)
@@ -225,12 +256,18 @@ namespace Common
         {
             modelBuilder.Entity<Status>()
                 .Property(s => s.Name).HasMaxLength(30);
+            modelBuilder.Entity<Status>()
+               .HasIndex(c => c.Name)
+               .IsUnique();
         }
 
         private void ConfigureTags(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tag>()
                 .Property(t => t.Name).HasMaxLength(30);
+            modelBuilder.Entity<Tag>()
+               .HasIndex(c => c.Name)
+               .IsUnique();
         }
 
         private void ConfigureTaxes(ModelBuilder modelBuilder)
@@ -249,6 +286,9 @@ namespace Common
         {
             modelBuilder.Entity<ApiAccessKey>()
                 .Property(aak => aak.Key).HasMaxLength(40);
+            modelBuilder.Entity<ApiAccessKey>()
+               .HasIndex(c => c.Key)
+               .IsUnique();
         }
 
 
