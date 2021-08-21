@@ -28,8 +28,8 @@ namespace OpenWebApi.Services
 
             var existingKeyForMethodInTable = _context.ApiKeysTablesMethods
                 .Where(a => a.ApiAccessKeyId == dbFromKey.Id)
-                .Where(a => a.HttpMethodId == (int)method)
-                .Where(a => a.TableId == (int)table)
+                .Where(a => a.HttpMethod == method)
+                .Where(a => a.Table == table)
                 .SingleOrDefault();
 
             if (existingKeyForMethodInTable != null)

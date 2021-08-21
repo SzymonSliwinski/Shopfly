@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace Common.Models.ApiModels
 {
     public enum TableType
@@ -31,12 +30,19 @@ namespace Common.Models.ApiModels
         productColors = 25,
         productDiemensions = 26
     }
-
-    public class Table
+    public enum HttpMethodType
+    {
+        post = 1,
+        get = 2,
+        patch = 3,
+        delete = 4
+    }
+    public class ApiKeysTablesMethods
     {
         public int Id { get; set; }
-        public TableType TableType { get; set; }
-        public List<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
-
+        public ApiAccessKey ApiAccessKey { get; set; }
+        public int ApiAccessKeyId { get; set; }
+        public TableType Table { get; set; }
+        public HttpMethodType HttpMethod { get; set; }
     }
 }

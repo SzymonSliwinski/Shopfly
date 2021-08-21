@@ -37,8 +37,6 @@ namespace Common
         public DbSet<Tax> Taxes { get; set; }
 
         //ApiModels
-        public DbSet<Table> Tables { get; set; }
-        public DbSet<HttpMethod> HttpMethods { get; set; }
         public DbSet<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
         public DbSet<ApiAccessKey> ApiAccessKeys { get; set; }
 
@@ -77,7 +75,6 @@ namespace Common
             SetProductTagsRelation(modelBuilder);
             SetProductVariantsPhotosRelation(modelBuilder);
             SetCustomersRatingsRelation(modelBuilder);
-            SetApiKeysTablesMethodsRelation(modelBuilder);
         }
 
         // ShopPanelModels configuration:
@@ -285,7 +282,7 @@ namespace Common
         private void ConfigureApiAccessKeys(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApiAccessKey>()
-                .Property(aak => aak.Key).HasMaxLength(40);
+                .Property(aak => aak.Key).HasMaxLength(50);
             modelBuilder.Entity<ApiAccessKey>()
                .HasIndex(c => c.Key)
                .IsUnique();
@@ -453,26 +450,6 @@ namespace Common
                 .HasOne(r => r.Product)
                 .WithMany(r => r.Ratings)
                 .HasForeignKey(r => r.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
-        }
-        private void SetApiKeysTablesMethodsRelation(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ApiKeysTablesMethods>()
-                .HasKey(a => new { a.ApiAccessKeyId, a.HttpMethodId, a.TableId });
-            modelBuilder.Entity<ApiKeysTablesMethods>()
-                .HasOne(a => a.ApiAccessKey)
-                .WithMany(a => a.ApiKeysTablesMethods)
-                .HasForeignKey(a => a.ApiAccessKeyId)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<ApiKeysTablesMethods>()
-                .HasOne(a => a.HttpMethod)
-                .WithMany(a => a.ApiKeysTablesMethods)
-                .HasForeignKey(a => a.HttpMethodId)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<ApiKeysTablesMethods>()
-                .HasOne(a => a.Table)
-                .WithMany(a => a.ApiKeysTablesMethods)
-                .HasForeignKey(a => a.TableId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
