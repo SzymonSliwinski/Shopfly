@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopWebApi", "Backend\ShopWebApi.csproj", "{28D261CD-6186-48E4-9868-71246472FE59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWebApi", "OpenWebApi\OpenWebApi.csproj", "{C58EE678-A9BD-4197-BE17-937F0A01095F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenWebApi", "OpenWebApi\OpenWebApi.csproj", "{C58EE678-A9BD-4197-BE17-937F0A01095F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D713671A-0BCB-46E3-BC3F-130FE311A17D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{D713671A-0BCB-46E3-BC3F-130FE311A17D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPanelWebApi", "ShopPanelWebApi\ShopPanelWebApi.csproj", "{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D713671A-0BCB-46E3-BC3F-130FE311A17D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
