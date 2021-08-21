@@ -43,6 +43,6 @@ namespace Common.Models.ApiModels
         public ApiAccessKey ApiAccessKey { get; set; }
         public int ApiAccessKeyId { get; set; }
         public TableType Table { get; set; }
-        public HttpMethodType HttpMethodId { get; set; }
+        public HttpMethodType HttpMethod { get; set; }
     }
 }
