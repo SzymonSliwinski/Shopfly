@@ -12,7 +12,7 @@ namespace OpenWebApi.Filters
     public class KeyAuthenticationFilter : Attribute, IAuthorizationFilter
     {
         public TableType Table { get; set; }
-        public HttpMethodsType Method { get; set; }
+        public HttpMethodType Method { get; set; }
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {

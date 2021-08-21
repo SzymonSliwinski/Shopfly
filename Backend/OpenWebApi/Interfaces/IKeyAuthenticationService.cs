@@ -8,7 +8,7 @@ namespace OpenWebApi.Interfaces
 {
     interface IKeyAuthenticationService
     {
-        Task<bool> CheckIsKeyHasAccessToTableAndMethod(string key, TableType table, HttpMethodsType method);
+        Task<bool> CheckIsKeyHasAccessToTableAndMethod(string key, TableType table, HttpMethodType method);
 
     }
 }

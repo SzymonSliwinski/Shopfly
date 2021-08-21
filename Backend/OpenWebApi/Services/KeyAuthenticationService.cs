@@ -16,7 +16,7 @@ namespace OpenWebApi.Services
             _context = context;
         }
 
-        public async Task<bool> CheckIsKeyHasAccessToTableAndMethod(string key, TableType table, HttpMethodsType method)
+        public async Task<bool> CheckIsKeyHasAccessToTableAndMethod(string key, TableType table, HttpMethodType method)
         {
             var dbFromKey =
             await _context.ApiAccessKeys
@@ -26,11 +26,13 @@ namespace OpenWebApi.Services
             if (dbFromKey == null)
                 return false;
 
-            if (_context.ApiKeysTablesMethods
+            var existingKeyForMethodInTable = _context.ApiKeysTablesMethods
                 .Where(a => a.ApiAccessKeyId == dbFromKey.Id)
                 .Where(a => a.HttpMethodId == (int)method)
                 .Where(a => a.TableId == (int)table)
-                .Any())
+                .SingleOrDefault();
+
+            if (existingKeyForMethodInTable != null)
                 return true;
 
             return false;
