@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
 
-namespace ShopWebApi.Filters
+namespace ShopPanelWebApi.Filters
 {
     public class TokenAuthenticationFilter : Attribute, IAuthorizationFilter
     {

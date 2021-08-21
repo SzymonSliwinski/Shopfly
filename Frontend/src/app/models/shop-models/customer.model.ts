@@ -4,6 +4,7 @@ import { Rating } from './rating.model';
 
 export interface Customer{
     id: number;
+    login: string;
     name: string;
     surname: string;
     phoneNumber:string;
