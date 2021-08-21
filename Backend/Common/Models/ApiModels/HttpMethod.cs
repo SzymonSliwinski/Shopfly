@@ -2,7 +2,7 @@
 
 namespace Common.Models.ApiModels
 {
-    public enum HttpMethodsType
+    public enum HttpMethodType
     {
         post = 1,
         get = 2,
@@ -15,6 +15,6 @@ namespace Common.Models.ApiModels
         public int Id { get; set; }
         public List<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
 
-        public HttpMethodsType Type { get; set; }
+        public HttpMethodType Type { get; set; }
     }
 }
