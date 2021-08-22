@@ -1,5 +1,5 @@
 using Common.Interfaces;
-using ShopWebApi.Services;
+using ShopPanelWebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 
-namespace ShopWebApi
+namespace ShopPanelWebApi
 {
     public class Startup
     {

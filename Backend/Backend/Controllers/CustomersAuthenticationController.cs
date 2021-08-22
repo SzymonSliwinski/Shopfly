@@ -1,17 +1,15 @@
 ﻿using Common.Dtos;
-using ShopWebApi.Interfaces;
-using Common.Models;
-using ShopWebApi.Services;
+using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ShopWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesAuthenticationController : ControllerBase
+    public class CustomersAuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authService;
-        public EmployeesAuthenticationController(IAuthenticationService authService)
+        public CustomersAuthenticationController(IAuthenticationService authService)
         {
             _authService = authService;
         }

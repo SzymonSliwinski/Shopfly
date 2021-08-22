@@ -1,6 +1,6 @@
 ﻿using Common.Models.Token;
 
-namespace ShopWebApi.Interfaces
+namespace Common.Interfaces
 {
     public interface IAuthenticationService
     {
