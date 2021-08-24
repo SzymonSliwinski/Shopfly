@@ -9,6 +9,6 @@ export class AuthenticationService implements CanActivate{
         // if expired go with request to remove it and set acces danied goto login page
         return true;
 
-        //else go to main
+        //else go to where u want to go
     }
 }

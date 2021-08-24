@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
-import { AuthenticationService } from './../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
 import { Routes, RouterModule } from '@angular/router';
+import { MainComponent } from './main/main.component';
+
 const routes: Routes = [
   {path:'main', component: MainComponent, canActivate: [AuthenticationService]}
 ];
 
 @NgModule({
-  declarations: [
-    MainComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
@@ -19,9 +18,8 @@ const routes: Routes = [
     AuthenticationService
   ],
   exports:[
-    MainComponent,
-    RouterModule
+    RouterModule,
   ]
 })
 
-export class ShopPanelModule { }
+export class PanelRoutingModule { }
