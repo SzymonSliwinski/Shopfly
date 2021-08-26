@@ -5,7 +5,7 @@ import {  CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } fr
 export class AuthenticationService implements CanActivate{
     canActivate(next: ActivatedRouteSnapshot, state:RouterStateSnapshot)
     : boolean{
-        // todo check if token expires
+        // todo check if token expired
         // if expired go with request to remove it and set acces danied goto login page
         return true;
 

@@ -4,6 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShopPanelModule } from './components/shop-panel/shop-panel.module';
 import { FormModule } from './forms/form.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,9 @@ import { FormModule } from './forms/form.module';
     AppRoutingModule,
     ShopPanelModule,
     FormModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
