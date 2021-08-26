@@ -1,0 +1,45 @@
+.topnav {
+    background-color: #14274f;
+    overflow: hidden;
+    height: 60px;
+    z-index: 100;
+  }
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-icon{
+    transform: scale(2);
+}
+
+.logo{
+    width: 25%;
+    color: #e9006b;
+    padding-left: 25px;
+    height: 60px;
+    font-size: 36px;
+    font-family: sans-serif;
+    justify-content: flex-start;
+}
+
+.logo-part{
+    color: whitesmoke;
+    margin-left: 15px;
+}
+
+.menu{
+    flex-basis: 100%;
+    margin-left: auto;
+    text-align: right;
+    padding-right: 25px;
+    height: 60px;
+    justify-content: flex-end;
+}
+
+.user-icon{
+    transform: scale(1.8);
+    color: whitesmoke
+}
