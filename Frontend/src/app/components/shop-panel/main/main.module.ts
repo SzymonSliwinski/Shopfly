@@ -1,8 +1,8 @@
+import { FormModule } from './../../../forms/form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 @NgModule({
   declarations: [
     MainComponent,
@@ -10,7 +10,8 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormModule
   ],
   providers: [
     
