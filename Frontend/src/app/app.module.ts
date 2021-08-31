@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
-import { PanelRoutingModule } from './components/shop-panel/panel-routing.module';
 import { MainModule } from './components/shop-panel/main.module';
 @NgModule({
   declarations: [
@@ -15,7 +14,6 @@ import { MainModule } from './components/shop-panel/main.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    PanelRoutingModule,
     MainModule,
   ],
   providers: [],

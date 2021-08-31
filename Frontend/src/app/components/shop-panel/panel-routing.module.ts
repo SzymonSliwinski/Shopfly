@@ -4,10 +4,16 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path:'panel/main', component: MainComponent, canActivate: [AuthenticationService]},
-  {path:'panel/sign-in', component: SignInComponent}
+  {
+    path: 'panel/main', component: MainComponent, canActivate: [AuthenticationService],
+    children: [
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] }
+    ]
+  },
+  { path: 'panel/sign-in', component: SignInComponent }
 ];
 
 @NgModule({
@@ -19,7 +25,7 @@ const routes: Routes = [
   providers: [
     AuthenticationService
   ],
-  exports:[
+  exports: [
     RouterModule,
   ]
 })
