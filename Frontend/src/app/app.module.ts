@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ShopPanelModule } from './components/shop-panel/shop-panel.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { PanelRoutingModule } from './components/shop-panel/panel-routing.module';
+import { MainModule } from './components/shop-panel/main.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,10 +13,10 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ShopPanelModule,
     BrowserAnimationsModule,
-    MatIconModule,
     MatMenuModule,
+    PanelRoutingModule,
+    MainModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
