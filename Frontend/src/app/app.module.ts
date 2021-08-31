@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShopPanelModule } from './components/shop-panel/shop-panel.module';
-import { FormModule } from './forms/form.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -16,7 +15,6 @@ import { MatMenuModule } from '@angular/material/menu';
     BrowserModule,
     AppRoutingModule,
     ShopPanelModule,
-    FormModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatMenuModule,

@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MainModule } from './main/main.module';
 import { PanelRoutingModule } from './panel-routing.module';
-import { PanelSignInComponent } from './panel-sign-in/panel-sign-in.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
-    PanelSignInComponent
+    SignInComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +16,7 @@ import { PanelSignInComponent } from './panel-sign-in/panel-sign-in.component';
     AuthenticationService
   ],
   exports:[
-    PanelSignInComponent,
+    SignInComponent,
     MainModule,
     PanelRoutingModule,
   ]
