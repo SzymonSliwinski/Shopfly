@@ -1,0 +1,91 @@
+<app-panel-navbar></app-panel-navbar>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <div class="sidebar-item" style="padding: 20px 0 10px 0">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>trending_up</mat-icon> Dashboard
+                </span>
+            </button>
+        </div>
+
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="sidebar-header">SALE</div>
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>shopping_basket</mat-icon> Orders
+                </span>
+            </button>
+        </div>
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>store</mat-icon> Products
+                </span>
+            </button>
+        </div>
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>group</mat-icon> Customers
+                </span>
+            </button>
+        </div>
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>analytics</mat-icon> Charts
+                </span>
+            </button>
+        </div>
+
+        <div style="height: 10px;">
+            <!-- spacer-->
+        </div>
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="sidebar-header">CONFIGURE</div>
+
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>settings</mat-icon>Settings
+                </span>
+            </button>
+        </div>
+
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>public</mat-icon>
+                    API
+                </span>
+            </button>
+        </div>
+
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>badge</mat-icon>
+                    Employees
+                </span>
+            </button>
+        </div>
+
+        <div class="sidebar-item">
+            <button mat-button>
+                <span class="flex">
+                    <mat-icon>import_export</mat-icon>
+                    import
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="body">
+    <router-outlet></router-outlet>
+</div>
