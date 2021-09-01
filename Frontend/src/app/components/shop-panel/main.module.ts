@@ -9,10 +9,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanelRoutingModule } from './panel-routing.module';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { PanelAuthenticationService } from 'src/app/services/shop-panel-services/panel-authentication.service';
 @NgModule({
   declarations: [
     MainComponent,
     DashboardComponent,
+    SignInComponent,
   ],
   imports: [
     CommonModule,
@@ -26,10 +29,11 @@ import { PanelRoutingModule } from './panel-routing.module';
     PanelRoutingModule,
   ],
   providers: [
-
+    PanelAuthenticationService,
   ],
   exports: [
     MainComponent,
+    SignInComponent,
   ]
 })
 

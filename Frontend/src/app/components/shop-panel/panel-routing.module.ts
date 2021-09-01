@@ -8,7 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: 'panel/main', component: MainComponent, canActivate: [AuthenticationService],
+    path: 'panel', component: MainComponent, canActivate: [AuthenticationService],
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] }
     ]

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ShopWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [TokenAuthenticationFilter]
     public class TestController : ControllerBase
