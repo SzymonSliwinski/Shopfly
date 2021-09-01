@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  _url: 'https://localhost:44327/'
+  _shopApiUrl: 'https://localhost:44327/api/',
+  _shopPanelApiurl: 'https://localhost:44301/shop-panel/'
 };
 
 /*
