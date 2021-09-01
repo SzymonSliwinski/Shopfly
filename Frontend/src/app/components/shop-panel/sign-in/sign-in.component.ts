@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationDto } from 'src/app/dto/authentication.dto';
+import { PanelAuthenticationService } from 'src/app/services/shop-panel-services/panel-authentication.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,11 +17,16 @@ export class SignInComponent {
   get email() { return this.form.get('email'); }
   get password() { return this.form.get('password'); }
 
+  constructor(
+    private readonly _panelAuthService: PanelAuthenticationService,
+  ) { }
 
-  constructor() { }
+  async onSubmit() {
+    if (this.form.invalid)
+      return;
 
-  onSubmit() {
-
+    let result = { loginOrEmail: this.email!.value, password: this.password!.value } as AuthenticationDto;
+    console.log(await this._panelAuthService.authenticate(result));
   }
 
 }
