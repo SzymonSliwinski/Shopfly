@@ -9,10 +9,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanelRoutingModule } from './panel-routing.module';
+import { SignInComponent } from './sign-in/sign-in.component';
 @NgModule({
   declarations: [
     MainComponent,
     DashboardComponent,
+    SignInComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { PanelRoutingModule } from './panel-routing.module';
   ],
   exports: [
     MainComponent,
+    SignInComponent,
   ]
 })
 

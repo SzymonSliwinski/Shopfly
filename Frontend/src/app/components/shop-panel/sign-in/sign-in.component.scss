@@ -51,6 +51,7 @@ button {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    margin-top: 20px;
 }
 
 button:active {
@@ -210,4 +211,10 @@ input {
 
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
+}
+
+.alert {
+    color: red;
+    font-weight: 500;
+    margin-top: -10px;
 }
