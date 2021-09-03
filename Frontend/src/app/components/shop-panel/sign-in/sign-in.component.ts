@@ -26,6 +26,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.redirectIfSignedIn();
+    console.log("jestem tu")
   }
 
   redirectIfSignedIn(): void {
@@ -39,7 +40,6 @@ export class SignInComponent implements OnInit {
 
     let result = { loginOrEmail: this.email!.value, password: this.password!.value } as AuthenticationDto;
     let isSucceeded = await this._panelAuthService.authenticate(result);
-    console.log(isSucceeded)
     if (isSucceeded === true) {
       this.router.navigate(['panel/dashboard']);
       this.wrongCredentialsError = false;

@@ -1,14 +1,17 @@
 import { Injectable } from "@angular/core";
-import {  CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 
 @Injectable()
-export class AuthenticationService implements CanActivate{
-    canActivate(next: ActivatedRouteSnapshot, state:RouterStateSnapshot)
-    : boolean{
-        // todo check if token expired
-        // if expired go with request to remove it and set acces danied goto login page
-        return true;
+export class AuthenticationService implements CanActivate {
+    constructor(
+        private router: Router,
+    ) { }
+    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+        : boolean | Promise<boolean> {
+        if (localStorage.getItem(environment._panelStorageKey) !== null)
+            return true;
 
-        //else go to where u want to go
+        return this.router.navigate(['panel/sign-in']);
     }
 }
