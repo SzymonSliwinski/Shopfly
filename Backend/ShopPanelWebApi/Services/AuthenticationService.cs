@@ -17,7 +17,7 @@ namespace ShopPanelWebApi.Services
 
         public bool Authenticate(string email, string password)//todo password
         {
-            var testEmail = "456";
+            var testEmail = "a@a.pl";
             var testPass = "123";
             //to do compare with users in db
 
