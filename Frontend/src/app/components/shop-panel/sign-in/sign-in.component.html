@@ -4,15 +4,19 @@
             <h1>Sign in</h1>
             <input type="email" placeholder="Email" id="email" formControlName="email" />
             <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="alert">
-                <span>E-mail is not valid</span>
+                <span>E-mail is not valid!</span>
             </div>
 
             <input type="password" placeholder="Password" formControlName="password" />
             <div *ngIf="password!.invalid && (password!.dirty || password!.touched)" class="alert">
-                <span>Password is not valid</span>
+                <span>Password is not valid!</span>
             </div>
 
             <button>Sign In</button>
+
+            <div class="alert credentials-error" *ngIf="wrongCredentialsError">
+                Wrong e-mail or password!
+            </div>
         </form>
     </div>
 

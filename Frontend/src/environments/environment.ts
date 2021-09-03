@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   _shopApiUrl: 'https://localhost:44327/',
-  _shopPanelApiurl: 'https://localhost:44301/shop-panel/'
+  _shopPanelApiurl: 'https://localhost:44301/shop-panel/',
+  _panelStorageKey: 'shopfly-panel-token',
+  _shopStorageKey: 'shopfly-token',
 };
 
 /*
