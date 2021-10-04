@@ -47,5 +47,10 @@ namespace ShopWebApi.Services
 
             return false;
         }
+
+        public void RemoveToken(string token)
+        {
+            _listTokens.Remove(_listTokens.Where(t => t.Value == token).Single());
+        }
     }
 }
