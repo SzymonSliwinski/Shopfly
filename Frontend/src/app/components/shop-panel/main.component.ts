@@ -7,10 +7,6 @@ import { environment } from 'src/environments/environment';
 })
 export class MainComponent {
   constructor() {
-    var values = localStorage.getItem(environment._panelStorageKey)!;
-    console.log(values);
-    // values.forEach(function (value: any, key: any) {
-    //   console.log(key + " " + value)
-    // });
+
   }
 }

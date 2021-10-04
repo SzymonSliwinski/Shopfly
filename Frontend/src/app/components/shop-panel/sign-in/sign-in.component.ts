@@ -26,7 +26,6 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.redirectIfSignedIn();
-    console.log("jestem tu")
   }
 
   redirectIfSignedIn(): void {

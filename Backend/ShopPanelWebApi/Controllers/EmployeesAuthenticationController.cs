@@ -7,7 +7,7 @@ using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
+    [Route("shop-panel/employees-authentication")]
     [ApiController]
     public class EmployeesAuthenticationController : ControllerBase
     {
@@ -29,12 +29,11 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [TokenAuthenticationFilter]
-        [Route("logout")]
+        [Route("logout/{token}")]
         [HttpDelete]
         public IActionResult Logout(string token)
         {
             _authService.RemoveToken(token);
-
             return Ok();
         }
     }

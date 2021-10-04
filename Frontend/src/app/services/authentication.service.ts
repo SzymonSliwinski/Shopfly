@@ -9,8 +9,11 @@ export class AuthenticationService implements CanActivate {
     ) { }
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot)
         : boolean | Promise<boolean> {
-        if (localStorage.getItem(environment._panelStorageKey) !== null)
+        const storage = JSON.parse(localStorage.getItem(environment._panelStorageKey)!) as { token: { expirationDate: Date; userId: number; value: string } };
+        if (storage && new Date(storage.token.expirationDate).getTime() > new Date().getTime())
             return true;
+        if (storage && new Date(storage.token.expirationDate).getTime() < new Date().getTime())
+            localStorage.removeItem(environment._shopStorageKey);
 
         return this.router.navigate(['panel/sign-in']);
     }
