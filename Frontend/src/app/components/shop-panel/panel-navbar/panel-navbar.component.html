@@ -1,17 +1,29 @@
 <div class="topnav flex flex-center">
-    <!-- logo -->
-    <div class="logo flex flex-center">
-      <p>
-        <mat-icon class="shop-icon">
+  <!-- logo -->
+  <div class="logo flex flex-center">
+    <p>
+      <mat-icon class="shop-icon">
         storefront
-        </mat-icon>
-        <span class="logo-part">Shop</span>fly
-      </p>
-    </div>
-    <!-- menu -->
-    <div class="menu flex">
-      <mat-icon class="user-icon">
-        account_circle
       </mat-icon>
-    </div>  
+      <span class="logo-part">Shop</span>fly
+    </p>
   </div>
+  <!-- menu -->
+  <div class="menu flex">
+    <mat-icon class="user-icon" [matMenuTriggerFor]="userMenu">
+      account_circle
+    </mat-icon>
+  </div>
+</div>
+
+<mat-menu #userMenu="matMenu" xPosition="before">
+  <button mat-menu-item>
+    <mat-icon>manage_accounts</mat-icon>
+    <span>settings</span>
+  </button>
+
+  <button mat-menu-item (click)="onLogoutClick()">
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

@@ -3,10 +3,11 @@ using Common.Interfaces;
 using Common.Models.Token;
 using ShopPanelWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
+    [Route("shop-panel/employees-authentication")]
     [ApiController]
     public class EmployeesAuthenticationController : ControllerBase
     {
@@ -25,6 +26,15 @@ namespace ShopPanelWebApi.Controllers
             //todo after generating token get user from db
             else
                 return Unauthorized();
+        }
+
+        [TokenAuthenticationFilter]
+        [Route("logout/{token}")]
+        [HttpDelete]
+        public IActionResult Logout(string token)
+        {
+            _authService.RemoveToken(token);
+            return Ok();
         }
     }
 }
