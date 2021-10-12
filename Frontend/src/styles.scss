@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
+@use '~@angular/material'as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,21 +19,126 @@ $Frontend-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$Frontend-theme: mat.define-light-theme((
-  color: (
-    primary: $Frontend-primary,
-    accent: $Frontend-accent,
-    warn: $Frontend-warn,
-  )
-));
+$Frontend-theme: mat.define-light-theme((color: (primary: $Frontend-primary,
+      accent: $Frontend-accent,
+      warn: $Frontend-warn,
+    )));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($Frontend-theme);
 
-body{
-    background-color: #e9edee;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(241, 242, 246);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.flex {
+  display: flex;
+}
+
+.flex-space-evenly {
+  justify-content: space-around;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-align-center {
+  align-self: center;
+}
+
+.flex-align-start {
+  align-self: flex-start;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.center {
+  margin: auto;
+}
+
+// tools
+
+.p-10 {
+  padding: 10px;
+}
+
+.p-l-10 {
+  padding-left: 10px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-50 {
+  width: 75%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.h-50 {
+  height: 50px;
+}
+
+.h-100 {
+  height: 100px;
+}
+
+.h-200 {
+  height: 200px;
+}
+
+.h-300 {
+  height: 300px;
+}
+
+.t-50 {
+  top: 50px;
+}
+
+.white-background {
+  background-color: white;
+}
+
+.color-blue {
+  color: rgb(82, 126, 141)
+}
+
+.i-24 {
+  font-size: 24px;
+}
+
+.i-28 {
+  font-size: 28px;
+}
+
+.i-32 {
+  font-size: 32px;
+}
+
+.i-36 {
+  font-size: 36px;
+}
+
+.m-r {
+  margin-left: auto;
+  padding-right: 25px;
+}
