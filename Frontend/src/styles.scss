@@ -68,14 +68,35 @@ body {
   margin: auto;
 }
 
+.radius {
+  border-radius: 10px;
+}
+
+.mat-header-cell {
+  font-size: 16px !important;
+}
+
 // tools
 
 .p-10 {
   padding: 10px;
 }
 
+.p-25 {
+  padding: 25px;
+}
+
+
 .p-l-10 {
   padding-left: 10px;
+}
+
+.p-t-10 {
+  padding-top: 10px;
+}
+
+.p-t-20 {
+  padding-top: 20px;
 }
 
 .w-100 {
