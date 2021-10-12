@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanelRoutingModule } from './panel-routing.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { PanelAuthenticationService } from 'src/app/services/shop-panel-services/panel-authentication.service';
+import { OrdersModule } from './orders/orders.module';
 @NgModule({
   declarations: [
     MainComponent,
@@ -27,6 +28,7 @@ import { PanelAuthenticationService } from 'src/app/services/shop-panel-services
     MatListModule,
     MatButtonModule,
     PanelRoutingModule,
+    OrdersModule
   ],
   providers: [
     PanelAuthenticationService,

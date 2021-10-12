@@ -1,0 +1,130 @@
+<div class="white-background w-100 h-100 flex">
+    <h1 class="p-l-10 flex-align-start">Orders</h1>
+    <div class="flex-column m-r flex-align-center">
+        <span class="flex-align-center pointer" style="margin-right: 10px">
+            <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+        </span>
+        <span class="flex-align-center">Add new order</span>
+    </div>
+</div>
+
+<div class="h-50">
+    <!--spacer -->
+</div>
+
+<div class=" radius white-background w-95 h-100 center flex flex-space-evenly">
+    <div class="flex-column flex-align-center">
+        <span class="flex-align-center" style="margin-right: 10px">
+            <mat-icon class="i-36" style="color: #38924d">shopping_cart</mat-icon>
+        </span>
+        <span class="flex-align-center">New orders today</span>
+        <span class="flex-align-center">0</span>
+    </div>
+
+    <div class="flex-column flex-align-center">
+        <span class="flex-align-center" style="margin-right: 10px">
+            <mat-icon class="i-36" style="color:rgb(13, 65, 65)">checklist</mat-icon>
+        </span>
+        <span class="flex-align-center">Active orders</span>
+        <span class="flex-align-center">0</span>
+    </div>
+
+    <div class="flex-column flex-align-center">
+        <span class="flex-align-center" style="margin-right: 10px">
+            <mat-icon class="i-36" style="color: #d4853a">paid</mat-icon>
+        </span>
+        <span class="flex-align-center">Orders total value</span>
+        <span class="flex-align-center">0</span>
+
+    </div>
+
+    <div class="flex-column flex-align-center">
+        <span class="flex-align-center" style="margin-right: 10px">
+            <mat-icon class="i-36" style="color: #ce7d78">request_quote</mat-icon>
+        </span>
+        <span class="flex-align-center">Average order value</span>
+        <span class="flex-align-center">0</span>
+    </div>
+</div>
+
+<div class="h-50">
+    <!--spacer -->
+</div>
+
+<div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
+    <table mat-table [dataSource]=" ordersList" class="flex-align-center w-95 mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>
+                    ID
+                </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>
+                    Customer
+                </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalValue">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>
+                    Value
+                </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalValue}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentType">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>
+                    Payment
+                </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>
+                    Status
+                </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>
+                    Date
+                </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/YYYY HH:mm'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="buttons">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button>
+                    <mat-icon style="color: rgb(133, 77, 14)">description</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon style="color: red">delete</mat-icon>
+                </button>
+                <button mat-stroked-button>Details</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div class="p-t-20">
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</div>
