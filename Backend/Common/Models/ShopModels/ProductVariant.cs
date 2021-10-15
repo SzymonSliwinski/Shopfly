@@ -15,5 +15,6 @@ namespace Common.Models.ShopModels
         public int Quantity { get; set; }
         public List<ProductsVariantsPhotos> ProductsVariantsPhotos { get; set; }
         public Product Product { get; set; }
+        public int ProductId { get; set; }
     }
 }

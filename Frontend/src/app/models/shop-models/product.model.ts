@@ -9,7 +9,7 @@ import { Tax } from './tax.model';
 import { Category } from './category.model';
 import { Comment } from './comment.model';
 
-export interface Product{
+export interface Product {
     id: number;
     categoryId: number;
     category: Category;
@@ -22,6 +22,7 @@ export interface Product{
     bruttoPrice: number;
     createDate: Date;
     isActive: boolean;
+    isVisible: boolean;
     updateDate: Date;
     description: string;
     comments: Comment[];
