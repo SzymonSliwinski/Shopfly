@@ -76,6 +76,14 @@ body {
   font-size: 16px !important;
 }
 
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
 // tools
 
 .p-10 {
@@ -103,8 +111,12 @@ body {
   width: 100%;
 }
 
+.w-50-px {
+  width: 50px;
+}
+
 .w-50 {
-  width: 75%;
+  width: 50%;
 }
 
 .w-75 {

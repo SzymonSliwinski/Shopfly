@@ -1,12 +1,12 @@
 import { Product } from './product.model';
 
-export interface Category{
+export interface Category {
     id: number;
     name: string;
     isRoot: boolean;
     parentCategoryId: number;
-    parentCategory: Category;
+    parentCategory: Category | null;
     childrensCategories: Category[];
     position: number;
-    products: Product[];
+    products?: Product[] | null;
 }

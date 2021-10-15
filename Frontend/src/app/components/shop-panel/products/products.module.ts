@@ -9,6 +9,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ProductsComponent } from './products.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from '../../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -24,6 +26,8 @@ import { SharedModule } from '../../shared/shared.module';
         MatChipsModule,
         MatFormFieldModule,
         SharedModule,
+        MatSelectModule,
+        MatCheckboxModule,
     ],
     providers: [
     ],
