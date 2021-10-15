@@ -1,14 +1,13 @@
 import { Order } from './order.model';
-import { CustomerFavouritesProducts } from './customers-favourites-products.model';
 import { Rating } from './rating.model';
-
-export interface Customer{
+import { CustomerFavouritesProducts } from './customer-favourites-products.model';
+export interface Customer {
     id: number;
     login: string;
     name: string;
     surname: string;
-    phoneNumber:string;
-    email:string;
+    phoneNumber: string;
+    email: string;
     isNewsletterSubscribed: boolean;
     createDate: Date;
     lastLoginDate: Date;

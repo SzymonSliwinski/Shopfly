@@ -1,8 +1,9 @@
-import { ProductsVariants } from './products-variants.model';
-export interface ProductDiemensions{
+import { ProductVariant } from './product-variant.model';
+
+export interface ProductDiemensions {
    id: number;
    width: number;
    height: number;
-   weight: number; 
-   productVariant: ProductsVariants[];
+   weight: number;
+   productVariant: ProductVariant[];
 }
