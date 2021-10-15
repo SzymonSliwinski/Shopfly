@@ -8,6 +8,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { ProductsComponent } from './products.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from '../../shared/shared.module';
+
 @NgModule({
     declarations: [
         ProductsComponent,
@@ -20,7 +22,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MatButtonModule,
         MatPaginatorModule,
         MatChipsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        SharedModule,
     ],
     providers: [
     ],

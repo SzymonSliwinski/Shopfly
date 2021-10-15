@@ -13,8 +13,8 @@ const routes: Routes = [
     path: 'panel', component: MainComponent, canActivate: [AuthenticationService],
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] },
-      { path: 'orders', component: ProductsComponent, canActivate: [AuthenticationService] },
-      { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] }
+      { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] },
+      { path: 'products', component: ProductsComponent, canActivate: [AuthenticationService] }
     ]
   },
   { path: 'panel/sign-in', component: SignInComponent }
