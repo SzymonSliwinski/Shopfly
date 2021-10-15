@@ -6,12 +6,14 @@ import { MainComponent } from './main.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
     path: 'panel', component: MainComponent, canActivate: [AuthenticationService],
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] },
+      { path: 'orders', component: ProductsComponent, canActivate: [AuthenticationService] },
       { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] }
     ]
   },
