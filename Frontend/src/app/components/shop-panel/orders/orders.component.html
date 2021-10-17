@@ -43,8 +43,11 @@
 </div>
 
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
-    <table mat-table [dataSource]=" ordersList" class="flex-align-center w-95 mat-elevation-z8">
-        <ng-container matColumnDef="id">
+    <shared-data-table *ngIf="isLoaded" [dataSource]="ordersList" [displayedColumns]="displayedColumns"
+        [columnsNames]="columnsNames">
+    </shared-data-table>
+    <!-- <table mat-table [dataSource]=" ordersList" class="flex-align-center w-95 mat-elevation-z8"> -->
+    <!-- <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>
                 <h4>
                     ID
@@ -113,7 +116,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </table> -->
     <div class="p-t-20">
         <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
         </mat-paginator>
