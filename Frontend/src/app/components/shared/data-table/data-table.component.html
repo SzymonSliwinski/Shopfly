@@ -6,7 +6,10 @@
             </h4>
         </th>
         <td mat-cell *matCellDef="let element">
-            {{element[displayedColumn.objectField]}}
+            <span *ngIf="!displayedColumn.usePipe">
+                {{element[displayedColumn.objectField]}}</span>
+            <span *ngIf="displayedColumn.usePipe"> {{element[displayedColumn.objectField]
+                | dynamicPipe:displayedColumn.pipeValues!.pipe:displayedColumn.pipeValues!.pipeArgs}}</span>
         </td>
     </ng-container>
 

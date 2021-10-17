@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ValueProvider } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TableColumnDto } from 'src/app/dto/table-column.dto';
 
 @Component({
@@ -10,8 +10,7 @@ export class DataTableComponent {
   @Input() dataSource: any;
   @Input() displayedColumns!: TableColumnDto[];
   @Input() columnsNames!: string[];
-  constructor() {
-    console.log(this.displayedColumns)
-  }
+
+
 
 }

@@ -4,11 +4,13 @@ import { PanelSubpageHeaderComponent } from './panel-subpage-header/panel-subpag
 import { MatIconModule } from '@angular/material/icon';
 import { DataTableComponent } from './data-table/data-table.component';
 import { MatTableModule } from '@angular/material/table';
+import { DynamicPipe } from './dynamic-pipe.pipe';
 
 @NgModule({
     declarations: [
         PanelSubpageHeaderComponent,
         DataTableComponent,
+        DynamicPipe,
     ],
     imports: [
         CommonModule,
@@ -16,10 +18,12 @@ import { MatTableModule } from '@angular/material/table';
         MatTableModule
     ],
     providers: [
+
     ],
     exports: [
         PanelSubpageHeaderComponent,
-        DataTableComponent
+        DataTableComponent,
+        DynamicPipe
     ]
 })
 

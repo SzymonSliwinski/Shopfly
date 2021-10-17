@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
 import { TableColumnDto } from 'src/app/dto/table-column.dto';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -12,12 +13,12 @@ export class OrdersComponent implements OnInit {
   //public displayedColumns = ['id', 'customerName', 'totalValue', 'paymentType', 'status', 'date', 'buttons'];
   public displayedColumns: TableColumnDto[] =
     [
-      { title: 'ID', objectField: 'id', hasAdditionalContent: false, additionalContent: null },
-      { title: 'Customer Name', objectField: 'customerName', hasAdditionalContent: false, additionalContent: null },
-      { title: 'Total value', objectField: 'totalValue', hasAdditionalContent: false, additionalContent: null },
-      { title: 'Payment type', objectField: 'paymentType', hasAdditionalContent: false, additionalContent: null },
-      { title: 'Status', objectField: 'status', hasAdditionalContent: false, additionalContent: null },
-      { title: 'Date', objectField: 'date', hasAdditionalContent: false, additionalContent: null },
+      { title: 'ID', objectField: 'id', additionalContent: null },
+      { title: 'Customer name', objectField: 'customerName', additionalContent: null },
+      { title: 'Total value', objectField: 'totalValue', additionalContent: null },
+      { title: 'Payment type', objectField: 'paymentType', additionalContent: null },
+      { title: 'Status', objectField: 'status', additionalContent: null },
+      { title: 'Date', objectField: 'date', additionalContent: null, usePipe: true, pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' } },
     ];
   public columnsNames: string[] = [];
   public isLoaded = false;
