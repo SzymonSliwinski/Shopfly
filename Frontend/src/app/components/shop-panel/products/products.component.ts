@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Product } from 'src/app/models/shop-models/product.model';
 
 @Component({
