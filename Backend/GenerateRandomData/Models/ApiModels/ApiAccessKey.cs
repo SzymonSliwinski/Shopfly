@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Common.Models.ApiModels
+namespace GenerateRandomData.Models.ApiModels
 {
     public class ApiAccessKey
     {
+        [Newtonsoft.Json.JsonIgnore]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public string Key { get; set; }

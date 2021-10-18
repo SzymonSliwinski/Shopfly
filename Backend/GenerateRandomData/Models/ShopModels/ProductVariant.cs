@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Common.Models.ShopModels
+namespace GenerateRandomData.Models.ShopModels
 {
     public class ProductVariant
     {
@@ -11,7 +11,7 @@ namespace Common.Models.ShopModels
         public ProductColor Color { get; set; }
         public int DimensionId { get; set; }
         [Newtonsoft.Json.JsonIgnore]
-        public int DimensionId { get; set; }
+        //public int DimensionId { get; set; }
         public ProductDimensions Dimension { get; set; }
         public float Price { get; set; }
         public bool IsOnSale { get; set; }

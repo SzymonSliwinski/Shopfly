@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace Common.Models.ShopPanelModels
+namespace GenerateRandomData.Models.ShopPanelModels
 {
     public class Employee
     {

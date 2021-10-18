@@ -1,4 +1,4 @@
-﻿namespace Common.Models.ShopPanelModels
+﻿namespace GenerateRandomData.Models.ShopPanelModels
 {
     public class EmployeesProfiles
     {

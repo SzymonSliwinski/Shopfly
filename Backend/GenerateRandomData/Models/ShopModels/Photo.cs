@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Common.Models.ShopModels
+namespace GenerateRandomData.Models.ShopModels
 {
     public class Photo
     {

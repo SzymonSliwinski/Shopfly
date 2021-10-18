@@ -1,5 +1,4 @@
-﻿
-namespace Common.Models.ApiModels
+﻿namespace GenerateRandomData.Models.ApiModels
 {
     public enum TableType
     {
@@ -39,7 +38,9 @@ namespace Common.Models.ApiModels
     }
     public class ApiKeysTablesMethods
     {
+        [Newtonsoft.Json.JsonIgnore]
         public int Id { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public ApiAccessKey ApiAccessKey { get; set; }
         public int ApiAccessKeyId { get; set; }
         public TableType Table { get; set; }
