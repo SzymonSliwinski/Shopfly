@@ -5,7 +5,6 @@ namespace Common.Models.ShopModels
 {
     public class Customer
     {
-        [Newtonsoft.Json.JsonIgnore]
         public int Id { get; set; }
         public string Login { get; set; }
         public string Name { get; set; }
@@ -17,13 +16,9 @@ namespace Common.Models.ShopModels
         public DateTime LastLoginDate { get; set; }
         // todo default language table (defaultLanguageId)
         public string Password { get; set; }
-        [Newtonsoft.Json.JsonIgnore]
         public List<Comment> Comments { get; set; }
-        [Newtonsoft.Json.JsonIgnore]
         public List<Rating> Ratings { get; set; }
-        [Newtonsoft.Json.JsonIgnore]
         public List<CustomerFavouritesProducts> CustomerFavouritesProducts { get; set; }
-        [Newtonsoft.Json.JsonIgnore]
         public List<Order> Orders { get; set; }
     }
 }
