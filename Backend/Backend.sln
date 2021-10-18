@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenWebApi", "OpenWebApi\Op
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{D713671A-0BCB-46E3-BC3F-130FE311A17D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPanelWebApi", "ShopPanelWebApi\ShopPanelWebApi.csproj", "{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopPanelWebApi", "ShopPanelWebApi\ShopPanelWebApi.csproj", "{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateRandomData", "GenerateRandomData\GenerateRandomData.csproj", "{2D44CE65-8BDA-4132-AF0C-873B10A7EA9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9741C3AB-6588-4AA9-A5EF-7BA992C5F98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D44CE65-8BDA-4132-AF0C-873B10A7EA9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D44CE65-8BDA-4132-AF0C-873B10A7EA9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D44CE65-8BDA-4132-AF0C-873B10A7EA9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D44CE65-8BDA-4132-AF0C-873B10A7EA9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
