@@ -1,0 +1,161 @@
+<shared-panel-subpage-header subpageTitle='products'></shared-panel-subpage-header>
+<div class="h-50">
+    <!--spacer-->
+</div>
+<div class="radius white-background w-95 center flex-column flex-space-evenly">
+    <!-- top filter selects -->
+    <div class="p-25 w-100 flex p-r-10">
+        <!-- filter by category select -->
+        <mat-form-field style=" width: 300px;">
+            <mat-label>Filter by category</mat-label>
+            <mat-select>
+                <mat-option>Clear</mat-option>
+                <mat-option value="valid">category 1</mat-option>
+                <mat-option value="invalid">category 2</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- mass action select -->
+        <mat-form-field class="p-l-10">
+            <mat-label>Mass action</mat-label>
+            <mat-select>
+                <mat-option>delete</mat-option>
+                <mat-option value="valid">aaa</mat-option>
+                <mat-option value="invalid">aaa</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <!-- filter selects end -->
+
+    <!-- products table -->
+    <div class="w-100">
+        <!-- <shared-data-table dataSource="productsList" ></shared-data-table> -->
+        <!-- <table mat-table [dataSource]="productsList" class="center w-95 mat-elevation-z8">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        ID
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <span>
+                        <mat-checkbox></mat-checkbox>
+                    </span>
+                    <span class="p-l-10" style="position: relative; top: 1px;">
+                        {{element.id}}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="photo">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Photo
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <img width="40" height="40"
+                        src="https://i.picsum.photos/id/656/200/200.jpg?hmac=MNTvk8A5MPGsxw6vlhoVkWBGsnwW_UjuWcxVp-gQZI8">
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Name
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Category
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nettoPrice">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Price (netto)
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.nettoPrice}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="bruttoPrice">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Price (brutto)
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.bruttoPrice}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="isVisible">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Visible
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon *ngIf="element.isVisible" style="color: green">done</mat-icon>
+                    <mat-icon *ngIf="!element.isVisible" style="color: red">clear</mat-icon>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4>
+                        Quantity
+                    </h4>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    123
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="buttons">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button>
+                        <mat-icon style="color:orange">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button [matMenuTriggerFor]="moreMenu" (click)="onElementMenuExtend(element)">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef=" displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table> -->
+    </div>
+
+    <div class="p-t-20">
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <!-- end of products table -->
+
+</div>
+
+<!-- more menu -->
+<mat-menu #moreMenu="matMenu" xPosition="before">
+    <button mat-menu-item>
+        <mat-icon>delete</mat-icon> Delete
+    </button>
+    <!-- isVisible === false -->
+    <button *ngIf="!isChoosenElementVisible" mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        Show
+    </button>
+    <!-- isVisible === true -->
+    <button *ngIf="isChoosenElementVisible" mat-menu-item>
+        <mat-icon>visibility_off</mat-icon>
+        Hide
+    </button>
+</mat-menu>

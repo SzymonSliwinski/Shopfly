@@ -9,8 +9,9 @@ namespace Common.Models.ShopModels
         public int ColorId { get; set; }
         [Newtonsoft.Json.JsonIgnore]
         public ProductColor Color { get; set; }
-        public int DimensionId { get; set; }        // tutaj poprawiłem literówkę
+        public int DimensionId { get; set; }
         [Newtonsoft.Json.JsonIgnore]
+        public int DimensionId { get; set; }
         public ProductDimensions Dimension { get; set; }
         public float Price { get; set; }
         public bool IsOnSale { get; set; }
@@ -20,5 +21,6 @@ namespace Common.Models.ShopModels
         public List<ProductsVariantsPhotos> ProductsVariantsPhotos { get; set; }
         [Newtonsoft.Json.JsonIgnore]
         public Product Product { get; set; }
+        public int ProductId { get; set; }
     }
 }

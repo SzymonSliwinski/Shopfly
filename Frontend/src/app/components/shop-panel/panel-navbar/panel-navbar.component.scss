@@ -3,19 +3,19 @@
     overflow: hidden;
     height: 60px;
     z-index: 100;
-  }
+}
 
-.flex{
+.flex {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.shop-icon{
+.shop-icon {
     transform: scale(2);
 }
 
-.logo{
+.logo {
     width: 25%;
     color: #e9006b;
     padding-left: 25px;
@@ -25,12 +25,12 @@
     justify-content: flex-start;
 }
 
-.logo-part{
+.logo-part {
     color: whitesmoke;
     margin-left: 15px;
 }
 
-.menu{
+.menu {
     flex-basis: 100%;
     margin-left: auto;
     text-align: right;
@@ -39,7 +39,7 @@
     justify-content: flex-end;
 }
 
-.user-icon{
+.user-icon {
     transform: scale(1.8);
     color: whitesmoke;
     cursor: pointer;

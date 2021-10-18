@@ -3,7 +3,7 @@
 <div class="wrapper">
     <div class="sidebar">
         <div class="sidebar-item" style="padding: 20px 0 10px 0">
-            <button mat-button>
+            <button mat-button [routerLink]="['dashboard']">
                 <span class="flex">
                     <mat-icon>trending_up</mat-icon> Dashboard
                 </span>
@@ -14,14 +14,14 @@
 
         <div class="sidebar-header">SALE</div>
         <div class="sidebar-item">
-            <button mat-button>
+            <button mat-button [routerLink]="['orders']">
                 <span class="flex">
                     <mat-icon>shopping_basket</mat-icon> Orders
                 </span>
             </button>
         </div>
         <div class="sidebar-item">
-            <button mat-button>
+            <button mat-button [routerLink]="['products']">
                 <span class="flex">
                     <mat-icon>store</mat-icon> Products
                 </span>

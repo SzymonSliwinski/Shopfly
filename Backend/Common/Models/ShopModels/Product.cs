@@ -20,6 +20,7 @@ namespace Common.Models.ShopModels
         public float BruttoPrice { get; set; }
         public DateTime CreateDate { get; set; }
         public bool IsActive { get; set; }
+        public bool IsVisible { get; set; }
         public DateTime UpdateDate { get; set; }
         public string Description { get; set; }
         [Newtonsoft.Json.JsonIgnore]
