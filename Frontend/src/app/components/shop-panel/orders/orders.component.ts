@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
 import { TableColumnDto } from 'src/app/dto/table-column.dto';
 import { DatePipe } from '@angular/common';
+import { TableButtonsComponent } from './table-buttons.component';
 
 @Component({
   selector: 'app-orders',
@@ -10,15 +11,18 @@ import { DatePipe } from '@angular/common';
 })
 export class OrdersComponent implements OnInit {
   public ordersList!: OrderDisplayDto[];
-  //public displayedColumns = ['id', 'customerName', 'totalValue', 'paymentType', 'status', 'date', 'buttons'];
   public displayedColumns: TableColumnDto[] =
     [
-      { title: 'ID', objectField: 'id', additionalContent: null },
-      { title: 'Customer name', objectField: 'customerName', additionalContent: null },
-      { title: 'Total value', objectField: 'totalValue', additionalContent: null },
-      { title: 'Payment type', objectField: 'paymentType', additionalContent: null },
-      { title: 'Status', objectField: 'status', additionalContent: null },
-      { title: 'Date', objectField: 'date', additionalContent: null, usePipe: true, pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' } },
+      { title: 'ID', objectField: 'id' },
+      { title: 'Customer name', objectField: 'customerName' },
+      { title: 'Total value', objectField: 'totalValue' },
+      { title: 'Payment type', objectField: 'paymentType' },
+      { title: 'Status', objectField: 'status' },
+      { title: 'Date', objectField: 'date', usePipe: true, pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' } },
+      {
+        title: '', objectField: 'action',
+        customContent: TableButtonsComponent
+      }
     ];
   public columnsNames: string[] = [];
   public isLoaded = false;
@@ -44,7 +48,7 @@ export class OrdersComponent implements OnInit {
     }];
 
     this.displayedColumns.forEach(c => {
-      this.columnsNames.push(c.objectField);
+      this.columnsNames.push(c.objectField!);
     });
     this.isLoaded = true;
   }

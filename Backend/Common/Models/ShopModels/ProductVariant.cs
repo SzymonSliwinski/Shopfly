@@ -9,7 +9,6 @@ namespace Common.Models.ShopModels
         public int ColorId { get; set; }
         [Newtonsoft.Json.JsonIgnore]
         public ProductColor Color { get; set; }
-        public int DimensionId { get; set; }
         [Newtonsoft.Json.JsonIgnore]
         public int DimensionId { get; set; }
         public ProductDimensions Dimension { get; set; }

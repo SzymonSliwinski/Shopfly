@@ -1,15 +1,24 @@
 <table mat-table [dataSource]="dataSource" class="center w-95 mat-elevation-z8">
-    <ng-container *ngFor="let displayedColumn of displayedColumns" [matColumnDef]='displayedColumn.objectField'>
+    <ng-container *ngFor="let displayedColumn of displayedColumns" [matColumnDef]='displayedColumn.objectField!'>
         <th mat-header-cell *matHeaderCellDef>
             <h4>
                 {{displayedColumn.title}}
             </h4>
         </th>
         <td mat-cell *matCellDef="let element">
-            <span *ngIf="!displayedColumn.usePipe">
-                {{element[displayedColumn.objectField]}}</span>
-            <span *ngIf="displayedColumn.usePipe"> {{element[displayedColumn.objectField]
-                | dynamicPipe:displayedColumn.pipeValues!.pipe:displayedColumn.pipeValues!.pipeArgs}}</span>
+            <!-- default -->
+            <span *ngIf="!displayedColumn.usePipe && !displayedColumn.customContent">
+                {{element[displayedColumn.objectField!]}}
+            </span>
+            <!-- for pipe -->
+            <span *ngIf="displayedColumn.usePipe && !displayedColumn.customContent">
+                {{element[displayedColumn.objectField!]
+                | dynamicPipe:displayedColumn.pipeValues!.pipe:displayedColumn.pipeValues!.pipeArgs}}
+            </span>
+            <!-- for custom html -->
+            <span *ngIf="displayedColumn.customContent">
+                <div *ngComponentOutlet="displayedColumn.customContent"></div>
+            </span>
         </td>
     </ng-container>
 
