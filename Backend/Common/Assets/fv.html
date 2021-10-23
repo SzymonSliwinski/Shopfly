@@ -95,6 +95,15 @@
     .table-product-name {
         text-align: left;
     }
+
+    /* .summary-table-all {
+        background: lightgray;
+    } */
+
+    price-summary {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: medium;
+    }
 </style>
 
 <body>
@@ -184,7 +193,59 @@
 
         <!-- add more products -->
     </table>
+    <div class="row">
+        <div class="column">
+            <table class="summary-table">
+                <tr class="table-main">
+                    <td>Stawka VAT [%]</td>
+                    <td>Netto</td>
+                    <td>VAT</td>
+                    <td>Brutto</td>
+                </tr>
+                <tr class="table-product">
+                    <td>8</td>
+                    <td>13.34</td>
+                    <td>1.07</td>
+                    <td>14.41</td>
+                </tr>
+                <tr class="table-product">
+                    <td>23</td>
+                    <td>158.97</td>
+                    <td>36.56</td>
+                    <td>195.53</td>
+                </tr>
+                <tr class="table-product">
+                    <td class="table-product-name">Razem</td>
+                    <td>172.31</td>
+                    <td>37.63</td>
+                    <td>209.94</td>
+                </tr>
+            </table>
+        </div>
+        <div class="column">
+            <heading>Podsumowanie zamówienia</heading><br>
+            <price-summary>
+                Pozostało do zapłaty: ___________<br>
+                Sposób zapłaty: ______________<br>
+                Termin zapłaty: ______________<br>
+                Dostawa: ______________<br>
+            </price-summary>
+        </div>
+    </div>
 
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+    <div class="row">
+        <div class="column">
+            _________________________________<br>
+            Osoba upoważniona do odbioru faktury
+        </div>
+        <div class="column">
+            _________________________________<br>
+            Osoba upoważniona do wystawienia faktury
+        </div>
+
+    </div>
 
 </body>
 
