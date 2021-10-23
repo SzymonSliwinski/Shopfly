@@ -1,11 +1,11 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { TableColumnDto, ContentMode } from 'src/app/dto/table-column.dto';
 
 export enum TableButton {
-  delete,
-  edit,
-  details,
-  menu
+  Delete,
+  Edit,
+  Details,
+  Menu
 }
 
 @Component({
@@ -13,27 +13,32 @@ export enum TableButton {
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
 })
-export class DataTableComponent<T> {
+export class DataTableComponent<T> implements OnInit {
   @Input() dataSource!: T[];
   @Input() displayedColumns!: TableColumnDto[];
   @Input() columnsNames!: string[];
   @Input() hasSelectableRows: boolean = false; //TO DO
   @Input() buttons: TableButton[] = [];
-  @Input() component: any;
   @Input() data: any;
   contentMode = ContentMode;
   optionTemplateRef!: TemplateRef<any>;
   tableButton = TableButton;
-
-
+  isLoaded = false;
   constructor() { }
 
-  public onDeleteClick(): void {
-    console.log('delete' + this.data);
+  ngOnInit() {
+    this.isLoaded = false;
+    //  if (this.buttons.length > 0)
+    //this.displayedColumns.push({ title: 's', isButtonColumn: true, contentMode: ContentMode.Buttons, objectField: 'actions' });
+    this.isLoaded = true;
   }
 
-  public onDetailsClick(): void {
-    console.log('details' + this.data);
+  public onDeleteClick(element: any): void {
+    console.log('delete' + element.id);
+  }
+
+  public onDetailsClick(element: any): void {
+    console.log('details' + element.id);
   }
 
 }

@@ -7,7 +7,6 @@ import { MatTableModule } from '@angular/material/table';
 import { DynamicPipe } from './dynamic-pipe.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { PortalModule } from '@angular/cdk/portal';
-import { TableButtonsComponent } from '../shop-panel/orders/table-buttons.component';
 
 @NgModule({
     declarations: [

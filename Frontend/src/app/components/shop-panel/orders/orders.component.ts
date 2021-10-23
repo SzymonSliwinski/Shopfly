@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { DatePipe } from '@angular/common';
-import { TableButtonsComponent } from './table-buttons.component';
+import { TableButton } from '../../shared/data-table/data-table.component';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-orders',
@@ -11,6 +12,7 @@ import { TableButtonsComponent } from './table-buttons.component';
 })
 export class OrdersComponent implements OnInit {
   public ordersList!: OrderDisplayDto[];
+  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Edit, TableButton.Details];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },
@@ -18,13 +20,8 @@ export class OrdersComponent implements OnInit {
       { title: 'Total value', objectField: 'totalValue' },
       { title: 'Payment type', objectField: 'paymentType' },
       { title: 'Status', objectField: 'status' },
-      { title: 'Date', objectField: 'date', pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' }, contentMode: ContentMode.dynamicPipe },
-      {
-        title: '', objectField: 'action',
-        customContent: TableButtonsComponent,
-        contentMode: ContentMode.custom,
-        injectorType: TableButtonsDto
-      }
+      { title: 'Date', objectField: 'date', pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' }, contentMode: ContentMode.DynamicPipe },
+      { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons }
     ];
   public columnsNames: string[] = [];
   public isLoaded = false;

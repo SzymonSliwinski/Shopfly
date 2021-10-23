@@ -8,15 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { SharedModule } from '../../shared/shared.module';
-import { TableButtonsComponent } from './table-buttons.component';
 
 @NgModule({
   declarations: [
-    OrdersComponent,
-    TableButtonsComponent,
+    OrdersComponent
   ],
   entryComponents: [
-    TableButtonsComponent
+
   ],
   imports: [
     CommonModule,
