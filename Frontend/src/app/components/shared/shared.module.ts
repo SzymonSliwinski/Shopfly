@@ -6,6 +6,9 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { DynamicPipe } from './dynamic-pipe.pipe';
 import { MatButtonModule } from '@angular/material/button';
+import { PortalModule } from '@angular/cdk/portal';
+import { TableButtonsComponent } from '../shop-panel/orders/table-buttons.component';
+
 @NgModule({
     declarations: [
         PanelSubpageHeaderComponent,
@@ -16,7 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
         CommonModule,
         MatIconModule,
         MatTableModule,
-        MatButtonModule
+        MatButtonModule,
+        PortalModule
     ],
     providers: [
 

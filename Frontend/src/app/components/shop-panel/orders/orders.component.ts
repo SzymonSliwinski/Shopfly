@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
-import { TableColumnDto } from 'src/app/dto/table-column.dto';
+import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { DatePipe } from '@angular/common';
 import { TableButtonsComponent } from './table-buttons.component';
 
@@ -18,10 +18,12 @@ export class OrdersComponent implements OnInit {
       { title: 'Total value', objectField: 'totalValue' },
       { title: 'Payment type', objectField: 'paymentType' },
       { title: 'Status', objectField: 'status' },
-      { title: 'Date', objectField: 'date', usePipe: true, pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' } },
+      { title: 'Date', objectField: 'date', pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' }, contentMode: ContentMode.dynamicPipe },
       {
         title: '', objectField: 'action',
-        customContent: TableButtonsComponent
+        customContent: TableButtonsComponent,
+        contentMode: ContentMode.custom,
+        injectorType: TableButtonsDto
       }
     ];
   public columnsNames: string[] = [];
