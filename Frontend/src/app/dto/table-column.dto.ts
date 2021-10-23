@@ -1,9 +1,15 @@
 import { Type } from "@angular/core";
 
+export enum ContentMode {
+    Default,
+    DynamicPipe,
+    Custom,
+    Buttons
+}
+
 export interface TableColumnDto {
-    title: string;
-    objectField: string;
-    additionalContent: any;
-    usePipe?: boolean;
-    pipeValues?: { pipe: Type<any>, pipeArgs?: any };
+    title: string; // title in header column
+    objectField?: string; // name of object fied which data should be taken from
+    pipeValues?: { pipe: Type<any>, pipeArgs?: any }; // value for dynamic pipe
+    contentMode?: ContentMode;
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
-import { TableColumnDto } from 'src/app/dto/table-column.dto';
+import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { DatePipe } from '@angular/common';
+import { TableButton } from '../../shared/data-table/data-table.component';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-orders',
@@ -10,15 +12,16 @@ import { DatePipe } from '@angular/common';
 })
 export class OrdersComponent implements OnInit {
   public ordersList!: OrderDisplayDto[];
-  //public displayedColumns = ['id', 'customerName', 'totalValue', 'paymentType', 'status', 'date', 'buttons'];
+  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Edit, TableButton.Details];
   public displayedColumns: TableColumnDto[] =
     [
-      { title: 'ID', objectField: 'id', additionalContent: null },
-      { title: 'Customer name', objectField: 'customerName', additionalContent: null },
-      { title: 'Total value', objectField: 'totalValue', additionalContent: null },
-      { title: 'Payment type', objectField: 'paymentType', additionalContent: null },
-      { title: 'Status', objectField: 'status', additionalContent: null },
-      { title: 'Date', objectField: 'date', additionalContent: null, usePipe: true, pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' } },
+      { title: 'ID', objectField: 'id' },
+      { title: 'Customer name', objectField: 'customerName' },
+      { title: 'Total value', objectField: 'totalValue' },
+      { title: 'Payment type', objectField: 'paymentType' },
+      { title: 'Status', objectField: 'status' },
+      { title: 'Date', objectField: 'date', pipeValues: { pipe: DatePipe, pipeArgs: 'dd-MM-yyyy HH:mm' }, contentMode: ContentMode.DynamicPipe },
+      { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons }
     ];
   public columnsNames: string[] = [];
   public isLoaded = false;
@@ -44,7 +47,7 @@ export class OrdersComponent implements OnInit {
     }];
 
     this.displayedColumns.forEach(c => {
-      this.columnsNames.push(c.objectField);
+      this.columnsNames.push(c.objectField!);
     });
     this.isLoaded = true;
   }
