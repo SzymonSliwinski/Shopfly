@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using Bogus;
-using Common.Models.ShopModels;
-using Common.Models.ShopPanelModels;
+using GenerateRandomData.Models.ApiModels;
+using GenerateRandomData.Models.ShopModels;
+using GenerateRandomData.Models.ShopPanelModels;
+using GenerateRandomData.Models.Token;
 
 namespace GenerateRandomData
 {
@@ -47,6 +49,11 @@ namespace GenerateRandomData
             GenerateStatus(numberOfPositions, true, savePath, dateFile);
             GenerateTag(numberOfPositions, true, savePath, dateFile);
             GenerateTax(numberOfPositions, true, savePath, dateFile);
+
+            GenerateApiAccessKey(numberOfPositions, true, savePath, dateFile);
+            GenerateApiKeysTablesMethods(numberOfPositions, true, savePath, dateFile);
+
+            GenerateToken(numberOfPositions, true, savePath, dateFile);
         }
 
         // Shop Panel Models ------------------------
@@ -724,5 +731,80 @@ namespace GenerateRandomData
             }
             return taxData;
         }
+
+        static Faker<ApiAccessKey> GenerateApiAccessKey(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
+        {
+            // ustawienie właściwości:
+            var apiAccessKeyData = new Faker<ApiAccessKey>("pl")
+                .RuleFor(aak => aak.CreateDate, aak => aak.Date.Recent(365))
+                .RuleFor(aak => aak.Key, aak => aak.Internet.Password(20));
+
+            // zapis do pliku:
+            if (saveToFile)
+            {
+                List<ApiAccessKey> myApiAccessKey = apiAccessKeyData.Generate(numberOfPositions);
+
+                string fileName = "apiAccessKey_" + dateFile + ".json";
+                using (StreamWriter file = File.CreateText(savePath + fileName))
+                {
+                    var serializer = new Newtonsoft.Json.JsonSerializer();
+                    serializer.Serialize(file, myApiAccessKey);
+                }
+
+                Console.WriteLine("file " + fileName + " generated");
+            }
+            return apiAccessKeyData;
+        }
+
+        static Faker<ApiKeysTablesMethods> GenerateApiKeysTablesMethods(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
+        {
+            // ustawienie właściwości:
+            var apiKeysTablesMethodsData = new Faker<ApiKeysTablesMethods>("pl")
+                .RuleFor(aktm => aktm.ApiAccessKeyId, aktm => aktm.Random.Int(1, numberOfPositions))
+                .RuleFor(aktm => aktm.Table, aktm => aktm.PickRandom<TableType>())
+                .RuleFor(aktm => aktm.HttpMethod, aktm => aktm.PickRandom<HttpMethodType>());
+
+            // zapis do pliku:
+            if (saveToFile)
+            {
+                List<ApiKeysTablesMethods> myApiKeysTablesMethods = apiKeysTablesMethodsData.Generate(numberOfPositions);
+
+                string fileName = "apiKeysTablesMethods_" + dateFile + ".json";
+                using (StreamWriter file = File.CreateText(savePath + fileName))
+                {
+                    var serializer = new Newtonsoft.Json.JsonSerializer();
+                    serializer.Serialize(file, myApiKeysTablesMethods);
+                }
+
+                Console.WriteLine("file " + fileName + " generated");
+            }
+            return apiKeysTablesMethodsData;
+        }
+
+        static Faker<Token> GenerateToken(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
+        {
+            // ustawienie właściwości:
+            var tokenData = new Faker<Token>("pl")
+                .RuleFor(t => t.Value, t => t.Random.Word())
+                .RuleFor(t => t.ExpirationDate, t => t.Date.Soon(5))
+                .RuleFor(t => t.UserId, t => t.Random.Int(1, numberOfPositions));
+
+            // zapis do pliku:
+            if (saveToFile)
+            {
+                List<Token> myToken = tokenData.Generate(numberOfPositions);
+
+                string fileName = "token_" + dateFile + ".json";
+                using (StreamWriter file = File.CreateText(savePath + fileName))
+                {
+                    var serializer = new Newtonsoft.Json.JsonSerializer();
+                    serializer.Serialize(file, myToken);
+                }
+
+                Console.WriteLine("file " + fileName + " generated");
+            }
+            return tokenData;
+        }
+
     }
 }
