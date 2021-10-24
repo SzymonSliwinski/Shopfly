@@ -19,6 +19,8 @@ namespace Common.Models.ShopModels
         public DateTime Date { get; set; }
         public string AdditionalDescription { get; set; }
         public List<OrdersProducts> OrdersProducts { get; set; }
+        public bool IsActive { get; set; }
+
 
         // Delivery:
         public string DeliveryAddressStreet { get; set; }

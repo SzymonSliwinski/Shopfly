@@ -12,5 +12,6 @@ namespace Common.Models.ShopModels
         public int DeliveryDaysMaximum { get; set; }
         public List<Order> Orders { get; set; }
         public List<ProductsCarriers> ProductsCarriers { get; set; }
+        public bool IsActive { get; set; }
     }
 }

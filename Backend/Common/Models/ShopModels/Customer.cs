@@ -20,5 +20,7 @@ namespace Common.Models.ShopModels
         public List<Rating> Ratings { get; set; }
         public List<CustomerFavouritesProducts> CustomerFavouritesProducts { get; set; }
         public List<Order> Orders { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }
