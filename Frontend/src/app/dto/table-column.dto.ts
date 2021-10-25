@@ -3,8 +3,9 @@ import { Type } from "@angular/core";
 export enum ContentMode {
     Default,
     DynamicPipe,
-    Custom,
-    Buttons
+    TrueOrFalse,
+    Buttons,
+    Photo
 }
 
 export interface TableColumnDto {

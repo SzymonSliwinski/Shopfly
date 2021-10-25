@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { DynamicPipe } from './dynamic-pipe.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { PortalModule } from '@angular/cdk/portal';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { PortalModule } from '@angular/cdk/portal';
         MatIconModule,
         MatTableModule,
         MatButtonModule,
-        PortalModule
+        PortalModule,
+        MatMenuModule
     ],
     providers: [
 
