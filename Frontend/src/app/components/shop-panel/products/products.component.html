@@ -29,6 +29,9 @@
 
     <!-- products table -->
     <div class="w-100">
+        <shared-data-table *ngIf="isLoaded" [dataSource]="productsList" [displayedColumns]="displayedColumns"
+            [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons">
+        </shared-data-table>
         <!-- <shared-data-table dataSource="productsList" ></shared-data-table> -->
         <!-- <table mat-table [dataSource]="productsList" class="center w-95 mat-elevation-z8">
             <ng-container matColumnDef="id">
@@ -144,18 +147,18 @@
 </div>
 
 <!-- more menu -->
-<mat-menu #moreMenu="matMenu" xPosition="before">
+<!-- <mat-menu #moreMenu="matMenu" xPosition="before">
     <button mat-menu-item>
         <mat-icon>delete</mat-icon> Delete
     </button>
-    <!-- isVisible === false -->
-    <button *ngIf="!isChoosenElementVisible" mat-menu-item>
-        <mat-icon>visibility</mat-icon>
-        Show
-    </button>
-    <!-- isVisible === true -->
-    <button *ngIf="isChoosenElementVisible" mat-menu-item>
-        <mat-icon>visibility_off</mat-icon>
-        Hide
-    </button>
-</mat-menu>
+    < isVisible === false 
+<button *ngIf="!isChoosenElementVisible" mat-menu-item>
+    <mat-icon>visibility</mat-icon>
+    Show
+</button>
+ isVisible === true 
+<button *ngIf="isChoosenElementVisible" mat-menu-item>
+    <mat-icon>visibility_off</mat-icon>
+    Hide
+</button>
+</mat-menu> -->

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { TableColumnDto, ContentMode } from 'src/app/dto/table-column.dto';
 
 export enum TableButton {
@@ -6,39 +7,51 @@ export enum TableButton {
   Edit,
   Details,
   Menu
-}
+};
+
+export enum MenuButton {
+  Delete,
+  Edit,
+  Details,
+};
 
 @Component({
   selector: 'shared-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
 })
-export class DataTableComponent<T> implements OnInit {
+export class DataTableComponent<T>{
   @Input() dataSource!: T[];
   @Input() displayedColumns!: TableColumnDto[];
   @Input() columnsNames!: string[];
   @Input() hasSelectableRows: boolean = false; //TO DO
   @Input() buttons: TableButton[] = [];
+  @Input() menuButtons: MenuButton[] = [];
   @Input() data: any;
   contentMode = ContentMode;
   optionTemplateRef!: TemplateRef<any>;
   tableButton = TableButton;
-  isLoaded = false;
-  constructor() { }
+  menuButton = MenuButton;
+  public afterMenuClickedElement: any;
 
-  ngOnInit() {
-    this.isLoaded = false;
-    //  if (this.buttons.length > 0)
-    //this.displayedColumns.push({ title: 's', isButtonColumn: true, contentMode: ContentMode.Buttons, objectField: 'actions' });
-    this.isLoaded = true;
-  }
+  constructor(private readonly _sanitizer: DomSanitizer) { }
 
   public onDeleteClick(element: any): void {
-    console.log('delete' + element.id);
+    console.log(element);
+    console.log(element.id);
   }
 
   public onDetailsClick(element: any): void {
+    this.afterMenuClickedElement = element;
     console.log('details' + element.id);
+  }
+
+  public onMenuClick(element: any): void {
+    console.log('details' + element.id);
+  }
+
+  public getStringAsHtml(htmlString: string) {
+    return this._sanitizer.bypassSecurityTrustHtml(htmlString);
   }
 
 }
