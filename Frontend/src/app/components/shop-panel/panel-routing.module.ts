@@ -7,6 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
+import { CustomersComponent } from './customers/customers.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] },
       { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] },
-      { path: 'products', component: ProductsComponent, canActivate: [AuthenticationService] }
+      { path: 'products', component: ProductsComponent, canActivate: [AuthenticationService] },
+      { path: 'customers', component: CustomersComponent, canActivate: [AuthenticationService] }
     ]
   },
   { path: 'panel/sign-in', component: SignInComponent }
