@@ -13,7 +13,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { PanelAuthenticationService } from 'src/app/services/shop-panel-services/panel-authentication.service';
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
-
+import { CustomersModule } from './customers/customers.module';
 @NgModule({
   declarations: [
     MainComponent,
@@ -32,6 +32,7 @@ import { ProductsModule } from './products/products.module';
     PanelRoutingModule,
     OrdersModule,
     ProductsModule,
+    CustomersModule,
   ],
   providers: [
     PanelAuthenticationService,

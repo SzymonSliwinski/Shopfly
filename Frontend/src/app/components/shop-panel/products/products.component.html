@@ -30,7 +30,8 @@
     <!-- products table -->
     <div class="w-100">
         <shared-data-table *ngIf="isLoaded" [dataSource]="productsList" [displayedColumns]="displayedColumns"
-            [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons">
+            [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons"
+            [hasSelectableRows]="true">
         </shared-data-table>
         <!-- <shared-data-table dataSource="productsList" ></shared-data-table> -->
         <!-- <table mat-table [dataSource]="productsList" class="center w-95 mat-elevation-z8">
