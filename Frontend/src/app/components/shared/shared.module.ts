@@ -8,7 +8,7 @@ import { DynamicPipe } from './dynamic-pipe.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { PortalModule } from '@angular/cdk/portal';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
     declarations: [
         PanelSubpageHeaderComponent,
@@ -21,7 +21,8 @@ import { MatMenuModule } from '@angular/material/menu';
         MatTableModule,
         MatButtonModule,
         PortalModule,
-        MatMenuModule
+        MatMenuModule,
+        MatCheckboxModule
     ],
     providers: [
 

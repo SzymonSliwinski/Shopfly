@@ -3,3 +3,9 @@ table {
         text-align: center;
     }
 }
+
+mat-checkbox {
+    position: relative;
+    top: -1px;
+    padding-right: 5px;
+}

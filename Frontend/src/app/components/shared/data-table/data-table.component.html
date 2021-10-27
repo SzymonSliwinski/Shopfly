@@ -1,11 +1,15 @@
 <table mat-table [dataSource]="dataSource" class="center w-95 mat-elevation-z8">
-    <ng-container *ngFor="let displayedColumn of displayedColumns" [matColumnDef]='displayedColumn.objectField!'>
+    <ng-container *ngFor="let displayedColumn of displayedColumns; let i = index"
+        [matColumnDef]='displayedColumn.objectField!'>
         <th mat-header-cell *matHeaderCellDef>
             <h4>
                 {{displayedColumn.title}}
             </h4>
         </th>
         <td mat-cell *matCellDef="let element">
+            <span *ngIf="hasSelectableRows && i === 0">
+                <mat-checkbox (change)="onCheckboxChange(element)"></mat-checkbox>
+            </span>
             <!-- default -->
             <span *ngIf="!displayedColumn.contentMode">
                 {{element[displayedColumn.objectField!]}}
