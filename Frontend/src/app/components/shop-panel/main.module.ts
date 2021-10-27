@@ -13,14 +13,12 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { PanelAuthenticationService } from 'src/app/services/shop-panel-services/panel-authentication.service';
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
-import { CustomersComponent } from './customers/customers.component';
-
+import { CustomersModule } from './customers/customers.module';
 @NgModule({
   declarations: [
     MainComponent,
     DashboardComponent,
     SignInComponent,
-    CustomersComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +32,7 @@ import { CustomersComponent } from './customers/customers.component';
     PanelRoutingModule,
     OrdersModule,
     ProductsModule,
+    CustomersModule,
   ],
   providers: [
     PanelAuthenticationService,

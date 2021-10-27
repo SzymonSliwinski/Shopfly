@@ -58,7 +58,4 @@ export class ProductsComponent implements OnInit {
     this.isLoaded = true;
   }
 
-  public onElementMenuExtend(element: Product) {
-    this.isChoosenElementVisible = element.isVisible;
-  }
 }
