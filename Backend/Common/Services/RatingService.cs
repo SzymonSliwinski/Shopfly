@@ -24,10 +24,10 @@ namespace Common.Services
 
         public async Task<Rating> Delete(int id)
         {
-            var productDb = await GetById(id);
+            var ratingDb = await GetById(id);
             await _context.SaveChangesAsync();
 
-            return productDb;
+            return ratingDb;
         }
 
         public async Task<Rating> Add(Rating rating)

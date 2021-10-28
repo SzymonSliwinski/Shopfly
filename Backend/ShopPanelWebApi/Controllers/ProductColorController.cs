@@ -37,13 +37,13 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> Add([FromBody] ProductColor productColor)
+        public async Task<ActionResult<ProductColor>> Add([FromBody] ProductColor productColor)
         {
             return Ok(await _productColorService.Add(productColor));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Product>> Update([FromBody] ProductColor productColor)
+        public async Task<ActionResult<ProductColor>> Update([FromBody] ProductColor productColor)
         {
             return Ok(await _productColorService.Update(productColor));
         }

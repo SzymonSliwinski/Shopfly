@@ -24,10 +24,10 @@ namespace Common.Services
 
         public async Task<Photo> Delete(int id)
         {
-            var productDb = await GetById(id);
+            var photoDb = await GetById(id);
             await _context.SaveChangesAsync();
 
-            return productDb;
+            return photoDb;
         }
 
         public async Task<Photo> Add(Photo photo)

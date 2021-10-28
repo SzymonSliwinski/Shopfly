@@ -33,16 +33,16 @@ namespace Common.Services
 
         public async Task<ProductsCarriers> Add(ProductsCarriers productsCarriers)
         {
-            var newproductsCarriers = new ProductsCarriers()
+            var newProductsCarriers = new ProductsCarriers()
             {
                 ProductId = productsCarriers.ProductId,
                 CarrierId = productsCarriers.CarrierId
             };
 
-            await _context.AddAsync(newproductsCarriers);
+            await _context.AddAsync(newProductsCarriers);
             await _context.SaveChangesAsync();
 
-            return newproductsCarriers;
+            return newProductsCarriers;
         }
 
         public async Task<ProductsCarriers> Update(ProductsCarriers oldProductsCarriers, ProductsCarriers newProductsCarriers)

@@ -24,11 +24,11 @@ namespace Common.Services
 
         public async Task<PaymentType> Delete(int id)
         {
-            var productDb = await GetById(id);
-            productDb.IsActive = false;
+            var paymentTypeDb = await GetById(id);
+            paymentTypeDb.IsActive = false;
             await _context.SaveChangesAsync();
 
-            return productDb;
+            return paymentTypeDb;
         }
 
         public async Task<PaymentType> Add(PaymentType paymentType)

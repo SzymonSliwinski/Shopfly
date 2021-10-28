@@ -50,7 +50,7 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ProductsCarriers>> RemoveMany(List<ProductsPayments> productsPaymentsList)
+        public async Task<ActionResult<ProductsPayments>> RemoveMany(List<ProductsPayments> productsPaymentsList)
         {
             return Ok(await _productsPaymentsService.RemoveMany(productsPaymentsList));
         }

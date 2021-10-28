@@ -24,10 +24,10 @@ namespace Common.Services
 
         public async Task<ProductVariant> Delete(int id)
         {
-            var productDb = await GetById(id);
+            var productVariantDb = await GetById(id);
             await _context.SaveChangesAsync();
 
-            return productDb;
+            return productVariantDb;
         }
 
         public async Task<ProductVariant> Add(ProductVariant productVariant)

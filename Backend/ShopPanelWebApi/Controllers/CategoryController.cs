@@ -43,7 +43,7 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Product>> Update([FromBody] Category category)
+        public async Task<ActionResult<Category>> Update([FromBody] Category category)
         {
             return Ok(await _categoryService.Update(category));
         }

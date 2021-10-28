@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Models.ShopModels;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +24,10 @@ namespace Common.Services
 
         public async Task<ProductColor> Delete(int id)
         {
-            var productDb = await GetById(id);
+            var productColorDb = await GetById(id);
             await _context.SaveChangesAsync();
 
-            return productDb;
+            return productColorDb;
         }
 
         public async Task<ProductColor> Add(ProductColor productColor)

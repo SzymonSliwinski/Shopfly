@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
 using Common.Services;
 using ShopPanelWebApi.Filters;

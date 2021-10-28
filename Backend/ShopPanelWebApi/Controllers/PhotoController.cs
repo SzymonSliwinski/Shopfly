@@ -37,13 +37,13 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> Add([FromBody] Photo photo)
+        public async Task<ActionResult<Photo>> Add([FromBody] Photo photo)
         {
             return Ok(await _photoService.Add(photo));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Product>> Update([FromBody] Photo photo)
+        public async Task<ActionResult<Photo>> Update([FromBody] Photo photo)
         {
             return Ok(await _photoService.Update(photo));
         }

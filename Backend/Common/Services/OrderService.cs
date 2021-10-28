@@ -25,11 +25,11 @@ namespace Common.Services
 
         public async Task<Order> Delete(int id)
         {
-            var productDb = await GetById(id);
-            productDb.IsActive = false;
+            var orderDb = await GetById(id);
+            orderDb.IsActive = false;
             await _context.SaveChangesAsync();
 
-            return productDb;
+            return orderDb;
         }
 
         public async Task<Order> Add(Order order)

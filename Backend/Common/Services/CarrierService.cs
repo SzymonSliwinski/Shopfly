@@ -17,7 +17,7 @@ namespace Common.Services
         {
             var result = await _context.Carriers
                 .AsQueryable()
-                .SingleAsync(p => p.Id == id);
+                .SingleAsync(c => c.Id == id);
 
             return result;
         }

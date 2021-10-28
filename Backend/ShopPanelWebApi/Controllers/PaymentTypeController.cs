@@ -43,7 +43,7 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Product>> Update([FromBody] PaymentType paymentType)
+        public async Task<ActionResult<PaymentType>> Update([FromBody] PaymentType paymentType)
         {
             return Ok(await _paymentTypeService.Update(paymentType));
         }
