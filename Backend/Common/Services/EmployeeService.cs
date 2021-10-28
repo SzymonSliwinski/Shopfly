@@ -56,7 +56,6 @@ namespace Common.Services
             oldEmployee.Name = updatedEmployee.Name.Trim();
             oldEmployee.Surname = updatedEmployee.Surname.Trim();
             oldEmployee.Email = updatedEmployee.Email.Trim();
-            oldEmployee.Password = updatedEmployee.Password.Trim();
 
             await _context.SaveChangesAsync();
             return oldEmployee;
