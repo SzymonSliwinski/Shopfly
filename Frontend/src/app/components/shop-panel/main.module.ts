@@ -14,6 +14,8 @@ import { PanelAuthenticationService } from 'src/app/services/shop-panel-services
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
+import { ShopSettingsModule } from './shop-settings/shop-settings.module';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -33,6 +35,8 @@ import { CustomersModule } from './customers/customers.module';
     OrdersModule,
     ProductsModule,
     CustomersModule,
+    ShopSettingsModule,
+
   ],
   providers: [
     PanelAuthenticationService,
