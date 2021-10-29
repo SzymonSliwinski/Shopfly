@@ -25,5 +25,6 @@ namespace GenerateRandomData.Models.ShopModels
         public List<CustomerFavouritesProducts> CustomerFavouritesProducts { get; set; }
         [Newtonsoft.Json.JsonIgnore]
         public List<Order> Orders { get; set; }
+        public bool IsActive { get; set; }
     }
 }
