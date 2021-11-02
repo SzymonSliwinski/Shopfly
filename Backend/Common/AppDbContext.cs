@@ -1,4 +1,5 @@
-﻿using Common.Models.ApiModels;
+﻿using Common.Models;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,8 @@ namespace Common
         //ApiModels
         public DbSet<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
         public DbSet<ApiAccessKey> ApiAccessKeys { get; set; }
+        //Settings
+        public DbSet<ShopSettings> ShopSettings { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> option) : base(option) { }
 
@@ -63,6 +66,7 @@ namespace Common
             ConfigureTaxes(modelBuilder);
             ConfigureOrdersProducts(modelBuilder);
             ConfigureApiAccessKeys(modelBuilder);
+            ConfigureShopSettings(modelBuilder);
 
             //relations
             SetPrivilegesProfilesRelation(modelBuilder);
@@ -287,7 +291,17 @@ namespace Common
                .HasIndex(c => c.Key)
                .IsUnique();
         }
-
+        private void ConfigureShopSettings(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ShopSettings>()
+                .HasNoKey();
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopLogoPath)
+                .HasMaxLength(100);
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.FaviconLogoPath)
+                .HasMaxLength(100);
+        }
 
         // ShopPanelModels relations:
         private void SetPrivilegesProfilesRelation(ModelBuilder modelBuilder)

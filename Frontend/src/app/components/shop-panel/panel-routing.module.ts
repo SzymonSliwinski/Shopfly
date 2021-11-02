@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { CustomersComponent } from './customers/customers.component';
+import { ShopSettingsComponent } from './shop-settings/shop-settings.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] },
       { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] },
       { path: 'products', component: ProductsComponent, canActivate: [AuthenticationService] },
-      { path: 'customers', component: CustomersComponent, canActivate: [AuthenticationService] }
+      { path: 'customers', component: CustomersComponent, canActivate: [AuthenticationService] },
+      { path: 'shop-settings', component: ShopSettingsComponent, canActivate: [AuthenticationService] }
     ]
   },
   { path: 'panel/sign-in', component: SignInComponent }

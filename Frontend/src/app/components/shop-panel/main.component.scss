@@ -5,11 +5,11 @@
     width: 225px;
     height: 100%;
     color: white;
+    top: 60px;
 }
 
 .flex {
     display: flex;
-
     align-items: center;
 }
 
@@ -44,4 +44,5 @@ mat-icon {
 .body {
     margin-left: 225px;
     position: relative;
+    top: 60px;
 }
