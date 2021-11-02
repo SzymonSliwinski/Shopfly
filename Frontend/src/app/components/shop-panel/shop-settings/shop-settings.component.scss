@@ -1,0 +1,38 @@
+mat-icon {
+    font-size: 36px;
+    width: 40px;
+    height: 40px;
+}
+
+.mat-divider {
+    border-top-color: #14274f;
+    height: 5px;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+mat-list {
+    padding: 30px 0 10px 100px;
+    width: 600px;
+}
+
+.list-element {
+    font-size: 18px !important;
+    width: 300px;
+}
+
+.mat-list-item {
+    height: 80px !important;
+}
+
+.list-item {
+    text-align: right;
+    font-weight: 500;
+    align-content: flex-end;
+}
+
+.second-row-element {
+    text-align: left !important;
+    padding-left: 20px;
+}

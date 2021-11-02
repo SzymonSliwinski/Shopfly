@@ -6,10 +6,107 @@
     <!--spacer -->
 </div>
 
-<div class="radius white-background center w-75 flex flex-space-evenly p-25 flex-column">
-    <div class="h-50">
-        <!-- spacer -->
-    </div>
-    <hr />
+<div class="radius white-background center w-75 flex flex-space-evenly flex-column">
+    <!-- general header -->
+    <span class="flex align-items-center p-l-10 p-t-10">
+        <mat-icon>settings_applications</mat-icon>
+        <h1 class="flex-align-start">General</h1>
+    </span>
 
+    <div class="mat-divider w-100">
+        <!--divider-->
+    </div>
+
+    <mat-list role="list" class="text-right">
+        <mat-list-item class="list-item">
+            <span class="list-element">Catalog mode</span>
+            <span class="p-l-10 p-r-10"></span>
+            <span class="list-element second-row-element">
+                <mat-slide-toggle [(ngModel)]="shopSettings.isCatalogMode" color="primary">
+                </mat-slide-toggle>
+            </span>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="list-item">
+            <span class="list-element">
+                Shopping for guests
+            </span>
+            <span class="p-l-10 p-r-10"></span>
+            <span class="list-element second-row-element">
+                <mat-slide-toggle [(ngModel)]="shopSettings.allowGuestsForShopping" color="primary">
+                </mat-slide-toggle>
+            </span>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="list-item">
+            <span class="list-element">
+                How long defined as new
+            </span>
+            <span class="p-l-10 p-r-10"></span>
+            <span class="list-element second-row-element">
+                <mat-form-field appearance="fill">
+                    <input matInput type="number" [(ngModel)]="shopSettings.howLongDefinedAsNew" min="1" max="32000">
+                </mat-form-field>
+            </span>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="list-item">
+            <span class="list-element ">
+                Products per page
+            </span>
+            <span class="p-l-10 p-r-10"></span>
+            <span class="list-element second-row-element">
+                <mat-form-field appearance="fill">
+                    <input matInput type="number" [(ngModel)]="shopSettings.productsPerPage" min="1" max="100">
+                </mat-form-field>
+            </span>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="list-item">
+            <span class="list-element">
+                Show product stock
+            </span>
+            <span class="p-l-10 p-r-10"></span>
+            <span class="list-element second-row-element">
+                <mat-slide-toggle [(ngModel)]="shopSettings.displayProductQuantity" color="primary">
+                </mat-slide-toggle>
+            </span>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="list-item">
+            <span class="list-element">Default sort</span>
+            <span class="p-l-10 p-r-10"></span>
+            <span class="list-element second-row-element">
+                <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="shopSettings.defaultSortBy">
+                        <mat-option *ngFor=" let sortOption of getSortOptionsAsStrings()"
+                            [value]="sortOptionToEnum(sortOption)">
+                            {{sortOption}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </span>
+        </mat-list-item>
+    </mat-list>
+
+    <!-- images header -->
+    <span class="flex align-items-center p-l-10 p-t-10">
+        <mat-icon>image</mat-icon>
+        <h1 class="flex-align-start">Images</h1>
+    </span>
+
+    <div class="mat-divider">
+        <!--divider-->
+    </div>
+
+    <!-- files header -->
+    <span class="flex align-items-center p-l-10 p-t-10">
+        <mat-icon>drive_file_move</mat-icon>
+        <h1 class="flex-align-start">Import files</h1>
+    </span>
+
+    <div class="mat-divider w-100">
+        <!--divider-->
+    </div>
+
+    <span class="flex p-10">
+        <button mat-raised-button color="primary" style="margin-left: auto; margin-right: 10px;">
+            Save
+        </button>
+    </span>
 </div>

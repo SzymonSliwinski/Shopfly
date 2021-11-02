@@ -5,6 +5,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ShopSettingsComponent } from './shop-settings.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
     declarations: [
@@ -19,7 +25,12 @@ import { MatButtonModule } from '@angular/material/button';
         MatMenuModule,
         MatTableModule,
         MatButtonModule,
-
+        MatSlideToggleModule,
+        FormsModule,
+        MatListModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     providers: [
     ],

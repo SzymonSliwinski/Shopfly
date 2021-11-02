@@ -16,15 +16,19 @@ namespace Common.Models
             Alphabetic
         }
 
+        // general
         public bool IsCatalogMode { get; set; }
         public bool AllowGuestsForShopping { get; set; }
         public short HowLongDefinedAsNew { get; set; }
         public short ProductsPerPage { get; set; }
         public bool DisplayProductQuantity { get; set; }
+        public SortOption DefaultSortBy { get; set; }
+
+        // photos
         public string ShopLogoPath { get; set; }
         public string FaviconLogoPath { get; set; }
         public short MaxPhotoSize { get; set; }
-        public SortOption DefaultSortBy { get; set; }
+        // files
         public char ImportFileSeparator { get; set; }
         public char MultipleValuesInFileSeparator { get; set; }
 

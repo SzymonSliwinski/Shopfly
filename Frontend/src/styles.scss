@@ -56,8 +56,16 @@ body {
   align-self: flex-start;
 }
 
+.align-items-center {
+  align-items: center;
+}
+
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .pointer {
@@ -99,6 +107,10 @@ body {
   padding-left: 10px;
 }
 
+.p-r-10 {
+  padding-right: 10px;
+}
+
 .p-t-10 {
   padding-top: 10px;
 }
@@ -109,6 +121,14 @@ body {
 
 .w-100 {
   width: 100%;
+}
+
+.w-200 {
+  width: 200px;
+}
+
+.w-300 {
+  width: 300px;
 }
 
 .w-50-px {
