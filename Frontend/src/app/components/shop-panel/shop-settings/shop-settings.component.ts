@@ -26,6 +26,15 @@ export class ShopSettingsComponent implements OnInit {
     }
   }
 
+  onLogoChange(value: any): void {
+    console.log(value)
+
+  }
+
+  onFaviconChange(value: any): void {
+    console.log(value)
+  }
+
   public sortOptionToString(optionEnum: SortOption): string {
     return SortOptionToString(optionEnum);
   }
