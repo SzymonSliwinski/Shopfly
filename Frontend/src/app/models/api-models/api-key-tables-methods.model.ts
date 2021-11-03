@@ -29,6 +29,38 @@ export enum TableType {
     productDiemensions
 }
 
+export function TableTypesStringList(): string[] {
+    console.log('x')
+    return [
+        'employees',
+        'employeesProfiles',
+        'profiles',
+        'profilesPrivileges',
+        'privileges',
+        'customers',
+        'statuses',
+        'orders',
+        'ordersProducts',
+        'customerFavouritesProducts',
+        'ratings',
+        'comments',
+        'tags',
+        'productTags',
+        'products',
+        'productsPayments',
+        'paymentTypes',
+        'carriers',
+        'productsCarriers',
+        'taxes',
+        'categories',
+        'productsVariants',
+        'productsVariantsPhotos',
+        'photos',
+        'productColors',
+        'productDiemensions'
+    ];
+}
+
 export function TableTypeToString(type: TableType): string {
     switch (type) {
         case TableType.employees: return 'employees';
@@ -96,6 +128,15 @@ export enum HttpMethodType {
     get,
     patch,
     delete
+}
+
+export function HttpMethodTypesStringList(): string[] {
+    return [
+        'post',
+        'get',
+        'patch',
+        'delete'
+    ];
 }
 
 export function HttpMethodTypeToString(type: HttpMethodType): string {

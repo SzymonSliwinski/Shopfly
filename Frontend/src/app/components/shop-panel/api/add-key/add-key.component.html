@@ -1,6 +1,55 @@
 <div class="white-background w-100 h-100 flex">
     <h1 class="p-l-10 flex-align-start">Add key</h1>
-
+    <!-- header -->
     <div class="flex-column m-r flex-align-center">
     </div>
+</div>
+
+<div class="h-50"></div>
+
+<div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
+    <!-- key field -->
+    <div class="flex">
+        <mat-form-field appearance="fill" style="width: 550px;">
+            <mat-label>Key</mat-label>
+            <input matInput [(ngModel)]="apiAccessKey.key" maxlength="50">
+        </mat-form-field>
+        <span class="p-l-10">
+            <button mat-fab (click)="onRandomKeyClick()" color="primary" style="position: relative; top: 5px;">
+                <mat-icon>cached</mat-icon>
+            </button>
+        </span>
+    </div>
+    <div class="h-50">
+        <!--spacer-->
+    </div>
+
+    <div class="mat-divider w-100"></div>
+
+    <div class="h-50">
+        <!--spacer-->
+    </div>
+
+    <div *ngFor="let method of getHttpMethodTypesStringList()" class="flex w-75 center text-center">
+        <!-- <span style="width: 20%;"> -->
+        {{method}}
+        <!-- </span> -->
+    </div>
+    <div *ngFor="let table of getTableTypesStringList()" class="flex w-75 center text-center">
+        <div *ngFor="let method of getHttpMethodTypesStringList()" style="width: 20%;">
+            e
+        </div>
+    </div>
+
+    <div class="h-50">
+        <!--spacer-->
+    </div>
+    <div class="mat-divider w-100"></div>
+
+    <span class="flex p-10">
+        <button mat-raised-button color="primary" style="margin-left: auto; margin-right: 10px;">
+            Save
+        </button>
+    </span>
+
 </div>
