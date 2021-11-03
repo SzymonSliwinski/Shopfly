@@ -12,10 +12,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../shared/shared.module';
+import { AddKeyComponent } from './add-key/add-key.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
-        ApiComponent
+        ApiComponent,
+        AddKeyComponent
     ],
     entryComponents: [
     ],
@@ -31,7 +34,8 @@ import { SharedModule } from '../../shared/shared.module';
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
-        SharedModule
+        SharedModule,
+        RouterModule
     ],
     providers: [
     ],

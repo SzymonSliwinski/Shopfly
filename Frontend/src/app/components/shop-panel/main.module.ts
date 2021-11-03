@@ -37,7 +37,7 @@ import { ApiModule } from './api/api.module';
     ProductsModule,
     CustomersModule,
     ShopSettingsModule,
-    ApiModule,
+    ApiModule
   ],
   providers: [
     PanelAuthenticationService,

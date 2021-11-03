@@ -49,4 +49,8 @@ export class ApiComponent implements OnInit {
     this.isLoaded = true;
   }
 
+  public onAddKeyClick(): void {
+
+  }
+
 }
