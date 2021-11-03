@@ -9,6 +9,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { CustomersComponent } from './customers/customers.component';
 import { ShopSettingsComponent } from './shop-settings/shop-settings.component';
+import { ApiComponent } from './api/api.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
       { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] },
       { path: 'products', component: ProductsComponent, canActivate: [AuthenticationService] },
       { path: 'customers', component: CustomersComponent, canActivate: [AuthenticationService] },
-      { path: 'shop-settings', component: ShopSettingsComponent, canActivate: [AuthenticationService] }
+      { path: 'shop-settings', component: ShopSettingsComponent, canActivate: [AuthenticationService] },
+      { path: 'api', component: ApiComponent, canActivate: [AuthenticationService] }
     ]
   },
   { path: 'panel/sign-in', component: SignInComponent }
