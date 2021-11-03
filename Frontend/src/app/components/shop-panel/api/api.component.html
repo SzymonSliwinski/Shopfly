@@ -1,0 +1,41 @@
+<div class="white-background w-100 h-100 flex">
+    <h1 class="p-l-10 flex-align-start">API</h1>
+
+    <div class="flex-column m-r flex-align-center">
+    </div>
+    <div class="flex m-r flex-align-center flex-buttons">
+        <div class="flex-column">
+            <span class="flex-align-center pointer" style="margin-right: 10px">
+                <mat-slide-toggle size="large" color="primary" [(ngModel)]="isApiOn"></mat-slide-toggle>
+            </span>
+            <span class="flex-align-center f-16" style="position: relative; top:3px;">
+                Switch On/Off API
+            </span>
+        </div>
+        <div class="flex-column">
+            <span class="flex-align-center pointer" style="margin-right: 10px">
+                <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+            </span>
+            <span class="flex-align-center f-16">Add new API key</span>
+        </div>
+    </div>
+</div>
+
+<div class="h-50"></div>
+
+<div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
+    <div>
+        <mat-form-field class="p-l-10">
+            <mat-label>Mass action</mat-label>
+            <mat-select>
+                <mat-option>delete</mat-option>
+                <mat-option value="valid">aaa</mat-option>
+                <mat-option value="invalid">aaa</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <shared-data-table *ngIf="isLoaded" [dataSource]="apiKeys" [displayedColumns]="displayedColumns"
+        [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons" [hasSelectableRows]="true">
+    </shared-data-table>
+</div>
