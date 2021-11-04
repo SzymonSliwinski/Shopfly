@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Models.ShopModels;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,7 @@ namespace Common.Services
         public async Task<Comment> Add(Comment comment)
         {
             comment.Content = comment.Content.Trim();   // czy tutaj tylko to?
+            comment.CreateDate = DateTime.Now.ToLocalTime();
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
             return comment;

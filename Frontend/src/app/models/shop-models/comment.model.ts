@@ -7,4 +7,5 @@ export interface Comment{
     productId: number;
     product: Product;
     content: string;
+    createDate: Date;
 }

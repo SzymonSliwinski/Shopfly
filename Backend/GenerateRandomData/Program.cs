@@ -241,7 +241,9 @@ namespace GenerateRandomData
             var commentData = new Faker<Comment>("pl")
                 .RuleFor(c => c.CustomerId, c => c.Random.Int(1, numberOfPositions))
                 .RuleFor(c => c.ProductId, c => c.Random.Int(1, numberOfPositions))
-                .RuleFor(c => c.Content, c => c.Lorem.Text());
+                .RuleFor(c => c.Content, c => c.Lorem.Text())
+                .RuleFor(c => c.CreateDate, c => c.Date.Past(3));
+
 
             // zapis do pliku:
             if (saveToFile)

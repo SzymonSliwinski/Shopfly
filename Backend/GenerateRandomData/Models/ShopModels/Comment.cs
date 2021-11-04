@@ -1,4 +1,6 @@
-﻿namespace GenerateRandomData.Models.ShopModels
+﻿using System;
+
+namespace GenerateRandomData.Models.ShopModels
 {
     public class Comment
     {
@@ -11,5 +13,6 @@
         [Newtonsoft.Json.JsonIgnore]
         public Product Product { get; set; }
         public string Content { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }
