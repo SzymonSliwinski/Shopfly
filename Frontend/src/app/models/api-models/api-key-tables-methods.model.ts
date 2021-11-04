@@ -30,34 +30,33 @@ export enum TableType {
 }
 
 export function TableTypesStringList(): string[] {
-    console.log('x')
     return [
         'employees',
-        'employeesProfiles',
+        'employees profiles',
         'profiles',
-        'profilesPrivileges',
+        'profiles privileges',
         'privileges',
         'customers',
         'statuses',
         'orders',
-        'ordersProducts',
-        'customerFavouritesProducts',
+        'orders products',
+        'customer favourites products',
         'ratings',
         'comments',
         'tags',
-        'productTags',
+        'product tags',
         'products',
-        'productsPayments',
-        'paymentTypes',
+        'products payments',
+        'payment types',
         'carriers',
-        'productsCarriers',
+        'products carriers',
         'taxes',
         'categories',
-        'productsVariants',
-        'productsVariantsPhotos',
+        'products variants',
+        'products variants photos',
         'photos',
-        'productColors',
-        'productDiemensions'
+        'product colors',
+        'product diemensions'
     ];
 }
 

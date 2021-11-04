@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../shared/shared.module';
 import { AddKeyComponent } from './add-key/add-key.component';
 import { RouterModule } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
         MatFormFieldModule,
         MatInputModule,
         SharedModule,
-        RouterModule
+        RouterModule,
+        MatCheckboxModule
     ],
     providers: [
     ],
