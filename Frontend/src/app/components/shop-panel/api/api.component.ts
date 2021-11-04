@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { ApiAccessKey } from 'src/app/models/api-models/api-access-key.model';
-import { MenuButton, TableButton } from '../../shared/data-table/data-table.component';
+import { TableButton } from '../../shared/data-table/data-table.component';
 
 @Component({
   selector: 'app-api',
@@ -14,8 +14,7 @@ export class ApiComponent implements OnInit {
   apiKeys!: ApiAccessKey[];
   isLoaded = false;
   constructor() { }
-  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
-  public menuButtons: MenuButton[] = [MenuButton.Delete, MenuButton.Details];
+  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Delete];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },

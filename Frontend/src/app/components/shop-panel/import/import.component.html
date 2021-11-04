@@ -1,0 +1,34 @@
+<div class="white-background w-100 h-100 flex">
+    <h1 class="p-l-10 flex-align-start">Import</h1>
+</div>
+
+<div class="h-50">
+    <!--spacer-->
+</div>
+
+<div class="radius white-background w-50 flex flex-space-evenly p-25 flex-column" style="margin-left: 50px;">
+    <div class="w-100">
+        <p class="p-l-10" style="font-weight: 500;">What table you want to import?</p>
+        <!-- header -->
+        <div class="flex-column m-r flex-align-center">
+            <mat-form-field appearance="fill" style="width: 280px;">
+                <mat-select style="width: 250px;">
+                    <mat-option *ngFor="let table of tables" [value]="table">
+                        {{table |titlecase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <p class="p-l-10" style="font-weight: 500;">Choose file</p>
+    <div class="flex" style="gap: 5px;">
+        <div class="radius path-holder"></div>
+        <button mat-flat-button color="primary" (click)="file.click()">
+            Browse
+        </button>
+    </div>
+    <span class="info">Supported formats .json and .csv</span>
+</div>
+
+<input type="file" accept="image/*" #file style="display: none;">

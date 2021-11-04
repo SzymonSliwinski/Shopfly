@@ -10,7 +10,7 @@
     <!-- general header -->
     <span class="flex align-items-center p-l-10 p-t-10">
         <mat-icon>settings_applications</mat-icon>
-        <h1 class="flex-align-start">General</h1>
+        <h2 class="flex-align-start">General</h2>
     </span>
 
     <div class="mat-divider w-100">
@@ -87,7 +87,7 @@
     <!-- images header -->
     <span class="flex align-items-center p-l-10 p-t-10">
         <mat-icon>image</mat-icon>
-        <h1 class="flex-align-start">Images</h1>
+        <h2 class="flex-align-start">Images</h2>
     </span>
 
     <div class="mat-divider">
@@ -97,21 +97,23 @@
     <mat-list role="list" class="text-right">
         <!-- logo -->
         <mat-list-item class="list-item">
-            <span class="list-element">Shop logo photo <i>to do style</i></span>
+            <span class="list-element">Shop logo photo</span>
             <span class="p-l-10 p-r-10"></span>
             <span class="list-element second-row-element">
-                <label for="file">Choose File</label>
-                <input type="file" id="file" (change)="onLogoChange($event.target)">
+                <button mat-flat-button color="primary" (click)="file.click()">
+                    Browse
+                </button>
             </span>
         </mat-list-item>
 
         <!-- favicon -->
         <mat-list-item class="list-item">
-            <span class="list-element">Shop logo photo <i>to do style</i></span>
+            <span class="list-element">Shop logo photo</span>
             <span class="p-l-10 p-r-10"></span>
             <span class="list-element second-row-element">
-                <label for="file">Choose File</label>
-                <input type="file" id="file" (change)="onFaviconChange($event.target)">
+                <button mat-flat-button color="primary" (click)="file.click()">
+                    Browse
+                </button>
             </span>
         </mat-list-item>
 
@@ -129,7 +131,7 @@
     <!-- files header -->
     <span class="flex align-items-center p-l-10 p-t-10">
         <mat-icon>drive_file_move</mat-icon>
-        <h1 class="flex-align-start">Import files</h1>
+        <h2 class="flex-align-start">Import files</h2>
     </span>
 
     <div class="mat-divider w-100">
@@ -174,3 +176,5 @@
 <div class="h-100">
     <!--spacer -->
 </div>
+
+<input type="file" accept="image/*" #file style="display: none;">

@@ -11,6 +11,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { ShopSettingsComponent } from './shop-settings/shop-settings.component';
 import { ApiComponent } from './api/api.component';
 import { AddKeyComponent } from './api/add-key/add-key.component';
+import { ImportComponent } from './import/import.component';
 
 const routes: Routes = [
   {
@@ -22,8 +23,8 @@ const routes: Routes = [
       { path: 'customers', component: CustomersComponent, canActivate: [AuthenticationService] },
       { path: 'shop-settings', component: ShopSettingsComponent, canActivate: [AuthenticationService] },
       { path: 'api', component: ApiComponent, canActivate: [AuthenticationService] },
-      { path: 'api/add', component: AddKeyComponent, canActivate: [AuthenticationService] }
-
+      { path: 'api/add', component: AddKeyComponent, canActivate: [AuthenticationService] },
+      { path: 'import', component: ImportComponent, canActivate: [AuthenticationService] }
     ]
   },
   { path: 'panel/sign-in', component: SignInComponent }
