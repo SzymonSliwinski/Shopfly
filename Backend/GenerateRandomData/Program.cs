@@ -189,7 +189,8 @@ namespace GenerateRandomData
                 .RuleFor(c => c.Name, c => c.Lorem.Word())
                 .RuleFor(c => c.Logo, c => c.System.FilePath())
                 .RuleFor(c => c.DeliveryDaysMinimum, c => c.Random.Int(1, 30))
-                .RuleFor(c => c.DeliveryDaysMaximum, c => c.Random.Int(1, 60)); //todo reguła na >= DeliveryDaysMinimum
+                .RuleFor(c => c.DeliveryDaysMaximum, c => c.Random.Int(1, 60))
+                .RuleFor(c => c.IsActive, c => c.Random.Bool()); //todo reguła na >= DeliveryDaysMinimum
 
             // zapis do pliku:
             if (saveToFile)
@@ -240,7 +241,9 @@ namespace GenerateRandomData
             var commentData = new Faker<Comment>("pl")
                 .RuleFor(c => c.CustomerId, c => c.Random.Int(1, numberOfPositions))
                 .RuleFor(c => c.ProductId, c => c.Random.Int(1, numberOfPositions))
-                .RuleFor(c => c.Content, c => c.Lorem.Text());
+                .RuleFor(c => c.Content, c => c.Lorem.Text())
+                .RuleFor(c => c.CreateDate, c => c.Date.Past(3));
+
 
             // zapis do pliku:
             if (saveToFile)
@@ -269,9 +272,10 @@ namespace GenerateRandomData
                 .RuleFor(c => c.PhoneNumber, c => c.Phone.PhoneNumber("#########"))
                 .RuleFor(c => c.Email, c => c.Internet.Email())
                 .RuleFor(c => c.IsNewsletterSubscribed, c => c.Random.Bool())
-                .RuleFor(c => c.CreateDate, c => c.Date.Past(3))    // tutaj można zmienić format daty
+                .RuleFor(c => c.CreateDate, c => c.Date.Past(3)) // tutaj można zmienić format daty
                 .RuleFor(c => c.LastLoginDate, c => c.Date.Recent(365))
-                .RuleFor(c => c.Password, c => c.Internet.Password(12));
+                .RuleFor(c => c.Password, c => c.Internet.Password(12))
+                .RuleFor(c => c.IsActive, c => c.Random.Bool());
 
             // zapis do pliku:
             if (saveToFile)
@@ -325,6 +329,7 @@ namespace GenerateRandomData
                 .RuleFor(o => o.PriceTotal, o => float.Parse(o.Commerce.Price()))
                 .RuleFor(o => o.Date, o => o.Date.Recent(365))
                 .RuleFor(o => o.AdditionalDescription, o => o.Lorem.Text())
+                .RuleFor(o => o.IsActive, o => o.Random.Bool())
 
                 .RuleFor(o => o.DeliveryAddressStreet, o => o.Address.StreetName())
                 .RuleFor(o => o.DeliveryAddressPostal, o => o.Address.ZipCode())
@@ -388,7 +393,8 @@ namespace GenerateRandomData
             // ustawienie właściwości:
             var paymentTypeData = new Faker<PaymentType>("pl")
                 .RuleFor(pt => pt.Name, pt => pt.Random.Word())
-                .RuleFor(pt => pt.Icon, pt => pt.System.FilePath());
+                .RuleFor(pt => pt.Icon, pt => pt.System.FilePath())
+                .RuleFor(pt => pt.IsActive, pt => pt.Random.Bool());
 
             // zapis do pliku:
             if (saveToFile)

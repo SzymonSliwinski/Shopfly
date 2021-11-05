@@ -15,5 +15,6 @@ namespace GenerateRandomData.Models.ShopModels
         public List<Order> Orders { get; set; }
         [Newtonsoft.Json.JsonIgnore]
         public List<ProductsCarriers> ProductsCarriers { get; set; }
+        public bool IsActive { get; set; }
     }
 }
