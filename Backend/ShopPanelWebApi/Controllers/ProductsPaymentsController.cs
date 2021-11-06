@@ -37,12 +37,12 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _productsPaymentsService.Add(productsPayments));
         }
 
-        [HttpPatch]
-        public async Task<ActionResult<ProductsPayments>> Update([FromBody] ProductsPayments oldProductsPayments, ProductsPayments newProductsPayments)
-        {
-            return Ok(await _productsPaymentsService.Update(oldProductsPayments, newProductsPayments));
-        }
-
+        /*        [HttpPatch]
+                public async Task<ActionResult<ProductsPayments>> Update([FromBody] ProductsPayments oldProductsPayments, ProductsPayments newProductsPayments)
+                {
+                    return Ok(await _productsPaymentsService.Update(oldProductsPayments, newProductsPayments));
+                }
+        */
         [HttpPost]
         public async Task<ActionResult<ProductsPayments>> AddMany([FromBody] List<ProductsPayments> productsPaymentsList)
         {

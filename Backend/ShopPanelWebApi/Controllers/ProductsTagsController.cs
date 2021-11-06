@@ -9,7 +9,7 @@ using ShopPanelWebApi.Filters;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter] 
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ProductsTagsController : ControllerBase
     {
@@ -37,11 +37,11 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _productsTagsService.Add(productsTags));
         }
 
-        [HttpPatch]
-        public async Task<ActionResult<ProductsTags>> Update([FromBody] ProductsTags oldProductsTags, ProductsTags newProductsTags)
-        {
-            return Ok(await _productsTagsService.Update(oldProductsTags, newProductsTags));
-        }
+        /*       [HttpPatch]
+               public async Task<ActionResult<ProductsTags>> Update([FromBody] ProductsTags newProductsTags)
+               {
+                   return Ok(await _productsTagsService.Update(newProductsTags));
+               }*/
 
         [HttpPost]
         public async Task<ActionResult<ProductsTags>> AddMany([FromBody] List<ProductsTags> productsTagsList)

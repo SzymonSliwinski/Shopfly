@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.Dtos;
 using Common.Models.ShopModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace Common.Services
         {
             var result = await _context.CustomerFavouritesProducts
                 .AsQueryable()
-                .SingleAsync(cfp => cfp.CustomerId ==  customerId && cfp.ProductId == productId);
+                .SingleAsync(cfp => cfp.CustomerId == customerId && cfp.ProductId == productId);
 
             return result;
         }
@@ -45,11 +46,11 @@ namespace Common.Services
             return newCustomerFavouritesProducts;
         }
 
-        public async Task<CustomerFavouritesProducts> Update(CustomerFavouritesProducts oldCustomerFavouritesProducts, CustomerFavouritesProducts newCustomerFavouritesProducts)
+        public async Task<CustomerFavouritesProducts> Update(UpdateModelDto<CustomerFavouritesProducts> modelsDto)
         {
-            await Delete(oldCustomerFavouritesProducts.CustomerId, oldCustomerFavouritesProducts.ProductId);
-            await Add(newCustomerFavouritesProducts);
-            return newCustomerFavouritesProducts;
+            await Delete(modelsDto.OldModel.CustomerId, modelsDto.OldModel.ProductId);
+            await Add(modelsDto.NewModel);
+            return modelsDto.NewModel;
         }
 
         public async Task<List<CustomerFavouritesProducts>> AddMany(List<CustomerFavouritesProducts> customerFavouritesProductsList)
