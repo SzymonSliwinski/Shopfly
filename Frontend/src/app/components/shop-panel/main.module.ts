@@ -17,6 +17,8 @@ import { CustomersModule } from './customers/customers.module';
 import { ShopSettingsModule } from './shop-settings/shop-settings.module';
 import { ApiModule } from './api/api.module';
 import { ImportModule } from './import/import.module';
+import { EmployeesModule } from './employees/employees.module';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -37,7 +39,9 @@ import { ImportModule } from './import/import.module';
     ProductsModule,
     CustomersModule,
     ShopSettingsModule,
-    ImportModule
+    ImportModule,
+    ApiModule,
+    EmployeesModule,
   ],
   providers: [
     PanelAuthenticationService,

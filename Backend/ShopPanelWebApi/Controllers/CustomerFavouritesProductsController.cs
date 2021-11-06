@@ -5,6 +5,7 @@ using Common;
 using Common.Models.ShopModels;
 using Common.Services;
 using ShopPanelWebApi.Filters;
+using Common.Dtos;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -38,9 +39,9 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult<CustomerFavouritesProducts>> Update([FromBody] CustomerFavouritesProducts oldCustomerFavouritesProducts, CustomerFavouritesProducts newCustomerFavouritesProducts)
+        public async Task<ActionResult<CustomerFavouritesProducts>> Update([FromBody] UpdateModelDto<CustomerFavouritesProducts> payload)
         {
-            return Ok(await _customerFavouritesProductsService.Update(oldCustomerFavouritesProducts, newCustomerFavouritesProducts));
+            return Ok(await _customerFavouritesProductsService.Update(payload));
         }
 
         [HttpPost]
