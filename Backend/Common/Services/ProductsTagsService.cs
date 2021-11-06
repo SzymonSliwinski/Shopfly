@@ -47,13 +47,13 @@ namespace Common.Services
             return newProductsTags;
         }
 
-        public async Task<ProductsTags> Update(ProductsTags oldProductsTags, ProductsTags newProductsTags)
-        {
-            await Delete(oldProductsTags.TagId, oldProductsTags.ProductId);
-            await Add(newProductsTags);
-            return newProductsTags;
-        }
-
+        /*      public async Task<ProductsTags> Update(ProductsTags newProductsTags)
+              {
+                  await Delete(oldProductsTags.TagId, oldProductsTags.ProductId);
+                  await Add(newProductsTags);
+                  return newProductsTags;
+              }
+      */
         public async Task<List<ProductsTags>> AddMany(List<ProductsTags> productsTagsList)
         {
             foreach (var productsTags in productsTagsList)

@@ -37,11 +37,11 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _productsCarriersService.Add(productsCarriers));
         }
 
-        [HttpPatch]
-        public async Task<ActionResult<ProductsCarriers>> Update([FromBody] ProductsCarriers oldProductsCarriers, ProductsCarriers newProductsCarriers)
-        {
-            return Ok(await _productsCarriersService.Update(oldProductsCarriers, newProductsCarriers));
-        }
+        /*        [HttpPatch]
+                public async Task<ActionResult<ProductsCarriers>> Update([FromBody] ProductsCarriers oldProductsCarriers, ProductsCarriers newProductsCarriers)
+                {
+                    return Ok(await _productsCarriersService.Update(oldProductsCarriers, newProductsCarriers));
+                }*/
 
         [HttpPost]
         public async Task<ActionResult<ProductsCarriers>> AddMany([FromBody] List<ProductsCarriers> productsCarriersList)

@@ -37,11 +37,11 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _profilesPrivilegesService.Add(profilesPrivileges));
         }
 
-        [HttpPatch]
-        public async Task<ActionResult<ProfilesPrivileges>> Update([FromBody] ProfilesPrivileges oldProfilesPrivileges, ProfilesPrivileges newProfilesPrivileges)
-        {
-            return Ok(await _profilesPrivilegesService.Update(oldProfilesPrivileges, newProfilesPrivileges));
-        }
+        /*        [HttpPatch]
+                public async Task<ActionResult<ProfilesPrivileges>> Update([FromBody] ProfilesPrivileges oldProfilesPrivileges, ProfilesPrivileges newProfilesPrivileges)
+                {
+                    return Ok(await _profilesPrivilegesService.Update(oldProfilesPrivileges, newProfilesPrivileges));
+                }*/
 
         [HttpPost]
         public async Task<ActionResult<ProfilesPrivileges>> AddMany([FromBody] List<ProfilesPrivileges> profilesPrivilegesList)
