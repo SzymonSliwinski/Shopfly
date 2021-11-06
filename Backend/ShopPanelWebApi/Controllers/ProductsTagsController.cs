@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Dtos;
 using Common.Models.ShopModels;
 using Common.Services;
 using ShopPanelWebApi.Filters;
@@ -37,11 +38,11 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _productsTagsService.Add(productsTags));
         }
 
-        /*       [HttpPatch]
-               public async Task<ActionResult<ProductsTags>> Update([FromBody] ProductsTags newProductsTags)
-               {
-                   return Ok(await _productsTagsService.Update(newProductsTags));
-               }*/
+        [HttpPatch]
+        public async Task<ActionResult<ProductsTags>> Update([FromBody] UpdateModelDto<ProductsTags> payload)
+        {
+            return Ok(await _productsTagsService.Update(payload));
+        }
 
         [HttpPost]
         public async Task<ActionResult<ProductsTags>> AddMany([FromBody] List<ProductsTags> productsTagsList)
