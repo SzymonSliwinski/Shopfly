@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.Dtos;
 using Common.Models.ShopPanelModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,11 +46,11 @@ namespace Common.Services
             return newProfilesPrivileges;
         }
 
-        public async Task<ProfilesPrivileges> Update(ProfilesPrivileges oldProfilesPrivileges, ProfilesPrivileges newProfilesPrivileges)
+        public async Task<ProfilesPrivileges> Update(UpdateModelDto<ProfilesPrivileges> modelsDto)
         {
-            await Delete(oldProfilesPrivileges.ProfileId, oldProfilesPrivileges.PrivilegeId);
-            await Add(newProfilesPrivileges);
-            return newProfilesPrivileges;
+            await Delete(modelsDto.OldModel.ProfileId, modelsDto.OldModel.PrivilegeId);
+            await Add(modelsDto.NewModel);
+            return modelsDto.NewModel;
         }
 
         public async Task<List<ProfilesPrivileges>> AddMany(List<ProfilesPrivileges> profilesPrivilegesList)

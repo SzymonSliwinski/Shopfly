@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.Dtos;
 using Common.Models.ShopPanelModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,11 +46,11 @@ namespace Common.Services
             return newEmployeesProfiles;
         }
 
-        public async Task<EmployeesProfiles> Update(EmployeesProfiles oldEmployeesProfiles, EmployeesProfiles newEmployeesProfiles)
+        public async Task<EmployeesProfiles> Update(UpdateModelDto<EmployeesProfiles> modelsDto)
         {
-            await Delete(oldEmployeesProfiles.EmployeeId, oldEmployeesProfiles.ProfileId);
-            await Add(newEmployeesProfiles);
-            return newEmployeesProfiles;
+            await Delete(modelsDto.OldModel.EmployeeId, modelsDto.OldModel.ProfileId);
+            await Add(modelsDto.NewModel);
+            return modelsDto.NewModel;
         }
 
         public async Task<List<EmployeesProfiles>> AddMany(List<EmployeesProfiles> employeesProfilesList)
