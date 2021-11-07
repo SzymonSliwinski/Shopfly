@@ -1,1 +1,5 @@
-<p>profiles-list works!</p>
+<div class="w-50 center">
+    <shared-data-table *ngIf="isLoaded" [dataSource]="profilesList" [displayedColumns]="displayedColumns"
+        [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons" [hasSelectableRows]="true">
+    </shared-data-table>
+</div>
