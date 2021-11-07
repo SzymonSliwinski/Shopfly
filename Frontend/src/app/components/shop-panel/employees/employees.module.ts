@@ -10,10 +10,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from '../../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { EmployeesComponent } from './employees.component';
+import { EmployeesListComponent } from './employees-list/employees-list.component';
+import { ProfilesListComponent } from './profiles-list/profiles-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
     declarations: [
         EmployeesComponent,
+        EmployeesListComponent,
+        ProfilesListComponent,
     ],
     imports: [
         CommonModule,
@@ -26,6 +31,7 @@ import { EmployeesComponent } from './employees.component';
         MatFormFieldModule,
         SharedModule,
         MatSelectModule,
+        MatTabsModule
     ],
     providers: [
     ],

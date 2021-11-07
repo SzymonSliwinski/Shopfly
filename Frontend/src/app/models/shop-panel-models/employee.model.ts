@@ -1,11 +1,11 @@
 import { EmployeesProfiles } from './employees-profiles';
-export interface Employee{
+export interface Employee {
     id: number;
     name: string;
     surname: string;
     email: string;
     isActive: boolean;
-    password: string;
-    employeesProfiles: EmployeesProfiles[];
+    password?: string;
+    employeesProfiles?: EmployeesProfiles[];
 
 }

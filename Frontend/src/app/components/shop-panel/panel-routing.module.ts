@@ -13,6 +13,7 @@ import { ApiComponent } from './api/api.component';
 import { AddKeyComponent } from './api/add-key/add-key.component';
 import { ImportComponent } from './import/import.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { ChartsComponent } from './charts/charts.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
       { path: 'api', component: ApiComponent, canActivate: [AuthenticationService] },
       { path: 'api/add', component: AddKeyComponent, canActivate: [AuthenticationService] },
       { path: 'import', component: ImportComponent, canActivate: [AuthenticationService] },
-      { path: 'employees', component: EmployeesComponent, canActivate: [AuthenticationService] }
+      { path: 'employees', component: EmployeesComponent, canActivate: [AuthenticationService] },
+      { path: 'charts', component: ChartsComponent, canActivate: [AuthenticationService] }
     ]
   },
   { path: 'panel/sign-in', component: SignInComponent }
