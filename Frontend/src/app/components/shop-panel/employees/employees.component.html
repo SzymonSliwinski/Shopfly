@@ -1,0 +1,52 @@
+<div class="white-background w-100 flex-column">
+    <div class="flex">
+        <h1 class="p-l-10 flex-align-start" *ngIf="tab === 'employees'">Employees</h1>
+        <h1 class="p-l-10 flex-align-start" *ngIf="tab === 'profiles'">Profiles</h1>
+
+        <div class="flex m-r flex-align-center flex-buttons">
+            <!-- employees -->
+            <div class="flex-column" *ngIf="tab === 'employees'">
+                <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
+                    <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+                </span>
+                <span class="flex-align-center f-16">Add employee</span>
+            </div>
+            <!-- profiles -->
+            <div class="flex-column" *ngIf="tab === 'profiles'">
+                <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
+                    <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+                </span>
+                <span class="flex-align-center f-16">Add profile</span>
+            </div>
+        </div>
+    </div>
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span (click)="onTabChange('employees')" class="custom-label">Employees</span>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span (click)="onTabChange('profiles')" class="custom-label">Profiles</span>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div class="h-50">
+    <!--spacer-->
+</div>
+
+<div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
+    to do filters
+
+    <div class="w-100">
+        <div *ngIf="tab === 'employees'">
+            <app-employees-list></app-employees-list>
+        </div>
+        <div *ngIf="tab === 'profiles'">
+            <app-profiles-list></app-profiles-list>
+        </div>
+    </div>
+</div>

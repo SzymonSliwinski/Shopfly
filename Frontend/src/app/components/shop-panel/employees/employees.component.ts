@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
+  tab: 'employees' | 'profiles' = 'employees';
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  public onTabChange(tab: 'employees' | 'profiles') {
+    this.tab = tab;
+    console.log(this.tab)
+  }
+
 
 }
