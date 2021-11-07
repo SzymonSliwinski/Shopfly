@@ -10,4 +10,5 @@ export interface Carrier{
     deliveryDaysMaximum: number;
     productsCarriers: ProductsCarriers[];
     orders: Order[];
+    isActive: boolean;
 }
