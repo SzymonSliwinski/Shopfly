@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Common.Models.ShopModels
 {
-    public class Product
+    public class Product : EntityBase
     {
-        public int Id { get; set; }
+        //  public int Id { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string Name { get; set; }
