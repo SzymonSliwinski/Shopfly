@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ShopModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace ShopPanelWebApi.Services
@@ -10,6 +11,7 @@ namespace ShopPanelWebApi.Services
     public class ChartsService
     {
         private readonly AppDbContext _context;
+
         public ChartsService(AppDbContext context)
         {
             _context = context;
@@ -23,13 +25,71 @@ namespace ShopPanelWebApi.Services
                 .ToListAsync();
             var result = new Dictionary<DateTime, int>();
 
-            for(var day = dateFrom.Date; day.Date <= dateTo.Date; day = day.AddDays(1)) // wypełnia cały słownik zakresem dat
+            for (var day = dateFrom.Date;
+                day.Date <= dateTo.Date;
+                day = day.AddDays(1)) // wypełnia cały słownik zakresem dat
                 result.Add(day.Date, 0);
 
-            foreach(var orderFromDays in ordersFromDays)
+            foreach (var orderFromDays in ordersFromDays)
                 result[orderFromDays.Date]++;
 
             return result;
+        }
+
+        public async Task<Dictionary<string, int>> GetCarriersChartDataFromDays(DateTime dateFrom, DateTime dateTo)
+        {
+            var ordersFromDaysList = await _context.Orders // list of all orders within a certain time range
+                .AsQueryable()
+                .Include(o => o.Carrier)
+                .Where(o => o.Date >= dateFrom.ToLocalTime() && o.Date <= dateTo.ToLocalTime())
+                .ToListAsync();
+
+            var carrierDaysDictionary = new Dictionary<string, int>(); // carrier name, number of appearances
+
+            foreach (var order in ordersFromDaysList)
+                if (carrierDaysDictionary.ContainsKey(order.Carrier.Name))
+                    carrierDaysDictionary[order.Carrier.Name]++;
+                else
+                    carrierDaysDictionary.Add(order.Carrier.Name, 1);
+
+            return carrierDaysDictionary;
+        }
+
+        public async Task<Dictionary<string, int>> GetPaymentTypesChartDataFromDays(DateTime dateFrom, DateTime dateTo)
+        {
+            var ordersFromDaysList = await _context.Orders
+                .AsQueryable()
+                .Include(o => o.PaymentType)
+                .Where(o => o.Date >= dateFrom.ToLocalTime() && o.Date <= dateTo.ToLocalTime())
+                .ToListAsync();
+
+            var paymentsDaysDictionary = new Dictionary<string, int>(); // payment type name, number of appearances
+
+            foreach (var order in ordersFromDaysList)
+                if (paymentsDaysDictionary.ContainsKey(order.PaymentType.Name))
+                    paymentsDaysDictionary[order.PaymentType.Name]++;
+                else
+                    paymentsDaysDictionary.Add(order.PaymentType.Name, 1);
+
+            return paymentsDaysDictionary;
+        }
+
+        public async Task<Dictionary<DateTime, int>> GetNewUserChartDataFromDays(DateTime dateFrom, DateTime dateTo)
+        {
+            var newUsersFromDays = await _context.Customers
+                .AsQueryable()
+                .Where(c => c.CreateDate >= dateFrom.ToLocalTime() && c.CreateDate <= dateTo.ToLocalTime())
+                .ToListAsync();
+
+            var newUserDaysDictionary = new Dictionary<DateTime, int>(); // date, number of new users
+
+            for (var day = dateFrom.Date; day.Date <= dateTo.Date; day = day.AddDays(1))
+                newUserDaysDictionary.Add(day.Date, 0);
+
+            foreach (var customer in newUsersFromDays)
+                newUserDaysDictionary[customer.CreateDate]++;
+
+            return newUserDaysDictionary;
         }
     }
 }
