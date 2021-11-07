@@ -18,7 +18,7 @@ import { ShopSettingsModule } from './shop-settings/shop-settings.module';
 import { ApiModule } from './api/api.module';
 import { ImportModule } from './import/import.module';
 import { EmployeesModule } from './employees/employees.module';
-
+import { ChartsModule } from './charts/charts.module';
 @NgModule({
   declarations: [
     MainComponent,
@@ -42,6 +42,7 @@ import { EmployeesModule } from './employees/employees.module';
     ImportModule,
     ApiModule,
     EmployeesModule,
+    ChartsModule,
   ],
   providers: [
     PanelAuthenticationService,
