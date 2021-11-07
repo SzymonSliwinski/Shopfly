@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.Dtos;
 using Common.Models.ShopModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,11 +46,11 @@ namespace Common.Services
             return newProductsCarriers;
         }
 
-        public async Task<ProductsCarriers> Update(ProductsCarriers oldProductsCarriers, ProductsCarriers newProductsCarriers)
+        public async Task<ProductsCarriers> Update(UpdateModelDto<ProductsCarriers> modelsDto)
         {
-            await Delete(oldProductsCarriers.ProductId, oldProductsCarriers.CarrierId);
-            await Add(newProductsCarriers);
-            return newProductsCarriers;
+            await Delete(modelsDto.OldModel.ProductId, modelsDto.OldModel.CarrierId);
+            await Add(modelsDto.NewModel);
+            return modelsDto.NewModel;
         }
 
         public async Task<List<ProductsCarriers>> AddMany(List<ProductsCarriers> productsCarriersList)

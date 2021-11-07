@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
+using Common.Dtos;
 using Common.Models.ShopModels;
 using Common.Services;
 using ShopPanelWebApi.Filters;
@@ -37,11 +38,11 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _ordersProductsService.Add(ordersProducts));
         }
 
-        /*        [HttpPatch]
-                public async Task<ActionResult<OrdersProducts>> Update([FromBody] OrdersProducts oldOrdersProducts, OrdersProducts newOrdersProducts)
-                {
-                    return Ok(await _ordersProductsService.Update(oldOrdersProducts, newOrdersProducts));
-                }*/
+        [HttpPatch]
+        public async Task<ActionResult<OrdersProducts>> Update([FromBody] UpdateModelDto<OrdersProducts> payload)
+        {
+            return Ok(await _ordersProductsService.Update(payload));
+        }
 
         [HttpPost]
         public async Task<ActionResult<OrdersProducts>> AddMany([FromBody] List<OrdersProducts> ordersProductsList)

@@ -20,7 +20,7 @@ namespace Common.Models.ShopModels
         public string AdditionalDescription { get; set; }
         public List<OrdersProducts> OrdersProducts { get; set; }
         public bool IsActive { get; set; }
-
+        public DateTime CompleteDate { get; set; }
 
         // Delivery:
         public string DeliveryAddressStreet { get; set; }

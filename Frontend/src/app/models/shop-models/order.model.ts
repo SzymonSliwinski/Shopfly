@@ -18,6 +18,8 @@ export interface Order{
     date: Date;
     additionalDescription: string;
     ordersProducts: OrdersProducts[];
+    isActive: boolean;
+    completeDate: Date;
 
     deliveryAddressStreet: string;
     deliveryAddressPostal: string;

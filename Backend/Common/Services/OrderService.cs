@@ -42,7 +42,7 @@ namespace Common.Services
             order.DeliveryAddressPostal = order.DeliveryAddressPostal.Trim();
             order.DeliveryAddressCity = order.DeliveryAddressCity.Trim();
             order.DeliveryAddressCountry = order.DeliveryAddressCountry.Trim();
-            
+
             order.BillingAddressStreet = order.BillingAddressStreet.Trim();
             order.BillingAddressPostal = order.BillingAddressPostal.Trim();
             order.BillingAddressCity = order.BillingAddressCity.Trim();
@@ -74,7 +74,8 @@ namespace Common.Services
             oldOrder.PriceTotal = updatedOrder.PriceTotal;
             oldOrder.AdditionalDescription = updatedOrder.AdditionalDescription;
             oldOrder.AdditionalDescription = updatedOrder.AdditionalDescription;
-            
+            oldOrder.CompleteDate = updatedOrder.CompleteDate;
+
             oldOrder.DeliveryAddressStreet = updatedOrder.DeliveryAddressStreet;
             oldOrder.DeliveryAddressPostal = updatedOrder.DeliveryAddressPostal;
             oldOrder.DeliveryAddressCity = updatedOrder.DeliveryAddressCity;
@@ -84,7 +85,7 @@ namespace Common.Services
             oldOrder.BillingAddressPostal = updatedOrder.BillingAddressPostal;
             oldOrder.BillingAddressCity = updatedOrder.BillingAddressCity;
             oldOrder.BillingAddressCountry = updatedOrder.BillingAddressCountry;
-            
+
             oldOrder.Nip = updatedOrder.Nip;
             oldOrder.CompanyName = updatedOrder.CompanyName;
             oldOrder.CustomerPhoneNumber = updatedOrder.CustomerPhoneNumber;

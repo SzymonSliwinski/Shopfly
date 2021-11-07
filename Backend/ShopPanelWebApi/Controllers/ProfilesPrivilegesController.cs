@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
+using Common.Dtos;
 using Common.Models.ShopPanelModels;
 using Common.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -37,11 +38,11 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _profilesPrivilegesService.Add(profilesPrivileges));
         }
 
-        /*        [HttpPatch]
-                public async Task<ActionResult<ProfilesPrivileges>> Update([FromBody] ProfilesPrivileges oldProfilesPrivileges, ProfilesPrivileges newProfilesPrivileges)
-                {
-                    return Ok(await _profilesPrivilegesService.Update(oldProfilesPrivileges, newProfilesPrivileges));
-                }*/
+        [HttpPatch]
+        public async Task<ActionResult<ProfilesPrivileges>> Update([FromBody] UpdateModelDto<ProfilesPrivileges> payload)
+        {
+            return Ok(await _profilesPrivilegesService.Update(payload));
+        }
 
         [HttpPost]
         public async Task<ActionResult<ProfilesPrivileges>> AddMany([FromBody] List<ProfilesPrivileges> profilesPrivilegesList)

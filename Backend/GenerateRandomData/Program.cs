@@ -91,7 +91,7 @@ namespace GenerateRandomData
             var employeesProfilesData = new Faker<EmployeesProfiles>("pl")
                 .RuleFor(ep => ep.EmployeeId, ep => ep.Random.Int(1, numberOfPositions))
                 .RuleFor(ep => ep.ProfileId, ep => ep.Random.Int(1, numberOfPositions));
-                
+
 
             if (saveToFile)
             {
@@ -330,6 +330,7 @@ namespace GenerateRandomData
                 .RuleFor(o => o.Date, o => o.Date.Recent(365))
                 .RuleFor(o => o.AdditionalDescription, o => o.Lorem.Text())
                 .RuleFor(o => o.IsActive, o => o.Random.Bool())
+                .RuleFor(o => o.CompleteDate, o => o.Date.Recent(365))
 
                 .RuleFor(o => o.DeliveryAddressStreet, o => o.Address.StreetName())
                 .RuleFor(o => o.DeliveryAddressPostal, o => o.Address.ZipCode())
@@ -345,7 +346,7 @@ namespace GenerateRandomData
                 .RuleFor(o => o.CompanyName, o => o.Company.CompanyName())
                 .RuleFor(o => o.CustomerPhoneNumber, o => o.Phone.PhoneNumber("#########"))
                 .RuleFor(o => o.CustomerEmail, o => o.Internet.Email());
-            
+
             // zapis do pliku:
             if (saveToFile)
             {
@@ -548,7 +549,7 @@ namespace GenerateRandomData
             var productsPaymentsData = new Faker<ProductsPayments>("pl")
                 .RuleFor(pp => pp.ProductId, pp => pp.Random.Int(1, numberOfPositions))
                 .RuleFor(pp => pp.PaymentTypeId, pp => pp.Random.Int(1, numberOfPositions));
-                
+
             // zapis do pliku:
             if (saveToFile)
             {
@@ -715,7 +716,7 @@ namespace GenerateRandomData
 
         static Faker<Tax> GenerateTax(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
-            int[] taxes = new[] {5, 8, 23};
+            int[] taxes = new[] { 5, 8, 23 };
             // ustawienie właściwości:
             var taxData = new Faker<Tax>("pl")
                 .RuleFor(t => t.Name, t => t.Random.Word())

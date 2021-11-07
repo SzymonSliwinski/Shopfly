@@ -6,4 +6,5 @@ export interface PaymentType{
     icon: string;
     orders: Order[];
     productsPayments: ProductsPayments[];
+    isActive: boolean;
 }
