@@ -43,5 +43,11 @@ namespace ShopPanelWebApi.Controllers
         {
             return Ok(await _chartsService.GetNewUserChartDataFromDays(dataRange.From, dataRange.To));
         }
+
+        [HttpPost("complete-order-chart-data")]
+        public async Task<ActionResult<Dictionary<DateTime, int>>> GetCompleteOrderChartData([FromBody] DataRangeDto dataRange)
+        {
+            return Ok(await _chartsService.GetCompleteOrderChartDataFromDays(dataRange.From, dataRange.To));
+        }
     }
 }

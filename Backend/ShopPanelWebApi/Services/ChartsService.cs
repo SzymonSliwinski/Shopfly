@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Microsoft.EntityFrameworkCore;
+using DateTime = System.DateTime;
 
 namespace ShopPanelWebApi.Services
 {
@@ -76,7 +77,7 @@ namespace ShopPanelWebApi.Services
 
         public async Task<Dictionary<DateTime, int>> GetNewUserChartDataFromDays(DateTime dateFrom, DateTime dateTo)
         {
-            var newUsersFromDays = await _context.Customers
+            var newUsersFromDaysList = await _context.Customers
                 .AsQueryable()
                 .Where(c => c.CreateDate >= dateFrom.ToLocalTime() && c.CreateDate <= dateTo.ToLocalTime())
                 .ToListAsync();
@@ -86,10 +87,28 @@ namespace ShopPanelWebApi.Services
             for (var day = dateFrom.Date; day.Date <= dateTo.Date; day = day.AddDays(1))
                 newUserDaysDictionary.Add(day.Date, 0);
 
-            foreach (var customer in newUsersFromDays)
+            foreach (var customer in newUsersFromDaysList)
                 newUserDaysDictionary[customer.CreateDate]++;
 
             return newUserDaysDictionary;
+        }
+
+        public async Task<Dictionary<DateTime, int>> GetCompleteOrderChartDataFromDays(DateTime dateFrom, DateTime dateTo)
+        {
+            var completeOrdersFromDaysList = await _context.Orders
+                .AsQueryable()
+                .Where(o => o.CompleteDate >= dateFrom.ToLocalTime() && o.CompleteDate <= dateTo.ToLocalTime())
+                .ToListAsync();
+
+            var completeOrdersDaysDictionary = new Dictionary<DateTime, int>(); // date, number of completed orders
+
+            for (var day = dateFrom.Date; day.Date <= dateTo.Date; day = day.AddDays(1))
+                completeOrdersDaysDictionary.Add(day.Date, 0);
+
+            foreach (var order in completeOrdersFromDaysList)
+                completeOrdersDaysDictionary[order.CompleteDate]++;
+
+            return completeOrdersDaysDictionary;
         }
     }
 }
