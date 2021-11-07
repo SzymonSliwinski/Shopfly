@@ -1,6 +1,6 @@
 ﻿namespace Common.Models.ShopPanelModels
 {
-    public class ProfilesPrivileges
+    public class ProfilesPrivileges : ManyToManyEntityBase
     {
         public int ProfileId { get; set; }
         public Profile Profile { get; set; }

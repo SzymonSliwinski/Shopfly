@@ -17,15 +17,37 @@ namespace Common.Services
             _table = _context.Set<T>();
         }
 
-        public T GetById(int id)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return _table.Find(id);
+            return await _table.ToListAsync();
+        }
+
+        public async Task<T> GetById(object id)
+        {
+            return await _table.FindAsync(id);
         }
         public async Task<T> Insert(T item)
         {
             await _table.AddAsync(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return item;
+        }
+
+        public async Task<T> Update(T item)
+        {
+            _table.Attach(item);
+            _context.Entry(item).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return item;
+        }
+
+        public async Task Delete(object id)
+        {
+            T existing = await GetById(id);
+            _table.Remove(existing);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

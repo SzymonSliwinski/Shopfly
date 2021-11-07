@@ -4,6 +4,7 @@ using Common.Services;
 using Common.Models.ShopModels;
 using Common;
 using System.Threading.Tasks;
+using Common.Models.ShopPanelModels;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -19,10 +20,11 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> TestAuthentication([FromBody] Category prod)
+        public async Task<ActionResult<string>> TestAuthentication([FromBody] ProfilesPrivileges prod)
         {
-            var service = new CrudService<Category>(_context);
-            var a = await service.Insert(prod);
+            var service = new ManyToManyCrudService<ProfilesPrivileges>(_context);
+            //var a = await service.Insert(prod);
+            service.Delete(prod.ProfileId, prod.PrivilegeId);
             return Ok("Hello world");
         }
     }
