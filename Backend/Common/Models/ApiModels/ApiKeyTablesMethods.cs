@@ -37,9 +37,9 @@ namespace Common.Models.ApiModels
         patch,
         delete
     }
-    public class ApiKeysTablesMethods
+    public class ApiKeysTablesMethods : EntityBase
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public ApiAccessKey ApiAccessKey { get; set; }
         public int ApiAccessKeyId { get; set; }
         public TableType Table { get; set; }

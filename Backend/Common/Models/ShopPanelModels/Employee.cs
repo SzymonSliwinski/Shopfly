@@ -3,9 +3,9 @@ using System.Security.Cryptography;
 
 namespace Common.Models.ShopPanelModels
 {
-    public class Employee
+    public class Employee : EntityBase
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
