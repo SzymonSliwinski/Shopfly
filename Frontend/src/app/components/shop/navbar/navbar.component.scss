@@ -1,0 +1,74 @@
+.topnav {
+    background-color: #14274f;
+    overflow: hidden;
+    height: 70px;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+}
+
+.navbar-content {
+    max-width: 1600px !important;
+    height: 100%;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-icon {
+    transform: scale(2);
+}
+
+.logo {
+    width: 200px;
+    color: #e9006b;
+    height: 100%;
+    font-size: 36px;
+    font-family: sans-serif;
+    justify-content: flex-start;
+}
+
+.logo-part {
+    color: whitesmoke;
+    margin-left: 15px;
+}
+
+.menu {
+    margin-left: auto;
+    text-align: right;
+    height: 100%;
+}
+
+.user-icon {
+    transform: scale(1.8);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.search {
+    margin-right: auto;
+    padding-left: 50px;
+
+}
+
+.search-input {
+    font-size: 16px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    min-width: 400px;
+}
+
+.search-button {
+    background-color: orange;
+    position: relative;
+    top: -1px;
+    right: 6px;
+}
+
+.search-input:focus {
+    outline: none;
+}
