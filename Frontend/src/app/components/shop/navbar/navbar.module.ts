@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { ShopRoutingModule } from '../shop-routing.module';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -22,7 +22,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatFormFieldModule,
     MatButtonModule,
     MatTooltipModule,
-    MatSidenavModule
+    MatSidenavModule,
+    ShopRoutingModule
   ],
   providers: [
     PanelAuthenticationService
