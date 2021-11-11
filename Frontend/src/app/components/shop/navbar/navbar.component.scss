@@ -8,7 +8,7 @@
 }
 
 .navbar-content {
-    max-width: 1600px !important;
+    max-width: 1400px !important;
     height: 100%;
 }
 
@@ -28,7 +28,7 @@
     height: 100%;
     font-size: 36px;
     font-family: sans-serif;
-    justify-content: flex-start;
+    padding-left: 20px;
 }
 
 .logo-part {
@@ -51,7 +51,7 @@
 .search {
     margin-right: auto;
     padding-left: 50px;
-
+    width: 40%;
 }
 
 .search-input {
@@ -59,7 +59,7 @@
     padding: 8px;
     border: none;
     border-radius: 5px;
-    min-width: 400px;
+    width: 80%;
 }
 
 .search-button {
@@ -71,4 +71,11 @@
 
 .search-input:focus {
     outline: none;
+}
+
+.button-icon {
+    color: white;
+    cursor: pointer;
+    position: relative;
+    top: -5px;
 }

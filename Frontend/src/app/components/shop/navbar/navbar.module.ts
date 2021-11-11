@@ -7,6 +7,9 @@ import { PanelAuthenticationService } from 'src/app/services/shop-panel-services
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -17,7 +20,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatMenuModule,
     FormsModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule,
+
   ],
   providers: [
     PanelAuthenticationService
