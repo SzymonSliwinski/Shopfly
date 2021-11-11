@@ -8,7 +8,7 @@
 }
 
 .navbar-content {
-    max-width: 1600px !important;
+    max-width: 1400px !important;
     height: 100%;
 }
 
@@ -28,7 +28,7 @@
     height: 100%;
     font-size: 36px;
     font-family: sans-serif;
-    justify-content: flex-start;
+    padding-left: 20px;
 }
 
 .logo-part {
@@ -51,7 +51,7 @@
 .search {
     margin-right: auto;
     padding-left: 50px;
-
+    width: 40%;
 }
 
 .search-input {
@@ -59,11 +59,12 @@
     padding: 8px;
     border: none;
     border-radius: 5px;
-    min-width: 400px;
+    width: 80%;
 }
 
-.search-button {
-    background-color: orange;
+.search-button,
+.sign-in-button {
+    background-color: rgb(255, 115, 0);
     position: relative;
     top: -1px;
     right: 6px;
@@ -71,4 +72,30 @@
 
 .search-input:focus {
     outline: none;
+}
+
+.button-icon {
+    color: white;
+    cursor: pointer;
+    position: relative;
+    top: -5px;
+}
+
+.note {
+    opacity: 0.8;
+    font-size: 12px;
+    text-align: center
+}
+
+.sign-in-button-wrapper {
+    width: 270px;
+}
+
+.sign-in-button {
+    margin: auto;
+    padding: 5px;
+    width: 250px;
+    font-size: 18px;
+    color: white;
+    margin-left: 15px;
 }

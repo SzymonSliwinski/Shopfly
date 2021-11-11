@@ -1,5 +1,8 @@
 <div class="topnav">
   <div class="navbar-content center flex flex-center">
+    <mat-icon class="icon button-icon i-36">
+      menu
+    </mat-icon>
     <!-- logo -->
     <div class="logo flex flex-center">
       <mat-icon class="shop-icon">
@@ -15,25 +18,33 @@
       </button>
     </div>
     <!-- menu -->
-    <div class="flex">
-      <div class="menu">
-        user
-        <!-- <mat-icon class="user-icon" [matMenuTriggerFor]="userMenu">
-          account_circle
-        </mat-icon> -->
-      </div>
+    <div class="menu flex" style="gap: 60px">
+      <mat-icon class="icon button-icon i-36" [matMenuTriggerFor]="userMenu">
+        account_circle
+      </mat-icon>
+
+      <mat-icon class="icon button-icon  i-36" [matTooltip]="'Favourite products'" matTooltipClass="f-18">
+        favorite_border
+      </mat-icon>
+
+      <mat-icon class="icon button-icon i-36" [matTooltip]="'Cart'" matTooltipClass="f-18">
+        shopping_cart
+      </mat-icon>
     </div>
   </div>
 </div>
 
-<!-- <mat-menu #userMenu="matMenu" xPosition="before">
-  <button mat-menu-item>
-    <mat-icon>manage_accounts</mat-icon>
-    <span>settings</span>
-  </button>
+<mat-menu #userMenu="matMenu" yPosition="below">
+  <div style="width: 270px;">
+    <h3 class="text-center">Welcome in Shopfly</h3>
+    <p class="note">Please sign in to have fully access to shop functions</p>
+    <hr>
+    <div class="sign-in-button-wrapper">
+      <button mat-flat-button class="sign-in-button" [routerLink]="['sign-in']">Sign in</button>
+    </div>
 
-  <button mat-menu-item>
-    <mat-icon>logout</mat-icon>
-    <span>Logout</span>
-  </button>
-</mat-menu> -->
+    <div class="flex" style="gap: 5px;">
+      <p>No account yet?</p> <a href="sign-up">Sign up</a>
+    </div>
+  </div>
+</mat-menu>

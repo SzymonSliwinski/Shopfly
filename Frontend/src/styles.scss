@@ -211,6 +211,10 @@ body {
   font-size: 16px;
 }
 
+.f-18 {
+  font-size: 18px;
+}
+
 .m-r {
   margin-left: auto;
   padding-right: 25px;
@@ -221,4 +225,9 @@ body {
   height: 5px;
   padding-top: 10px;
   padding-bottom: 10px
+}
+
+a:link {
+  text-decoration: none;
+  color: #4b0082;
 }
