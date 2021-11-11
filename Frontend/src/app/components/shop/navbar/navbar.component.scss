@@ -62,8 +62,9 @@
     width: 80%;
 }
 
-.search-button {
-    background-color: orange;
+.search-button,
+.sign-in-button {
+    background-color: rgb(255, 115, 0);
     position: relative;
     top: -1px;
     right: 6px;
@@ -78,4 +79,23 @@
     cursor: pointer;
     position: relative;
     top: -5px;
+}
+
+.note {
+    opacity: 0.8;
+    font-size: 12px;
+    text-align: center
+}
+
+.sign-in-button-wrapper {
+    width: 270px;
+}
+
+.sign-in-button {
+    margin: auto;
+    padding: 5px;
+    width: 250px;
+    font-size: 18px;
+    color: white;
+    margin-left: 15px;
 }

@@ -22,7 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatFormFieldModule,
     MatButtonModule,
     MatTooltipModule,
-
+    MatSidenavModule
   ],
   providers: [
     PanelAuthenticationService
