@@ -1,24 +1,24 @@
 <div class="topnav">
   <div class="navbar-content center flex flex-center">
-    <mat-icon class="icon button-icon i-36">
+    <mat-icon class="icon button-icon i-36" *ngIf="displayNavbarContent">
       menu
     </mat-icon>
     <!-- logo -->
-    <div class="logo flex flex-center">
+    <div class="logo flex flex-center" [routerLink]="['']">
       <mat-icon class="shop-icon">
         storefront
       </mat-icon>
       <span class="logo-part">Shop</span>fly
     </div>
 
-    <div class="search">
+    <div class="search" *ngIf="displayNavbarContent">
       <input class="search-input" placeholder="Search...">
       <button mat-flat-button class="search-button">
         <mat-icon style="color: #fff">search</mat-icon>
       </button>
     </div>
     <!-- menu -->
-    <div class="menu flex" style="gap: 60px">
+    <div class="menu flex" style="gap: 60px" *ngIf="displayNavbarContent">
       <mat-icon class="icon button-icon i-36" [matMenuTriggerFor]="userMenu">
         account_circle
       </mat-icon>
