@@ -1,1 +1,51 @@
-<p>sign-up works!</p>
+<div class="h-50">
+    <!-- spacer -->
+</div>
+<div class="radius white-background center w-500 flex flex-space-evenly p-25 flex-column">
+    <h1 class="p-10">Sign up</h1>
+
+    <div class="form-field-container">
+        <p>E-mail</p>
+        <input type="email" id="email" />
+    </div>
+
+    <div class="form-field-container">
+        <span>Password</span>
+        <input type="password" />
+        <span class="info">*Password should contain at least 8 characters</span>
+    </div>
+
+    <div class="form-field-container">
+        <div class="flex double-field">
+            <div class="flex-column">
+                <p>Name</p>
+                <input type="text" />
+            </div>
+
+            <div class="flex-column">
+                <p>Surname</p>
+                <input type="text" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-field-container">
+        <p>Phone number</p>
+        <input />
+        <span class="info">*Specified in format 123-123-123</span>
+    </div>
+
+    <mat-checkbox color="primary">
+        I agree with shop <a href="condition-use" target="blank">conditions of use </a>
+    </mat-checkbox>
+
+    <mat-checkbox color="primary">
+        I want to receive informations about sales, new products etc.
+    </mat-checkbox>
+
+    <span class=" center" style="margin-top: 20px">
+        <button mat-raised-button color="primary">
+            Submit
+        </button>
+    </span>
+</div>

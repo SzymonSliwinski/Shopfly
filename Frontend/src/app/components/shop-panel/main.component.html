@@ -2,39 +2,45 @@
 
 <div class="wrapper">
     <div class="sidebar">
-        <div class="sidebar-item" style="padding: 20px 0 10px 0">
-            <button mat-button [routerLink]="['dashboard']">
-                <span class="flex">
-                    <mat-icon>trending_up</mat-icon> Dashboard
-                </span>
-            </button>
+        <div style="padding: 20px 0 10px 0;">
+            <div class="sidebar-item"
+                [ngClass]="activeTab === tabs.Dashboard ? 'active-navbar-button font-black' : 'font-white'">
+                <button mat-button [routerLink]="['dashboard']">
+                    <span class="flex">
+                        <mat-icon>trending_up</mat-icon> Dashboard
+                    </span>
+                </button>
+            </div>
         </div>
-
         <mat-divider class="divider"></mat-divider>
 
-        <div class="sidebar-header">SALE</div>
-        <div class="sidebar-item">
-            <button mat-button [routerLink]="['orders']">
-                <span class="flex">
+        <div class="sidebar-header font-white">SALE</div>
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Orders ? 'active-navbar-button font-black' : 'font-white'">
+            <button mat-button [routerLink]=" ['orders']">
+                <span class=" flex">
                     <mat-icon>shopping_basket</mat-icon> Orders
                 </span>
             </button>
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Products ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['products']">
                 <span class="flex">
                     <mat-icon>store</mat-icon> Products
                 </span>
             </button>
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Customers ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['customers']">
                 <span class="flex">
                     <mat-icon>group</mat-icon> Customers
                 </span>
             </button>
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Charts ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['charts']">
                 <span class="flex">
                     <mat-icon>analytics</mat-icon> Charts
@@ -47,9 +53,10 @@
         </div>
         <mat-divider class="divider"></mat-divider>
 
-        <div class="sidebar-header">CONFIGURE</div>
+        <div class="sidebar-header font-white">CONFIGURE</div>
 
-        <div class="sidebar-item">
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Settings ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['shop-settings']">
                 <span class="flex">
                     <mat-icon>settings</mat-icon>Settings
@@ -57,7 +64,7 @@
             </button>
         </div>
 
-        <div class="sidebar-item">
+        <div class="sidebar-item" [ngClass]="activeTab === tabs.Api ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['api']">
                 <span class="flex">
                     <mat-icon>public</mat-icon>
@@ -66,7 +73,8 @@
             </button>
         </div>
 
-        <div class="sidebar-item">
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Employees ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['employees']">
                 <span class="flex">
                     <mat-icon>badge</mat-icon>
@@ -75,7 +83,8 @@
             </button>
         </div>
 
-        <div class="sidebar-item">
+        <div class="sidebar-item"
+            [ngClass]="activeTab === tabs.Import ? 'active-navbar-button font-black' : 'font-white'">
             <button mat-button [routerLink]="['import']">
                 <span class="flex">
                     <mat-icon>import_export</mat-icon>

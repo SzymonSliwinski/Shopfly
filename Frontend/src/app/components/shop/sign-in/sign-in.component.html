@@ -1,1 +1,43 @@
-<p>sign-in works!</p>
+<div class="container w-100 center" style="background-color: red;" id="container">
+    <div class="form-container sign-in-container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <h1>Sign in</h1>
+            <div class="h-50"></div>
+
+            <input type="email" placeholder="Email" id="email" formControlName="email" />
+            <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="alert">
+                <span>E-mail is not valid!</span>
+            </div>
+
+            <input type="password" placeholder="Password" formControlName="password" />
+            <div *ngIf="password!.invalid && (password!.dirty || password!.touched)" class="alert">
+                <span>Password is not valid!</span>
+            </div>
+            <div class="w-100 text-left f-14">
+                <a href="#">Password reset</a>
+            </div>
+            <div class="h-50"></div>
+            <button mat-raised-button>
+                Submit
+            </button>
+
+            <div class="alert credentials-error" *ngIf="wrongCredentialsError">
+                Wrong e-mail or password!
+            </div>
+
+            <div class="flex p-25" style="gap: 5px;">
+                No account yet? <a href="sign-up">Sign up</a>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>Welcome to</h1>
+                <h1>Shopfly</h1>
+            </div>
+        </div>
+    </div>
+</div>

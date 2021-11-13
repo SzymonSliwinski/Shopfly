@@ -4,7 +4,6 @@
     left: 0;
     width: 225px;
     height: 100%;
-    color: white;
     top: 60px;
 }
 
@@ -28,13 +27,13 @@
 
 .sidebar-item button {
     width: 100%;
-    color: white;
     text-align: left;
-    padding-left: 20px;
+    padding: 5px 5px 5px 20px;
 }
 
 .sidebar-item:hover button {
-    background-color: #b8bfce
+    background-color: #b8bfce;
+    color: black;
 }
 
 mat-icon {
@@ -45,4 +44,13 @@ mat-icon {
     margin-left: 225px;
     position: relative;
     top: 60px;
+}
+
+.active-navbar-button {
+    background-color: #b8bfce;
+    color: #000;
+}
+
+.font-white {
+    color: #fff;
 }
