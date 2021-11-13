@@ -215,13 +215,17 @@ body {
   font-size: 18px;
 }
 
+.f-14 {
+  font-size: 14px;
+}
+
 .m-r {
   margin-left: auto;
   padding-right: 25px;
 }
 
 .mat-divider {
-  border-top-color: #14274f;
+  border-top-color: #0f327c !important;
   height: 5px;
   padding-top: 10px;
   padding-bottom: 10px
@@ -229,5 +233,5 @@ body {
 
 a:link {
   text-decoration: none;
-  color: #4b0082;
+  color: #6f92af;
 }
