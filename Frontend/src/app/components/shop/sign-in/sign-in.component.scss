@@ -34,30 +34,11 @@ span {
 }
 
 button {
-    border-radius: 20px;
-    border: 1px solid #FF4B2B;
     background-color: #FF4B2B;
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
     transition: transform 80ms ease-in;
-    margin-top: 20px;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-button:focus {
-    outline: none;
-}
-
-button.ghost {
-    background-color: transparent;
-    border-color: #FFFFFF;
+    color: #fff;
+    padding: 3px;
+    width: 100px;
 }
 
 form {
