@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  isLogged = false;
+  isLogged = true;
+  showCategories = true;
+  @ViewChild('sidebar') sidebar!: SidebarComponent;
+
   constructor() { }
 
   ngOnInit(): void {
     this.isLogged = this.checkIsLogged();
-    console.log(this.isLogged)
   }
 
   checkIsLogged(): boolean {
@@ -27,4 +30,10 @@ export class HomeComponent implements OnInit {
 
     return true;
   }
+
+  toggleCategories() {
+    this.showCategories = !this.showCategories;
+    this.showCategories === true ? this.sidebar.toggle() : this.sidebar.hide();
+  }
+
 }

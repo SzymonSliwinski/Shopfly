@@ -1,5 +1,10 @@
-<app-navbar [isLogged]="isLogged"></app-navbar>
-
+<app-navbar [isLogged]="isLogged" (toggleNavbarEventEmitter)="toggleCategories()"></app-navbar>
+<ejs-sidebar id="default-sidebar" #sidebar>
+    <div class="title"> Sidebar content</div>
+    <div class="sub-title">
+        Click the button to close the Sidebar.
+    </div>
+</ejs-sidebar>
 <div class="body">
     <router-outlet></router-outlet>
 </div>

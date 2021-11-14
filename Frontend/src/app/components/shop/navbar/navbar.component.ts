@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ShopAuthenticationService } from 'src/app/services/shop/shop-authentication.service';
 
@@ -10,6 +10,8 @@ import { ShopAuthenticationService } from 'src/app/services/shop/shop-authentica
 export class NavbarComponent {
   @Input() isLogged = false;
   displayNavbarContent = true;
+  @Output() toggleNavbarEventEmitter = new EventEmitter<boolean>();
+
   constructor(
     private readonly _router: Router,
     private readonly _authService: ShopAuthenticationService
@@ -27,5 +29,9 @@ export class NavbarComponent {
   public async onLogoutClick(): Promise<boolean> {
     await this._authService.logout();
     return this._router.navigate(['sign-in']);
+  }
+
+  onMenuClick() {
+    this.toggleNavbarEventEmitter.emit(true);
   }
 }
