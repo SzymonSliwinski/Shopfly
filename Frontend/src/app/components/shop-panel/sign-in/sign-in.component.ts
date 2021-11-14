@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
     if (this.form.invalid)
       return;
 
-    let result = { loginOrEmail: this.email!.value, password: this.password!.value } as AuthenticationDto;
+    let result = { email: this.email!.value, password: this.password!.value } as AuthenticationDto;
     let isSucceeded = await this._panelAuthService.authenticate(result);
     if (isSucceeded === true) {
       this.router.navigate(['panel/dashboard']);

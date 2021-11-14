@@ -22,6 +22,11 @@ namespace ShopWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
+            services.AddCors(options =>
+            options.AddDefaultPolicy(builder =>
+            builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("x-auth-token")
+          )
+      );
             services.AddControllers();
         }
 
@@ -36,7 +41,7 @@ namespace ShopWebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
