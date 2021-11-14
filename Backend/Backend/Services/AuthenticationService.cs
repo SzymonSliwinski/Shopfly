@@ -15,15 +15,14 @@ namespace ShopWebApi.Services
             _listTokens = new List<Token>();
         }
 
-        public bool Authenticate(string loginOrEmail, string password)//todo password
+        public bool Authenticate(string email, string password)//todo password
         {
-            var testLogin = "123";
-            var testEmail = "456";
+            var testEmail = "a@a.pl";
             var testPass = "123";
             //to do compare with users in db
 
             return (
-                (loginOrEmail == testLogin || loginOrEmail == testEmail) &&
+                (email == testEmail) &&
                  password == testPass);
         }
 

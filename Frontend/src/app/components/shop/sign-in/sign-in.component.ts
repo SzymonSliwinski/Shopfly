@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationDto } from 'src/app/dto/authentication.dto';
+import { ShopAuthenticationService } from 'src/app/services/shop/shop-authentication.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,6 +21,7 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private readonly _authService: ShopAuthenticationService
   ) { }
 
   ngOnInit() {
@@ -27,11 +29,23 @@ export class SignInComponent implements OnInit {
   }
 
   redirectIfSignedIn(): void {
-
+    if (sessionStorage.getItem(environment._shopStorageKey) !== null)
+      this.router.navigate(['']);
   }
 
   async onSubmit() {
+    if (this.form.invalid)
+      return;
 
+    let result = { email: this.email!.value, password: this.password!.value } as AuthenticationDto;
+    let isSucceeded = await this._authService.authenticate(result);
+    if (isSucceeded === true) {
+      this.router.navigate(['']);
+      this.wrongCredentialsError = false;
+    }
+    else {
+      this.wrongCredentialsError = true
+    }
 
   }
 }

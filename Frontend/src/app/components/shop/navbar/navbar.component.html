@@ -1,6 +1,6 @@
 <div class="topnav">
   <div class="navbar-content center flex flex-center">
-    <mat-icon class="icon button-icon i-36" *ngIf="displayNavbarContent">
+    <mat-icon class="icon button-icon i-36" *ngIf="displayNavbarContent" (click)="onMenuClick()">
       menu
     </mat-icon>
     <!-- logo -->
@@ -19,7 +19,11 @@
     </div>
     <!-- menu -->
     <div class="menu flex" style="gap: 60px" *ngIf="displayNavbarContent">
-      <mat-icon class="icon button-icon i-36" [matMenuTriggerFor]="userMenu">
+      <mat-icon class="icon button-icon i-36" [matMenuTriggerFor]="notLoggedUserMenu" *ngIf="!isLogged">
+        account_circle
+      </mat-icon>
+
+      <mat-icon class="icon button-icon i-36" [matMenuTriggerFor]="loggedUserMenu" *ngIf="isLogged">
         account_circle
       </mat-icon>
 
@@ -34,7 +38,7 @@
   </div>
 </div>
 
-<mat-menu #userMenu="matMenu" yPosition="below">
+<mat-menu #notLoggedUserMenu="matMenu" yPosition="below">
   <div style="width: 270px;">
     <h3 class="text-center">Welcome in Shopfly</h3>
     <p class="note">Please sign in to have fully access to shop functions</p>
@@ -45,6 +49,21 @@
 
     <div class="flex" style="gap: 5px;">
       <p>No account yet?</p> <a href="sign-up">Sign up</a>
+    </div>
+  </div>
+</mat-menu>
+
+<mat-menu #loggedUserMenu="matMenu" yPosition="below">
+  <div style="width: 270px;">
+    <h3 class="text-center">Welcome in Shopfly</h3>
+    <hr>
+
+    <div class="sign-in-button-wrapper">
+      <button mat-flat-button class="sign-in-button">Settings</button>
+    </div>
+    <div style="height: 10px;"></div>
+    <div class="sign-in-button-wrapper">
+      <button mat-flat-button class="sign-in-button" (click)="onLogoutClick()">Logout</button>
     </div>
   </div>
 </mat-menu>

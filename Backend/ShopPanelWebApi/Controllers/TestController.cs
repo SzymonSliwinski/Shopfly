@@ -24,7 +24,7 @@ namespace ShopPanelWebApi.Controllers
         {
             var service = new ManyToManyCrudService<ProfilesPrivileges>(_context);
             //var a = await service.Insert(prod);
-            service.Delete(prod.ProfileId, prod.PrivilegeId);
+            await service.Delete(prod.ProfileId, prod.PrivilegeId);
             return Ok("Hello world");
         }
     }
