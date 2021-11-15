@@ -8,6 +8,10 @@ import { SignInModule } from './sign-in/sign-in.module';
 import { SignUpModule } from './sign-up/sign-up.module';
 import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { BrowserModule } from '@angular/platform-browser';
     SignUpModule,
     SignInModule,
     SidebarModule,
-    BrowserModule
+    BrowserModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTreeModule
   ],
   providers: [
     AuthenticationService
