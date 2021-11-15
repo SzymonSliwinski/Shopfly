@@ -4,9 +4,9 @@ export interface Category {
     id: number;
     name: string;
     isRoot: boolean;
-    parentCategoryId: number;
+    parentCategoryId: number | null;
     parentCategory: Category | null;
-    childrensCategories: Category[];
+    childrensCategories: Category[] | null;
     position: number;
     products?: Product[] | null;
 }
