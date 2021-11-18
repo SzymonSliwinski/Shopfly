@@ -35,4 +35,24 @@
 
 <div class="body">
     <router-outlet></router-outlet>
+    <div class="h-50"></div>
+
+    <div class="w-50 center">
+        <carousel [objectFit]="'cover'" [cellWidth]="'100%'" [height]="300" [dots]="true" [loop]="true">
+            <div class="carousel-cell">
+                <img src="https://i.picsum.photos/id/983/1200/400.jpg?hmac=7cUyY46Qtzjb3AA-cV63vwozNdLuCR8JQz1pqQmiGA8">
+            </div>
+            <div class="carousel-cell">
+                <img src="https://i.picsum.photos/id/73/1600/600.jpg?hmac=AQezYuk7F3HkOBMdOJe7DK6yOIJ60ybhpDNBEN0COxM">
+            </div>
+            <div class="carousel-cell">
+                <img src="https://i.picsum.photos/id/14/1600/600.jpg?hmac=Dq4LaQJDAaL6QEHyySwOT6BsxtDZw3B0dYDkEuK8N90">
+            </div>
+        </carousel>
+    </div>
+    <div class="h-100"></div>
+    <div>
+        <carousel>
+        </carousel>
+    </div>
 </div>

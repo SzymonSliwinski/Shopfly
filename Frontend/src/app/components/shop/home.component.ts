@@ -1,10 +1,9 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Category } from 'src/app/models/shop-models/category.model';
-
 interface Node {
   expandable: boolean;
   name: string;

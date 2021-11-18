@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatTreeModule } from '@angular/material/tree';
     BrowserModule,
     MatButtonModule,
     MatIconModule,
-    MatTreeModule
+    MatTreeModule,
+    IvyCarouselModule
   ],
   providers: [
     AuthenticationService
