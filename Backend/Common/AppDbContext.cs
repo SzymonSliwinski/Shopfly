@@ -36,6 +36,8 @@ namespace Common
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Tax> Taxes { get; set; }
+        public DbSet<HomeProductsLists> HomeProductsLists { get; set; }
+        public DbSet<ProductListPhoto> ProductListPhotos { get; set; }
 
         //ApiModels
         public DbSet<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
@@ -67,6 +69,8 @@ namespace Common
             ConfigureOrdersProducts(modelBuilder);
             ConfigureApiAccessKeys(modelBuilder);
             ConfigureShopSettings(modelBuilder);
+            ConfigureProductListPhotos(modelBuilder);
+            ConfigureHomeProductsLists(modelBuilder);
 
             //relations
             SetPrivilegesProfilesRelation(modelBuilder);
@@ -301,6 +305,20 @@ namespace Common
             modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.FaviconLogoPath)
                 .HasMaxLength(100);
+        }
+
+        private void ConfigureProductListPhotos(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductListPhoto>()
+                .Property(plp => plp.Photo).HasMaxLength(50);
+        }
+
+        private void ConfigureHomeProductsLists(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HomeProductsLists>()
+                .Property(hpl => hpl.Title).HasMaxLength(20);
+            modelBuilder.Entity<HomeProductsLists>()
+                .Property(hpl => hpl.Url).HasMaxLength(50);
         }
 
         // ShopPanelModels relations:
