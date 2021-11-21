@@ -4,6 +4,7 @@ import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Category } from 'src/app/models/shop-models/category.model';
+import { NavigationEnd, Router } from '@angular/router';
 interface Node {
   expandable: boolean;
   name: string;
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   showCategories = false;
   isLoaded = false;
   animateSidebar = false;
+  isHomeSite = false;
   treeControl = new FlatTreeControl<Node>(
     node => node.level,
     node => node.expandable,
@@ -44,8 +46,14 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   @ViewChild('sidebar') sidebar!: SidebarComponent;
 
-  constructor() {
+  constructor(
+    private readonly _router: Router
+  ) {
     this.dataSource.data;
+    _router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd)
+        this.isHomeSite = val.url === '/' ? true : false;
+    });
   }
   ngOnInit(): void {
     this.isLogged = this.checkIsLogged();

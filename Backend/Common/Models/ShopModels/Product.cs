@@ -28,6 +28,7 @@ namespace Common.Models.ShopModels
         public List<ProductsCarriers> ProductsCarriers { get; set; }
         public List<ProductsTags> ProductsTags { get; set; }
         public List<ProductVariant> ProductsVariants { get; set; }
+        public List<HomeProductsLists> HomeProductsLists { get; set; }
 
     }
 }

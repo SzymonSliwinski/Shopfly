@@ -7,10 +7,10 @@ namespace Common.Models.ShopModels
 {
     public class HomeProductsLists
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Url { get; set; }
-        public bool IsVisible { get; set; }
-        public List<ProductListPhoto> Photos { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
+        public int ListId { get; set; }
+        public HomeList HomeList { get; set; }
+
     }
 }

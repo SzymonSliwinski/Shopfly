@@ -36,8 +36,8 @@ namespace Common
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Tax> Taxes { get; set; }
+        public DbSet<HomeList> HomeLists { get; set; }
         public DbSet<HomeProductsLists> HomeProductsLists { get; set; }
-        public DbSet<ProductListPhoto> ProductListPhotos { get; set; }
 
         //ApiModels
         public DbSet<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
@@ -69,7 +69,6 @@ namespace Common
             ConfigureOrdersProducts(modelBuilder);
             ConfigureApiAccessKeys(modelBuilder);
             ConfigureShopSettings(modelBuilder);
-            ConfigureProductListPhotos(modelBuilder);
             ConfigureHomeProductsLists(modelBuilder);
 
             //relations
@@ -83,6 +82,7 @@ namespace Common
             SetProductTagsRelation(modelBuilder);
             SetProductVariantsPhotosRelation(modelBuilder);
             SetCustomersRatingsRelation(modelBuilder);
+            SetHomeProductsLists(modelBuilder);
         }
 
         // ShopPanelModels configuration:
@@ -307,17 +307,11 @@ namespace Common
                 .HasMaxLength(100);
         }
 
-        private void ConfigureProductListPhotos(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ProductListPhoto>()
-                .Property(plp => plp.Photo).HasMaxLength(50);
-        }
-
         private void ConfigureHomeProductsLists(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<HomeProductsLists>()
+            modelBuilder.Entity<HomeList>()
                 .Property(hpl => hpl.Title).HasMaxLength(20);
-            modelBuilder.Entity<HomeProductsLists>()
+            modelBuilder.Entity<HomeList>()
                 .Property(hpl => hpl.Url).HasMaxLength(50);
         }
 
@@ -481,6 +475,21 @@ namespace Common
             modelBuilder.Entity<Rating>()
                 .HasOne(r => r.Product)
                 .WithMany(r => r.Ratings)
+                .HasForeignKey(r => r.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+        private void SetHomeProductsLists(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HomeProductsLists>()
+                .HasKey(r => new { r.ListId, r.ProductId });
+            modelBuilder.Entity<HomeProductsLists>()
+                .HasOne(r => r.HomeList)
+                .WithMany(r => r.HomeProductsLists)
+                .HasForeignKey(r => r.ListId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<HomeProductsLists>()
+                .HasOne(r => r.Product)
+                .WithMany(r => r.HomeProductsLists)
                 .HasForeignKey(r => r.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

@@ -8,6 +8,7 @@ import { Rating } from './rating.model';
 import { Tax } from './tax.model';
 import { Category } from './category.model';
 import { Comment } from './comment.model';
+import { HomeProductsList } from './home-products-lists.model';
 
 export interface Product {
     id: number;
@@ -33,4 +34,5 @@ export interface Product {
     productsCarriers: ProductsCarriers[] | null;
     productsTags: ProductsTags[] | null;
     productsVariants: ProductVariant[] | null;
+    homeProductsLists: HomeProductsList[] | null;
 }

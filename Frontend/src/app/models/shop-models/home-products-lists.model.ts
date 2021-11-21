@@ -1,9 +1,9 @@
-import { ProductListPhoto } from "./product-list-photo.model";
+import { HomeList } from "./home-list.model";
+import { Product } from "./product.model";
 
-export interface HomeProductsLists {
-    id: number;
-    title: string;
-    url: string;
-    isVisible: boolean;
-    photos: ProductListPhoto[];
+export interface HomeProductsList {
+    productId: number;
+    listId: number;
+    homeList: HomeList;
+    product: Product;
 }
