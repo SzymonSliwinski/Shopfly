@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { MatCardModule } from '@angular/material/card';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     MatButtonModule,
     MatIconModule,
     MatTreeModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    MatCardModule,
+    CarouselModule
   ],
   providers: [
     AuthenticationService

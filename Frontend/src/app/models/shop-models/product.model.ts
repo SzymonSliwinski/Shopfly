@@ -12,11 +12,11 @@ import { HomeProductsList } from './home-products-lists.model';
 
 export interface Product {
     id: number;
-    categoryId: number;
-    category: Category;
+    categoryId?: number;
+    category?: Category;
     name: string;
-    taxId: number;
-    tax: Tax | null;
+    taxId?: number;
+    tax?: Tax | null;
     isLowStock: boolean;
     additionalShippingCost: number
     nettoPrice: number;
@@ -26,13 +26,13 @@ export interface Product {
     isVisible: boolean;
     updateDate: Date;
     description: string;
-    comments: Comment[] | null;
-    ratings: Rating[] | null;
-    clientFavouritesProducts: CustomerFavouritesProducts[] | null;
-    ordersProducts: OrdersProducts[] | null;
-    productsPayments: ProductsPayments[] | null;
-    productsCarriers: ProductsCarriers[] | null;
-    productsTags: ProductsTags[] | null;
-    productsVariants: ProductVariant[] | null;
-    homeProductsLists: HomeProductsList[] | null;
+    comments?: Comment[] | null;
+    ratings?: Rating[] | null;
+    clientFavouritesProducts?: CustomerFavouritesProducts[] | null;
+    ordersProducts?: OrdersProducts[] | null;
+    productsPayments?: ProductsPayments[] | null;
+    productsCarriers?: ProductsCarriers[] | null;
+    productsTags?: ProductsTags[] | null;
+    productsVariants?: ProductVariant[] | null;
+    homeProductsLists?: HomeProductsList[] | null;
 }

@@ -5,5 +5,5 @@ export interface HomeList {
     title: string;
     url: string;
     isVisible: boolean;
-    photos: HomeProductsList[];
+    homeProductsLists: HomeProductsList[];
 }
