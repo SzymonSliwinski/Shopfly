@@ -66,9 +66,12 @@ hr {
 }
 
 .product-image {
-    width: 90%;
-    height: 140px;
+    width: 300px;
+    height: 150px;
+}
 
+.product-item-content {
+    width: 300px;
 }
 
 .fav-button:hover {
@@ -86,4 +89,15 @@ hr {
 .product-name,
 .product-price {
     font-size: 18px;
+}
+
+.product-item {
+    width: 320px;
+    padding: 10px;
+}
+
+.product-item:hover {
+    opacity: 0.4;
+    background-color: silver;
+    cursor: pointer;
 }

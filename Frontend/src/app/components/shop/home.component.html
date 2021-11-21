@@ -58,7 +58,7 @@
         </div>
         <div class="h-100"></div>
 
-        <div class="w-75 center" *ngFor="let list of productsLists">
+        <div class="center" style="width: 80%;" *ngFor="let list of productsLists">
             <hr>
             <span class="list-title">{{list.title}}</span>
             <div style="height: 20px">
@@ -68,12 +68,11 @@
                 <div class="carousel-inner" role="listbox" let homeProductList>
                     <p-carousel [value]="list.homeProductsLists" [numVisible]="4" [numScroll]="1" [circular]="false">
                         <ng-template pTemplate="header">
-                            <div class="p-10"></div>
                         </ng-template>
                         <ng-template let-productListItem pTemplate="item">
-                            <div class="product-item ">
+                            <div class="product-item">
                                 <div class="product-item-content">
-                                    <div class="flex" style="justify-content: center;">
+                                    <div>
                                         <img src="{{ productListItem.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path }}"
                                             [alt]="productListItem.product.name" class="product-image" />
                                     </div>
