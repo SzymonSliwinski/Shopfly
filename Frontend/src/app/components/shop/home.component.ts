@@ -454,4 +454,8 @@ export class HomeComponent implements OnInit {
     this.sidebar.hide();
     this.animateSidebar = true;
   }
+
+  getActualYear(): string {
+    return new Date().getFullYear().toString();
+  }
 }
