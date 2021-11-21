@@ -4,6 +4,9 @@ import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Category } from 'src/app/models/shop-models/category.model';
+import { NavigationEnd, Router } from '@angular/router';
+import { HomeProductsList } from 'src/app/models/shop-models/home-products-lists.model';
+import { HomeList } from 'src/app/models/shop-models/home-list.model';
 interface Node {
   expandable: boolean;
   name: string;
@@ -20,6 +23,341 @@ export class HomeComponent implements OnInit {
   showCategories = false;
   isLoaded = false;
   animateSidebar = false;
+  isHomeSite = false;
+  productsLists: HomeList[] = [
+    {
+      id: 1,
+      title: 'On sale',
+      url: '#',
+      isVisible: true,
+      homeProductsLists: [
+        {
+          productId: 1,
+          listId: 1,
+          product: {
+            id: 1,
+            categoryId: 1,
+            name: 'prod1',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 754.51,
+            bruttoPrice: 590.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.Ut esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/1077/200/300.jpg?hmac=BqQneQETTwZkHqmZmg4VxHsD-Lia-Qxp6nXv0c2eaac'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          productId: 2,
+          listId: 1,
+          product: {
+            id: 2,
+            categoryId: 1,
+            name: 'prod2',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 123.51,
+            bruttoPrice: 434.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          productId: 1,
+          listId: 1,
+          product: {
+            id: 1,
+            categoryId: 1,
+            name: 'prod1',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 754.51,
+            bruttoPrice: 590.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.Ut esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/1077/200/300.jpg?hmac=BqQneQETTwZkHqmZmg4VxHsD-Lia-Qxp6nXv0c2eaac'
+                    }
+                  }
+                ]
+              }
+            ]
+
+          }
+        },
+        {
+          productId: 2,
+          listId: 1,
+          product: {
+            id: 2,
+            categoryId: 1,
+            name: 'prod2',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 123.51,
+            bruttoPrice: 434.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: 'Bestsellers',
+      url: '#',
+      isVisible: true,
+      homeProductsLists: [
+        {
+          productId: 1,
+          listId: 1,
+          product: {
+            id: 1,
+            categoryId: 1,
+            name: 'prod1',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 754.51,
+            bruttoPrice: 590.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/1077/200/300.jpg?hmac=BqQneQETTwZkHqmZmg4VxHsD-Lia-Qxp6nXv0c2eaac'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          productId: 2,
+          listId: 1,
+          product: {
+            id: 2,
+            categoryId: 1,
+            name: 'prod2',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 123.51,
+            bruttoPrice: 434.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
+                    }
+                  }
+                ]
+              },
+            ]
+          }
+        },
+        {
+          productId: 2,
+          listId: 1,
+          product: {
+            id: 2,
+            categoryId: 1,
+            name: 'prod2',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 123.51,
+            bruttoPrice: 434.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
+                    }
+                  }
+                ]
+              },
+            ]
+          }
+        },
+        {
+          productId: 2,
+          listId: 1,
+          product: {
+            id: 2,
+            categoryId: 1,
+            name: 'prod2',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 123.51,
+            bruttoPrice: 434.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
+                    }
+                  }
+                ]
+              },
+            ]
+          }
+        },
+        {
+          productId: 2,
+          listId: 1,
+          product: {
+            id: 2,
+            categoryId: 1,
+            name: 'prod2',
+            isLowStock: false,
+            additionalShippingCost: 27.05,
+            nettoPrice: 123.51,
+            bruttoPrice: 434.0,
+            createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            isActive: false,
+            isVisible: false,
+            updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
+            description: "Sed maxime ex.\nUt esse ut quia sed.",
+            productsVariants: [
+              {
+                id: 1,
+                price: 754.51,
+                productsVariantsPhotos: [
+                  {
+                    productVariantId: 1,
+                    photoId: 1,
+                    photo: {
+                      id: 1,
+                      isCover: true,
+                      path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
+                    }
+                  }
+                ]
+              },
+            ]
+          }
+        }
+      ]
+    }
+  ];
   treeControl = new FlatTreeControl<Node>(
     node => node.level,
     node => node.expandable,
@@ -44,9 +382,16 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   @ViewChild('sidebar') sidebar!: SidebarComponent;
 
-  constructor() {
+  constructor(
+    private readonly _router: Router
+  ) {
     this.dataSource.data;
+    _router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd)
+        this.isHomeSite = val.url === '/' ? true : false;
+    });
   }
+
   ngOnInit(): void {
     this.isLogged = this.checkIsLogged();
     this.dataSource.data = [
@@ -108,5 +453,9 @@ export class HomeComponent implements OnInit {
   onSidebarInit() {
     this.sidebar.hide();
     this.animateSidebar = true;
+  }
+
+  getActualYear(): string {
+    return new Date().getFullYear().toString();
   }
 }

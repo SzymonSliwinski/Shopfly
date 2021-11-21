@@ -4,6 +4,7 @@
 .body {
     top: 60px;
     position: relative;
+    height: 100%;
 }
 
 #container {
@@ -47,4 +48,56 @@ mat-tree {
     mat-tree-node {
         color: white !important;
     }
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid silver;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.list-title {
+    padding: 10px 0 30px 20px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.product-image {
+    width: 300px;
+    height: 150px;
+}
+
+.product-item-content {
+    width: 300px;
+}
+
+.fav-button:hover {
+    color: red
+}
+
+.add-button:hover {
+    color: green
+}
+
+.search-button:hover {
+    color: blue
+}
+
+.product-name,
+.product-price {
+    font-size: 18px;
+}
+
+.product-item {
+    width: 320px;
+    padding: 10px;
+}
+
+.product-item:hover {
+    opacity: 0.4;
+    background-color: silver;
+    cursor: pointer;
 }

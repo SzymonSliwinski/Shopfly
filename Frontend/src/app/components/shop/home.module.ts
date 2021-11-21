@@ -10,10 +10,11 @@ import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-
+import { MatCardModule } from '@angular/material/card';
+import { CarouselModule } from 'primeng/carousel';
+import { CartModule } from './cart/cart.module';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -29,7 +30,10 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     MatButtonModule,
     MatIconModule,
     MatTreeModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    MatCardModule,
+    CarouselModule,
+    CartModule
   ],
   providers: [
     AuthenticationService

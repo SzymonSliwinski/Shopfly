@@ -1,9 +1,9 @@
 import { Photo } from './photo.model';
 import { ProductVariant } from './product-variant.model';
 
-export interface ProductsVariantsPhotos{
+export interface ProductsVariantsPhotos {
     productVariantId: number;
-    productVariant: ProductVariant;
+    productVariant?: ProductVariant;
     photoId: number;
-    photo: Photo;
+    photo?: Photo;
 }
