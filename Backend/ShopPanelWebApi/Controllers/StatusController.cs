@@ -3,49 +3,63 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class StatusController : ControllerBase
     {
-        private readonly StatusService _statusService;
+        private readonly AppDbContext _statusService;
         public StatusController(AppDbContext context)
         {
-            _statusService = new StatusService(context);
+            _statusService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Status>> GetById(int id)
         {
-            return Ok(await _statusService.GetById(id));
+            var service = new CrudService<Status>(_statusService);
+            var status = await service.GetById(id);
+
+            return Ok(await service.GetById(status.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Status>> GetAll()
         {
-            return Ok(await _statusService.GetAll());
+            var service = new CrudService<Status>(_statusService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Status>> Delete(int id)
         {
-            return Ok(await _statusService.Delete(id));
+            var service = new CrudService<Status>(_statusService);
+            var status = await service.GetById(id);
+
+            await service.Update(status);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Status>> Add([FromBody] Status status)
         {
-            return Ok(await _statusService.Add(status));
+            var service = new CrudService<Status>(_statusService);
+
+            return Ok(await service.Insert(status));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Status>> Update([FromBody] Status status)
+        public async Task<ActionResult<Status>> Update([FromBody] Status updatedStatus)
         {
-            return Ok(await _statusService.Update(status));
+            var service = new CrudService<Status>(_statusService);
+            var oldStatus = await service.GetById(updatedStatus.Id);
+
+            oldStatus.Name = updatedStatus.Name;
+
+            return Ok(await service.Update(oldStatus));
         }
     }
 }

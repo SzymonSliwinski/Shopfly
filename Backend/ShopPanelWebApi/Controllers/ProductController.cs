@@ -1,55 +1,82 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Common.Models.ShopModels;
 using Common.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShopPanelWebApi.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductService _productService;
+        private readonly AppDbContext _productService;
         public ProductController(AppDbContext context)
         {
-            _productService = new ProductService(context);
+            _productService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Product>> GetById(int id)
         {
-            return Ok(await _productService.GetById(id));
+            var service = new CrudService<Product>(_productService);
+            var product = await service.GetById(id);
+
+            return Ok(await service.GetById(product.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Product>> GetAll()
         {
-            return Ok(await _productService.GetAll());
+            var service = new CrudService<Product>(_productService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> Delete(int id)
         {
-            return Ok(await _productService.Delete(id));
+            var service = new CrudService<Product>(_productService);
+            var product = await service.GetById(id);
+
+            product.IsActive = false;
+
+            await service.Update(product);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Product>> Add([FromBody] Product product)
         {
-            return Ok(await _productService.Add(product));
+            var service = new CrudService<Product>(_productService);
+
+            product.Name = product.Name.Trim();
+            product.IsActive = true;
+            product.CreateDate = DateTime.Now.ToLocalTime();
+            product.UpdateDate = DateTime.Now.ToLocalTime();
+
+            return Ok(await service.Insert(product));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Product>> Update([FromBody] Product product)
+        public async Task<ActionResult<Product>> Update([FromBody] Product updatedProduct)
         {
-            return Ok(await _productService.Update(product));
+            var service = new CrudService<Product>(_productService);
+            var oldProduct = await service.GetById(updatedProduct.Id);
+
+            oldProduct.CategoryId = updatedProduct.CategoryId;
+            oldProduct.Name = updatedProduct.Name.Trim();
+            oldProduct.TaxId = updatedProduct.TaxId;
+            oldProduct.IsLowStock = updatedProduct.IsLowStock;
+            oldProduct.AdditionalShippingCost = updatedProduct.AdditionalShippingCost;
+            oldProduct.NettoPrice = updatedProduct.NettoPrice;
+            oldProduct.BruttoPrice = updatedProduct.BruttoPrice;
+            oldProduct.IsVisible = updatedProduct.IsVisible;
+            oldProduct.Description = updatedProduct.Description;
+            oldProduct.UpdateDate = DateTime.Now.ToLocalTime();
+
+            return Ok(await service.Update(oldProduct));
         }
     }
 }

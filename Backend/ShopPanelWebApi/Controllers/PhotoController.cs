@@ -3,49 +3,66 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class PhotoController : ControllerBase
     {
-        private readonly PhotoService _photoService;
+        private readonly AppDbContext _photoService;
         public PhotoController(AppDbContext context)
         {
-            _photoService = new PhotoService(context);
+            _photoService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Photo>> GetById(int id)
         {
-            return Ok(await _photoService.GetById(id));
+            var service = new CrudService<Photo>(_photoService);
+            var photo = await service.GetById(id);
+
+            return Ok(await service.GetById(photo.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Photo>> GetAll()
         {
-            return Ok(await _photoService.GetAll());
+            var service = new CrudService<Photo>(_photoService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Photo>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return Ok(await _photoService.Delete(id));
+            var service = new CrudService<Photo>(_photoService);
+            var photo = await service.GetById(id);
+
+            await service.Update(photo);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Photo>> Add([FromBody] Photo photo)
         {
-            return Ok(await _photoService.Add(photo));
+            var service = new CrudService<Photo>(_photoService);
+
+            photo.Path = photo.Path.Trim();
+
+            return Ok(await service.Insert(photo));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Photo>> Update([FromBody] Photo photo)
+        public async Task<ActionResult<Photo>> Update([FromBody] Photo updatedPhoto)
         {
-            return Ok(await _photoService.Update(photo));
+            var service = new CrudService<Photo>(_photoService);
+            var oldPhoto = await service.GetById(updatedPhoto.Id);
+
+            oldPhoto.IsCover = updatedPhoto.IsCover;
+            oldPhoto.Path = updatedPhoto.Path.Trim();
+
+            return Ok(await service.Update(oldPhoto));
         }
     }
 }

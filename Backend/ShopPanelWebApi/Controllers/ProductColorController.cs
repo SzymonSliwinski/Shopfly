@@ -3,49 +3,65 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class ProductColorController : ControllerBase
     {
-        private readonly ProductColorService _productColorService;
+        private readonly AppDbContext _productColorService;
         public ProductColorController(AppDbContext context)
         {
-            _productColorService = new ProductColorService(context);
+            _productColorService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<ProductColor>> GetById(int id)
         {
-            return Ok(await _productColorService.GetById(id));
+            var service = new CrudService<ProductColor>(_productColorService);
+            var productColor = await service.GetById(id);
+
+            return Ok(await service.GetById(productColor.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<ProductColor>> GetAll()
         {
-            return Ok(await _productColorService.GetAll());
+            var service = new CrudService<ProductColor>(_productColorService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ProductColor>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return Ok(await _productColorService.Delete(id));
+            var service = new CrudService<ProductColor>(_productColorService);
+            var productColor = await service.GetById(id);
+
+            await service.Update(productColor);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<ProductColor>> Add([FromBody] ProductColor productColor)
         {
-            return Ok(await _productColorService.Add(productColor));
+            var service = new CrudService<ProductColor>(_productColorService);
+
+            productColor.HexValue = productColor.HexValue.Trim();
+
+            return Ok(await service.Insert(productColor));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<ProductColor>> Update([FromBody] ProductColor productColor)
+        public async Task<ActionResult<ProductColor>> Update([FromBody] ProductColor updatedProductColor)
         {
-            return Ok(await _productColorService.Update(productColor));
+            var service = new CrudService<ProductColor>(_productColorService);
+            var oldProductColor = await service.GetById(updatedProductColor.Id);
+
+            oldProductColor.HexValue = updatedProductColor.HexValue.Trim();
+
+            return Ok(await service.Update(oldProductColor));
         }
     }
 }

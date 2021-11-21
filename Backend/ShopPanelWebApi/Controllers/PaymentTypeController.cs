@@ -12,40 +12,62 @@ namespace ShopPanelWebApi.Controllers
     [ApiController]
     public class PaymentTypeController : ControllerBase
     {
-        private readonly PaymentTypeService _paymentTypeService;
+        private readonly AppDbContext _paymentTypeService;
         public PaymentTypeController(AppDbContext context)
         {
-            _paymentTypeService = new PaymentTypeService(context);
+            _paymentTypeService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<PaymentType>> GetById(int id)
         {
-            return Ok(await _paymentTypeService.GetById(id));
+            var service = new CrudService<PaymentType>(_paymentTypeService);
+            var paymentType = await service.GetById(id);
+
+            return Ok(await service.GetById(paymentType.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<PaymentType>> GetAll()
         {
-            return Ok(await _paymentTypeService.GetAll());
+            var service = new CrudService<PaymentType>(_paymentTypeService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PaymentType>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return Ok(await _paymentTypeService.Delete(id));
+            var service = new CrudService<PaymentType>(_paymentTypeService);
+            var paymentType = await service.GetById(id);
+
+            paymentType.IsActive = false;
+
+            await service.Update(paymentType);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<PaymentType>> Add([FromBody] PaymentType paymentType)
         {
-            return Ok(await _paymentTypeService.Add(paymentType));
+            var service = new CrudService<PaymentType>(_paymentTypeService);
+
+            paymentType.Name = paymentType.Name.Trim();
+            paymentType.Icon = paymentType.Icon.Trim();
+            paymentType.IsActive = true;
+
+            return Ok(await service.Insert(paymentType));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<PaymentType>> Update([FromBody] PaymentType paymentType)
+        public async Task<ActionResult<PaymentType>> Update([FromBody] PaymentType updatedPaymentType)
         {
-            return Ok(await _paymentTypeService.Update(paymentType));
+            var service = new CrudService<PaymentType>(_paymentTypeService);
+            var oldPaymentType = await service.GetById(updatedPaymentType.Id);
+
+            oldPaymentType.Name = updatedPaymentType.Name.Trim();
+            oldPaymentType.Icon = updatedPaymentType.Icon.Trim();
+
+            return Ok(await service.Update(oldPaymentType));
         }
     }
 }
