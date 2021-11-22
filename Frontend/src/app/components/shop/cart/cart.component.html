@@ -1,4 +1,39 @@
-<div class="h-50">
-    <!-- spacer -->
+<div class="h-50"></div>
+<div>
+    <div class="flex flex-column">
+        <div class="flex flex-center" style="align-items: center; width: 600px; ">
+            <span class="cart-header">Cart (2)</span>
+
+            <span class="flex flex-center clear-button" style="align-items: center;">
+                <button mat-button>
+                    <mat-icon>delete</mat-icon>Clear cart
+                </button>
+            </span>
+        </div>
+
+        <div class="flex flex-center" style="width: 1100px">
+            <div class="mat-elevation-z8 radius p-10 white-background" style="width: 600px">
+            </div>
+            <div style="width: 100px"></div>
+            <div class="mat-elevation-z8 radius flex-column p-10 white-background"
+                style="width: 400px; margin-left: auto;">
+                <span class="bolded" style="font-size: 22px">Summary</span>
+                <hr>
+                <span class=" flex">
+                    <p class="bolded">Total cart value</p>
+                    <p style="margin-left: auto;">$4974</p>
+                </span>
+                <span class=" flex">
+                    <p class="bolded">Total netto value</p>
+                    <p style="margin-left: auto;">$4974</p>
+                </span>
+                <mat-divider></mat-divider>
+                <span class="center" style="margin-top: px">
+                    <button mat-raised-button color="primary" style="width: 200px !important; padding: 2px;">
+                        Go to payment <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
-<p>cart works!</p>

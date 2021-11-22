@@ -64,9 +64,14 @@
     width: 80%;
 }
 
-.search-button,
-.sign-in-button {
+.search-button {
     background-color: rgb(255, 115, 0);
+    position: relative;
+    top: -1px;
+    right: 6px;
+}
+
+.sign-in-button {
     position: relative;
     top: -1px;
     right: 6px;
