@@ -2,7 +2,7 @@
 <div>
     <div class="flex flex-column">
         <div class="flex flex-center" style="align-items: center; width: 600px; ">
-            <span class="cart-header">Cart (2)</span>
+            <span class="cart-header">Cart ({{customerCart.length}})</span>
 
             <span class="flex flex-center clear-button" style="align-items: center;">
                 <button mat-button>
@@ -20,11 +20,11 @@
                         <img class="product-miniature"
                             src="{{cartPosition.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
                     </span>
-                    <span class="product-name p-10" style="width: 300px; ">
+                    <span class="product-name p-10" style="width: 280px; ">
                         <a href="#">{{cartPosition.product!.name}}</a>
                     </span>
 
-                    <span>${{cartPosition.product!.bruttoPrice}}</span>
+                    <span>{{cartPosition.product!.bruttoPrice | number:'1.2-2'}}$</span>
                     <div style="width: 20px;"></div>
                     <mat-form-field style="width: 50px;">
                         <input matInput maxlength="5">
@@ -50,11 +50,11 @@
                 <hr>
                 <span class="flex">
                     <p class="bolded">Total cart value</p>
-                    <p style="margin-left: auto;">$4974</p>
+                    <p style="margin-left: auto;">{{getTotalBruttoValue() | number:'1.2-2'}}$</p>
                 </span>
                 <span class="flex">
                     <p class="bolded">Total netto value</p>
-                    <p style="margin-left: auto;">$4974</p>
+                    <p style="margin-left: auto;">{{getTotalNettoValue() | number:'1.2-2'}}$</p>
                 </span>
                 <mat-divider></mat-divider>
                 <span class="center" style="margin-top: px">

@@ -222,4 +222,20 @@ export class CartComponent implements OnInit {
     ]
   }
 
+  public getTotalBruttoValue(): number {
+    var result = 0;
+    this.customerCart.forEach(p => {
+      result += p.product!.bruttoPrice;
+    });
+
+    return result;
+  }
+  getTotalNettoValue(): number {
+    var result = 0;
+    this.customerCart.forEach(p => {
+      result += p.product!.nettoPrice;
+    });
+
+    return result;
+  }
 }
