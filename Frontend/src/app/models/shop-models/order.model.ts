@@ -4,20 +4,20 @@ import { Carrier } from './carrier.model';
 import { Status } from './status.model';
 import { PaymentType } from './payment-type.model';
 
-export interface Order{
+export interface Order {
     id: number;
     paymentTypeId: number;
-    paymentType: PaymentType;
+    paymentType?: PaymentType | null;
     statusId: number;
-    status: Status;
+    status?: Status | null;
     carrierId: number;
-    carrier: Carrier;
+    carrier?: Carrier | null;
     customerId: number;
-    customer: Customer;
+    customer?: Customer | null;
     totalPrice: number;
     date: Date;
     additionalDescription: string;
-    ordersProducts: OrdersProducts[];
+    ordersProducts?: OrdersProducts[] | null;
     isActive: boolean;
     completeDate: Date;
 
@@ -26,13 +26,13 @@ export interface Order{
     deliveryAddressCity: string;
     deliveryAddressCountry: string;
 
-    billingAddressStreet: string;
-    billingAddressPostal: string;
-    billingAddressCity: string;
-    billingAddressCountry: string;
+    billingAddressStreet?: string | null;
+    billingAddressPostal?: string | null;
+    billingAddressCity?: string | null;
+    billingAddressCountry?: string | null;
 
-    nip: string;
-    companyName: string;
-    customerPhoneNumber: string;
-    customerEmail: string;
+    nip?: string | null;
+    companyName?: string | null;
+    customerPhoneNumber?: string | null;
+    customerEmail?: string | null;
 }

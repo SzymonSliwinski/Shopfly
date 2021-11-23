@@ -1,0 +1,74 @@
+<span class="header p-25">Summary</span>
+<div class="h-50"></div>
+
+<div class="flex flex-center" style="width: 1100px">
+    <!-- order -->
+    <div class="mat-elevation-z8 flex-column radius center" style="width: 600px">
+        <span class="header" style="font-size: 18px;">Your order</span>
+        <div class="flex-column radius white-background" style="width: 600px">
+            <div *ngFor="let customerProduct of products" class="flex p-10 flex-center" style="align-items: center;">
+                <span>
+                    <img class="product-miniature"
+                        src="{{customerProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                </span>
+                <span class="product-name p-10" style="width: 280px; ">
+                    {{customerProduct.product!.name}}
+                </span>
+
+                <span>{{customerProduct.product!.bruttoPrice | number:'1.2-2'}}$</span>
+                <div style="width: 20px;"></div>
+                <span style="width: 50px;">
+                    <!-- // {{customerProduct.quantity}} -->
+                    1
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- informations -->
+    <div style=" width: 100px">
+    </div>
+    <!-- overview -->
+    <div class="mat-elevation-z8 radius flex-column p-10 white-background overview-container">
+        <span class="bolded" style="font-size: 22px">Shipping details</span>
+        <span class="flex">
+            <p class=" bolded">Customer:</p>
+            <p style="margin-left: 30px;">Jan Kowalski</p>
+        </span>
+
+        <span class="flex">
+            <p class="bolded">Payment:</p>
+            <p style="margin-left: 30px;">Cash</p>
+        </span>
+        <span class="flex">
+            <p class="bolded">Carrier:</p>
+            <p style="margin-left: 30px;">DHL</p>
+        </span>
+        <span class="flex">
+            <p class="bolded">Country/City:</p>
+            <p style="margin-left: 30px;">{{order.deliveryAddressCountry}}/{{order.deliveryAddressCity}}
+
+            </p>
+        </span>
+
+        <span class="flex">
+            <p class="bolded">Address:</p>
+            <p style="margin-left: 30px;">
+                {{order.deliveryAddressPostal}}, {{order.deliveryAddressStreet}}
+            </p>
+        </span>
+        <mat-divider></mat-divider>
+        <span class="flex">
+            <p class="bolded">Total value</p>
+            <p style="margin-left: 30px;">
+                {{order.totalPrice}}
+            </p>
+        </span>
+        <span class="center">
+            <div style="height: 25px;"></div>
+            <button mat-raised-button color="primary" class="next-button" matStepperNext>
+                Confirm
+            </button>
+            <div style="height: 25px;"></div>
+        </span>
+    </div>
+</div>

@@ -12,12 +12,14 @@ import { CartProductsListComponent } from './cart-products-list/cart-products-li
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
     declarations: [
         CartComponent,
         CartProductsListComponent,
         OrderDetailsComponent,
+        SummaryComponent,
     ],
     imports: [
         CommonModule,
