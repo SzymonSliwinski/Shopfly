@@ -7,9 +7,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { CartProductsListComponent } from './cart-products-list/cart-products-list.component';
+
 @NgModule({
     declarations: [
         CartComponent,
+        CartProductsListComponent,
     ],
     imports: [
         CommonModule,
@@ -18,7 +22,8 @@ import { MatInputModule } from '@angular/material/input';
         MatDividerModule,
         FormsModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatStepperModule
     ],
     providers: [
     ],
