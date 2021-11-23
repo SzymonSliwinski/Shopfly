@@ -1,0 +1,39 @@
+.header {
+    font-size: 28px;
+    font-weight: 500;
+    padding: 20px;
+}
+
+.carrier-logo {
+    width: 30px;
+    height: 30px;
+}
+
+.logo-wrapper {
+    margin-left: auto;
+    top: -8px;
+    position: relative
+}
+
+.double-field {
+    width: 100%;
+    margin: auto;
+    gap: 20px;
+}
+
+.form-field-container {
+    padding: 10px 0 10px 0;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    width: 90%;
+    font-size: 16px;
+}
+
+p {
+    font-weight: 500;
+    font-size: 16px;
+}

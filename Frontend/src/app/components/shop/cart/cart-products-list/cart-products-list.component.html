@@ -43,9 +43,8 @@
             <div style=" width: 100px">
             </div>
             <!-- summary -->
-            <div class="mat-elevation-z8 radius flex-column p-10 white-background"
-                style="width: 400px; margin-left: auto; max-height: 300px !important">
-                <span class="bolded" style="font-size: 22px">Summary</span>
+            <div class="mat-elevation-z8 radius flex-column p-10 white-background overview-container">
+                <span class="bolded" style="font-size: 22px">Overview</span>
                 <hr>
                 <span class="flex">
                     <p class="bolded">Total cart value</p>
@@ -56,9 +55,8 @@
                     <p style="margin-left: auto;">{{getTotalNettoValue() | number:'1.2-2'}}$</p>
                 </span>
                 <mat-divider></mat-divider>
-                <span class="center" style="margin-top: px">
-                    <button mat-raised-button color="primary" style="width: 200px !important; padding: 2px;"
-                        matStepperNext>
+                <span class="center">
+                    <button mat-raised-button color="primary" class="next-button" matStepperNext>
                         Go to payment<mat-icon>chevron_right</mat-icon>
                     </button>
                 </span>

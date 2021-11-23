@@ -9,11 +9,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CartProductsListComponent } from './cart-products-list/cart-products-list.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
         CartComponent,
         CartProductsListComponent,
+        OrderDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -23,7 +27,9 @@ import { CartProductsListComponent } from './cart-products-list/cart-products-li
         FormsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatStepperModule
+        MatStepperModule,
+        MatRadioModule,
+        MatCheckboxModule
     ],
     providers: [
     ],

@@ -23,3 +23,14 @@
 a:hover {
     text-decoration: underline;
 }
+
+.overview-container {
+    width: 400px;
+    margin-left: auto;
+    max-height: 300px !important
+}
+
+.next-button {
+    width: 200px !important;
+    padding: 2px;
+}
