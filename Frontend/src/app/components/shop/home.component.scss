@@ -97,9 +97,12 @@ hr {
 }
 
 .product-item:hover {
-    opacity: 0.4;
-    background-color: silver;
+    opacity: 0.8;
     cursor: pointer;
+
+    .product-name {
+        text-decoration: underline;
+    }
 }
 
 footer {

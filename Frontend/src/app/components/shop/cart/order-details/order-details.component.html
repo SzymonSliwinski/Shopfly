@@ -1,0 +1,173 @@
+<div>
+    <span class="header p-25">Shipping and payment</span>
+    <div class="h-50"></div>
+    <div class="mat-elevation-z8 flex-column radius center" style="width: 600px">
+        <span class="header" style="font-size: 18px;">1.Choose carrier</span>
+        <mat-radio-group class="flex flex-column m-l-10">
+            <div class="flex flex-center" style="margin-top: 5px;" *ngFor="let carrier of carriers">
+                <mat-radio-button [value]="carrier.id" color="primary">
+                </mat-radio-button>
+                <span class="m-l-10">
+                    {{carrier.name}}
+                </span>
+
+                <span style="opacity: 0.6; padding-left: 8px;">
+                    ({{carrier.cost}}$)
+                </span>
+
+                <span class="logo-wrapper m-r-10">
+                    <img src="{{carrier.logo}}" class="carrier-logo">
+                </span>
+            </div>
+        </mat-radio-group>
+    </div>
+
+
+    <div style="height: 25px;"></div>
+
+    <div class="mat-elevation-z8 flex-column radius center" style="width: 600px">
+        <span class="header" style="font-size: 18px;">2.Choose payment type</span>
+        <mat-radio-group class="flex flex-column m-l-10">
+            <div class="flex flex-center" style="margin-top: 5px;" *ngFor="let paymentType of paymentTypes">
+                <mat-radio-button [value]="paymentType.id" color="primary">
+                </mat-radio-button>
+                <span>
+                    {{paymentType.name}}
+                </span>
+
+                <span class="logo-wrapper m-r-10">
+                    <mat-icon> {{paymentType.icon}}</mat-icon>
+                </span>
+            </div>
+        </mat-radio-group>
+    </div>
+
+    <div style="height: 25px;"></div>
+
+    <div class="mat-elevation-z8 flex-column radius center" style="width: 600px">
+        <span class="header" style="font-size: 18px;">3.Customer informations</span>
+
+        <div class="form-field-container m-l-10">
+            <div class="flex double-field">
+                <div class="flex-column">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+
+                <div class="flex-column">
+                    <p>Surname</p>
+                    <input type="text" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-field-container m-l-10">
+            <div class="flex double-field">
+                <div class="flex-column">
+                    <p>Delivery country (select with all countries)</p>
+                    <input type="text" />
+                </div>
+
+                <div class="flex-column">
+                    <p>City</p>
+                    <input type="text" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-field-container m-l-10">
+            <div class="flex double-field">
+                <div class="flex-column">
+                    <p>Postal code</p>
+                    <input type="text" />
+                </div>
+
+                <div class="flex-column">
+                    <p>Address</p>
+                    <input type="text" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-field-container m-l-10">
+            <div class="flex double-field">
+                <div class="flex-column">
+                    <p>Phone</p>
+                    <input type="text" />
+                </div>
+
+                <div class="flex-column">
+                    <p>E-mail</p>
+                    <input type="text" />
+                </div>
+            </div>
+        </div>
+
+        <mat-checkbox [(ngModel)]="isVatSelected" color="primary" class="p-10">
+            I want to receive VAT for my company
+        </mat-checkbox>
+
+        <div *ngIf="isVatSelected">
+            <p class="m-l-10">Company informations</p>
+
+            <div class="form-field-container m-l-10">
+                <div class="flex-column">
+                    <p>Company name</p>
+                    <input type="text" />
+                </div>
+            </div>
+
+            <div class="form-field-container m-l-10">
+                <div class="flex-column">
+                    <p>NIP</p>
+                    <input type="text" />
+                </div>
+            </div>
+
+            <div class="form-field-container m-l-10">
+                <div class="flex double-field">
+                    <div class="flex-column">
+                        <p>Company country</p>
+                        <input type="text" />
+                    </div>
+
+                    <div class="flex-column">
+                        <p>Company city</p>
+                        <input type="text" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field-container m-l-10">
+                <div class="flex double-field">
+                    <div class="flex-column">
+                        <p>Company postal</p>
+                        <input type="text" />
+                    </div>
+
+                    <div class="flex-column">
+                        <p>Company address</p>
+                        <input type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <mat-checkbox color="primary" class="p-10">
+                I agree with shop <a href="condition-use" target="blank">conditions of use </a>
+            </mat-checkbox>
+
+            <mat-checkbox color="primary" class="p-10">
+                I want to receive informations about sales, new products etc.
+            </mat-checkbox>
+        </div>
+
+        <mat-divider></mat-divider>
+        <span class="center">
+            <button mat-raised-button color="primary" class="next-button" matStepperNext>
+                Go to summary<mat-icon>chevron_right</mat-icon>
+            </button>
+            <div style="height: 25px;"></div>
+        </span>
+    </div>
