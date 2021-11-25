@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CarouselModule } from 'primeng/carousel';
 import { CartModule } from './cart/cart.module';
 import { FavoritesProductsModule } from './favorites-products/favorites-products.module';
+import { ProductsPageModule } from './products-page/products-page.module';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -35,7 +36,8 @@ import { FavoritesProductsModule } from './favorites-products/favorites-products
     MatCardModule,
     CarouselModule,
     CartModule,
-    FavoritesProductsModule
+    FavoritesProductsModule,
+    ProductsPageModule
   ],
   providers: [
     AuthenticationService
