@@ -1,9 +1,9 @@
 import { Product } from './product.model';
 import { Customer } from './customer.model';
 
-export interface CustomerFavouritesProducts{
+export interface CustomerFavouritesProducts {
     customerId: number;
-    customer: Customer;
+    customer?: Customer | null;
     productId: number;
-    product: Product;
+    product?: Product | null;
 }

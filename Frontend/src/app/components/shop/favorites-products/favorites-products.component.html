@@ -1,1 +1,28 @@
-rtdrt
+<div class="h-100"></div>
+<div class="mat-elevation-z8 flex-column radius center" style="width: 800px;">
+    <span class="header" style="font-size: 18px;">Your favorites products ({{favoritesProducts.length}})</span>
+    <mat-divider></mat-divider>
+
+    <div *ngIf="favoritesProducts.length < 0">
+        <span class="no-products p-10">No products on your list!</span>
+        <div class="h-50"></div>
+    </div>
+
+    <div class="p-10" *ngIf="favoritesProducts.length > 0">
+        <div class="product-wrapper flex p-10 flex-center" *ngFor="let favoriteProduct of favoritesProducts"
+            style="align-items: center;">
+            <span>
+                <img class=" product-miniature"
+                    src="{{favoriteProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+            </span>
+            <span class="product-name p-10" style="width: 500px; ">
+                {{favoriteProduct.product!.name}}
+            </span>
+            <div style="height: 25px;"></div>
+            <span style="margin-left: auto; padding-right: 20px;">{{favoriteProduct.product!.bruttoPrice |
+                number:'1.2-2'}}$</span>
+            <mat-divider></mat-divider>
+        </div>
+    </div>
+</div>
+<div class="h-50"></div>

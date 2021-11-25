@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FavoritesProductsComponent } from './favorites-products.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 @NgModule({
     declarations: [
         FavoritesProductsComponent,
@@ -10,7 +11,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     imports: [
         CommonModule,
         MatButtonModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatDividerModule
     ],
     providers: [
     ],
