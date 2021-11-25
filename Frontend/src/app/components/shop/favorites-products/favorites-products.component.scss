@@ -1,0 +1,25 @@
+.header {
+    font-size: 28px;
+    font-weight: 500;
+    padding: 20px;
+}
+
+.no-products {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.product-miniature {
+    width: 75px;
+    height: 75px;
+}
+
+.product-wrapper:hover {
+    opacity: 0.8;
+    cursor: pointer;
+
+    .product-name {
+        text-decoration: underline;
+    }
+}

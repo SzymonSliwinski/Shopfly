@@ -15,6 +15,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { MatCardModule } from '@angular/material/card';
 import { CarouselModule } from 'primeng/carousel';
 import { CartModule } from './cart/cart.module';
+import { FavoritesProductsModule } from './favorites-products/favorites-products.module';
+import { ProductsPageModule } from './products-page/products-page.module';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -33,7 +35,9 @@ import { CartModule } from './cart/cart.module';
     IvyCarouselModule,
     MatCardModule,
     CarouselModule,
-    CartModule
+    CartModule,
+    FavoritesProductsModule,
+    ProductsPageModule
   ],
   providers: [
     AuthenticationService
