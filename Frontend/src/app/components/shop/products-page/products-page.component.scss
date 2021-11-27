@@ -1,0 +1,76 @@
+.header {
+    font-size: 28px;
+    font-weight: 500;
+    padding: 10px;
+}
+
+mat-icon {
+    position: relative;
+    top: 8px;
+}
+
+.filter-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.filter-title {
+    font-weight: 500;
+}
+
+.search-button {
+    width: 200px !important;
+    padding: 2px;
+}
+
+.products-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.product {
+    width: 220px;
+    height: 10px;
+}
+
+p-card:hover {
+    opacity: 0.8;
+    cursor: pointer;
+
+    .product-name {
+        text-decoration: underline;
+    }
+}
+
+.filter-container {
+    max-height: 800px;
+}
+
+.product-image {
+    height: 150px;
+    width: 220px;
+    margin: auto;
+}
+
+.fav-button:hover {
+    color: red
+}
+
+.add-button:hover {
+    color: green
+}
+
+.search-button:hover {
+    color: blue
+}
+
+.product-buttons {
+    margin-left: auto;
+}
+
+.product-price {
+    position: relative;
+    top: 15px;
+    margin-right: auto;
+}
