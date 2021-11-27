@@ -10,6 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductsPageComponent } from './products-page.component';
 import { MatSelectModule } from '@angular/material/select';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatInputModule,
         MatRadioModule,
         MatCheckboxModule,
-        MatSelectModule
+        MatSelectModule,
+        CardModule
     ],
     providers: [
     ],
