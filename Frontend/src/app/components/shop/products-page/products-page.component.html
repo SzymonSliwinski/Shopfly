@@ -1,1 +1,60 @@
-<p>products-page works!</p>
+<div class="h-50"></div>
+<div class="flex flex-column">
+    <span>Shopfly <mat-icon>chevron_right</mat-icon> Actual category</span>
+    <span class="header">Actual category (123 results)</span>
+</div>
+
+<div class="flex" style="width: 1100px;">
+    <div class="filter-container mat-elevation-z8 p-10" style="width: 250px;">
+        <span class="filter-header">Filters</span>
+        <mat-divider></mat-divider>
+        <div style="height: 5px;"></div>
+        <div class="filter-title">Price</div>
+        <div class="flex flex-center" style="justify-content: space-evenly;">
+            <mat-form-field style="width: 100px">
+                <mat-label>Min</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field style="width: 100px">
+                <mat-label>Max</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <mat-divider></mat-divider>
+        <div style="height: 5px;"></div>
+        <div class="filter-title">Manufacturer</div>
+        <div class="p-10">
+            <mat-checkbox color="primary">Manufacturer 1</mat-checkbox>
+            <mat-checkbox color="primary">Manufacturer 2</mat-checkbox>
+        </div>
+
+        <span class="filter-header">Sort</span>
+        <mat-divider></mat-divider>
+        <mat-checkbox color="primary">Show only product on sale</mat-checkbox>
+        <div style="height: 15px;"></div>
+        <div class="filter-title">Sort products</div>
+        <mat-form-field class="p-10" style="width: 100%">
+            <mat-label>Sort by</mat-label>
+            <mat-select>
+                <mat-option value="option1">Price lowest</mat-option>
+                <mat-option value="option6">Price highest</mat-option>
+                <mat-option value="option5">Marks lowest</mat-option>
+                <mat-option value="option4">Marks highest</mat-option>
+                <mat-option value="option4">A - Z</mat-option>
+                <mat-option value="option4">Z - A</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div class="flex flex-center" style="justify-content: center;">
+            <button mat-raised-button color="primary" class="search-button">
+                Search
+            </button>
+        </div>
+        <div style="height: 25px;"></div>
+
+    </div>
+
+    <div class="products-container">
+
+    </div>
+</div>

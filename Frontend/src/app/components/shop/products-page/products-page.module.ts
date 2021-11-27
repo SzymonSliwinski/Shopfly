@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductsPageComponent } from './products-page.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { ProductsPageComponent } from './products-page.component';
         MatFormFieldModule,
         MatInputModule,
         MatRadioModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSelectModule
     ],
     providers: [
     ],
