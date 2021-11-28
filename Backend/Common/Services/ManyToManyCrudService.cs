@@ -22,6 +22,11 @@ namespace Common.Services
             return await _table.FindAsync(key1, key2);
         }
 
+        public async Task<T> GetById(object id)
+        {
+            return await _table.FindAsync(id);
+        }
+
         public async Task<T> Insert(T item)
         {
             await _table.AddAsync(item);

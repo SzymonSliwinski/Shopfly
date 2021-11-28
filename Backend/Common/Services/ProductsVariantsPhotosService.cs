@@ -8,6 +8,7 @@ namespace Common.Services
 {
     public class ProductsVariantsPhotosService
     {
+        /*
         private readonly AppDbContext _context;
         public ProductsVariantsPhotosService(AppDbContext context)
         {
@@ -68,5 +69,6 @@ namespace Common.Services
 
             return productsVariantsPhotosList;
         }
+        */
     }
 }
