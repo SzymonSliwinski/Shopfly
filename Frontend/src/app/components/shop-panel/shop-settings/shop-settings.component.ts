@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SortOptionToString, GetAllSortOptionsAsStrings, SortOptionToEnum, ShopSettings, SortOption } from 'src/app/models/shop-settings.model';
+import { ShopSettingsService } from 'src/app/services/shop-settings.service';
 
 @Component({
   selector: 'app-shop-settings',
@@ -8,11 +9,13 @@ import { SortOptionToString, GetAllSortOptionsAsStrings, SortOptionToEnum, ShopS
 })
 export class ShopSettingsComponent implements OnInit {
   public shopSettings!: ShopSettings;
-  constructor() { }
+  constructor(
+    private readonly _shopSettingsService: ShopSettingsService
+  ) { }
 
   ngOnInit(): void {
     this.shopSettings = {
-      isCatalogMode: false,
+      shopName: 'Shopfly',
       allowGuestsForShopping: false,
       howLongDefinedAsNew: 353,
       productsPerPage: 30,
@@ -26,13 +29,15 @@ export class ShopSettingsComponent implements OnInit {
     }
   }
 
-  onLogoChange(value: any): void {
-    console.log(value)
+  async importFile(event: any, fileType: 'logo' | 'favicon'): Promise<void> {
+    if (event.target.files.length !== 1)
+      return;
 
-  }
-
-  onFaviconChange(value: any): void {
-    console.log(value)
+    const file: File = event.target.files[0];
+    if (file) {
+      if (fileType === 'favicon')
+        await this._shopSettingsService.setFavicon(file);
+    }
   }
 
   public sortOptionToString(optionEnum: SortOption): string {

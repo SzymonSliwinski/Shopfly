@@ -37,7 +37,7 @@ export function SortOptionToEnum(sortOption: string): SortOption | void {
 }
 
 export interface ShopSettings {
-    isCatalogMode: boolean;
+    shopName: string;
     allowGuestsForShopping: boolean;
     howLongDefinedAsNew: number;
     productsPerPage: number;
@@ -46,7 +46,7 @@ export interface ShopSettings {
     faviconPath: string;
     maxPhotoSize: number;
     defaultSortBy: SortOption;
-    importFileSeparator: string; // max length 1
-    multipleValuesInFileSeparator: string; // max length 1
+    importFileSeparator: string;
+    multipleValuesInFileSeparator: string;
 
 }

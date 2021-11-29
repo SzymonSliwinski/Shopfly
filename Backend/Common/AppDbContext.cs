@@ -298,13 +298,14 @@ namespace Common
         private void ConfigureShopSettings(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ShopSettings>()
-                .HasNoKey();
-            modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.ShopLogoPath)
                 .HasMaxLength(100);
             modelBuilder.Entity<ShopSettings>()
-                .Property(ss => ss.FaviconLogoPath)
+                .Property(ss => ss.FaviconPath)
                 .HasMaxLength(100);
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopName)
+                .HasMaxLength(30);
         }
 
         private void ConfigureHomeProductsLists(ModelBuilder modelBuilder)

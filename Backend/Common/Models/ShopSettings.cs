@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Common.Models
+﻿namespace Common.Models
 {
-    public class ShopSettings
+    public class ShopSettings : EntityBase
     {
         public enum SortOption
         {
@@ -17,7 +12,7 @@ namespace Common.Models
         }
 
         // general
-        public bool IsCatalogMode { get; set; }
+        public string ShopName { get; set; }
         public bool AllowGuestsForShopping { get; set; }
         public short HowLongDefinedAsNew { get; set; }
         public short ProductsPerPage { get; set; }
@@ -26,12 +21,28 @@ namespace Common.Models
 
         // photos
         public string ShopLogoPath { get; set; }
-        public string FaviconLogoPath { get; set; }
+        public string FaviconPath { get; set; }
         public short MaxPhotoSize { get; set; }
         // files
         public char ImportFileSeparator { get; set; }
         public char MultipleValuesInFileSeparator { get; set; }
 
-
+        /// <summary>
+        /// default settings for shop
+        /// </summary>
+        public void SetDefaultSettings()
+        {
+            ShopName = "Shopfly";
+            AllowGuestsForShopping = false;
+            HowLongDefinedAsNew = 3;
+            ProductsPerPage = 30;
+            DisplayProductQuantity = true;
+            DefaultSortBy = SortOption.AddDate;
+            ShopLogoPath = "";
+            FaviconPath = "";
+            MaxPhotoSize = 20;
+            ImportFileSeparator = '-';
+            MultipleValuesInFileSeparator = ';';
+        }
     }
 }
