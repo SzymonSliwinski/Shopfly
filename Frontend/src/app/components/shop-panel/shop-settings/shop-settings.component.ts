@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SortOptionToString, GetAllSortOptionsAsStrings, SortOptionToEnum, ShopSettings, SortOption } from 'src/app/models/shop-settings.model';
+import { ShopSettingsService } from 'src/app/services/shop-settings.service';
 
 @Component({
   selector: 'app-shop-settings',
@@ -8,22 +9,12 @@ import { SortOptionToString, GetAllSortOptionsAsStrings, SortOptionToEnum, ShopS
 })
 export class ShopSettingsComponent implements OnInit {
   public shopSettings!: ShopSettings;
-  constructor() { }
+  constructor(
+    private readonly _shopSettingsService: ShopSettingsService
+  ) { }
 
-  ngOnInit(): void {
-    this.shopSettings = {
-      shopName: 'Shopfly',
-      allowGuestsForShopping: false,
-      howLongDefinedAsNew: 353,
-      productsPerPage: 30,
-      displayProductQuantity: true,
-      defaultSortBy: SortOption.Alphabetic,
-      shopLogoPath: '',
-      faviconPath: '',
-      maxPhotoSize: 321,
-      importFileSeparator: '-',
-      multipleValuesInFileSeparator: ';',
-    }
+  async ngOnInit(): Promise<void> {
+    this.shopSettings = await this._shopSettingsService.getSettings();
   }
 
   onLogoChange(value: any): void {

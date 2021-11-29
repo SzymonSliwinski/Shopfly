@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ShopSettingsService } from 'src/app/services/shop-settings.service';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
         MatInputModule
     ],
     providers: [
+        ShopSettingsService
     ],
     exports: [
         ShopSettingsComponent,

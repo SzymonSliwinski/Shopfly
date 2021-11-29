@@ -21,12 +21,28 @@
 
         // photos
         public string ShopLogoPath { get; set; }
-        public string FaviconLogoPath { get; set; }
+        public string FaviconPath { get; set; }
         public short MaxPhotoSize { get; set; }
         // files
         public char ImportFileSeparator { get; set; }
         public char MultipleValuesInFileSeparator { get; set; }
 
-
+        /// <summary>
+        /// default settings for shop
+        /// </summary>
+        public void SetDefaultSettings()
+        {
+            ShopName = "Shopfly";
+            AllowGuestsForShopping = false;
+            HowLongDefinedAsNew = 3;
+            ProductsPerPage = 30;
+            DisplayProductQuantity = true;
+            DefaultSortBy = SortOption.AddDate;
+            ShopLogoPath = "";
+            FaviconPath = "";
+            MaxPhotoSize = 20;
+            ImportFileSeparator = '-';
+            MultipleValuesInFileSeparator = ';';
+        }
     }
 }

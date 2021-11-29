@@ -301,7 +301,7 @@ namespace Common
                 .Property(ss => ss.ShopLogoPath)
                 .HasMaxLength(100);
             modelBuilder.Entity<ShopSettings>()
-                .Property(ss => ss.FaviconLogoPath)
+                .Property(ss => ss.FaviconPath)
                 .HasMaxLength(100);
             modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.ShopName)
