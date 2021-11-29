@@ -13,17 +13,31 @@ export class ShopSettingsComponent implements OnInit {
     private readonly _shopSettingsService: ShopSettingsService
   ) { }
 
-  async ngOnInit(): Promise<void> {
-    this.shopSettings = await this._shopSettingsService.getSettings();
+  ngOnInit(): void {
+    this.shopSettings = {
+      shopName: 'Shopfly',
+      allowGuestsForShopping: false,
+      howLongDefinedAsNew: 353,
+      productsPerPage: 30,
+      displayProductQuantity: true,
+      defaultSortBy: SortOption.Alphabetic,
+      shopLogoPath: '',
+      faviconPath: '',
+      maxPhotoSize: 321,
+      importFileSeparator: '-',
+      multipleValuesInFileSeparator: ';',
+    }
   }
 
-  onLogoChange(value: any): void {
-    console.log(value)
+  async importFile(event: any, fileType: 'logo' | 'favicon'): Promise<void> {
+    if (event.target.files.length !== 1)
+      return;
 
-  }
-
-  onFaviconChange(value: any): void {
-    console.log(value)
+    const file: File = event.target.files[0];
+    if (file) {
+      if (fileType === 'favicon')
+        await this._shopSettingsService.setFavicon(file);
+    }
   }
 
   public sortOptionToString(optionEnum: SortOption): string {

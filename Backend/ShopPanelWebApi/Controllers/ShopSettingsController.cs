@@ -4,13 +4,20 @@ using Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using ShopPanelWebApi.Filters;
 using System.Collections.Generic;
+using System.Web;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Diagnostics;
 
 namespace ShopPanelWebApi.Controllers
 {
-    [Route("shop-settings")]
-    [TokenAuthenticationFilter]
+    [Route("shop-panel/shop-settings")]
+    //  [TokenAuthenticationFilter]
     [ApiController]
     public class ShopSettingsController : ControllerBase
     {
@@ -51,6 +58,21 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<ShopSettings>> Update([FromBody] ShopSettings payload)
         {
             return Ok(await _dbService.Update(payload));
+        }
+
+        [HttpPost]
+        [Route("favicon")]
+        public async Task SetFavicon(IFormFile file)
+        {
+            if (file.Length > 0)
+            {
+                string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\..\\assets\\".ToString();
+                using (Stream fileStream = new FileStream(filePath + file.FileName, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+            }
+
         }
     }
 }

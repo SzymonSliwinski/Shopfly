@@ -98,10 +98,10 @@
     <mat-list role="list" class="text-right">
         <!-- logo -->
         <mat-list-item class="list-item">
-            <span class="list-element">Shop logo photo</span>
+            <span class="list-element">Shop logo</span>
             <span class="p-l-10 p-r-10"></span>
             <span class="list-element second-row-element">
-                <button mat-flat-button color="primary" (click)="file.click()">
+                <button mat-flat-button color="primary" (click)="logo.click()">
                     Browse
                 </button>
             </span>
@@ -109,10 +109,10 @@
 
         <!-- favicon -->
         <mat-list-item class="list-item">
-            <span class="list-element">Shop logo photo</span>
+            <span class="list-element">Shop favicon</span>
             <span class="p-l-10 p-r-10"></span>
             <span class="list-element second-row-element">
-                <button mat-flat-button color="primary" (click)="file.click()">
+                <button mat-flat-button color="primary" (click)="favicon.click()">
                     Browse
                 </button>
             </span>
@@ -178,4 +178,5 @@
     <!--spacer -->
 </div>
 
-<input type="file" accept="image/*" #file style="display: none;">
+<input type="file" accept="image/*" #logo style="display: none;" (change)="importFile($event, 'logo')">
+<input type="file" accept="image/*" #favicon style="display: none;" (change)="importFile($event, 'favicon')">
