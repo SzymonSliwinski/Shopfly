@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Common.Models
+﻿namespace Common.Models
 {
-    public class ShopSettings
+    public class ShopSettings : EntityBase
     {
         public enum SortOption
         {

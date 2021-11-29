@@ -298,8 +298,6 @@ namespace Common
         private void ConfigureShopSettings(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ShopSettings>()
-                .HasNoKey();
-            modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.ShopLogoPath)
                 .HasMaxLength(100);
             modelBuilder.Entity<ShopSettings>()
