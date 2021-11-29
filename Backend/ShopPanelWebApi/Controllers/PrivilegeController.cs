@@ -12,40 +12,57 @@ namespace ShopPanelWebApi.Controllers
     [ApiController]
     public class PrivilegeController : ControllerBase
     {
-        private readonly PrivilegeService _privilegeService;
+        private readonly AppDbContext _privilegeService;
         public PrivilegeController(AppDbContext context)
         {
-            _privilegeService = new PrivilegeService(context);
+            _privilegeService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Privilege>> GetById(int id)
         {
-            return Ok(await _privilegeService.GetById(id));
+            var service = new CrudService<Privilege>(_privilegeService);
+            var privilege = await service.GetById(id);
+
+            return Ok(await service.GetById(privilege.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Privilege>> GetAll()
         {
-            return Ok(await _privilegeService.GetAll());
+            var service = new CrudService<Privilege>(_privilegeService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Privilege>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return Ok(await _privilegeService.Delete(id));
+            var service = new CrudService<Privilege>(_privilegeService);
+            var privilege = await service.GetById(id);
+
+            await service.Update(privilege);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Privilege>> Add([FromBody] Privilege privilege)
         {
-            return Ok(await _privilegeService.Add(privilege));
+            var service = new CrudService<Privilege>(_privilegeService);
+
+            privilege.Name = privilege.Name.Trim();
+
+            return Ok(await service.Insert(privilege));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Privilege>> Update([FromBody] Privilege privilege)
+        public async Task<ActionResult<Privilege>> Update([FromBody] Privilege updatedPrivilege)
         {
-            return Ok(await _privilegeService.Update(privilege));
+            var service = new CrudService<Privilege>(_privilegeService);
+            var oldPrivilege = await service.GetById(updatedPrivilege.Id);
+
+            oldPrivilege.Name = updatedPrivilege.Name;
+
+            return Ok(await service.Update(oldPrivilege));
         }
     }
 }

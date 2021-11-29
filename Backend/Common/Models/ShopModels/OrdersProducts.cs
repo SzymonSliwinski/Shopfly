@@ -1,6 +1,6 @@
 ﻿namespace Common.Models.ShopModels
 {
-    public class OrdersProducts
+    public class OrdersProducts : ManyToManyEntityBase
     {
         public int OrderId { get; set; }
         public Order Order { get; set; }

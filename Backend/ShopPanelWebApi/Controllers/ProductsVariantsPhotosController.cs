@@ -2,58 +2,53 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
-using Common.Dtos;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class ProductsVariantsPhotosController : ControllerBase
     {
-        private readonly ProductsVariantsPhotosService _productsVariantsPhotosService;
+        private readonly AppDbContext _productsVariantsPhotosService;
         public ProductsVariantsPhotosController(AppDbContext context)
         {
-            _productsVariantsPhotosService = new ProductsVariantsPhotosService(context);
+            _productsVariantsPhotosService = context;
         }
 
         [HttpGet("by-id/{id}")]
-        public async Task<ActionResult<ProductsVariantsPhotos>> FindOne(int productVariantId, int photoId)
+        public async Task<ActionResult<ProductsVariantsPhotos>> FindOne(int id) // błąd 500
         {
-            return Ok(await _productsVariantsPhotosService.FindOne(productVariantId, photoId));
+            var service = new ManyToManyCrudService<ProductsVariantsPhotos>(_productsVariantsPhotosService);
+            var productsVariantsPhotos = await service.GetById(id);
+
+            return Ok(await service.GetByKey(productsVariantsPhotos.ProductVariantId, productsVariantsPhotos.PhotoId));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ProductsVariantsPhotos>> Delete(int productVariantId, int photoId)
+        public async Task<ActionResult> Delete([FromBody] ProductsVariantsPhotos productsVariantsPhotos)    // błąd 500
         {
-            return Ok(await _productsVariantsPhotosService.Delete(productVariantId, photoId));
+            var service = new ManyToManyCrudService<ProductsVariantsPhotos>(_productsVariantsPhotosService);
+            await service.Delete(productsVariantsPhotos.ProductVariantId, productsVariantsPhotos.PhotoId);
+            return Ok();
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductsVariantsPhotos>> Add([FromBody] ProductsVariantsPhotos productsVariantsPhotos)
+        public async Task<ActionResult<ProductsVariantsPhotos>> Add([FromBody] ProductsVariantsPhotos productsVariantsPhotos)   // działa 
         {
-            return Ok(await _productsVariantsPhotosService.Add(productsVariantsPhotos));
+            var service = new ManyToManyCrudService<ProductsVariantsPhotos>(_productsVariantsPhotosService);
+            return Ok(await service.Insert(productsVariantsPhotos));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<ProductsVariantsPhotos>> Update([FromBody] UpdateModelDto<ProductsVariantsPhotos> payload)
+        public async Task<ActionResult<ProductsVariantsPhotos>> Update([FromBody] ProductsVariantsPhotos updateOldModelDto) // zwraca 200, ale nie wiem czy dobrze
         {
-            return Ok(await _productsVariantsPhotosService.Update(payload));
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<ProductsVariantsPhotos>> AddMany([FromBody] List<ProductsVariantsPhotos> productsVariantsPhotosList)
-        {
-            return Ok(await _productsVariantsPhotosService.AddMany(productsVariantsPhotosList));
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ProductsVariantsPhotos>> RemoveMany(List<ProductsVariantsPhotos> productsVariantsPhotosList)
-        {
-            return Ok(await _productsVariantsPhotosService.RemoveMany(productsVariantsPhotosList));
+            //var service = new ManyToManyCrudService<ProductsVariantsPhotos>(_productsVariantsPhotosService);
+            await Delete(updateOldModelDto);
+            await Add(updateOldModelDto);
+            return Ok();
         }
     }
 }

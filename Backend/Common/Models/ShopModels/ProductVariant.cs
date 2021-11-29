@@ -2,9 +2,9 @@
 
 namespace Common.Models.ShopModels
 {
-    public class ProductVariant
+    public class ProductVariant : EntityBase
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int ColorId { get; set; }
         public ProductColor Color { get; set; }
         public int DimensionId { get; set; }

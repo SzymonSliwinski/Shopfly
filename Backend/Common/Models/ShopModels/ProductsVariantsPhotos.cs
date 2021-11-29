@@ -1,6 +1,6 @@
 ﻿namespace Common.Models.ShopModels
 {
-    public class ProductsVariantsPhotos
+    public class ProductsVariantsPhotos : ManyToManyEntityBase
     {
         public int ProductVariantId { get; set; }
         public ProductVariant ProductVariant { get; set; }

@@ -8,44 +8,59 @@ using ShopPanelWebApi.Filters;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class TagController : ControllerBase
     {
-        private readonly TagService _tagService;
+        private readonly AppDbContext _tagService;
         public TagController(AppDbContext context)
         {
-            _tagService = new TagService(context);
+            _tagService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Tag>> GetById(int id)
         {
-            return Ok(await _tagService.GetById(id));
+            var service = new CrudService<Tag>(_tagService);
+            var tag = await service.GetById(id);
+
+            return Ok(await service.GetById(tag.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Tag>> GetAll()
         {
-            return Ok(await _tagService.GetAll());
+            var service = new CrudService<Tag>(_tagService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tag>> Delete(int id)
         {
-            return Ok(await _tagService.Delete(id));
+            var service = new CrudService<Tag>(_tagService);
+            var tag = await service.GetById(id);
+
+            await service.Update(tag);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Tag>> Add([FromBody] Tag tag)
         {
-            return Ok(await _tagService.Add(tag));
+            var service = new CrudService<Tag>(_tagService);
+
+            return Ok(await service.Insert(tag));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Tag>> Update([FromBody] Tag tag)
+        public async Task<ActionResult<Tag>> Update([FromBody] Tag updatedTag)
         {
-            return Ok(await _tagService.Update(tag));
+            var service = new CrudService<Tag>(_tagService);
+            var oldTag = await service.GetById(updatedTag.Id);
+
+            oldTag.Name = updatedTag.Name;
+
+            return Ok(await service.Update(oldTag));
         }
     }
 }

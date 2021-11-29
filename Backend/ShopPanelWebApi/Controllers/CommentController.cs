@@ -1,51 +1,69 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly CommentService _commentService;
+        private readonly AppDbContext _commentService;
         public CommentController(AppDbContext context)
         {
-            _commentService = new CommentService(context);
+            _commentService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Comment>> GetById(int id)
         {
-            return Ok(await _commentService.GetById(id));
+            var service = new CrudService<Comment>(_commentService);
+            var comment = await service.GetById(id);
+
+            return Ok(await service.GetById(comment.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Comment>> GetAll()
         {
-            return Ok(await _commentService.GetAll());
+            var service = new CrudService<Comment>(_commentService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Comment>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return Ok(await _commentService.Delete(id));
+            var service = new CrudService<Comment>(_commentService);
+            var comment = await service.GetById(id);
+
+            await service.Update(comment);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Comment>> Add([FromBody] Comment comment)
         {
-            return Ok(await _commentService.Add(comment));
+            var service = new CrudService<Comment>(_commentService);
+
+            comment.Content = comment.Content.Trim();
+            comment.CreateDate = DateTime.Now.ToLocalTime();
+
+            return Ok(await service.Insert(comment));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Comment>> Update([FromBody] Comment comment)
+        public async Task<ActionResult<Comment>> Update([FromBody] Comment updatedComment)
         {
-            return Ok(await _commentService.Update(comment));
+            var service = new CrudService<Comment>(_commentService);
+            var oldComment = await service.GetById(updatedComment.Id);
+
+            oldComment.Content = updatedComment.Content.Trim();
+
+            return Ok(await service.Update(oldComment));
         }
 
     }

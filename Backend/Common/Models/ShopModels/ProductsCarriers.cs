@@ -2,7 +2,7 @@
 
 namespace Common.Models.ShopModels
 {
-    public class ProductsCarriers
+    public class ProductsCarriers : ManyToManyEntityBase
     {
         public int ProductId { get; set; }
         public Product Product { get; set; }

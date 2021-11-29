@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Common.Models.ShopModels
 {
-    public class Order
+    public class Order : EntityBase
     {
         // Order properties:
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int PaymentTypeId { get; set; }
         public PaymentType PaymentType { get; set; }
         public int StatusId { get; set; }

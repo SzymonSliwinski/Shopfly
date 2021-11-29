@@ -8,44 +8,59 @@ using ShopPanelWebApi.Filters;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class RatingController : ControllerBase
     {
-        private readonly RatingService _ratingService;
+        private readonly AppDbContext _ratingService;
         public RatingController(AppDbContext context)
         {
-            _ratingService = new RatingService(context);
+            _ratingService = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Rating>> GetById(int id)
         {
-            return Ok(await _ratingService.GetById(id));
+            var service = new CrudService<Rating>(_ratingService);
+            var rating = await service.GetById(id);
+
+            return Ok(await service.GetById(rating.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Rating>> GetAll()
         {
-            return Ok(await _ratingService.GetAll());
+            var service = new CrudService<Rating>(_ratingService);
+            return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Rating>> Delete(int id)
         {
-            return Ok(await _ratingService.Delete(id));
+            var service = new CrudService<Rating>(_ratingService);
+            var rating = await service.GetById(id);
+
+            await service.Update(rating);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Rating>> Add([FromBody] Rating rating)
         {
-            return Ok(await _ratingService.Add(rating));
+            var service = new CrudService<Rating>(_ratingService);
+
+            return Ok(await service.Insert(rating));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Rating>> Update([FromBody] Rating rating)
+        public async Task<ActionResult<Rating>> Update([FromBody] Rating updatedRating)
         {
-            return Ok(await _ratingService.Update(rating));
+            var service = new CrudService<Rating>(_ratingService);
+            var oldRating = await service.GetById(updatedRating.Id);
+
+            oldRating.Rate = updatedRating.Rate;
+
+            return Ok(await service.Update(oldRating));
         }
     }
 }
