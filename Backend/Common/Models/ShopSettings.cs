@@ -17,7 +17,7 @@ namespace Common.Models
         }
 
         // general
-        public bool IsCatalogMode { get; set; }
+        public string ShopName { get; set; }
         public bool AllowGuestsForShopping { get; set; }
         public short HowLongDefinedAsNew { get; set; }
         public short ProductsPerPage { get; set; }

@@ -305,6 +305,9 @@ namespace Common
             modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.FaviconLogoPath)
                 .HasMaxLength(100);
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopName)
+                .HasMaxLength(30);
         }
 
         private void ConfigureHomeProductsLists(ModelBuilder modelBuilder)

@@ -12,7 +12,7 @@ export class ShopSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.shopSettings = {
-      isCatalogMode: false,
+      shopName: 'Shopfly',
       allowGuestsForShopping: false,
       howLongDefinedAsNew: 353,
       productsPerPage: 30,
