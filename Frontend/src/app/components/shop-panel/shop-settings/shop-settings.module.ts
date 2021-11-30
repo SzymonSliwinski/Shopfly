@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ShopSettingsService } from 'src/app/services/shop-settings.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -31,7 +33,9 @@ import { ShopSettingsService } from 'src/app/services/shop-settings.service';
         MatListModule,
         MatSelectModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     providers: [
         ShopSettingsService

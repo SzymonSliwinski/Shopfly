@@ -39,7 +39,6 @@ namespace Common.Models.ApiModels
     }
     public class ApiKeysTablesMethods : EntityBase
     {
-        //public int Id { get; set; }
         public ApiAccessKey ApiAccessKey { get; set; }
         public int ApiAccessKeyId { get; set; }
         public TableType Table { get; set; }

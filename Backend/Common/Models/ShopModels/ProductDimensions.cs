@@ -4,7 +4,6 @@ namespace Common.Models.ShopModels
 {
     public class ProductDimensions : EntityBase
     {
-        //public int Id { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
         public float Weight { get; set; }

@@ -13,6 +13,9 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Diagnostics;
+using System;
+using Common.Utilieties;
+using Common.Dtos;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -26,6 +29,7 @@ namespace ShopPanelWebApi.Controllers
         public ShopSettingsController(AppDbContext context)
         {
             _context = context;
+            _dbService = new CrudService<ShopSettings>(_context);
         }
 
         /// <summary>
@@ -42,8 +46,9 @@ namespace ShopPanelWebApi.Controllers
             if (settings.Count() == 0)
             {
                 var defaultSettings = new ShopSettings();
-                defaultSettings.SetDefaultSettings();
+                defaultSettings.SetDefaultValues();
                 settings.Add(defaultSettings);
+                await _dbService.Insert(settings.First());
             }
 
             return Ok(settings.First());
@@ -60,19 +65,27 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _dbService.Update(payload));
         }
 
-        [HttpPost]
-        [Route("favicon")]
-        public async Task SetFavicon(IFormFile file)
+        /// <summary>
+        /// receives file from frontend, generates unique name for it and saves it in proper path
+        /// returns path to this file, not successed returns empty string
+        /// </summary>
+        /// <param name="file">photo</param>
+        /// <returns></returns>
+        [HttpPost("settings-photo")]
+        public async Task<ActionResult<SettingsPhotoDto>> SetSettingsPhoto(IFormFile file)
         {
             if (file.Length > 0)
             {
-                string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\..\\assets\\".ToString();
-                using (Stream fileStream = new FileStream(filePath + file.FileName, FileMode.Create))
+                var (filePath, fileName) = Utility.GetSettingsPhotosPathAndUniqueFileName();
+                var extension = Path.GetExtension(file.FileName);
+                var fullFileName = filePath + fileName + extension;
+                using (Stream fileStream = new FileStream(fullFileName, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
+                return Ok(new SettingsPhotoDto() { FileName = fileName + extension });
             }
-
+            return Ok(new SettingsPhotoDto() { FileName = String.Empty });
         }
     }
 }

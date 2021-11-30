@@ -30,7 +30,7 @@
         /// <summary>
         /// default settings for shop
         /// </summary>
-        public void SetDefaultSettings()
+        public void SetDefaultValues()
         {
             ShopName = "Shopfly";
             AllowGuestsForShopping = false;

@@ -51,7 +51,6 @@ namespace ShopPanelWebApi.Controllers
         {
             var service = new CrudService<Customer>(_customerService);
 
-            customer.Login = customer.Login.Trim();
             customer.Name = customer.Name.Trim();
             customer.Surname = customer.Surname.Trim();
             customer.PhoneNumber = customer.PhoneNumber.Trim();

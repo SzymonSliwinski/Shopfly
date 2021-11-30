@@ -34,3 +34,22 @@ mat-list {
     width: 200px;
     height: 35px;
 }
+
+.flex {
+    gap: 10px;
+}
+
+img {
+    width: 70px;
+    height: 70px;
+}
+
+img:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.browse-button {
+    max-height: 40px;
+    align-self: center;
+}

@@ -7,7 +7,6 @@ namespace Common.Models.ApiModels
 {
     public class ApiAccessKey : EntityBase
     {
-        //public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public string Key { get; set; }
         public bool IsActive { get; set; }
