@@ -18,6 +18,7 @@ export interface Product {
     taxId?: number;
     tax?: Tax | null;
     isLowStock: boolean;
+    stock?: number;
     additionalShippingCost: number
     nettoPrice: number;
     bruttoPrice: number;

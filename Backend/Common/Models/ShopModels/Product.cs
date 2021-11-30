@@ -5,13 +5,13 @@ namespace Common.Models.ShopModels
 {
     public class Product : EntityBase
     {
-        //  public int Id { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string Name { get; set; }
         public int TaxId { get; set; }
         public Tax Tax { get; set; }
         public bool IsLowStock { get; set; }
+        public int Stock { get; set; }
         public float AdditionalShippingCost { get; set; }
         public float NettoPrice { get; set; }
         public float BruttoPrice { get; set; }
@@ -29,6 +29,5 @@ namespace Common.Models.ShopModels
         public List<ProductsTags> ProductsTags { get; set; }
         public List<ProductVariant> ProductsVariants { get; set; }
         public List<HomeProductsLists> HomeProductsLists { get; set; }
-
     }
 }

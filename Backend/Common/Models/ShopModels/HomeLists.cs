@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Common.Models.ShopModels
 {
-    public class HomeList
+    public class HomeList : EntityBase
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
         public bool IsVisible { get; set; }

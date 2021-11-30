@@ -26,6 +26,7 @@ namespace ShopPanelWebApi.Controllers
         public ShopSettingsController(AppDbContext context)
         {
             _context = context;
+            _dbService = new CrudService<ShopSettings>(_context);
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace ShopPanelWebApi.Controllers
             if (settings.Count() == 0)
             {
                 var defaultSettings = new ShopSettings();
-                defaultSettings.SetDefaultSettings();
+                defaultSettings.SetDefaultValues();
                 settings.Add(defaultSettings);
             }
 
@@ -72,7 +73,6 @@ namespace ShopPanelWebApi.Controllers
                     await file.CopyToAsync(fileStream);
                 }
             }
-
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Common.Models.ShopModels
 {
     public class Carrier : EntityBase
     {
-        //public int Id { get; set; }
         public float Cost { get; set; }
         public string Name { get; set; }
         public string Logo { get; set; }
