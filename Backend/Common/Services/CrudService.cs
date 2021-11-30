@@ -47,7 +47,6 @@ namespace Common.Services
             T existing = await GetById(id);
             _table.Remove(existing);
             await _context.SaveChangesAsync();
-
         }
     }
 }

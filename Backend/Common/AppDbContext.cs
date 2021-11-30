@@ -299,10 +299,10 @@ namespace Common
         {
             modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.ShopLogoPath)
-                .HasMaxLength(100);
+                .HasMaxLength(200);
             modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.FaviconPath)
-                .HasMaxLength(100);
+                .HasMaxLength(200);
             modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.ShopName)
                 .HasMaxLength(30);

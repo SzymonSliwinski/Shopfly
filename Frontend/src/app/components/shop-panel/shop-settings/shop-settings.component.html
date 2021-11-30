@@ -7,171 +7,184 @@
 </div>
 
 <div class="radius white-background center w-75 flex flex-space-evenly flex-column">
-    <!-- general header -->
-    <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon>settings_applications</mat-icon>
-        <h2 class="flex-align-start">General</h2>
-    </span>
 
-    <div class="mat-divider w-100">
-        <!--divider-->
+    <div *ngIf="!isLoaded" class="center w-100" style="background-color: rgb(241, 242, 246);">
+        <mat-spinner class="center"></mat-spinner>
     </div>
 
-    <mat-list role="list" class="text-right">
-        <mat-list-item class="list-item">
-            <span class="list-element">Shop name</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-form-field>
-                    <input matInput [(ngModel)]="shopSettings.shopName" maxlength="30">
-                </mat-form-field>
-            </span>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="list-item">
-            <span class="list-element">
-                Shopping for guests
-            </span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-slide-toggle [(ngModel)]="shopSettings.allowGuestsForShopping" color="primary">
-                </mat-slide-toggle>
-            </span>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="list-item">
-            <span class="list-element">
-                How long defined as new
-            </span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-form-field>
-                    <input matInput type="number" [(ngModel)]="shopSettings.howLongDefinedAsNew" min="1" max="32000">
-                </mat-form-field>
-            </span>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="list-item">
-            <span class="list-element ">
-                Products per page
-            </span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-form-field>
-                    <input matInput type="number" [(ngModel)]="shopSettings.productsPerPage" min="1" max="100">
-                </mat-form-field>
-            </span>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="list-item">
-            <span class="list-element">
-                Show product stock
-            </span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-slide-toggle [(ngModel)]="shopSettings.displayProductQuantity" color="primary">
-                </mat-slide-toggle>
-            </span>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="list-item">
-            <span class="list-element">Default sort</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-form-field>
-                    <mat-select [(ngModel)]="shopSettings.defaultSortBy">
-                        <mat-option *ngFor=" let sortOption of getSortOptionsAsStrings()"
-                            [value]="sortOptionToEnum(sortOption)">
-                            {{sortOption}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </span>
-        </mat-list-item>
-    </mat-list>
+    <div *ngIf="isLoaded">
+        <!-- general header -->
+        <span class="flex align-items-center p-l-10 p-t-10">
+            <mat-icon>settings_applications</mat-icon>
+            <h2 class="flex-align-start">General</h2>
+        </span>
 
-    <!-- images header -->
-    <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon>image</mat-icon>
-        <h2 class="flex-align-start">Images</h2>
-    </span>
+        <div class="mat-divider w-100">
+            <!--divider-->
+        </div>
 
-    <div class="mat-divider">
-        <!--divider-->
-    </div>
-
-    <mat-list role="list" class="text-right">
-        <!-- logo -->
-        <mat-list-item class="list-item">
-            <span class="list-element">Shop logo</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <button mat-flat-button color="primary" (click)="logo.click()">
-                    Browse
-                </button>
-            </span>
-        </mat-list-item>
-
-        <!-- favicon -->
-        <mat-list-item class="list-item">
-            <span class="list-element">Shop favicon</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <button mat-flat-button color="primary" (click)="favicon.click()">
-                    Browse
-                </button>
-            </span>
-        </mat-list-item>
-
-        <!-- max photo size -->
-        <mat-list-item class="list-item">
-            <span class="list-element">Max photo size(MB)</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
-                <mat-form-field>
-                    <input matInput type="number" [(ngModel)]="shopSettings.maxPhotoSize" min="1" max="999">
-                </mat-form-field>
-            </span>
-        </mat-list-item>
-    </mat-list>
-    <!-- files header -->
-    <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon>drive_file_move</mat-icon>
-        <h2 class="flex-align-start">Import files</h2>
-    </span>
-
-    <div class="mat-divider w-100">
-        <!--divider-->
-    </div>
-
-    <mat-list role="list" class="text-right">
-        <!-- separator -->
-        <mat-list-item class="list-item">
-            <span class="list-element">Property separator</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
+        <mat-list role="list" class="text-right">
+            <mat-list-item class="list-item">
+                <span class="list-element">Shop name</span>
+                <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
-                    <mat-form-field style="width: 50px;">
-                        <input matInput [(ngModel)]="shopSettings.importFileSeparator" maxlength="1">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="shopSettings.shopName" maxlength="30">
                     </mat-form-field>
                 </span>
-            </span>
-        </mat-list-item>
-
-        <!-- multi separator -->
-        <mat-list-item class="list-item">
-            <span class="list-element">Multiple value separator</span>
-            <span class="p-l-10 p-r-10"></span>
-            <span class="list-element second-row-element">
+            </mat-list-item>
+            <mat-list-item role="listitem" class="list-item">
+                <span class="list-element">
+                    Shopping for guests
+                </span>
+                <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
-                    <mat-form-field style="width: 50px;">
-                        <input matInput [(ngModel)]="shopSettings.multipleValuesInFileSeparator" maxlength="1">
+                    <mat-slide-toggle [(ngModel)]="shopSettings.allowGuestsForShopping" color="primary">
+                    </mat-slide-toggle>
+                </span>
+            </mat-list-item>
+            <mat-list-item role="listitem" class="list-item">
+                <span class="list-element">
+                    How long defined as new
+                </span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput type="number" [(ngModel)]="shopSettings.howLongDefinedAsNew" min="1"
+                            max="32000">
                     </mat-form-field>
                 </span>
-            </span>
-        </mat-list-item>
-    </mat-list>
+            </mat-list-item>
+            <mat-list-item role="listitem" class="list-item">
+                <span class="list-element ">
+                    Products per page
+                </span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput type="number" [(ngModel)]="shopSettings.productsPerPage" min="1" max="100">
+                    </mat-form-field>
+                </span>
+            </mat-list-item>
+            <mat-list-item role="listitem" class="list-item">
+                <span class="list-element">
+                    Show product stock
+                </span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-slide-toggle [(ngModel)]="shopSettings.displayProductQuantity" color="primary">
+                    </mat-slide-toggle>
+                </span>
+            </mat-list-item>
+            <mat-list-item role="listitem" class="list-item">
+                <span class="list-element">Default sort</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="shopSettings.defaultSortBy">
+                            <mat-option *ngFor=" let sortOption of getSortOptionsAsStrings()"
+                                [value]="sortOptionToEnum(sortOption)">
+                                {{sortOption}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </span>
+            </mat-list-item>
+        </mat-list>
 
-    <span class="flex p-10">
-        <button mat-raised-button color="primary" style="margin-left: auto; margin-right: 10px;">
-            Save
-        </button>
-    </span>
+        <!-- images header -->
+        <span class="flex align-items-center p-l-10 p-t-10">
+            <mat-icon>image</mat-icon>
+            <h2 class="flex-align-start">Images</h2>
+        </span>
+
+        <div class="mat-divider">
+            <!--divider-->
+        </div>
+
+        <mat-list role="list" class="text-right">
+            <!-- logo -->
+            <mat-list-item class="list-item">
+                <span class="list-element">Shop logo</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element flex">
+                    <button mat-flat-button color="primary" class="browse-button" (click)="logo.click()">
+                        Browse
+                    </button>
+                    <img *ngIf="shopSettings.shopLogoPath && shopSettings.shopLogoPath.length > 0"
+                        [src]="'/assets/settings/' +shopSettings.shopLogoPath" (click)="removePhoto('logo')">
+                </span>
+            </mat-list-item>
+
+            <!-- favicon -->
+            <mat-list-item class="list-item">
+                <span class="list-element">Shop favicon</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element flex flex-center">
+                    <button mat-flat-button color="primary" class="browse-button" (click)="favicon.click()">
+                        Browse
+                    </button>
+                    <img *ngIf="shopSettings.faviconPath && shopSettings.faviconPath.length > 0"
+                        [src]="'/assets/settings/' + shopSettings.faviconPath" (click)="removePhoto('favicon')">
+                </span>
+            </mat-list-item>
+
+            <!-- max photo size -->
+            <mat-list-item class="list-item">
+                <span class="list-element">Max photo size(MB)</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput type="number" [(ngModel)]="shopSettings.maxPhotoSize" min="1" max="999">
+                    </mat-form-field>
+                </span>
+            </mat-list-item>
+        </mat-list>
+        <!-- files header -->
+        <span class="flex align-items-center p-l-10 p-t-10">
+            <mat-icon>drive_file_move</mat-icon>
+            <h2 class="flex-align-start">Import files</h2>
+        </span>
+
+        <div class="mat-divider w-100">
+            <!--divider-->
+        </div>
+
+        <mat-list role="list" class="text-right">
+            <!-- separator -->
+            <mat-list-item class="list-item">
+                <span class="list-element">Property separator</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <span class="list-element second-row-element">
+                        <mat-form-field style="width: 50px;">
+                            <input matInput [(ngModel)]="shopSettings.importFileSeparator" maxlength="1">
+                        </mat-form-field>
+                    </span>
+                </span>
+            </mat-list-item>
+
+            <!-- multi separator -->
+            <mat-list-item class="list-item">
+                <span class="list-element">Multiple value separator</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <span class="list-element second-row-element">
+                        <mat-form-field style="width: 50px;">
+                            <input matInput [(ngModel)]="shopSettings.multipleValuesInFileSeparator" maxlength="1">
+                        </mat-form-field>
+                    </span>
+                </span>
+            </mat-list-item>
+        </mat-list>
+
+        <span class="flex p-10">
+            <button mat-raised-button color="primary" style="margin-left: auto; margin-right: 10px;"
+                (click)="onSaveClick()">
+                Save
+            </button>
+        </span>
+    </div>
 </div>
 
 <div class="h-100">
