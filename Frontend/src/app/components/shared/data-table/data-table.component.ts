@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TableColumnDto, ContentMode } from 'src/app/dto/table-column.dto';
 
@@ -34,20 +34,23 @@ export class DataTableComponent<T>{
   menuButton = MenuButton;
   public afterMenuClickedElement: any;
   private selectedElements: T[] = [];
+  //events
+  @Output() public deleteEvent = new EventEmitter<T>();
+  @Output() public editEvent = new EventEmitter<T>();
+  @Output() public detailsEvent = new EventEmitter<T>();
 
   constructor(private readonly _sanitizer: DomSanitizer) { }
 
-  public onDeleteClick(element: any): void {
-    console.log(element);
+  public onDeleteClick(element: T): void {
+    this.deleteEvent.emit(element);
   }
 
-  public onDetailsClick(element: any): void {
-    this.afterMenuClickedElement = element;
-    console.log('details' + element);
+  public onEditClick(element: T) {
+    this.editEvent.emit(element);
   }
 
-  public onMenuClick(element: any): void {
-    console.log('details' + element);
+  public onDetailsClick(element: T): void {
+    this.detailsEvent.emit(element)
   }
 
   public getStringAsHtml(htmlString: string) {

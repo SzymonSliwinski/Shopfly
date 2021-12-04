@@ -34,11 +34,9 @@
             </span>
             <!-- buttons -->
             <span *ngIf="displayedColumn.contentMode === contentMode.Buttons">
-                <!-- <button mat-button mat-icon-button>
-                    <mat-icon mat-icon style="color: rgb(133, 77, 14)">description</mat-icon>
-                </button> -->
                 <!-- edit -->
-                <button *ngIf="buttons.indexOf(tableButton.Edit) != -1" class="mat-icon-button" mat-icon-button>
+                <button *ngIf="buttons.indexOf(tableButton.Edit) != -1" class="mat-icon-button" mat-icon-button
+                    (click)="onEditClick(element)">
                     <mat-icon style="color:orange">edit</mat-icon>
                 </button>
                 <!-- delete -->
@@ -51,8 +49,7 @@
                     (click)="onDetailsClick(element)">Details
                 </button>
                 <!-- menu -->
-                <button *ngIf="buttons.indexOf(tableButton.Menu) != -1" mat-icon-button [matMenuTriggerFor]="moreMenu"
-                    (click)="onMenuClick(element)">
+                <button *ngIf="buttons.indexOf(tableButton.Menu) != -1" mat-icon-button [matMenuTriggerFor]="moreMenu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </span>
