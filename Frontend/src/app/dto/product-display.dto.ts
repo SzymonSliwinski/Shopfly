@@ -7,6 +7,6 @@ export interface ProductDisplayDto {
     nettoPrice: number;
     bruttoPrice: number;
     isVisible: boolean;
-    quantity: number;
+    stock: number;
 
 }

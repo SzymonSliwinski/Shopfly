@@ -39,11 +39,6 @@
                     (click)="onEditClick(element)">
                     <mat-icon style="color:orange">edit</mat-icon>
                 </button>
-                <!-- delete -->
-                <button *ngIf="buttons.indexOf(tableButton.Delete) != -1" class="mat-icon-button" mat-icon-button
-                    (click)="onDeleteClick(element)">
-                    <mat-icon mat-icon class="mat-icon" style="color: red">delete</mat-icon>
-                </button>
                 <!-- details -->
                 <button *ngIf="buttons.indexOf(tableButton.Details) != -1" mat-stroked-button
                     (click)="onDetailsClick(element)">Details
@@ -51,6 +46,11 @@
                 <!-- menu -->
                 <button *ngIf="buttons.indexOf(tableButton.Menu) != -1" mat-icon-button [matMenuTriggerFor]="moreMenu">
                     <mat-icon>more_vert</mat-icon>
+                </button>
+                <!-- delete -->
+                <button *ngIf="buttons.indexOf(tableButton.Delete) != -1" class="mat-icon-button" mat-icon-button
+                    (click)="onDeleteClick(element)">
+                    <mat-icon mat-icon class="mat-icon" style="color: red">delete</mat-icon>
                 </button>
             </span>
         </td>

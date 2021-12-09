@@ -3,7 +3,8 @@ import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { DatePipe } from '@angular/common';
 import { TableButton } from '../../shared/data-table/data-table.component';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { Order } from 'src/app/models/shop-models/order.model';
+import { OrderService } from 'src/app/services/shared/orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,7 +13,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 })
 export class OrdersComponent implements OnInit {
   public ordersList!: OrderDisplayDto[];
-  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Edit, TableButton.Details];
+  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Details];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },
@@ -25,7 +26,9 @@ export class OrdersComponent implements OnInit {
     ];
   public columnsNames: string[] = [];
   public isLoaded = false;
-  constructor() { }
+  constructor(
+    private readonly _orderService: OrderService
+  ) { }
 
   ngOnInit(): void {
     this.isLoaded = false;
@@ -51,4 +54,9 @@ export class OrdersComponent implements OnInit {
     });
     this.isLoaded = true;
   }
+
+  deleteOrder(order: OrderDisplayDto) {
+    this._orderService.delete(order.id);
+  }
+
 }

@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit {
   public productsList!: ProductDisplayDto[];
   public isChoosenElementVisible!: boolean;
   isLoaded = false;
+  public isAddMode = false;
   constructor() { }
   public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
   public menuButtons: MenuButton[] = [MenuButton.Delete, MenuButton.Details];
@@ -40,7 +41,7 @@ export class ProductsComponent implements OnInit {
       nettoPrice: 20.32,
       bruttoPrice: 38.00,
       isVisible: true,
-      quantity: 322
+      stock: 322
     }, {
       id: 2,
       name: 'produkt2',
@@ -49,13 +50,17 @@ export class ProductsComponent implements OnInit {
       nettoPrice: 22.32,
       bruttoPrice: 33.00,
       isVisible: false,
-      quantity: 232
+      stock: 232
     }
     ];
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
     });
     this.isLoaded = true;
+  }
+
+  public onAddClick() {
+    this.isAddMode = !this.isAddMode;
   }
 
 }
