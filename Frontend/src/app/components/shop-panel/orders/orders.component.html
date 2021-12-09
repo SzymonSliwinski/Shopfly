@@ -46,6 +46,7 @@
 
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
     <shared-data-table *ngIf="isLoaded" [dataSource]="ordersList" [displayedColumns]="displayedColumns"
-        [columnsNames]="columnsNames" [buttons]="tableButtons" (deleteEvent)="deleteOrder($event)">
+        [columnsNames]="columnsNames" [buttons]="tableButtons" (deleteEvent)="deleteOrder($event)"
+        (editEvent)="editStatus($event)">
     </shared-data-table>
 </div>

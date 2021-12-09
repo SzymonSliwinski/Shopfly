@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import { TableButton } from '../../shared/data-table/data-table.component';
 import { Order } from 'src/app/models/shop-models/order.model';
 import { OrderService } from 'src/app/services/shared/orders.service';
+import { ChangeStatusDialogComponent } from './change-status-dialog/change-status-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-orders',
@@ -13,7 +15,7 @@ import { OrderService } from 'src/app/services/shared/orders.service';
 })
 export class OrdersComponent implements OnInit {
   public ordersList!: OrderDisplayDto[];
-  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Details];
+  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Details, TableButton.Edit];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },
@@ -27,7 +29,8 @@ export class OrdersComponent implements OnInit {
   public columnsNames: string[] = [];
   public isLoaded = false;
   constructor(
-    private readonly _orderService: OrderService
+    private readonly _orderService: OrderService,
+    private readonly dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +60,10 @@ export class OrdersComponent implements OnInit {
 
   deleteOrder(order: OrderDisplayDto) {
     this._orderService.delete(order.id);
+  }
+
+  editStatus(order: OrderDisplayDto) {
+    this.dialog.open(ChangeStatusDialogComponent);
   }
 
 }

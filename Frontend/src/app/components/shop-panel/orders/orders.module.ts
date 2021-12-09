@@ -9,10 +9,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { SharedModule } from '../../shared/shared.module';
 import { OrderService } from 'src/app/services/shared/orders.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ChangeStatusDialogComponent } from './change-status-dialog/change-status-dialog.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { StatusService } from 'src/app/services/shared/status.service';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
-    OrdersComponent
+    OrdersComponent,
+    ChangeStatusDialogComponent
   ],
   entryComponents: [
 
@@ -26,9 +35,16 @@ import { OrderService } from 'src/app/services/shared/orders.service';
     MatPaginatorModule,
     MatChipsModule,
     SharedModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatRadioModule
   ],
   providers: [
-    OrderService
+    OrderService,
+    StatusService
   ],
   exports: [
     OrdersComponent,
