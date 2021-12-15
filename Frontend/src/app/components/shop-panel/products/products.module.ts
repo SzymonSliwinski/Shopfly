@@ -8,9 +8,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { ProductsComponent } from './products.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
     declarations: [
         ProductsComponent,
@@ -27,6 +30,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         SharedModule,
         MatSelectModule,
         MatCheckboxModule,
+        FormsModule,
+        MatInputModule
     ],
     providers: [
     ],
