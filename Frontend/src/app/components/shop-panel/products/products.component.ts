@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit {
       { title: 'Netto', objectField: 'nettoPrice' },
       { title: 'Brutto', objectField: 'bruttoPrice' },
       { title: 'Visible', objectField: 'isVisible', contentMode: ContentMode.TrueOrFalse },
-      { title: 'Quantity', objectField: 'quantity' },
+      { title: 'Stock', objectField: 'stock' },
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
   public columnsNames: string[] = [];
@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit {
     this.isLoaded = true;
   }
 
-  public onAddClick() {
+  public switchAddMode() {
     this.isAddMode = !this.isAddMode;
   }
 

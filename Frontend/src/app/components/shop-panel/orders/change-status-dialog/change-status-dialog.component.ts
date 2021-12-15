@@ -10,10 +10,15 @@ import { StatusService } from 'src/app/services/shared/status.service';
 export class ChangeStatusDialogComponent implements OnInit {
   newStatus: Status = {} as Status;
   statusesList!: Status[];
+  selectedStatusId: number = 0;
   constructor(private readonly _statusService: StatusService) { }
 
   async ngOnInit(): Promise<void> {
     this.statusesList = await this._statusService.getAll();
+  }
+
+  onSaveClick() {
+    // to do send request to backend with new status
   }
 
   onAddClick() {

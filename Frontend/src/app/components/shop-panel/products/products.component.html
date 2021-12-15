@@ -6,10 +6,12 @@
     <div class="flex m-r flex-align-center flex-buttons">
 
         <div class="flex-column">
-            <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px" (click)="onAddClick()">
-                <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+            <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px" (click)="switchAddMode()">
+                <mat-icon class="i-36 color-blue" *ngIf="!isAddMode">add_circle</mat-icon>
+                <mat-icon class="i-36 color-blue" *ngIf="isAddMode">arrow_back</mat-icon>
             </span>
-            <span class="flex-align-center f-16">Add new product</span>
+            <span class="flex-align-center f-16" *ngIf="!isAddMode">Add new product</span>
+            <span class="flex-align-center f-16" *ngIf="isAddMode">Return to list</span>
         </div>
     </div>
 </div>
@@ -17,10 +19,10 @@
 <div class="h-50">
     <!--spacer-->
 </div>
-<div class="radius white-background w-95 center flex-column flex-space-evenly">
+<div class="radius white-background w-95 center flex-column flex-space-evenly"
+    [ngStyle]="!isAddMode ? {'width':'95%'} : {'width': '40%'}">
     <!-- top filter selects -->
-    <div class="p-25 w-100 flex p-r-10">
-        <!-- filter by category select -->
+    <!-- <div class="p-25 w-100 flex p-r-10">
         <mat-form-field style=" width: 300px;">
             <mat-label>Filter by category</mat-label>
             <mat-select>
@@ -30,7 +32,6 @@
             </mat-select>
         </mat-form-field>
 
-        <!-- mass action select -->
         <mat-form-field class="p-l-10">
             <mat-label>Mass action</mat-label>
             <mat-select>
@@ -39,7 +40,7 @@
                 <mat-option value="invalid">aaa</mat-option>
             </mat-select>
         </mat-form-field>
-    </div>
+    </div> -->
     <!-- filter selects end -->
 
     <!-- products table -->
@@ -49,7 +50,100 @@
             [menuButtons]="menuButtons" [hasSelectableRows]="true">
         </shared-data-table>
         <!-- (deleteEvent)="deleteProduct($event)" -->
-        <div *ngIf="isLoaded && isAddMode">eie</div>
+        <!-- add form -->
+        <div *ngIf="isLoaded && isAddMode" class="flex flex-column">
+            <!-- name -->
+            <div class="list-item">
+                <span class="list-element">Product name:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </span>
+            </div>
+            <!-- category -->
+            <div class="list-item">
+                <span class="list-element">Category:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </span>
+            </div>
 
+            <!-- stock -->
+            <div class="list-item">
+                <span class="list-element">Stock:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </span>
+            </div>
+
+            <!-- netto price -->
+            <div class="list-item">
+                <span class="list-element">Netto price:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </span>
+            </div>
+
+            <!-- brutto price -->
+            <div class="list-item">
+                <span class="list-element">Brutto price:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </span>
+            </div>
+
+            <!-- description -->
+            <div class="list-item">
+                <span class="list-element">Description :</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-form-field>
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+                </span>
+            </div>
+
+            <!-- photo  -->
+            <div class="list-item" style="width: 300px !important">
+                <span class="list-element">Cover photo:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <button mat-flat-button color="primary" class="browse-button" (click)="photo.click()">
+                        Browse
+                    </button>
+                </span>
+            </div>
+
+            <!-- is visible -->
+            <div class="list-item" style="width: 210px !important">
+                <span class="list-element">Is visible:</span>
+                <span class="p-l-10 p-r-10"></span>
+                <span class="list-element second-row-element">
+                    <mat-checkbox></mat-checkbox>
+                </span>
+            </div>
+
+            <span class="flex p-25 center" style="justify-content: center;">
+                <button mat-raised-button color="primary">
+                    Add
+                </button>
+            </span>
+        </div>
     </div>
 </div>
+
+<input type="file" accept="image/*" #photo style="display: none;">
