@@ -4,9 +4,9 @@ namespace Common.Models.ShopModels
 {
     public class ProductVariant : EntityBase
     {
-        public int ColorId { get; set; }
+        public int? ColorId { get; set; }
         public ProductColor Color { get; set; }
-        public int DimensionId { get; set; }
+        public int? DimensionId { get; set; }
         public ProductDimensions Dimension { get; set; }
         public float Price { get; set; }
         public bool IsOnSale { get; set; }

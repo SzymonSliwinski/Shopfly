@@ -13,6 +13,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { ProductsService } from 'src/app/services/shop-panel-services/products.service';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { MatInputModule } from '@angular/material/input';
         MatInputModule
     ],
     providers: [
+        ProductsService
     ],
     exports: [
         ProductsComponent,

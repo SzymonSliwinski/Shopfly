@@ -8,7 +8,7 @@ namespace Common.Models.ShopModels
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string Name { get; set; }
-        public int TaxId { get; set; }
+        public int? TaxId { get; set; }
         public Tax Tax { get; set; }
         public bool IsLowStock { get; set; }
         public int Stock { get; set; }
