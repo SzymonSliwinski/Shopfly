@@ -4,14 +4,16 @@ using Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Common.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211216184151_ChangedTaxForNullable")]
+    partial class ChangedTaxForNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -530,10 +532,10 @@ namespace Common.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ColorId")
+                    b.Property<int>("ColorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DimensionId")
+                    b.Property<int>("DimensionId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsOnSale")
@@ -1009,11 +1011,15 @@ namespace Common.Migrations
                 {
                     b.HasOne("Common.Models.ShopModels.ProductColor", "Color")
                         .WithMany("ProductVariants")
-                        .HasForeignKey("ColorId");
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Common.Models.ShopModels.ProductDimensions", "Dimension")
                         .WithMany("ProductsVariants")
-                        .HasForeignKey("DimensionId");
+                        .HasForeignKey("DimensionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Common.Models.ShopModels.Product", "Product")
                         .WithMany("ProductsVariants")

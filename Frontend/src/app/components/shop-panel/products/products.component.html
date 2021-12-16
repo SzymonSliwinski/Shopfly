@@ -58,7 +58,7 @@
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
                     <mat-form-field>
-                        <input matInput>
+                        <input matInput [(ngModel)]="newProduct.name">
                     </mat-form-field>
                 </span>
             </div>
@@ -79,7 +79,7 @@
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
                     <mat-form-field>
-                        <input matInput>
+                        <input matInput [(ngModel)]="newProduct.stock">
                     </mat-form-field>
                 </span>
             </div>
@@ -90,7 +90,7 @@
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
                     <mat-form-field>
-                        <input matInput>
+                        <input matInput [(ngModel)]="newProduct.nettoPrice">
                     </mat-form-field>
                 </span>
             </div>
@@ -101,7 +101,7 @@
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
                     <mat-form-field>
-                        <input matInput>
+                        <input matInput [(ngModel)]="newProduct.bruttoPrice">
                     </mat-form-field>
                 </span>
             </div>
@@ -112,7 +112,7 @@
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
                     <mat-form-field>
-                        <textarea matInput></textarea>
+                        <textarea matInput [(ngModel)]="newProduct.description"></textarea>
                     </mat-form-field>
                 </span>
             </div>
@@ -133,12 +133,12 @@
                 <span class="list-element">Is visible:</span>
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="newProduct.isVisible"></mat-checkbox>
                 </span>
             </div>
 
             <span class="flex p-25 center" style="justify-content: center;">
-                <button mat-raised-button color="primary">
+                <button mat-raised-button color="primary" (click)="onAddClick()">
                     Add
                 </button>
             </span>
