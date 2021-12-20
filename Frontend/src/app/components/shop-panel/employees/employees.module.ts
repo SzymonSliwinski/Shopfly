@@ -15,7 +15,9 @@ import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddEmployeeDialog } from './add-employee-dialog/add-employee.dialog';
-
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
 
 @NgModule({
     declarations: [
@@ -36,9 +38,12 @@ import { AddEmployeeDialog } from './add-employee-dialog/add-employee.dialog';
         SharedModule,
         MatSelectModule,
         MatTabsModule,
-        MatDialogModule
+        MatDialogModule,
+        MatInputModule,
+        FormsModule
     ],
     providers: [
+        EmployeeService
     ],
     exports: [
         EmployeesComponent,

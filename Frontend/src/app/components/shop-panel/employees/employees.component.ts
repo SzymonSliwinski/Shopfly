@@ -9,7 +9,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class EmployeesComponent implements OnInit {
   tab: 'employees' | 'profiles' = 'employees';
-
   constructor(
     public _dialog: MatDialog,
   ) { }

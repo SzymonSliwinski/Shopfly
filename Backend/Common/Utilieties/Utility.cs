@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Common.Utilieties
@@ -17,6 +18,16 @@ namespace Common.Utilieties
             var fileName = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
 
             return (filePath, fileName);
+        }
+
+
+        public static string GetHashedPassword(string plainPassword)
+        {
+            string salt = "YOMENIK";
+            using SHA256 sha256Hash = SHA256.Create();
+            var result = sha256Hash.ComputeHash("");
+
+            return builder.ToString();
         }
 
     }
