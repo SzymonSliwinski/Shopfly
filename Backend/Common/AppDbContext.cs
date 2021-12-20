@@ -116,7 +116,7 @@ namespace Common
                 .HasIndex(e => e.Email)
                 .IsUnique();
             modelBuilder.Entity<Employee>()
-                .Property(e => e.Password).HasMaxLength(50);
+                .Property(e => e.Password).HasMaxLength(256);
         }
 
 
@@ -166,7 +166,7 @@ namespace Common
                 .HasIndex(c => c.Email)
                 .IsUnique();
             modelBuilder.Entity<Customer>()
-                .Property(c => c.Password).HasMaxLength(50);
+                .Property(c => c.Password).HasMaxLength(256);
         }
 
         private void ConfigureOrders(ModelBuilder modelBuilder)

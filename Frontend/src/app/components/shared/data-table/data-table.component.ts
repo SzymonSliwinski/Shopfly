@@ -33,6 +33,7 @@ export class DataTableComponent<T>{
   tableButton = TableButton;
   menuButton = MenuButton;
   public afterMenuClickedElement: any;
+  public clickedMenuElement?: T;
   private selectedElements: T[] = [];
   //events
   @Output() public deleteEvent = new EventEmitter<T>();
@@ -42,6 +43,7 @@ export class DataTableComponent<T>{
   constructor(private readonly _sanitizer: DomSanitizer) { }
 
   public onDeleteClick(element: T): void {
+    console.log(element)
     this.deleteEvent.emit(element);
   }
 
@@ -55,6 +57,10 @@ export class DataTableComponent<T>{
 
   public getStringAsHtml(htmlString: string) {
     return this._sanitizer.bypassSecurityTrustHtml(htmlString);
+  }
+
+  public onMenuClick(element: T) {
+    this.clickedMenuElement = element;
   }
 
   onCheckboxChange(element: any) {

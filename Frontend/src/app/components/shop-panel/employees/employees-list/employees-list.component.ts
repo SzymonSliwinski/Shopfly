@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MenuButton, TableButton } from 'src/app/components/shared/data-table/data-table.component';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Employee } from 'src/app/models/shop-panel-models/employee.model';
+import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
+import { EmployeeDialog } from '../employee-dialog/employee.dialog';
 
 @Component({
   selector: 'app-employees-list',
@@ -10,10 +13,14 @@ import { Employee } from 'src/app/models/shop-panel-models/employee.model';
 })
 export class EmployeesListComponent implements OnInit {
   public employeesList!: Employee[];
-
   public isChoosenElementVisible!: boolean;
   isLoaded = false;
-  constructor() { }
+
+  constructor(
+    private readonly _employeeService: EmployeeService,
+    public _dialog: MatDialog
+  ) { }
+
   public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
   public menuButtons: MenuButton[] = [MenuButton.Delete, MenuButton.Details];
   public displayedColumns: TableColumnDto[] =
@@ -27,25 +34,24 @@ export class EmployeesListComponent implements OnInit {
     ];
   public columnsNames: string[] = [];
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.isLoaded = false;
-    this.employeesList = [{
-      id: 1,
-      name: 'Jan',
-      surname: 'Kalewicz',
-      email: 'Jan@Kalewicz.pl',
-      isActive: true,
-    },
-    {
-      id: 2,
-      name: 'Ździsław',
-      surname: 'Broniewski',
-      email: 'zdzich@bron.pl',
-      isActive: true,
-    }];
+    this.employeesList = await this._employeeService.getAll();
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
     });
     this.isLoaded = true;
+  }
+
+  public async onDeleteClick(employee: Employee) {
+    await this._employeeService.delete(employee.id);
+    this.employeesList = this.employeesList.filter(c => c.id !== employee.id);
+  }
+
+  public async onEditClick(employee: Employee) {
+    this._dialog.open(EmployeeDialog, {
+      data: employee
+    });
+
   }
 }

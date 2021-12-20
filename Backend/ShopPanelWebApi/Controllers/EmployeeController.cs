@@ -4,6 +4,9 @@ using Common;
 using Common.Models.ShopPanelModels;
 using Common.Services;
 using ShopPanelWebApi.Filters;
+using Common.Utilieties;
+using System.Collections.Generic;
+using System;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -23,26 +26,26 @@ namespace ShopPanelWebApi.Controllers
         {
             var service = new CrudService<Employee>(_employeeService);
             var employee = await service.GetById(id);
-
-            return Ok(await service.GetById(employee.Id));
+            employee.Password = null;
+            return Ok(employee);
         }
 
         [HttpGet("get-all")]
-        public async Task<ActionResult<Employee>> GetAll()
+        public async Task<ActionResult<List<Employee>>> GetAll()
         {
             var service = new CrudService<Employee>(_employeeService);
-            return Ok(await service.GetAll());
+            var results = await service.GetAll();
+            foreach (var result in results)
+                result.Password = null;
+            return Ok(results);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var service = new CrudService<Employee>(_employeeService);
-            var employee = await service.GetById(id);
-
-            employee.IsActive = false;
-
-            await service.Update(employee);
+            // var employee = await service.GetById(id);
+            await service.Delete(id);
             return Ok();
         }
 
@@ -56,6 +59,7 @@ namespace ShopPanelWebApi.Controllers
             employee.Email = employee.Email.Trim();
             employee.IsActive = true;
             employee.Password = employee.Password.Trim();
+            employee.Password = Utility.GetHashedPassword(employee.Password);
 
             return Ok(await service.Insert(employee));
         }
@@ -69,7 +73,11 @@ namespace ShopPanelWebApi.Controllers
             oldEmployee.Name = updatedEmployee.Name.Trim();
             oldEmployee.Surname = updatedEmployee.Surname.Trim();
             oldEmployee.Email = updatedEmployee.Email.Trim();
-
+            if (!String.IsNullOrEmpty(updatedEmployee.Password))
+            {
+                oldEmployee.Password = updatedEmployee.Password.Trim();
+                oldEmployee.Password = Utility.GetHashedPassword(oldEmployee.Password);
+            }
             return Ok(await service.Update(oldEmployee));
         }
     }

@@ -44,7 +44,8 @@
                     (click)="onDetailsClick(element)">Details
                 </button>
                 <!-- menu -->
-                <button *ngIf="buttons.indexOf(tableButton.Menu) != -1" mat-icon-button [matMenuTriggerFor]="moreMenu">
+                <button *ngIf="buttons.indexOf(tableButton.Menu) != -1" mat-icon-button [matMenuTriggerFor]="moreMenu"
+                    (click)="onMenuClick(element)">
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <!-- delete -->
@@ -67,7 +68,8 @@
         <mat-icon>visibility</mat-icon>
         View
     </button>
-    <button mat-menu-item *ngIf="menuButtons.indexOf(menuButton.Delete) != -1">
+    <button mat-menu-item *ngIf="menuButtons.indexOf(menuButton.Delete) != -1"
+        (click)="onDeleteClick(clickedMenuElement!)">
         <mat-icon>delete</mat-icon> Delete
     </button>
 </mat-menu>

@@ -5,7 +5,7 @@
 
         <div class="flex m-r flex-align-center flex-buttons">
             <!-- employees -->
-            <div class="flex-column" *ngIf="tab === 'employees'">
+            <div class="flex-column" *ngIf="tab === 'employees'" (click)="onAddEmployeeClick()">
                 <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
                     <mat-icon class="i-36 color-blue">add_circle</mat-icon>
                 </span>
@@ -39,7 +39,6 @@
 </div>
 
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
-    to do filters
 
     <div>
         <div *ngIf="tab === 'employees'">

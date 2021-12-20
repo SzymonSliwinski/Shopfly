@@ -1,0 +1,30 @@
+<div class="container flex flex-column">
+    <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput [(ngModel)]="employee.email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="employee.name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Surname</mat-label>
+        <input matInput [(ngModel)]="employee.surname">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label type="password">Password</mat-label>
+        <input matInput [(ngModel)]="employee.password">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Repeat password</mat-label>
+        <input matInput type="password" [(ngModel)]="repeatedPassword">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onSaveClick()">Save</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>
