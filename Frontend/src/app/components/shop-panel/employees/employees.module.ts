@@ -14,7 +14,7 @@ import { EmployeesListComponent } from './employees-list/employees-list.componen
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddEmployeeDialog } from './add-employee-dialog/add-employee.dialog';
+import { EmployeeDialog } from './employee-dialog/employee.dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
@@ -24,7 +24,7 @@ import { EmployeeService } from 'src/app/services/shop-panel-services/employee.s
         EmployeesComponent,
         EmployeesListComponent,
         ProfilesListComponent,
-        AddEmployeeDialog,
+        EmployeeDialog,
     ],
     imports: [
         CommonModule,

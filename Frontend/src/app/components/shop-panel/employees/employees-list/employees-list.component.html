@@ -1,3 +1,4 @@
 <shared-data-table *ngIf="isLoaded" [dataSource]="employeesList" [displayedColumns]="displayedColumns"
-    [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons" [hasSelectableRows]="true">
+    [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons"
+    (deleteEvent)="onDeleteClick($event)">
 </shared-data-table>

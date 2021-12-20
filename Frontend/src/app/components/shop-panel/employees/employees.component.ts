@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddEmployeeDialog } from './add-employee-dialog/add-employee.dialog';
+import { EmployeeDialog } from './employee-dialog/employee.dialog';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -18,11 +18,10 @@ export class EmployeesComponent implements OnInit {
 
   public onTabChange(tab: 'employees' | 'profiles') {
     this.tab = tab;
-    console.log(this.tab)
   }
 
   public onAddEmployeeClick(): void {
-    const dialogRef = this._dialog.open(AddEmployeeDialog);
+    const dialogRef = this._dialog.open(EmployeeDialog);
 
   }
 

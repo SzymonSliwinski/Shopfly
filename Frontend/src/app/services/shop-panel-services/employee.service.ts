@@ -14,4 +14,8 @@ export class EmployeeService {
     public async getAll(): Promise<Employee[]> {
         return this._http.get<Employee[]>(environment._shopPanelApiUrl + 'employee/get-all').toPromise()
     }
+
+    public async delete(id: number): Promise<void> {
+        return this._http.delete<void>(environment._shopPanelApiUrl + 'employee/' + id).toPromise()
+    }
 }
