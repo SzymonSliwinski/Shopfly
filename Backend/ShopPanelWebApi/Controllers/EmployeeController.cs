@@ -6,6 +6,7 @@ using Common.Services;
 using ShopPanelWebApi.Filters;
 using Common.Utilieties;
 using System.Collections.Generic;
+using System;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -72,7 +73,11 @@ namespace ShopPanelWebApi.Controllers
             oldEmployee.Name = updatedEmployee.Name.Trim();
             oldEmployee.Surname = updatedEmployee.Surname.Trim();
             oldEmployee.Email = updatedEmployee.Email.Trim();
-
+            if (!String.IsNullOrEmpty(updatedEmployee.Password))
+            {
+                oldEmployee.Password = updatedEmployee.Password.Trim();
+                oldEmployee.Password = Utility.GetHashedPassword(oldEmployee.Password);
+            }
             return Ok(await service.Update(oldEmployee));
         }
     }

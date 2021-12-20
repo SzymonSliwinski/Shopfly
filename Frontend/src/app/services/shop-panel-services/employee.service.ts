@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
 export class EmployeeService {
     constructor(private _http: HttpClient) { }
 
-    public async add(product: Employee): Promise<Employee> {
-        return this._http.post<Employee>(environment._shopPanelApiUrl + 'employee', product).toPromise()
+    public async add(employee: Employee): Promise<Employee> {
+        return this._http.post<Employee>(environment._shopPanelApiUrl + 'employee', employee).toPromise()
     }
 
     public async getAll(): Promise<Employee[]> {
@@ -18,4 +18,9 @@ export class EmployeeService {
     public async delete(id: number): Promise<void> {
         return this._http.delete<void>(environment._shopPanelApiUrl + 'employee/' + id).toPromise()
     }
+
+    public async edit(employee: Employee): Promise<Employee> {
+        return this._http.patch<Employee>(environment._shopPanelApiUrl + 'employee', employee).toPromise()
+    }
+
 }

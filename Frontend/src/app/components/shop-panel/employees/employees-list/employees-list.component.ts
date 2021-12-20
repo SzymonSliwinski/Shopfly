@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MenuButton, TableButton } from 'src/app/components/shared/data-table/data-table.component';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Employee } from 'src/app/models/shop-panel-models/employee.model';
 import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
+import { EmployeeDialog } from '../employee-dialog/employee.dialog';
 
 @Component({
   selector: 'app-employees-list',
@@ -11,12 +13,12 @@ import { EmployeeService } from 'src/app/services/shop-panel-services/employee.s
 })
 export class EmployeesListComponent implements OnInit {
   public employeesList!: Employee[];
-
   public isChoosenElementVisible!: boolean;
   isLoaded = false;
 
   constructor(
-    private readonly _employeeService: EmployeeService
+    private readonly _employeeService: EmployeeService,
+    public _dialog: MatDialog
   ) { }
 
   public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
@@ -42,8 +44,14 @@ export class EmployeesListComponent implements OnInit {
   }
 
   public async onDeleteClick(employee: Employee) {
-    console.log("xd")
     await this._employeeService.delete(employee.id);
     this.employeesList = this.employeesList.filter(c => c.id !== employee.id);
+  }
+
+  public async onEditClick(employee: Employee) {
+    this._dialog.open(EmployeeDialog, {
+      data: employee
+    });
+
   }
 }

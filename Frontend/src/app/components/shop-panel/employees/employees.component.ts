@@ -21,8 +21,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   public onAddEmployeeClick(): void {
-    const dialogRef = this._dialog.open(EmployeeDialog);
-
+    this._dialog.open(EmployeeDialog);
   }
 
 
