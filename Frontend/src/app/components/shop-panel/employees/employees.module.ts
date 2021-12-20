@@ -13,12 +13,16 @@ import { EmployeesComponent } from './employees.component';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddEmployeeDialog } from './add-employee-dialog/add-employee.dialog';
+
 
 @NgModule({
     declarations: [
         EmployeesComponent,
         EmployeesListComponent,
         ProfilesListComponent,
+        AddEmployeeDialog,
     ],
     imports: [
         CommonModule,
@@ -31,7 +35,8 @@ import { MatTabsModule } from '@angular/material/tabs';
         MatFormFieldModule,
         SharedModule,
         MatSelectModule,
-        MatTabsModule
+        MatTabsModule,
+        MatDialogModule
     ],
     providers: [
     ],
