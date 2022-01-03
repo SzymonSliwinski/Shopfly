@@ -1,5 +1,6 @@
-<div class="w-50 center">
+<div class="w-90 center">
     <shared-data-table *ngIf="isLoaded" [dataSource]="profilesList" [displayedColumns]="displayedColumns"
-        [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons" [hasSelectableRows]="true">
+        [columnsNames]="columnsNames" [buttons]="tableButtons" (deleteEvent)="onDeleteClick($event)"
+        (editEvent)="onEditClick($event)">
     </shared-data-table>
 </div>

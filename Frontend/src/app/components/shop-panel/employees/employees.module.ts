@@ -15,9 +15,12 @@ import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EmployeeDialog } from './employee-dialog/employee.dialog';
+import { ProfileDialog } from './profile-dialog/profile.dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ProfileService } from 'src/app/services/shop-panel-services/profile.service';
 
 @NgModule({
     declarations: [
@@ -25,6 +28,7 @@ import { EmployeeService } from 'src/app/services/shop-panel-services/employee.s
         EmployeesListComponent,
         ProfilesListComponent,
         EmployeeDialog,
+        ProfileDialog
     ],
     imports: [
         CommonModule,
@@ -40,10 +44,12 @@ import { EmployeeService } from 'src/app/services/shop-panel-services/employee.s
         MatTabsModule,
         MatDialogModule,
         MatInputModule,
-        FormsModule
+        FormsModule,
+        MatCheckboxModule
     ],
     providers: [
-        EmployeeService
+        EmployeeService,
+        ProfileService
     ],
     exports: [
         EmployeesComponent,

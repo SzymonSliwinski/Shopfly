@@ -15,16 +15,16 @@ namespace ShopPanelWebApi.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly AppDbContext _employeeService;
+        private readonly AppDbContext _context;
         public EmployeeController(AppDbContext context)
         {
-            _employeeService = context;
+            _context = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Employee>> GetById(int id)
         {
-            var service = new CrudService<Employee>(_employeeService);
+            var service = new CrudService<Employee>(_context);
             var employee = await service.GetById(id);
             employee.Password = null;
             return Ok(employee);
@@ -33,7 +33,7 @@ namespace ShopPanelWebApi.Controllers
         [HttpGet("get-all")]
         public async Task<ActionResult<List<Employee>>> GetAll()
         {
-            var service = new CrudService<Employee>(_employeeService);
+            var service = new CrudService<Employee>(_context);
             var results = await service.GetAll();
             foreach (var result in results)
                 result.Password = null;
@@ -43,7 +43,7 @@ namespace ShopPanelWebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var service = new CrudService<Employee>(_employeeService);
+            var service = new CrudService<Employee>(_context);
             // var employee = await service.GetById(id);
             await service.Delete(id);
             return Ok();
@@ -52,7 +52,7 @@ namespace ShopPanelWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Employee>> Add([FromBody] Employee employee)
         {
-            var service = new CrudService<Employee>(_employeeService);
+            var service = new CrudService<Employee>(_context);
 
             employee.Name = employee.Name.Trim();
             employee.Surname = employee.Surname.Trim();
@@ -67,7 +67,7 @@ namespace ShopPanelWebApi.Controllers
         [HttpPatch]
         public async Task<ActionResult<Employee>> Update([FromBody] Employee updatedEmployee)
         {
-            var service = new CrudService<Employee>(_employeeService);
+            var service = new CrudService<Employee>(_context);
             var oldEmployee = await service.GetById(updatedEmployee.Id);
 
             oldEmployee.Name = updatedEmployee.Name.Trim();

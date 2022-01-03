@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmployeeDialog } from './employee-dialog/employee.dialog';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProfileDialog } from './profile-dialog/profile.dialog';
+import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 
 @Component({
   selector: 'app-employees',
@@ -8,6 +10,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
+  @ViewChild(ProfilesListComponent) profileListComponent!: ProfilesListComponent;
+
   tab: 'employees' | 'profiles' = 'employees';
   constructor(
     public _dialog: MatDialog,
@@ -24,5 +28,11 @@ export class EmployeesComponent implements OnInit {
     this._dialog.open(EmployeeDialog);
   }
 
+  public onAddProfileClick(): void {
+    const dialog = this._dialog.open(ProfileDialog);
 
+    dialog.afterClosed().subscribe(res => {
+      this.profileListComponent.refresh();
+    });
+  }
 }
