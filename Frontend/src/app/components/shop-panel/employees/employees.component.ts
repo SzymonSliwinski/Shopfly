@@ -3,6 +3,7 @@ import { EmployeeDialog } from './employee-dialog/employee.dialog';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProfileDialog } from './profile-dialog/profile.dialog';
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
+import { EmployeesListComponent } from './employees-list/employees-list.component';
 
 @Component({
   selector: 'app-employees',
@@ -11,6 +12,7 @@ import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 })
 export class EmployeesComponent implements OnInit {
   @ViewChild(ProfilesListComponent) profileListComponent!: ProfilesListComponent;
+  @ViewChild(EmployeesListComponent) employeeListComponent!: EmployeesListComponent;
 
   tab: 'employees' | 'profiles' = 'employees';
   constructor(
@@ -25,7 +27,11 @@ export class EmployeesComponent implements OnInit {
   }
 
   public onAddEmployeeClick(): void {
-    this._dialog.open(EmployeeDialog);
+    const dialog = this._dialog.open(EmployeeDialog);
+
+    dialog.afterClosed().subscribe(res => {
+      this.employeeListComponent.refresh();
+    });
   }
 
   public onAddProfileClick(): void {

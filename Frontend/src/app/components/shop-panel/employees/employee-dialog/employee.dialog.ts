@@ -22,7 +22,7 @@ export class EmployeeDialog implements OnInit {
   ngOnInit(): void {
     this.employee.isActive = true;
     if (this.editEmployee) {
-      this.employee = this.editEmployee;
+      this.employee = JSON.parse(JSON.stringify(this.editEmployee));
       this.isEditMode = true;
     }
   }
@@ -37,10 +37,12 @@ export class EmployeeDialog implements OnInit {
       this.employee = {} as Employee;
       this.repeatedPassword = '';
       this.employee.isActive = true;
+      this._dialogRef.close(this.employee);
     }
     else {
       await this._employeeService.edit(this.employee);
       this.employee.password = '';
+      this.editEmployee = this.employee;
       this._dialogRef.close();
     }
   }
