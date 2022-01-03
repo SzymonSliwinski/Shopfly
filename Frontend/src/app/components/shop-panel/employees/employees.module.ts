@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProfileService } from 'src/app/services/shop-panel-services/profile.service';
+import { EmployeeProfilesDialog } from './employee-profiles-dialog/employee-profiles.dialog';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { ProfileService } from 'src/app/services/shop-panel-services/profile.ser
         EmployeesListComponent,
         ProfilesListComponent,
         EmployeeDialog,
-        ProfileDialog
+        ProfileDialog,
+        EmployeeProfilesDialog
     ],
     imports: [
         CommonModule,

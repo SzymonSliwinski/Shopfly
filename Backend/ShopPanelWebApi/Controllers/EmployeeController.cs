@@ -7,6 +7,8 @@ using ShopPanelWebApi.Filters;
 using Common.Utilieties;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopPanelWebApi.Controllers
 {

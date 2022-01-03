@@ -22,5 +22,4 @@ export class EmployeeService {
     public async edit(employee: Employee): Promise<Employee> {
         return this._http.patch<Employee>(environment._shopPanelApiUrl + 'employee', employee).toPromise()
     }
-
 }
