@@ -9,9 +9,7 @@ namespace Common
     public class AppDbContext : DbContext
     {
         // panel tables
-        public DbSet<Privilege> Privileges { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<ProfilesPrivileges> ProfilesPrivileges { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeesProfiles> EmployeesProfiles { get; set; }
         // shop tables
@@ -50,7 +48,6 @@ namespace Common
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //configuration
-            ConfigurePrivileges(modelBuilder);
             ConfigureProfiles(modelBuilder);
             ConfigureEmployees(modelBuilder);
             ConfigureCarriers(modelBuilder);
@@ -72,7 +69,6 @@ namespace Common
             ConfigureHomeProductsLists(modelBuilder);
 
             //relations
-            SetPrivilegesProfilesRelation(modelBuilder);
             SetEmployeesProfilesRelation(modelBuilder);
             SetCommentsCustomersRelation(modelBuilder);
             SetCustomerFavouriteProductsRelation(modelBuilder);
@@ -86,15 +82,6 @@ namespace Common
         }
 
         // ShopPanelModels configuration:
-        private void ConfigurePrivileges(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Privilege>()
-                .Property(p => p.Name).HasMaxLength(30);
-            modelBuilder.Entity<Privilege>()
-                .HasIndex(p => p.Name)
-                .IsUnique();
-        }
-
         private void ConfigureProfiles(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Profile>()
@@ -317,23 +304,6 @@ namespace Common
         }
 
         // ShopPanelModels relations:
-        private void SetPrivilegesProfilesRelation(ModelBuilder modelBuilder)
-        {
-            // relacja many to many:
-            modelBuilder.Entity<ProfilesPrivileges>()
-                 .HasKey(pp => new { pp.PrivilegeId, pp.ProfileId });
-            modelBuilder.Entity<ProfilesPrivileges>()
-                .HasOne(pp => pp.Profile)
-                .WithMany(p => p.ProfilesPrivileges)
-                .HasForeignKey(pp => pp.ProfileId)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<ProfilesPrivileges>()
-                .HasOne(pp => pp.Privilege)
-                .WithMany(p => p.ProfilesPrivileges)
-                .HasForeignKey(pp => pp.PrivilegeId)
-                .OnDelete(DeleteBehavior.Restrict);
-        }
-
         private void SetEmployeesProfilesRelation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EmployeesProfiles>()

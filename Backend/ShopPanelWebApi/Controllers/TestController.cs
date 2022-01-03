@@ -18,14 +18,5 @@ namespace ShopPanelWebApi.Controllers
         {
             _context = context;
         }
-
-        [HttpPost]
-        public async Task<ActionResult<string>> TestAuthentication([FromBody] ProfilesPrivileges prod)
-        {
-            var service = new ManyToManyCrudService<ProfilesPrivileges>(_context);
-            //var a = await service.Insert(prod);
-            await service.Delete(prod.ProfileId, prod.PrivilegeId);
-            return Ok("Hello world");
-        }
     }
 }
