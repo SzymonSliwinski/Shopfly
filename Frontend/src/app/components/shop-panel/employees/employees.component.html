@@ -12,7 +12,7 @@
                 <span class="flex-align-center f-16">Add employee</span>
             </div>
             <!-- profiles -->
-            <div class="flex-column" *ngIf="tab === 'profiles'">
+            <div class="flex-column" *ngIf="tab === 'profiles'" (click)="onAddProfileClick()">
                 <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
                     <mat-icon class="i-36 color-blue">add_circle</mat-icon>
                 </span>

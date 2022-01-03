@@ -43,7 +43,6 @@ export class DataTableComponent<T>{
   constructor(private readonly _sanitizer: DomSanitizer) { }
 
   public onDeleteClick(element: T): void {
-    console.log(element)
     this.deleteEvent.emit(element);
   }
 
@@ -70,7 +69,5 @@ export class DataTableComponent<T>{
     } else {
       this.selectedElements.push(element);
     }
-    console.log(this.selectedElements)
   }
-
 }

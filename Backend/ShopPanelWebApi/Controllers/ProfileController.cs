@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopPanelModels;
 using Common.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -11,16 +13,16 @@ namespace ShopPanelWebApi.Controllers
     [ApiController]
     public class ProfileController : ControllerBase
     {
-        private readonly AppDbContext _profileService;
+        private readonly AppDbContext _context;
         public ProfileController(AppDbContext context)
         {
-            _profileService = context;
+            _context = context;
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Profile>> GetById(int id)
         {
-            var service = new CrudService<Profile>(_profileService);
+            var service = new CrudService<Profile>(_context);
             var profile = await service.GetById(id);
 
             return Ok(await service.GetById(profile.Id));
@@ -29,25 +31,32 @@ namespace ShopPanelWebApi.Controllers
         [HttpGet("get-all")]
         public async Task<ActionResult<Profile>> GetAll()
         {
-            var service = new CrudService<Profile>(_profileService);
+            var service = new CrudService<Profile>(_context);
             return Ok(await service.GetAll());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Profile>> Delete(int id)
         {
-            var service = new CrudService<Profile>(_profileService);
-            var profile = await service.GetById(id);
+            var service = new CrudService<Profile>(_context);
 
-            await service.Update(profile);
+            var employeeProfiles = await _context.EmployeesProfiles
+                .AsQueryable()
+                .Where(ep => ep.ProfileId == id)
+                .ToListAsync();
+
+            foreach (var employeeProfile in employeeProfiles)
+                _context.EmployeesProfiles.Remove(employeeProfile);
+
+            await service.Delete(id);
+            _context.SaveChanges();
             return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Profile>> Add([FromBody] Profile profile)
         {
-            var service = new CrudService<Profile>(_profileService);
-
+            var service = new CrudService<Profile>(_context);
             profile.Name = profile.Name.Trim();
 
             return Ok(await service.Insert(profile));
@@ -56,10 +65,18 @@ namespace ShopPanelWebApi.Controllers
         [HttpPatch]
         public async Task<ActionResult<Profile>> Update([FromBody] Profile updatedProfile)
         {
-            var service = new CrudService<Profile>(_profileService);
+            var service = new CrudService<Profile>(_context);
             var oldProfile = await service.GetById(updatedProfile.Id);
 
-            oldProfile.Name = updatedProfile.Name;
+            oldProfile.Name = updatedProfile.Name.Trim();
+            oldProfile.HasAccessToApi = updatedProfile.HasAccessToApi;
+            oldProfile.HasAccessToCharts = updatedProfile.HasAccessToCharts;
+            oldProfile.HasAccessToCustomers = updatedProfile.HasAccessToCustomers;
+            oldProfile.HasAccessToEmployees = updatedProfile.HasAccessToEmployees;
+            oldProfile.HasAccessToImports = updatedProfile.HasAccessToImports;
+            oldProfile.HasAccessToProducts = updatedProfile.HasAccessToProducts;
+            oldProfile.HasAccessToSettings = updatedProfile.HasAccessToSettings;
+            oldProfile.HasAccessToOrders = updatedProfile.HasAccessToOrders;
 
             return Ok(await service.Update(oldProfile));
         }

@@ -1,0 +1,19 @@
+<div class="container flex flex-column">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="profile.name" maxlength="30">
+    </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="profile.hasAccessToOrders" color="primary">Orders</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToProducts" color="primary">Products</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToCustomers" color="primary">Customers</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToCharts" color="primary">Charts</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToSettings" color="primary">Settings</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToApi" color="primary">API</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToEmployees" color="primary">Employees</mat-checkbox>
+    <mat-checkbox [(ngModel)]="profile.hasAccessToImports" color="primary">Imports</mat-checkbox>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onSaveClick()">Save</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>

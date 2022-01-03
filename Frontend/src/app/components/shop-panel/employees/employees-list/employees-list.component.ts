@@ -35,11 +35,15 @@ export class EmployeesListComponent implements OnInit {
   public columnsNames: string[] = [];
 
   async ngOnInit(): Promise<void> {
-    this.isLoaded = false;
-    this.employeesList = await this._employeeService.getAll();
+    this.refresh();
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
     });
+  }
+
+  async refresh() {
+    this.isLoaded = false;
+    this.employeesList = await this._employeeService.getAll();
     this.isLoaded = true;
   }
 
@@ -49,9 +53,12 @@ export class EmployeesListComponent implements OnInit {
   }
 
   public async onEditClick(employee: Employee) {
-    this._dialog.open(EmployeeDialog, {
+    const dialog = this._dialog.open(EmployeeDialog, {
       data: employee
     });
 
+    dialog.afterClosed().subscribe(() => {
+      this.refresh();
+    });
   }
 }
