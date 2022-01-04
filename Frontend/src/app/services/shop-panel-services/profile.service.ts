@@ -23,4 +23,8 @@ export class ProfileService {
         return this._http.patch<Profile>(environment._shopPanelApiUrl + 'profile', employee).toPromise()
     }
 
+    public async getProfilesForEmployee(employeeId: number): Promise<Profile[]> {
+        return this._http.get<Profile[]>(environment._shopPanelApiUrl + `profile/get-profiles-for-employee/${employeeId}`).toPromise()
+    }
+
 }

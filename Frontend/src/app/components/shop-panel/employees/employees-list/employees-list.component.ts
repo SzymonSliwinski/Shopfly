@@ -5,6 +5,7 @@ import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Employee } from 'src/app/models/shop-panel-models/employee.model';
 import { EmployeeService } from 'src/app/services/shop-panel-services/employee.service';
 import { EmployeeDialog } from '../employee-dialog/employee.dialog';
+import { EmployeeProfilesDialog } from '../employee-profiles-dialog/employee-profiles.dialog';
 
 @Component({
   selector: 'app-employees-list',
@@ -60,5 +61,12 @@ export class EmployeesListComponent implements OnInit {
     dialog.afterClosed().subscribe(() => {
       this.refresh();
     });
+  }
+
+  public async onViewClick(employee: Employee) {
+    this._dialog.open(EmployeeProfilesDialog, {
+      data: employee.id,
+      width: "100%"
+    })
   }
 }

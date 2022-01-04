@@ -1,4 +1,4 @@
 <shared-data-table *ngIf="isLoaded" [dataSource]="employeesList" [displayedColumns]="displayedColumns"
     [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons"
-    (deleteEvent)="onDeleteClick($event)" (editEvent)="onEditClick($event)">
+    (deleteEvent)="onDeleteClick($event)" (editEvent)="onEditClick($event)" (detailsEvent)="onViewClick($event)">
 </shared-data-table>

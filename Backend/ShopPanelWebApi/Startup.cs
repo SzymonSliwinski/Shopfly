@@ -25,7 +25,10 @@ namespace ShopPanelWebApi
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddCors(options =>
                options.AddDefaultPolicy(builder =>
-               builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("x-auth-token")
+               builder.WithOrigins("http://localhost:4200")
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .WithExposedHeaders("x-auth-token")
                )
            );
             services.AddDbContext<AppDbContext>(options =>

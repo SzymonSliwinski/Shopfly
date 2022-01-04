@@ -1,8 +1,12 @@
-﻿using Common.Interfaces;
+﻿using Common;
+using Common.Interfaces;
 using Common.Models.Token;
+using Common.Utilieties;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShopPanelWebApi.Services
 {
@@ -14,16 +18,12 @@ namespace ShopPanelWebApi.Services
         {
             _listTokens = new List<Token>();
         }
-
-        public bool Authenticate(string email, string password)//todo password
+        // probably to remove
+        public bool Authenticate(string email, string password)
         {
-            var testEmail = "a@a.pl";
-            var testPass = "123";
-            //to do compare with users in db
-
-            return (
-                (email == testEmail) &&
-                 password == testPass);
+            if (email == null)
+                return false;
+            return (true);
         }
 
         public Token GenerateToken()
@@ -31,7 +31,7 @@ namespace ShopPanelWebApi.Services
             var token = new Token
             {
                 Value = Guid.NewGuid().ToString(),
-                ExpirationDate = DateTime.Now.AddMinutes(20).ToLocalTime()//to do dynamic
+                ExpirationDate = DateTime.Now.AddMinutes(60).ToLocalTime()
             };
 
             _listTokens.Add(token);

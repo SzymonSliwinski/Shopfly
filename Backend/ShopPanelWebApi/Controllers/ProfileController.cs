@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopPanelModels;
@@ -79,6 +80,22 @@ namespace ShopPanelWebApi.Controllers
             oldProfile.HasAccessToOrders = updatedProfile.HasAccessToOrders;
 
             return Ok(await service.Update(oldProfile));
+        }
+
+        [HttpGet("get-profiles-for-employee/{employeeId}")]
+        public async Task<ActionResult<List<Profile>>> GetProfilesForEmployee(int employeeId)
+        {
+            var db = await _context.Profiles
+                .Include(p => p.EmployeesProfiles)
+                .ToListAsync();
+            var results = new List<Profile>();
+            foreach (var result in db)
+            {
+                if (result.EmployeesProfiles.Any(p => p.EmployeeId == employeeId))
+                    results.Add(result);
+            }
+
+            return Ok(results);
         }
     }
 }

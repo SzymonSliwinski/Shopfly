@@ -3,6 +3,7 @@ using Common.Models.Token;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShopWebApi.Services
 {
@@ -15,7 +16,7 @@ namespace ShopWebApi.Services
             _listTokens = new List<Token>();
         }
 
-        public bool Authenticate(string email, string password)//todo password
+        public bool Authenticate(string email, string password)
         {
             var testEmail = "a@a.pl";
             var testPass = "123";

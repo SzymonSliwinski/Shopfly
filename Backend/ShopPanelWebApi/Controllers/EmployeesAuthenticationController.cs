@@ -1,9 +1,12 @@
-﻿using Common.Dtos;
+﻿using Common;
+using Common.Dtos;
 using Common.Interfaces;
-using Common.Models.Token;
-using ShopPanelWebApi.Services;
+using Common.Utilieties;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopPanelWebApi.Filters;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -12,18 +15,31 @@ namespace ShopPanelWebApi.Controllers
     public class EmployeesAuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authService;
-        public EmployeesAuthenticationController(IAuthenticationService authService)
+        private readonly AppDbContext _context;
+
+        public EmployeesAuthenticationController(IAuthenticationService authService, AppDbContext context)
         {
             _authService = authService;
+            _context = context;
         }
 
         [HttpPost]
-        public IActionResult Authenticate([FromBody] AuthenticationDto authDto)
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticationDto authDto)
         {
-            //to do compare with every request is token expired if expired return 401 and redirect to sign in on front end
-            if (_authService.Authenticate(authDto.Email, authDto.Password))
-                return Ok(new { Token = _authService.GenerateToken() });
-            //todo after generating token get user from db
+            var hashedPass = Utility.GetHashedPassword(authDto.Password);
+            var employee = await _context.Employees
+                .AsQueryable()
+                .SingleOrDefaultAsync(e => e.Email == authDto.Email);
+
+            if (employee == null)
+                return Unauthorized();
+
+            if (employee.Password == hashedPass)
+            {
+                var token = new { Token = _authService.GenerateToken() };
+                token.Token.UserId = employee.Id;
+                return Ok(token);
+            }
             else
                 return Unauthorized();
         }

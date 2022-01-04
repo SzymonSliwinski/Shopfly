@@ -64,11 +64,12 @@
     <button mat-icon-button *ngIf="menuButtons.indexOf(menuButton.Edit) != -1">
         <mat-icon>edit</mat-icon>
     </button>
-    <button mat-menu-item *ngIf="menuButtons.indexOf(menuButton.Details) != -1">
+    <button mat-menu-item *ngIf="menuButtons.indexOf(menuButton.Details) != -1"
+        (click)="onDetailsClick(clickedMenuElement!)">
         <mat-icon>visibility</mat-icon>
         View
     </button>
-    <button mat-menu-item *ngIf="menuButtons.indexOf(menuButton.Delete) != -1"
+    <button mat-menu-item *ngIf=" menuButtons.indexOf(menuButton.Delete) !=-1"
         (click)="onDeleteClick(clickedMenuElement!)">
         <mat-icon>delete</mat-icon> Delete
     </button>

@@ -1,0 +1,23 @@
+<div class="w-90 center" *ngIf="isLoaded">
+    <div style="padding: 10px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Profiles</mat-label>
+            <mat-select [(ngModel)]="selectedProfileId">
+                <mat-option *ngFor="let profile of selectProfileList" [value]="profile.id">
+                    {{profile.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" style="margin-left: 10px" (click)="onAddProfileClick()">
+            Add profile
+        </button>
+    </div>
+    <shared-data-table *ngIf="isLoaded" [dataSource]="profilesList" [displayedColumns]="displayedColumns"
+        [columnsNames]="columnsNames" [buttons]="tableButtons" (deleteEvent)="onDeleteClick($event)">
+    </shared-data-table>
+</div>
+
+<div mat-dialog-actions class="flex">
+    <button mat-button (click)="onCloseClick()" style="margin-left: auto;">Close</button>
+</div>
