@@ -2,7 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TableButton } from 'src/app/components/shared/data-table/data-table.component';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
+import { EmployeesProfiles } from 'src/app/models/shop-panel-models/employees-profiles';
 import { Profile } from 'src/app/models/shop-panel-models/profile.model';
+import { EmployeesProfilesService } from 'src/app/services/shop-panel-services/employees-profiles.service';
 import { ProfileService } from 'src/app/services/shop-panel-services/profile.service';
 
 @Component({
@@ -12,14 +14,18 @@ import { ProfileService } from 'src/app/services/shop-panel-services/profile.ser
 })
 export class EmployeeProfilesDialog implements OnInit {
   profilesList: Profile[] = [];
+  allProfilesList: Profile[] = [];
+  selectProfileList: Profile[] = [];
+  selectedProfileId?: number;
   isLoaded = false;
   constructor(
     private readonly _dialogRef: MatDialogRef<EmployeeProfilesDialog>,
     private readonly _profileService: ProfileService,
+    private readonly _employeesProfilesService: EmployeesProfilesService,
     @Inject(MAT_DIALOG_DATA) public employeeId: number,
   ) { }
 
-  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Delete];
+  public tableButtons: TableButton[] = [TableButton.Delete];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },
@@ -46,7 +52,44 @@ export class EmployeeProfilesDialog implements OnInit {
   async refresh(): Promise<void> {
     this.isLoaded = false;
     this.profilesList = await this._profileService.getProfilesForEmployee(this.employeeId);
+    this.allProfilesList = await this._profileService.getAll();
+    this.selectedProfileId = undefined;
+    this.selectProfileList = [];
+    this.allProfilesList.forEach((c: Profile) => {
+      let itemFound = this.profilesList.find(p => p.id === c.id);
+      if (!itemFound) {
+        this.selectProfileList.push(c);
+      }
+    });
     this.isLoaded = true;
   }
 
+  public onCloseClick(): void {
+    this._dialogRef.close();
+  }
+
+  public async onAddProfileClick(): Promise<void> {
+    if (!this.selectedProfileId || !this.employeeId)
+      return;
+
+    let employeeProfile =
+      {
+        employeeId: this.employeeId,
+        profileId: this.selectedProfileId,
+      } as EmployeesProfiles
+
+    await this._employeesProfilesService.add(employeeProfile);
+    this.refresh();
+  }
+
+  public async onDeleteClick(profile: Profile): Promise<void> {
+    let employeeProfile =
+      {
+        employeeId: this.employeeId,
+        profileId: profile.id,
+      } as EmployeesProfiles;
+
+    await this._employeesProfilesService.delete(employeeProfile)
+    this.refresh();
+  }
 }

@@ -9,8 +9,8 @@ using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("shop-panel/employees-profiles")]
+    //[TokenAuthenticationFilter]
     [ApiController]
     public class EmployeesProfilesController : ControllerBase
     {
@@ -26,13 +26,13 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _employeesProfilesService.FindOne(employeeId, profileId));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<EmployeesProfiles>> Delete(int employeeId, int profileId)
+        [HttpPost("delete")]
+        public async Task<ActionResult<EmployeesProfiles>> Delete([FromBody] EmployeesProfiles ep)
         {
-            return Ok(await _employeesProfilesService.Delete(employeeId, profileId));
+            return Ok(await _employeesProfilesService.Delete(ep.EmployeeId, ep.ProfileId));
         }
 
-        [HttpPost]
+        [HttpPost("add-single")]
         public async Task<ActionResult<EmployeesProfiles>> Add([FromBody] EmployeesProfiles employeesProfiles)
         {
             return Ok(await _employeesProfilesService.Add(employeesProfiles));

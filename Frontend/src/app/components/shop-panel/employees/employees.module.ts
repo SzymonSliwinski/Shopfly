@@ -22,6 +22,7 @@ import { EmployeeService } from 'src/app/services/shop-panel-services/employee.s
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProfileService } from 'src/app/services/shop-panel-services/profile.service';
 import { EmployeeProfilesDialog } from './employee-profiles-dialog/employee-profiles.dialog';
+import { EmployeesProfilesService } from 'src/app/services/shop-panel-services/employees-profiles.service';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { EmployeeProfilesDialog } from './employee-profiles-dialog/employee-prof
     ],
     providers: [
         EmployeeService,
-        ProfileService
+        ProfileService,
+        EmployeesProfilesService
     ],
     exports: [
         EmployeesComponent,

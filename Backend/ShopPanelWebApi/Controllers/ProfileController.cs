@@ -82,14 +82,14 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Update(oldProfile));
         }
 
-        [HttpGet("get-profiles-for-employee/{id}")]
+        [HttpGet("get-profiles-for-employee/{employeeId}")]
         public async Task<ActionResult<List<Profile>>> GetProfilesForEmployee(int employeeId)
         {
             var db = await _context.Profiles
                 .Include(p => p.EmployeesProfiles)
                 .ToListAsync();
             var results = new List<Profile>();
-            foreach(var result in db)
+            foreach (var result in db)
             {
                 if (result.EmployeesProfiles.Any(p => p.EmployeeId == employeeId))
                     results.Add(result);
