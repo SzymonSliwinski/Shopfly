@@ -12,5 +12,6 @@ namespace Common.Models.ShopPanelModels
         public bool IsActive { get; set; }
         public string Password { get; set; }
         public List<EmployeesProfiles> EmployeesProfiles { get; set; }
+        public bool IsRoot { get; set; }
     }
 }
