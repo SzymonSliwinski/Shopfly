@@ -2,6 +2,7 @@
 using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
+using Common.Utilieties;
 using Microsoft.EntityFrameworkCore;
 
 namespace Common
@@ -104,6 +105,9 @@ namespace Common
                 .IsUnique();
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Password).HasMaxLength(256);
+            modelBuilder.Entity<Employee>().HasData(new Employee[] {
+                new Employee{Id=1,Name="Admin", Email="admin@shopfly.pl", Password = Utility.GetHashedPassword("admin"), IsActive = true, IsRoot= true}
+            });
         }
 
 

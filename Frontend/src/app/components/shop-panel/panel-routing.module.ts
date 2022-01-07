@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'panel', component: MainComponent, canActivate: [AuthenticationService],
     children: [
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationService] },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'orders', component: OrdersComponent, canActivate: [AuthenticationService] },
       { path: 'products', component: ProductsComponent, canActivate: [AuthenticationService] },
       { path: 'customers', component: CustomersComponent, canActivate: [AuthenticationService] },

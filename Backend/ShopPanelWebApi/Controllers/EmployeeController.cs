@@ -62,6 +62,7 @@ namespace ShopPanelWebApi.Controllers
             employee.IsActive = true;
             employee.Password = employee.Password.Trim();
             employee.Password = Utility.GetHashedPassword(employee.Password);
+            employee.IsRoot = false;
 
             return Ok(await service.Insert(employee));
         }
