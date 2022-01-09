@@ -44,7 +44,6 @@ namespace ShopPanelWebApi.Controllers
                 return Unauthorized();
         }
 
-        [TokenAuthenticationFilter]
         [Route("logout/{token}")]
         [HttpDelete]
         public IActionResult Logout(string token)

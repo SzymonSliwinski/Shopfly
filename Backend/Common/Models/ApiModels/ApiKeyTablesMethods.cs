@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace Common.Models.ApiModels
 {
     public enum TableType
@@ -6,8 +8,6 @@ namespace Common.Models.ApiModels
         employees,
         employeesProfiles,
         profiles,
-        profilesPrivileges,
-        privileges,
         customers,
         statuses,
         orders,
@@ -39,6 +39,7 @@ namespace Common.Models.ApiModels
     }
     public class ApiKeysTablesMethods : EntityBase
     {
+        [JsonIgnore]
         public ApiAccessKey ApiAccessKey { get; set; }
         public int ApiAccessKeyId { get; set; }
         public TableType Table { get; set; }

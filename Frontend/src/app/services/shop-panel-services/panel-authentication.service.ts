@@ -26,7 +26,6 @@ export class PanelAuthenticationService {
 
   public async logout(): Promise<void> {
     const storage = JSON.parse(localStorage.getItem(environment._panelStorageKey)!) as { token: { expirationDate: string; userId: number; value: string } };
-
     await this._http.delete<void>(environment._shopPanelApiUrl +
       'employees-authentication/logout/' +
       storage.token.value, { headers: new HttpHeaders().set('Authorization', storage.token.value) }

@@ -49,7 +49,9 @@ namespace ShopPanelWebApi.Services
 
         public void RemoveToken(string token)
         {
-            _listTokens.Remove(_listTokens.Where(t => t.Value == token).Single());
+            var tokenFound = _listTokens.Where(t => t.Value == token).SingleOrDefault();
+            if (tokenFound != null)
+                _listTokens.Remove(tokenFound);
         }
     }
 }
