@@ -4,8 +4,6 @@ export enum TableType {
     employees,
     employeesProfiles,
     profiles,
-    profilesPrivileges,
-    privileges,
     customers,
     statuses,
     orders,
@@ -34,8 +32,6 @@ export function TableTypesStringList(): string[] {
         'employees',
         'employees profiles',
         'profiles',
-        'profiles privileges',
-        'privileges',
         'customers',
         'statuses',
         'orders',
@@ -65,8 +61,6 @@ export function TableTypeToString(type: TableType): string {
         case TableType.employees: return 'employees';
         case TableType.employeesProfiles: return 'employeesProfiles';
         case TableType.profiles: return 'profiles';
-        case TableType.profilesPrivileges: return 'profilesPrivileges';
-        case TableType.privileges: return 'privileges';
         case TableType.customers: return 'customers';
         case TableType.statuses: return 'statuses';
         case TableType.orders: return 'orders';
@@ -96,8 +90,6 @@ export function TableTypeToEnum(type: string): TableType | void {
         case 'employees': return TableType.employees;
         case 'employeesProfiles': return TableType.employeesProfiles;
         case 'profiles': return TableType.profiles;
-        case 'profilesPrivileges': return TableType.profilesPrivileges;
-        case 'privileges': return TableType.privileges;
         case 'customers': return TableType.customers;
         case 'statuses': return TableType.statuses;
         case 'orders': return TableType.orders;
@@ -158,7 +150,7 @@ export function HttpMethodTypeToEnum(type: string): HttpMethodType | void {
 
 export interface ApiKeysTablesMethods {
     id: number;
-    apiAccessKey: ApiAccessKey;
+    apiAccessKey?: ApiAccessKey;
     apiAccessKeyId: number;
     table: TableType;
     httpMethod: HttpMethodType;

@@ -15,6 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddKeyComponent } from './add-key/add-key.component';
 import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ApiService } from 'src/app/services/shop-panel-services/api.service';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatCheckboxModule
     ],
     providers: [
+        ApiService
     ],
     exports: [
         ApiComponent,

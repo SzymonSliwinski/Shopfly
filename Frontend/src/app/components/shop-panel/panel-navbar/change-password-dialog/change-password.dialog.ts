@@ -30,5 +30,6 @@ export class ChangePasswordDialog {
 
     this._employeeService.changePassword(this.password);
     this.password = this.repeatPassword = '';
+    this.onCloseClick();
   }
 }
