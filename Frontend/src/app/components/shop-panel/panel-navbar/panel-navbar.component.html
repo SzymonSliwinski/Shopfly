@@ -17,9 +17,9 @@
 </div>
 
 <mat-menu #userMenu="matMenu" xPosition="before">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="onChangePasswordClick()">
     <mat-icon>manage_accounts</mat-icon>
-    <span>settings</span>
+    <span>Change password</span>
   </button>
 
   <button mat-menu-item (click)="onLogoutClick()">

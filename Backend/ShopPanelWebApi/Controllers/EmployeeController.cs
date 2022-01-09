@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Common.Dtos;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -18,16 +19,17 @@ namespace ShopPanelWebApi.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private CrudService<Employee> _service;
         public EmployeeController(AppDbContext context)
         {
             _context = context;
+            _service = new CrudService<Employee>(_context);
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Employee>> GetById(int id)
         {
-            var service = new CrudService<Employee>(_context);
-            var employee = await service.GetById(id);
+            var employee = await _service.GetById(id);
             employee.Password = null;
             return Ok(employee);
         }
@@ -35,8 +37,7 @@ namespace ShopPanelWebApi.Controllers
         [HttpGet("get-all")]
         public async Task<ActionResult<List<Employee>>> GetAll()
         {
-            var service = new CrudService<Employee>(_context);
-            var results = await service.GetAll();
+            var results = await _service.GetAll();
             foreach (var result in results)
                 result.Password = null;
             return Ok(results);
@@ -45,16 +46,13 @@ namespace ShopPanelWebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var service = new CrudService<Employee>(_context);
-            // var employee = await service.GetById(id);
-            await service.Delete(id);
+            await _service.Delete(id);
             return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Employee>> Add([FromBody] Employee employee)
         {
-            var service = new CrudService<Employee>(_context);
 
             employee.Name = employee.Name.Trim();
             employee.Surname = employee.Surname.Trim();
@@ -64,14 +62,13 @@ namespace ShopPanelWebApi.Controllers
             employee.Password = Utility.GetHashedPassword(employee.Password);
             employee.IsRoot = false;
 
-            return Ok(await service.Insert(employee));
+            return Ok(await _service.Insert(employee));
         }
 
         [HttpPatch]
         public async Task<ActionResult<Employee>> Update([FromBody] Employee updatedEmployee)
         {
-            var service = new CrudService<Employee>(_context);
-            var oldEmployee = await service.GetById(updatedEmployee.Id);
+            var oldEmployee = await _service.GetById(updatedEmployee.Id);
 
             oldEmployee.Name = updatedEmployee.Name.Trim();
             oldEmployee.Surname = updatedEmployee.Surname.Trim();
@@ -81,7 +78,17 @@ namespace ShopPanelWebApi.Controllers
                 oldEmployee.Password = updatedEmployee.Password.Trim();
                 oldEmployee.Password = Utility.GetHashedPassword(oldEmployee.Password);
             }
-            return Ok(await service.Update(oldEmployee));
+            return Ok(await _service.Update(oldEmployee));
+        }
+
+
+        [HttpPatch("change-password")]
+        public async Task ChangePassword([FromBody] ChangePasswordDto payload)
+        {
+            var employee = await _service.GetById(payload.UserId);
+
+            employee.Password = Utility.GetHashedPassword(payload.NewPassword);
+            await _service.Update(employee);
         }
     }
 }
