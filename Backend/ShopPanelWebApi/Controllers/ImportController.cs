@@ -1,12 +1,12 @@
-﻿using Common.Models.ApiModels;
-using Common.Utilieties;
+﻿using System.Collections.Generic;
+using Common.Models.ApiModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
+using Common.Models.ShopPanelModels;
+using ShopPanelWebApi.Repositories;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -14,6 +14,12 @@ namespace ShopPanelWebApi.Controllers
     [ApiController]
     public class ImportController : ControllerBase
     {
+        private readonly AppDbContext _context;
+        public ImportController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost("table-type/{tableTypes}")]
         public async Task<ActionResult> GetExtension(IFormFile file, TableType tableTypes)
         {
@@ -23,24 +29,34 @@ namespace ShopPanelWebApi.Controllers
 
                 if (fileExtension == "json")
                 {
-                    // wywołanie parsowania?
-                    // sprawdzenie, do jakiej tabeli ma to iść. na podstawie enuma.
-                    // jeśli ktoś wrzuci zły plik, trzeba zrobić walidację pliku, czy ma dobre kolumny.
+                    switch (tableTypes)
+                    {
+                        case TableType.employees:
+                            var employeeList = new FileRepository<Employee>(new List<Employee>());
+                            await employeeList.ParseModel(file, TableType.employees);
+                            //await _context.AddRangeAsync(employeeList);
 
-                    ShopPanelWebApi.Repositories.FileRepository.CheckFile(file, tableTypes, fileExtension);
-                }
-                else if (fileExtension == "csv")
-                {
-                    ShopPanelWebApi.Repositories.FileRepository.CheckFile(file, tableTypes, fileExtension);
+                            //foreach (var employee in employeeList)
+                            //{
+                            //    _context.Employees.Add(employee);
+                            //}
+
+
+                            return Ok();
+                            break;
+                    }
+
+                    return Ok();
+                    //FileRepository<>
+                    //return await FileRepository.ParseModel(file, tableTypes);
                 }
                 else
-                    return new UnsupportedMediaTypeResult();    // zwraca 415
+                    return new UnsupportedMediaTypeResult();
             }
             else
                 return new UnsupportedMediaTypeResult();
-
-            return new UnsupportedMediaTypeResult();
         }
-    }
 
+        //public async List<T> 
+    }
 }
