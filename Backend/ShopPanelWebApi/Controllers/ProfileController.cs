@@ -46,9 +46,7 @@ namespace ShopPanelWebApi.Controllers
                 .Where(ep => ep.ProfileId == id)
                 .ToListAsync();
 
-            foreach (var employeeProfile in employeeProfiles)
-                _context.EmployeesProfiles.Remove(employeeProfile);
-
+            _context.EmployeesProfiles.RemoveRange(employeeProfiles);
             await service.Delete(id);
             _context.SaveChanges();
             return Ok();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiAccessKey } from 'src/app/models/api-models/api-access-key.model';
 import { ApiKeysTablesMethods, HttpMethodType, HttpMethodTypesStringList, HttpMethodTypeToEnum, HttpMethodTypeToString, TableTypesStringList } from 'src/app/models/api-models/api-key-tables-methods.model';
 import { ApiService } from 'src/app/services/shop-panel-services/api.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-key',
@@ -11,7 +12,8 @@ import { ApiService } from 'src/app/services/shop-panel-services/api.service';
 export class AddKeyComponent implements OnInit {
   apiAccessKey: ApiAccessKey = {} as ApiAccessKey;
   constructor(
-    private readonly _apiService: ApiService
+    private readonly _apiService: ApiService,
+    private readonly _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -64,11 +66,16 @@ export class AddKeyComponent implements OnInit {
     } as ApiKeysTablesMethods);
   }
 
-  onSaveClick() {
+  async onSaveClick() {
     if (this.apiAccessKey.apiKeysTablesMethods?.length === 0)
       return;
     if (this.apiAccessKey.key.length === 0) return;
+    if (await this._apiService.doesKeyExist(this.apiAccessKey.key)) return;
 
-    this._apiService.add(this.apiAccessKey);
+    await this._apiService.add(this.apiAccessKey);
+  }
+
+  back() {
+    this._location.back();
   }
 }

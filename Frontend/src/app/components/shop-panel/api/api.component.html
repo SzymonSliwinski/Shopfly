@@ -5,8 +5,7 @@
     </div>
     <div class="flex m-r flex-align-center flex-buttons">
         <div class="flex-column">
-            <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px" (click)="onAddKeyClick()"
-                [routerLink]="['add']">
+            <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px" [routerLink]="['add']">
                 <mat-icon class="i-36 color-blue">add_circle</mat-icon>
             </span>
             <span class="flex-align-center f-16">Add new API key</span>
@@ -17,18 +16,7 @@
 <div class="h-50"></div>
 
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
-    <div>
-        <mat-form-field class="p-l-10">
-            <mat-label>Mass action</mat-label>
-            <mat-select>
-                <mat-option>delete</mat-option>
-                <mat-option value="valid">aaa</mat-option>
-                <mat-option value="invalid">aaa</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-
     <shared-data-table *ngIf="isLoaded" [dataSource]="apiKeys" [displayedColumns]="displayedColumns"
-        [columnsNames]="columnsNames" [buttons]="tableButtons" [hasSelectableRows]="true">
+        [columnsNames]="columnsNames" [buttons]="tableButtons" (deleteEvent)="onDeleteClick($event)">
     </shared-data-table>
 </div>
