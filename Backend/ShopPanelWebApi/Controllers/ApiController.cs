@@ -32,6 +32,19 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _service.Insert(apiAccessKey));
         }
 
+        [HttpPatch]
+        public async Task<ActionResult<ApiAccessKey>> Update([FromBody] ApiAccessKey apiAccessKey)
+        {
+            var employeeTablesMethodForKey =
+                await _context.ApiKeysTablesMethods.Where(c => c.ApiAccessKeyId == apiAccessKey.Id).ToListAsync();
+            _context.ApiKeysTablesMethods.RemoveRange(employeeTablesMethodForKey);
+            foreach (var apiKeyTableMethod in apiAccessKey.ApiKeysTablesMethods)
+                apiKeyTableMethod.ApiAccessKeyId = apiAccessKey.Id;
+            await _context.ApiKeysTablesMethods.AddRangeAsync(apiAccessKey.ApiKeysTablesMethods);
+            await _context.SaveChangesAsync();
+            return Ok(apiAccessKey);
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<ApiAccessKey>>> GetAll()
         {
@@ -45,6 +58,15 @@ namespace ShopPanelWebApi.Controllers
             var result = keyDb == null ? false : true;
 
             return Ok(result);
+        }
+
+        [HttpGet("get-full-by-key/{key}")]
+        public async Task<ActionResult<ApiAccessKey>> GetFullApiKey(string key)
+        {
+            return Ok(await _context.ApiAccessKeys
+                .AsQueryable()
+                .Include(c => c.ApiKeysTablesMethods)
+                .SingleAsync(c => c.Key == key));
         }
 
         [HttpDelete("{id}")]

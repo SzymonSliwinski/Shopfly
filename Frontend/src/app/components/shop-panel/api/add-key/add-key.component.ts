@@ -3,6 +3,8 @@ import { ApiAccessKey } from 'src/app/models/api-models/api-access-key.model';
 import { ApiKeysTablesMethods, HttpMethodType, HttpMethodTypesStringList, HttpMethodTypeToEnum, HttpMethodTypeToString, TableTypesStringList } from 'src/app/models/api-models/api-key-tables-methods.model';
 import { ApiService } from 'src/app/services/shop-panel-services/api.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-key',
@@ -11,12 +13,25 @@ import { Location } from '@angular/common';
 })
 export class AddKeyComponent implements OnInit {
   apiAccessKey: ApiAccessKey = {} as ApiAccessKey;
+  public isEditForm: boolean = false;
+  private editKey?: string;
   constructor(
     private readonly _apiService: ApiService,
-    private readonly _location: Location
+    private readonly _location: Location,
+    private readonly _activatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar
+
   ) { }
 
   ngOnInit(): void {
+    this._activatedRoute.params.subscribe(async param => {
+      if (param['key']) {
+        this.editKey = param['key'].toString();
+        this.isEditForm = true;
+        this.apiAccessKey = await this._apiService.getFullByKey(this.editKey!);
+      }
+    });
+
     this.apiAccessKey.apiKeysTablesMethods = [];
     this.apiAccessKey.createDate = new Date();
   }
@@ -66,13 +81,30 @@ export class AddKeyComponent implements OnInit {
     } as ApiKeysTablesMethods);
   }
 
+  public shouldBeChecked(tableNumber: number, methodNumber: number): boolean {
+    if (!this.isEditForm)
+      return false;
+    let keyFound = this.apiAccessKey.apiKeysTablesMethods!.find(c => c.httpMethod == methodNumber && c.table == tableNumber);
+    if (!keyFound)
+      return false;
+    return true;
+  }
+
   async onSaveClick() {
-    if (this.apiAccessKey.apiKeysTablesMethods?.length === 0)
+    if (this.isEditForm) {
+      await this._apiService.update(this.apiAccessKey);
+      this._snackBar.open("Saved!", "OK", { duration: 5000 });
       return;
+    }
+
+    if (this.apiAccessKey.apiKeysTablesMethods?.length === 0) return;
     if (this.apiAccessKey.key.length === 0) return;
     if (await this._apiService.doesKeyExist(this.apiAccessKey.key)) return;
 
-    await this._apiService.add(this.apiAccessKey);
+    if (!this.isEditForm)
+      await this._apiService.add(this.apiAccessKey);
+    this._snackBar.open("Saved!", "OK", { duration: 5000 });
+
   }
 
   back() {

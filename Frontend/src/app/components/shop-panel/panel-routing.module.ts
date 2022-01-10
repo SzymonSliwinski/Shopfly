@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'shop-settings', component: ShopSettingsComponent, canActivate: [AuthenticationService] },
       { path: 'api', component: ApiComponent, canActivate: [AuthenticationService] },
       { path: 'api/add', component: AddKeyComponent, canActivate: [AuthenticationService] },
+      { path: 'api/edit/:key', component: AddKeyComponent, canActivate: [AuthenticationService] },
       { path: 'import', component: ImportComponent, canActivate: [AuthenticationService] },
       { path: 'employees', component: EmployeesComponent, canActivate: [AuthenticationService] },
       { path: 'charts', component: ChartsComponent, canActivate: [AuthenticationService] }

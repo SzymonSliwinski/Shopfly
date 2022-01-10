@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { ApiAccessKey } from 'src/app/models/api-models/api-access-key.model';
 import { ApiService } from 'src/app/services/shop-panel-services/api.service';
@@ -15,7 +16,10 @@ export class ApiComponent implements OnInit {
   apiKeys!: ApiAccessKey[];
   isLoaded = false;
 
-  constructor(private readonly _apiService: ApiService) { }
+  constructor(
+    private readonly _apiService: ApiService,
+    private readonly _router: Router
+  ) { }
 
   public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Delete];
   public displayedColumns: TableColumnDto[] =
@@ -48,5 +52,9 @@ export class ApiComponent implements OnInit {
   async onDeleteClick(apiAccessKey: ApiAccessKey) {
     await this._apiService.remove(apiAccessKey.id);
     this.apiKeys = this.apiKeys.filter(c => c.id !== apiAccessKey.id);
+  }
+
+  async onEditClick(apiAccessKey: ApiAccessKey) {
+    return this._router.navigate([`panel/api/edit/${apiAccessKey.key}`]);
   }
 }
