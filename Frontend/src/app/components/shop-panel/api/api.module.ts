@@ -16,6 +16,7 @@ import { AddKeyComponent } from './add-key/add-key.component';
 import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApiService } from 'src/app/services/shop-panel-services/api.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { ApiService } from 'src/app/services/shop-panel-services/api.service';
         MatInputModule,
         SharedModule,
         RouterModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSnackBarModule
     ],
     providers: [
         ApiService

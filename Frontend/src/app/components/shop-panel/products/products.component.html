@@ -47,7 +47,7 @@
     <div class="w-100">
         <shared-data-table *ngIf="isLoaded && !isAddMode" [dataSource]="productsList"
             [displayedColumns]="displayedColumns" [columnsNames]="columnsNames" [buttons]="tableButtons"
-            [menuButtons]="menuButtons" [hasSelectableRows]="true">
+            [menuButtons]="menuButtons">
         </shared-data-table>
         <!-- (deleteEvent)="deleteProduct($event)" -->
         <!-- add form -->

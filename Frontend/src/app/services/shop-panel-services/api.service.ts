@@ -11,6 +11,24 @@ export class ApiService {
         return this._http.post<ApiAccessKey>(environment._shopPanelApiUrl + 'api', apiAccessKey).toPromise()
     }
 
+    public async update(apiAccessKey: ApiAccessKey): Promise<void> {
+        return this._http.patch<void>(environment._shopPanelApiUrl + 'api', apiAccessKey).toPromise()
+    }
 
+    public async getAll(): Promise<ApiAccessKey[]> {
+        return this._http.get<ApiAccessKey[]>(environment._shopPanelApiUrl + 'api').toPromise()
+    }
+
+    public async doesKeyExist(key: string): Promise<boolean> {
+        return this._http.get<boolean>(environment._shopPanelApiUrl + `api/does-key-exist/${key}`).toPromise()
+    }
+
+    public async getFullByKey(key: string): Promise<ApiAccessKey> {
+        return this._http.get<ApiAccessKey>(environment._shopPanelApiUrl + `api/get-full-by-key/${key}`).toPromise()
+    }
+
+    public async remove(id: number): Promise<void> {
+        return this._http.delete<void>(environment._shopPanelApiUrl + `api/${id}`).toPromise()
+    }
 
 }
