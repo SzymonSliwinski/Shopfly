@@ -32,23 +32,120 @@ namespace ShopPanelWebApi.Controllers
                     switch (tableTypes)
                     {
                         case TableType.employees:
-                            var employeeList = new FileRepository<Employee>(new List<Employee>());
-                            await employeeList.ParseModel(file, TableType.employees);
-                            //await _context.AddRangeAsync(employeeList);
+                            var employeeRepository = new FileRepository<Employee>(new List<Employee>());
+                            var employeeList = await employeeRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(employeeList);
 
-                            //foreach (var employee in employeeList)
-                            //{
-                            //    _context.Employees.Add(employee);
-                            //}
-
-
+                            await _context.SaveChangesAsync();
                             return Ok();
+                            break;
+
+                        case TableType.employeesProfiles:
+
+                            break;
+
+                        case TableType.profiles:
+
+                            break;
+
+                        case TableType.profilesPrivileges:
+
+                            break;
+
+                        case TableType.privileges:
+
+                            break;
+
+                        case TableType.customers:
+
+                            break;
+
+                        case TableType.statuses:
+
+                            break;
+
+                        case TableType.orders:
+
+                            break;
+
+                        case TableType.ordersProducts:
+
+                            break;
+
+                        case TableType.customrFavouritesProducts:
+
+                            break;
+
+                        case TableType.ratings:
+
+                            break;
+
+                        case TableType.comments:
+
+                            break;
+
+                        case TableType.tags:
+
+                            break;
+
+                        case TableType.productTags:
+
+                            break;
+
+                        case TableType.products:
+
+                            break;
+
+                        case TableType.productsPayments:
+
+                            break;
+
+                        case TableType.paymentTypes:
+
+                            break;
+
+                        case TableType.carriers:
+
+                            break;
+
+                        case TableType.productsCarriers:
+
+                            break;
+
+                        case TableType.taxes:
+
+                            break;
+
+                        case TableType.categories:
+
+                            break;
+
+                        case TableType.productsVariants:
+
+                            break;
+
+                        case TableType.productsVariantsPhotos:
+
+                            break;
+
+                        case TableType.photos:
+
+                            break;
+
+                        case TableType.productColors:
+
+                            break;
+
+                        case TableType.productDiemensions:
+
+                            break;
+
+                        default:
+                            new UnsupportedMediaTypeResult();
                             break;
                     }
 
                     return Ok();
-                    //FileRepository<>
-                    //return await FileRepository.ParseModel(file, tableTypes);
                 }
                 else
                     return new UnsupportedMediaTypeResult();
