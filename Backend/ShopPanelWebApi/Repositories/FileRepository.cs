@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ShopPanelWebApi.Repositories
 {
-    public class FileRepository<T> where T : EntityBase
+    public class FileRepository<T>
     {
         private readonly List<T> listOfObjects;
         public FileRepository(List<T> _list)

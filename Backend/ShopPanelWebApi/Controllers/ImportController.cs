@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
 using ShopPanelWebApi.Repositories;
 
@@ -38,114 +39,194 @@ namespace ShopPanelWebApi.Controllers
 
                             await _context.SaveChangesAsync();
                             return Ok();
-                            break;
 
                         case TableType.employeesProfiles:
+                            var employeesProfilesRepository = new FileRepository<EmployeesProfiles>(new List<EmployeesProfiles>());
+                            var employeesProfilesList = await employeesProfilesRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(employeesProfilesList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.profiles:
+                            var profileRepository = new FileRepository<Profile>(new List<Profile>());
+                            var profileList = await profileRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(profileList);
 
-                            break;
-
-                        case TableType.profilesPrivileges:
-
-                            break;
-
-                        case TableType.privileges:
-
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.customers:
+                            var customerRepository = new FileRepository<Customer>(new List<Customer>());
+                            var customerList = await customerRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(customerList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.statuses:
+                            var statusRepository = new FileRepository<Status>(new List<Status>());
+                            var statusList = await statusRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(statusList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.orders:
+                            var orderRepository = new FileRepository<Order>(new List<Order>());
+                            var orderList = await orderRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(orderList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.ordersProducts:
+                            var ordersProductsRepository = new FileRepository<OrdersProducts>(new List<OrdersProducts>());
+                            var ordersProductsList = await ordersProductsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(ordersProductsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.customrFavouritesProducts:
+                            var customerFavouritesProductsRepository = new FileRepository<CustomerFavouritesProducts>(new List<CustomerFavouritesProducts>());
+                            var customerFavouritesProductsList = await customerFavouritesProductsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(customerFavouritesProductsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.ratings:
+                            var ratingRepository = new FileRepository<Rating>(new List<Rating>());
+                            var ratingList = await ratingRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(ratingList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.comments:
+                            var commentRepository = new FileRepository<Comment>(new List<Comment>());
+                            var commentList = await commentRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(commentList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.tags:
+                            var tagRepository = new FileRepository<Tag>(new List<Tag>());
+                            var tagList = await tagRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(tagList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productTags:
+                            var productsTagsRepository = new FileRepository<ProductsTags>(new List<ProductsTags>());
+                            var productsTagsList = await productsTagsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productsTagsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.products:
+                            var productsRepository = new FileRepository<Product>(new List<Product>());
+                            var productsList = await productsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productsPayments:
+                            var productsPaymentsRepository = new FileRepository<ProductsPayments>(new List<ProductsPayments>());
+                            var productsPaymentsList = await productsPaymentsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productsPaymentsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.paymentTypes:
+                            var paymentTypeRepository = new FileRepository<PaymentType>(new List<PaymentType>());
+                            var paymentTypeList = await paymentTypeRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(paymentTypeList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.carriers:
+                            var carrierRepository = new FileRepository<Carrier>(new List<Carrier>());
+                            var carrierList = await carrierRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(carrierList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productsCarriers:
+                            var productsCarriersRepository = new FileRepository<ProductsCarriers>(new List<ProductsCarriers>());
+                            var productsCarriersList = await productsCarriersRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productsCarriersList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.taxes:
+                            var taxRepository = new FileRepository<Tax>(new List<Tax>());
+                            var taxList = await taxRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(taxList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.categories:
+                            var categoryRepository = new FileRepository<Category>(new List<Category>());
+                            var categoryList = await categoryRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(categoryList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productsVariants:
+                            var productVariantRepository = new FileRepository<ProductVariant>(new List<ProductVariant>());
+                            var productVariantsList = await productVariantRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productVariantsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productsVariantsPhotos:
+                            var productsVariantsPhotosRepository = new FileRepository<ProductsVariantsPhotos>(new List<ProductsVariantsPhotos>());
+                            var productsVariantsPhotosList = await productsVariantsPhotosRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productsVariantsPhotosList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.photos:
+                            var photoRepository = new FileRepository<Photo>(new List<Photo>());
+                            var photoList = await photoRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(photoList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productColors:
+                            var productColorRepository = new FileRepository<ProductColor>(new List<ProductColor>());
+                            var productColorsList = await productColorRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productColorsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         case TableType.productDiemensions:
+                            var productDimensionRepository = new FileRepository<ProductDimensions>(new List<ProductDimensions>());
+                            var productDimensionsList = await productDimensionRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(productDimensionsList);
 
-                            break;
+                            await _context.SaveChangesAsync();
+                            return Ok();
 
                         default:
-                            new UnsupportedMediaTypeResult();
-                            break;
+                            return new UnsupportedMediaTypeResult();
                     }
-
-                    return Ok();
                 }
                 else
                     return new UnsupportedMediaTypeResult();
@@ -153,7 +234,5 @@ namespace ShopPanelWebApi.Controllers
             else
                 return new UnsupportedMediaTypeResult();
         }
-
-        //public async List<T> 
     }
 }
