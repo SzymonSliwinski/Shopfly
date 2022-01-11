@@ -24,9 +24,7 @@ namespace GenerateRandomData
             // wywołanie funkcji generujących dane:
             GenerateEmployee(numberOfPositions, true, savePath, dateFile);
             GenerateEmployeesProfiles(numberOfPositions, true, savePath, dateFile);
-            GeneratePrivilege(numberOfPositions, true, savePath, dateFile);
             GenerateProfile(numberOfPositions, true, savePath, dateFile);
-            GenerateProfilesPrivileges(numberOfPositions, true, savePath, dateFile);
 
             GenerateCarrier(numberOfPositions, true, savePath, dateFile);
             GenerateCategory(numberOfPositions, true, savePath, dateFile);
@@ -65,14 +63,15 @@ namespace GenerateRandomData
                 .RuleFor(e => e.Surname, e => e.Name.LastName())
                 .RuleFor(e => e.Email, e => e.Internet.Email())
                 .RuleFor(e => e.IsActive, e => e.Random.Bool())
-                .RuleFor(e => e.Password, e => e.Internet.Password(12, false));
+                .RuleFor(e => e.Password, e => e.Internet.Password(12, false))
+                .RuleFor(e => e.IsRoot, e => e.Random.Bool());
 
             if (saveToFile)
             {
                 // generowanie danych:
                 List<Employee> myEmployee = employeeData.Generate(numberOfPositions);
                 // zapis do pliku:
-                string fileName = "employee_" + dateFile + ".json";
+                string fileName = "1_employee_" + dateFile + ".json";
 
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
@@ -97,7 +96,7 @@ namespace GenerateRandomData
             {
                 List<EmployeesProfiles> myEmployeesProfiles = employeesProfilesData.Generate(numberOfPositions);
 
-                string fileName = "employeesProfiles_" + dateFile + ".json";
+                string fileName = "3_employeesProfiles_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -110,41 +109,27 @@ namespace GenerateRandomData
             return employeesProfilesData;
         }
 
-        static Faker<Privilege> GeneratePrivilege(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
-        {
-            // ustawienie właściwości:
-            var privilegeData = new Faker<Privilege>("pl")
-                .RuleFor(p => p.Name, p => p.Lorem.Word());
-
-            // zapis do pliku:
-            if (saveToFile)
-            {
-                List<Privilege> myPrivilege = privilegeData.Generate(numberOfPositions);
-
-                string fileName = "privilege_" + dateFile + ".json";
-                using (StreamWriter file = File.CreateText(savePath + fileName))
-                {
-                    var serializer = new Newtonsoft.Json.JsonSerializer();
-                    serializer.Serialize(file, myPrivilege);
-                }
-
-                Console.WriteLine("file " + fileName + " generated");
-            }
-            return privilegeData;
-        }
-
         static Faker<Profile> GenerateProfile(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
             // ustawienie właściwości:
             var profileData = new Faker<Profile>("pl")
-                .RuleFor(p => p.Name, p => p.Lorem.Word());
+                .RuleFor(p => p.Name, p => p.Lorem.Word())
+                .RuleFor(p => p.HasAccessToOrders, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToImports, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToProducts, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToCustomers, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToCharts, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToSettings, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToApi, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToEmployees, p => p.Random.Bool());
+
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<Profile> myProfile = profileData.Generate(numberOfPositions);
 
-                string fileName = "profile_" + dateFile + ".json";
+                string fileName = "2_profile_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -154,30 +139,6 @@ namespace GenerateRandomData
                 Console.WriteLine("file " + fileName + " generated");
             }
             return profileData;
-        }
-
-        static Faker<ProfilesPrivileges> GenerateProfilesPrivileges(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
-        {
-            // ustawienie właściwości:
-            var profilesPrivilegesData = new Faker<ProfilesPrivileges>("pl")
-                .RuleFor(pp => pp.ProfileId, pp => pp.Random.Int(1, numberOfPositions))
-                .RuleFor(pp => pp.PrivilegeId, pp => pp.Random.Int(1, numberOfPositions));
-
-            // zapis do pliku:
-            if (saveToFile)
-            {
-                List<ProfilesPrivileges> myProfilesPrivileges = profilesPrivilegesData.Generate(numberOfPositions);
-
-                string fileName = "profilesPrivileges_" + dateFile + ".json";
-                using (StreamWriter file = File.CreateText(savePath + fileName))
-                {
-                    var serializer = new Newtonsoft.Json.JsonSerializer();
-                    serializer.Serialize(file, myProfilesPrivileges);
-                }
-
-                Console.WriteLine("file " + fileName + " generated");
-            }
-            return profilesPrivilegesData;
         }
 
         // Shop Models -------------------------------
