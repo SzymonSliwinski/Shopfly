@@ -11,5 +11,6 @@ namespace Common.Models.ShopModels
         public List<Category> ChildrensCategories { get; set; }
         public int Position { get; set; }
         public List<Product> Products { get; set; }
+        public bool IsActive { get; set; }
     }
 }

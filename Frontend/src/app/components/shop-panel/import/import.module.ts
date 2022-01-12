@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { ImportService } from 'src/app/services/shop-panel-services/import.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -21,9 +23,11 @@ import { MatButtonModule } from '@angular/material/button';
         MatFormFieldModule,
         FormsModule,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        MatSnackBarModule
     ],
     providers: [
+        ImportService
     ],
     exports: [
         ImportComponent,
