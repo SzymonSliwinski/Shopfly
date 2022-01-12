@@ -60,11 +60,12 @@ namespace GenerateRandomData
         // Shop Panel Models ------------------------
         static Faker<Employee> GenerateEmployee(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             var employeeData = new Faker<Employee>("pl")
                 .StrictMode(false)
                 .RuleFor(e => e.Name, e => e.Name.FirstName().ClampLength(1, 50))
                 .RuleFor(e => e.Surname, e => e.Name.LastName().ClampLength(1, 50))
-                .RuleFor(e => e.Email, e => e.Internet.Email().ClampLength(1, 30))
+                .RuleFor(e => e.Email, e => e.Internet.Email().ClampLength(1, 25) + index++)
                 .RuleFor(e => e.IsActive, e => e.Random.Bool())
                 .RuleFor(e => e.Password, e => e.Internet.Password(12, false))
                 .RuleFor(e => e.IsRoot, e => e.Random.Bool());
@@ -114,9 +115,10 @@ namespace GenerateRandomData
 
         static Faker<Profile> GenerateProfile(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var profileData = new Faker<Profile>("pl")
-                .RuleFor(p => p.Name, p => p.Random.Word().ClampLength(1, 30))
+                .RuleFor(p => p.Name, p => p.Random.Word().ClampLength(1, 25) + index++)
                 .RuleFor(p => p.HasAccessToOrders, p => p.Random.Bool())
                 .RuleFor(p => p.HasAccessToImports, p => p.Random.Bool())
                 .RuleFor(p => p.HasAccessToProducts, p => p.Random.Bool())
@@ -125,7 +127,6 @@ namespace GenerateRandomData
                 .RuleFor(p => p.HasAccessToSettings, p => p.Random.Bool())
                 .RuleFor(p => p.HasAccessToApi, p => p.Random.Bool())
                 .RuleFor(p => p.HasAccessToEmployees, p => p.Random.Bool());
-
 
             // zapis do pliku:
             if (saveToFile)
@@ -147,11 +148,12 @@ namespace GenerateRandomData
         // Shop Models -------------------------------
         static Faker<Carrier> GenerateCarrier(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var carrierData = new Faker<Carrier>("pl")
                 .RuleFor(c => c.Cost, c => float.Parse(c.Commerce.Price()))
-                .RuleFor(c => c.Name, c => c.Random.Word().ClampLength(1, 30))
-                .RuleFor(c => c.Logo, c => c.System.FilePath().ClampLength(1, 50))
+                .RuleFor(c => c.Name, c => c.Random.Word().ClampLength(1, 25) + index)
+                .RuleFor(c => c.Logo, c => c.System.FilePath().ClampLength(1, 45) + index++)
                 .RuleFor(c => c.DeliveryDaysMinimum, c => c.Random.Int(1, 30))
                 .RuleFor(c => c.DeliveryDaysMaximum, c => c.Random.Int(1, 60))
                 .RuleFor(c => c.IsActive, c => c.Random.Bool());
@@ -228,12 +230,13 @@ namespace GenerateRandomData
 
         static Faker<Customer> GenerateCustomer(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var customerData = new Faker<Customer>("pl")
                 .RuleFor(c => c.Name, c => c.Name.FirstName().ClampLength(1, 50))
                 .RuleFor(c => c.Surname, c => c.Name.LastName().ClampLength(1, 50))
-                .RuleFor(c => c.PhoneNumber, c => c.Phone.PhoneNumber("#########").ClampLength(1, 20))
-                .RuleFor(c => c.Email, c => c.Internet.Email().ClampLength(1, 50))
+                .RuleFor(c => c.PhoneNumber, c => c.Phone.PhoneNumber("#########").ClampLength(1, 15) + index)
+                .RuleFor(c => c.Email, c => c.Internet.Email().ClampLength(1, 45) + index++)
                 .RuleFor(c => c.IsNewsletterSubscribed, c => c.Random.Bool())
                 .RuleFor(c => c.CreateDate, c => c.Date.Past(3))
                 .RuleFor(c => c.LastLoginDate, c => c.Date.Recent(365))
@@ -379,10 +382,11 @@ namespace GenerateRandomData
 
         static Faker<Photo> GeneratePhoto(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var photoData = new Faker<Photo>("pl")
                 .RuleFor(p => p.IsCover, p => p.Random.Bool())
-                .RuleFor(p => p.Path, p => p.System.FilePath().ClampLength(1, 50));
+                .RuleFor(p => p.Path, p => p.System.FilePath().ClampLength(1, 45) + index++);
 
             // zapis do pliku:
             if (saveToFile)
@@ -633,9 +637,10 @@ namespace GenerateRandomData
 
         static Faker<Status> GenerateStatus(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var statusData = new Faker<Status>("pl")
-                .RuleFor(s => s.Name, s => s.Random.Word().ClampLength(1, 30));
+                .RuleFor(s => s.Name, s => s.Random.Word().ClampLength(1, 25) + index++);
 
             // zapis do pliku:
             if (saveToFile)
@@ -656,9 +661,10 @@ namespace GenerateRandomData
 
         static Faker<Tag> GenerateTag(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var tagData = new Faker<Tag>("pl")
-                .RuleFor(t => t.Name, t => t.Random.Word().ClampLength(1, 30));
+                .RuleFor(t => t.Name, t => t.Random.Word().ClampLength(1, 25) + index++);
 
             // zapis do pliku:
             if (saveToFile)
@@ -753,10 +759,11 @@ namespace GenerateRandomData
 
         static Faker<ApiAccessKey> GenerateApiAccessKey(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             // ustawienie właściwości:
             var apiAccessKeyData = new Faker<ApiAccessKey>("pl")
                 .RuleFor(aak => aak.CreateDate, aak => aak.Date.Recent(365))
-                .RuleFor(aak => aak.Key, aak => aak.Internet.Password(20));
+                .RuleFor(aak => aak.Key, aak => aak.Internet.Password(45) + index++);
 
             // zapis do pliku:
             if (saveToFile)
