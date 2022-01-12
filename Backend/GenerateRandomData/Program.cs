@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Bogus;
+using Bogus.Extensions;
 using GenerateRandomData.Models.ApiModels;
 using GenerateRandomData.Models.ShopModels;
 using GenerateRandomData.Models.ShopPanelModels;
@@ -24,9 +25,7 @@ namespace GenerateRandomData
             // wywołanie funkcji generujących dane:
             GenerateEmployee(numberOfPositions, true, savePath, dateFile);
             GenerateEmployeesProfiles(numberOfPositions, true, savePath, dateFile);
-            GeneratePrivilege(numberOfPositions, true, savePath, dateFile);
             GenerateProfile(numberOfPositions, true, savePath, dateFile);
-            GenerateProfilesPrivileges(numberOfPositions, true, savePath, dateFile);
 
             GenerateCarrier(numberOfPositions, true, savePath, dateFile);
             GenerateCategory(numberOfPositions, true, savePath, dateFile);
@@ -49,6 +48,8 @@ namespace GenerateRandomData
             GenerateStatus(numberOfPositions, true, savePath, dateFile);
             GenerateTag(numberOfPositions, true, savePath, dateFile);
             GenerateTax(numberOfPositions, true, savePath, dateFile);
+            GenerateHomeList(numberOfPositions, true, savePath, dateFile);
+            GenerateHomeProductsList(numberOfPositions, true, savePath, dateFile);
 
             GenerateApiAccessKey(numberOfPositions, true, savePath, dateFile);
             GenerateApiKeysTablesMethods(numberOfPositions, true, savePath, dateFile);
@@ -61,18 +62,19 @@ namespace GenerateRandomData
         {
             var employeeData = new Faker<Employee>("pl")
                 .StrictMode(false)
-                .RuleFor(e => e.Name, e => e.Name.FirstName())
-                .RuleFor(e => e.Surname, e => e.Name.LastName())
-                .RuleFor(e => e.Email, e => e.Internet.Email())
+                .RuleFor(e => e.Name, e => e.Name.FirstName().ClampLength(1, 50))
+                .RuleFor(e => e.Surname, e => e.Name.LastName().ClampLength(1, 50))
+                .RuleFor(e => e.Email, e => e.Internet.Email().ClampLength(1, 30))
                 .RuleFor(e => e.IsActive, e => e.Random.Bool())
-                .RuleFor(e => e.Password, e => e.Internet.Password(12, false));
+                .RuleFor(e => e.Password, e => e.Internet.Password(12, false))
+                .RuleFor(e => e.IsRoot, e => e.Random.Bool());
 
             if (saveToFile)
             {
                 // generowanie danych:
                 List<Employee> myEmployee = employeeData.Generate(numberOfPositions);
                 // zapis do pliku:
-                string fileName = "employee_" + dateFile + ".json";
+                string fileName = "1_employee_" + dateFile + ".json";
 
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
@@ -97,7 +99,7 @@ namespace GenerateRandomData
             {
                 List<EmployeesProfiles> myEmployeesProfiles = employeesProfilesData.Generate(numberOfPositions);
 
-                string fileName = "employeesProfiles_" + dateFile + ".json";
+                string fileName = "3_employeesProfiles_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -110,41 +112,27 @@ namespace GenerateRandomData
             return employeesProfilesData;
         }
 
-        static Faker<Privilege> GeneratePrivilege(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
-        {
-            // ustawienie właściwości:
-            var privilegeData = new Faker<Privilege>("pl")
-                .RuleFor(p => p.Name, p => p.Lorem.Word());
-
-            // zapis do pliku:
-            if (saveToFile)
-            {
-                List<Privilege> myPrivilege = privilegeData.Generate(numberOfPositions);
-
-                string fileName = "privilege_" + dateFile + ".json";
-                using (StreamWriter file = File.CreateText(savePath + fileName))
-                {
-                    var serializer = new Newtonsoft.Json.JsonSerializer();
-                    serializer.Serialize(file, myPrivilege);
-                }
-
-                Console.WriteLine("file " + fileName + " generated");
-            }
-            return privilegeData;
-        }
-
         static Faker<Profile> GenerateProfile(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
             // ustawienie właściwości:
             var profileData = new Faker<Profile>("pl")
-                .RuleFor(p => p.Name, p => p.Lorem.Word());
+                .RuleFor(p => p.Name, p => p.Random.Word().ClampLength(1, 30))
+                .RuleFor(p => p.HasAccessToOrders, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToImports, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToProducts, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToCustomers, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToCharts, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToSettings, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToApi, p => p.Random.Bool())
+                .RuleFor(p => p.HasAccessToEmployees, p => p.Random.Bool());
+
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<Profile> myProfile = profileData.Generate(numberOfPositions);
 
-                string fileName = "profile_" + dateFile + ".json";
+                string fileName = "2_profile_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -156,48 +144,24 @@ namespace GenerateRandomData
             return profileData;
         }
 
-        static Faker<ProfilesPrivileges> GenerateProfilesPrivileges(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
-        {
-            // ustawienie właściwości:
-            var profilesPrivilegesData = new Faker<ProfilesPrivileges>("pl")
-                .RuleFor(pp => pp.ProfileId, pp => pp.Random.Int(1, numberOfPositions))
-                .RuleFor(pp => pp.PrivilegeId, pp => pp.Random.Int(1, numberOfPositions));
-
-            // zapis do pliku:
-            if (saveToFile)
-            {
-                List<ProfilesPrivileges> myProfilesPrivileges = profilesPrivilegesData.Generate(numberOfPositions);
-
-                string fileName = "profilesPrivileges_" + dateFile + ".json";
-                using (StreamWriter file = File.CreateText(savePath + fileName))
-                {
-                    var serializer = new Newtonsoft.Json.JsonSerializer();
-                    serializer.Serialize(file, myProfilesPrivileges);
-                }
-
-                Console.WriteLine("file " + fileName + " generated");
-            }
-            return profilesPrivilegesData;
-        }
-
         // Shop Models -------------------------------
         static Faker<Carrier> GenerateCarrier(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
             // ustawienie właściwości:
             var carrierData = new Faker<Carrier>("pl")
                 .RuleFor(c => c.Cost, c => float.Parse(c.Commerce.Price()))
-                .RuleFor(c => c.Name, c => c.Lorem.Word())
-                .RuleFor(c => c.Logo, c => c.System.FilePath())
+                .RuleFor(c => c.Name, c => c.Random.Word().ClampLength(1, 30))
+                .RuleFor(c => c.Logo, c => c.System.FilePath().ClampLength(1, 50))
                 .RuleFor(c => c.DeliveryDaysMinimum, c => c.Random.Int(1, 30))
                 .RuleFor(c => c.DeliveryDaysMaximum, c => c.Random.Int(1, 60))
-                .RuleFor(c => c.IsActive, c => c.Random.Bool()); //todo reguła na >= DeliveryDaysMinimum
+                .RuleFor(c => c.IsActive, c => c.Random.Bool());
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<Carrier> myCarrier = carrierData.Generate(numberOfPositions);
 
-                string fileName = "carrier_" + dateFile + ".json";
+                string fileName = "12_carrier_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -213,7 +177,7 @@ namespace GenerateRandomData
         {
             // ustawienie właściwości:
             var categoryData = new Faker<Category>("pl")
-                .RuleFor(c => c.Name, c => c.Lorem.Word())
+                .RuleFor(c => c.Name, c => c.Random.Word().ClampLength(1, 30))
                 .RuleFor(c => c.IsRoot, c => c.Random.Bool())
                 .RuleFor(c => c.ParentCategoryId, c => c.Random.Int(1, numberOfPositions))
                 .RuleFor(c => c.Position, c => c.Random.Int(1, numberOfPositions));
@@ -241,7 +205,7 @@ namespace GenerateRandomData
             var commentData = new Faker<Comment>("pl")
                 .RuleFor(c => c.CustomerId, c => c.Random.Int(1, numberOfPositions))
                 .RuleFor(c => c.ProductId, c => c.Random.Int(1, numberOfPositions))
-                .RuleFor(c => c.Content, c => c.Lorem.Text())
+                .RuleFor(c => c.Content, c => c.Lorem.Text().ClampLength(1, 200))
                 .RuleFor(c => c.CreateDate, c => c.Date.Past(3));
 
 
@@ -266,13 +230,12 @@ namespace GenerateRandomData
         {
             // ustawienie właściwości:
             var customerData = new Faker<Customer>("pl")
-                .RuleFor(c => c.Login, c => c.Internet.UserName())
-                .RuleFor(c => c.Name, c => c.Name.FirstName())
-                .RuleFor(c => c.Surname, c => c.Name.LastName())
-                .RuleFor(c => c.PhoneNumber, c => c.Phone.PhoneNumber("#########"))
-                .RuleFor(c => c.Email, c => c.Internet.Email())
+                .RuleFor(c => c.Name, c => c.Name.FirstName().ClampLength(1, 50))
+                .RuleFor(c => c.Surname, c => c.Name.LastName().ClampLength(1, 50))
+                .RuleFor(c => c.PhoneNumber, c => c.Phone.PhoneNumber("#########").ClampLength(1, 20))
+                .RuleFor(c => c.Email, c => c.Internet.Email().ClampLength(1, 50))
                 .RuleFor(c => c.IsNewsletterSubscribed, c => c.Random.Bool())
-                .RuleFor(c => c.CreateDate, c => c.Date.Past(3)) // tutaj można zmienić format daty
+                .RuleFor(c => c.CreateDate, c => c.Date.Past(3))
                 .RuleFor(c => c.LastLoginDate, c => c.Date.Recent(365))
                 .RuleFor(c => c.Password, c => c.Internet.Password(12))
                 .RuleFor(c => c.IsActive, c => c.Random.Bool());
@@ -282,7 +245,7 @@ namespace GenerateRandomData
             {
                 List<Customer> myComment = customerData.Generate(numberOfPositions);
 
-                string fileName = "customer_" + dateFile + ".json";
+                string fileName = "10_customer_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -328,24 +291,24 @@ namespace GenerateRandomData
                 .RuleFor(o => o.CustomerId, o => o.Random.Int(1, numberOfPositions))
                 .RuleFor(o => o.PriceTotal, o => float.Parse(o.Commerce.Price()))
                 .RuleFor(o => o.Date, o => o.Date.Recent(365))
-                .RuleFor(o => o.AdditionalDescription, o => o.Lorem.Text())
+                .RuleFor(o => o.AdditionalDescription, o => o.Lorem.Text().ClampLength(1, 200))
                 .RuleFor(o => o.IsActive, o => o.Random.Bool())
                 .RuleFor(o => o.CompleteDate, o => o.Date.Recent(365))
 
-                .RuleFor(o => o.DeliveryAddressStreet, o => o.Address.StreetName())
-                .RuleFor(o => o.DeliveryAddressPostal, o => o.Address.ZipCode())
-                .RuleFor(o => o.DeliveryAddressCity, o => o.Address.City())
-                .RuleFor(o => o.DeliveryAddressCountry, o => o.Address.Country())
+                .RuleFor(o => o.DeliveryAddressStreet, o => o.Address.StreetName().ClampLength(1, 30))
+                .RuleFor(o => o.DeliveryAddressPostal, o => o.Address.ZipCode().ClampLength(1, 30))
+                .RuleFor(o => o.DeliveryAddressCity, o => o.Address.City().ClampLength(1, 30))
+                .RuleFor(o => o.DeliveryAddressCountry, o => o.Address.Country().ClampLength(1, 30))
 
-                .RuleFor(o => o.BillingAddressStreet, o => o.Address.StreetName())
-                .RuleFor(o => o.BillingAddressPostal, o => o.Address.ZipCode())
-                .RuleFor(o => o.BillingAddressCity, o => o.Address.City())
-                .RuleFor(o => o.BillingAddressCountry, o => o.Address.Country())
+                .RuleFor(o => o.BillingAddressStreet, o => o.Address.StreetName().ClampLength(1, 30))
+                .RuleFor(o => o.BillingAddressPostal, o => o.Address.ZipCode().ClampLength(1, 30))
+                .RuleFor(o => o.BillingAddressCity, o => o.Address.City().ClampLength(1, 30))
+                .RuleFor(o => o.BillingAddressCountry, o => o.Address.Country().ClampLength(1, 30))
 
-                .RuleFor(o => o.Nip, o => o.Phone.PhoneNumber("###-###-##-##"))
-                .RuleFor(o => o.CompanyName, o => o.Company.CompanyName())
-                .RuleFor(o => o.CustomerPhoneNumber, o => o.Phone.PhoneNumber("#########"))
-                .RuleFor(o => o.CustomerEmail, o => o.Internet.Email());
+                .RuleFor(o => o.Nip, o => o.Phone.PhoneNumber("###-###-##-##").ClampLength(1, 10))
+                .RuleFor(o => o.CompanyName, o => o.Company.CompanyName().ClampLength(1, 10))
+                .RuleFor(o => o.CustomerPhoneNumber, o => o.Phone.PhoneNumber("#########").ClampLength(1, 10))
+                .RuleFor(o => o.CustomerEmail, o => o.Internet.Email().ClampLength(1, 10));
 
             // zapis do pliku:
             if (saveToFile)
@@ -393,8 +356,8 @@ namespace GenerateRandomData
         {
             // ustawienie właściwości:
             var paymentTypeData = new Faker<PaymentType>("pl")
-                .RuleFor(pt => pt.Name, pt => pt.Random.Word())
-                .RuleFor(pt => pt.Icon, pt => pt.System.FilePath())
+                .RuleFor(pt => pt.Name, pt => pt.Random.Word().ClampLength(1, 30))
+                .RuleFor(pt => pt.Icon, pt => pt.System.FilePath().ClampLength(1, 50))
                 .RuleFor(pt => pt.IsActive, pt => pt.Random.Bool());
 
             // zapis do pliku:
@@ -402,7 +365,7 @@ namespace GenerateRandomData
             {
                 List<PaymentType> myPaymentType = paymentTypeData.Generate(numberOfPositions);
 
-                string fileName = "paymentType_" + dateFile + ".json";
+                string fileName = "11_paymentType_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -419,14 +382,14 @@ namespace GenerateRandomData
             // ustawienie właściwości:
             var photoData = new Faker<Photo>("pl")
                 .RuleFor(p => p.IsCover, p => p.Random.Bool())
-                .RuleFor(p => p.Path, p => p.System.FilePath());
+                .RuleFor(p => p.Path, p => p.System.FilePath().ClampLength(1, 50));
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<Photo> myPhoto = photoData.Generate(numberOfPositions);
 
-                string fileName = "photo_" + dateFile + ".json";
+                string fileName = "7_photo_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -443,16 +406,16 @@ namespace GenerateRandomData
             // ustawienie właściwości:
             var productData = new Faker<Product>("pl")
                 .RuleFor(p => p.CategoryId, p => p.Random.Int(1, numberOfPositions))
-                .RuleFor(p => p.Name, p => p.Random.Word())
+                .RuleFor(p => p.Name, p => p.Random.Word().ClampLength(1, 30))
                 .RuleFor(p => p.TaxId, p => p.Random.Int(1, numberOfPositions))
                 .RuleFor(p => p.IsLowStock, p => p.Random.Bool())
                 .RuleFor(p => p.AdditionalShippingCost, p => float.Parse(p.Commerce.Price(5, 40)))
                 .RuleFor(p => p.NettoPrice, p => float.Parse(p.Commerce.Price()))
-                .RuleFor(p => p.BruttoPrice, p => float.Parse(p.Commerce.Price())) //todo brutto > netto
+                .RuleFor(p => p.BruttoPrice, p => float.Parse(p.Commerce.Price()))
                 .RuleFor(p => p.CreateDate, p => p.Date.Recent(365))
                 .RuleFor(p => p.IsActive, p => p.Random.Bool())
                 .RuleFor(p => p.UpdateDate, p => p.Date.Recent(365))
-                .RuleFor(p => p.Description, p => p.Lorem.Text());
+                .RuleFor(p => p.Description, p => p.Lorem.Text().ClampLength(1, 300));
 
             // zapis do pliku:
             if (saveToFile)
@@ -475,14 +438,14 @@ namespace GenerateRandomData
         {
             // ustawienie właściwości:
             var productColorData = new Faker<ProductColor>("pl")
-                .RuleFor(pc => pc.HexValue, pc => pc.Internet.Color());
+                .RuleFor(pc => pc.HexValue, pc => pc.Internet.Color().Remove(0, 1));
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<ProductColor> myProductColor = productColorData.Generate(numberOfPositions);
 
-                string fileName = "productColor_" + dateFile + ".json";
+                string fileName = "8_productColor_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -507,7 +470,7 @@ namespace GenerateRandomData
             {
                 List<ProductDimensions> myProductDimensions = productDimensionsData.Generate(numberOfPositions);
 
-                string fileName = "productDimensions_" + dateFile + ".json";
+                string fileName = "9_productDimensions_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -672,14 +635,14 @@ namespace GenerateRandomData
         {
             // ustawienie właściwości:
             var statusData = new Faker<Status>("pl")
-                .RuleFor(s => s.Name, s => s.Random.Word());
+                .RuleFor(s => s.Name, s => s.Random.Word().ClampLength(1, 30));
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<Status> myStatus = statusData.Generate(numberOfPositions);
 
-                string fileName = "status_" + dateFile + ".json";
+                string fileName = "4_status_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -695,14 +658,14 @@ namespace GenerateRandomData
         {
             // ustawienie właściwości:
             var tagData = new Faker<Tag>("pl")
-                .RuleFor(t => t.Name, t => t.Random.Word());
+                .RuleFor(t => t.Name, t => t.Random.Word().ClampLength(1, 30));
 
             // zapis do pliku:
             if (saveToFile)
             {
                 List<Tag> myTag = tagData.Generate(numberOfPositions);
 
-                string fileName = "tag_" + dateFile + ".json";
+                string fileName = "5_tag_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -719,7 +682,7 @@ namespace GenerateRandomData
             int[] taxes = new[] { 5, 8, 23 };
             // ustawienie właściwości:
             var taxData = new Faker<Tax>("pl")
-                .RuleFor(t => t.Name, t => t.Random.Word())
+                .RuleFor(t => t.Name, t => t.Random.Word().ClampLength(1, 15))
                 .RuleFor(t => t.Interest, t => t.PickRandom(taxes));
 
             // zapis do pliku:
@@ -727,7 +690,7 @@ namespace GenerateRandomData
             {
                 List<Tax> myTax = taxData.Generate(numberOfPositions);
 
-                string fileName = "tax_" + dateFile + ".json";
+                string fileName = "6_tax_" + dateFile + ".json";
                 using (StreamWriter file = File.CreateText(savePath + fileName))
                 {
                     var serializer = new Newtonsoft.Json.JsonSerializer();
@@ -737,6 +700,55 @@ namespace GenerateRandomData
                 Console.WriteLine("file " + fileName + " generated");
             }
             return taxData;
+        }
+
+        static Faker<HomeList> GenerateHomeList(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
+        {
+            // ustawienie właściwości:
+            var homeListData = new Faker<HomeList>("pl")
+                .RuleFor(hl => hl.Title, hl => hl.Random.Word().ClampLength(1, 20))
+                .RuleFor(hl => hl.Url, hl => hl.Internet.Url().ClampLength(1, 50))
+                .RuleFor(hl => hl.IsVisible, hl => hl.Random.Bool());
+
+            // zapis do pliku:
+            if (saveToFile)
+            {
+                List<HomeList> myHomeList = homeListData.Generate(numberOfPositions);
+
+                string fileName = "13_homeList_" + dateFile + ".json";
+                using (StreamWriter file = File.CreateText(savePath + fileName))
+                {
+                    var serializer = new Newtonsoft.Json.JsonSerializer();
+                    serializer.Serialize(file, myHomeList);
+                }
+
+                Console.WriteLine("file " + fileName + " generated");
+            }
+            return homeListData;
+        }
+
+        static Faker<HomeProductsLists> GenerateHomeProductsList(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
+        {
+            // ustawienie właściwości:
+            var homeProductsListData = new Faker<HomeProductsLists>("pl")
+                .RuleFor(hpl => hpl.ListId, hpl => hpl.Random.Int(1, numberOfPositions))
+                .RuleFor(hpl => hpl.ProductId, hpl => hpl.Random.Int(1, numberOfPositions));
+
+            // zapis do pliku:
+            if (saveToFile)
+            {
+                List<HomeProductsLists> myHomeProductsListsList = homeProductsListData.Generate(numberOfPositions);
+
+                string fileName = "homeProductsList_" + dateFile + ".json";
+                using (StreamWriter file = File.CreateText(savePath + fileName))
+                {
+                    var serializer = new Newtonsoft.Json.JsonSerializer();
+                    serializer.Serialize(file, myHomeProductsListsList);
+                }
+
+                Console.WriteLine("file " + fileName + " generated");
+            }
+            return homeProductsListData;
         }
 
         static Faker<ApiAccessKey> GenerateApiAccessKey(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
@@ -812,6 +824,5 @@ namespace GenerateRandomData
             }
             return tokenData;
         }
-
     }
 }
