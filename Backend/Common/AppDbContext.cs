@@ -44,7 +44,7 @@ namespace Common
         //Settings
         public DbSet<ShopSettings> ShopSettings { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> option) : base(option) { }
+        public AppDbContext(DbContextOptions option) : base(option) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

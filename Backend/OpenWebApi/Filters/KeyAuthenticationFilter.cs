@@ -1,11 +1,10 @@
-﻿using Common.Models.ApiModels;
+﻿using Common;
+using Common.Models.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using OpenWebApi.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OpenWebApi.Filters
 {
@@ -34,8 +33,13 @@ namespace OpenWebApi.Filters
                     .First(c => c.Key == "ApiKey")
                     .Value;
 
-                if (!authService.CheckIsKeyHasAccessToTableAndMethod(key, Table, Method).Result)
+                var dbContext = (AppDbContext)context.HttpContext
+                 .RequestServices
+                  .GetService(typeof(AppDbContext));
+
+                if (!authService.CheckIsKeyHasAccessToTableAndMethod(dbContext, key, Table, Method).Result)
                     result = false;
+
             }
 
             if (!result)
