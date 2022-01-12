@@ -12,7 +12,7 @@
         <!-- header -->
         <div class="flex-column m-r flex-align-center">
             <mat-form-field appearance="fill" style="width: 280px;">
-                <mat-select style="width: 250px;">
+                <mat-select style="width: 250px;" [(ngModel)]="selectedTable">
                     <mat-option *ngFor="let table of tables" [value]="table">
                         {{table | titlecase}}
                     </mat-option>
@@ -22,10 +22,12 @@
     </div>
 
     <p class="p-l-10" style="font-weight: 500;">Choose file</p>
-    <div class="">
+    <div class="flex">
         <button mat-flat-button color="primary" (click)="file.click()">
             Browse
         </button>
+
+        <mat-icon class="i-36" *ngIf="isFileLoaded">checked</mat-icon>
     </div>
     <span class="info">Supported formats .json</span>
     <span class="flex">
@@ -36,4 +38,4 @@
     </span>
 </div>
 
-<input type="file" accept="image/*" #file style="display: none;">
+<input type="file" accept="image/*" #file style="display: none;" (change)="onFileUpload($event)">
