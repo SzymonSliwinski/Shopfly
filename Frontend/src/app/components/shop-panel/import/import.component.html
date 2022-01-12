@@ -14,7 +14,7 @@
             <mat-form-field appearance="fill" style="width: 280px;">
                 <mat-select style="width: 250px;">
                     <mat-option *ngFor="let table of tables" [value]="table">
-                        {{table |titlecase}}
+                        {{table | titlecase}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -22,15 +22,15 @@
     </div>
 
     <p class="p-l-10" style="font-weight: 500;">Choose file</p>
-    <div class="flex" style="gap: 5px;">
-        <div class="radius path-holder"></div>
+    <div class="">
         <button mat-flat-button color="primary" (click)="file.click()">
             Browse
         </button>
     </div>
-    <span class="info">Supported formats .json and .csv</span>
+    <span class="info">Supported formats .json</span>
     <span class="flex">
-        <button mat-raised-button color="primary" style="margin-left: auto; margin-right: 10px;">
+        <button mat-raised-button color="primary" style="margin-left: auto; margin-right: 10px;"
+            (click)="onSaveClick()">
             Save
         </button>
     </span>
