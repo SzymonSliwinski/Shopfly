@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductDisplayDto } from 'src/app/dto/product-display.dto';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Product } from 'src/app/models/shop-models/product.model';
 import { ProductsService } from 'src/app/services/shop-panel-services/products.service';
 import { MenuButton, TableButton } from '../../shared/data-table/data-table.component';
+import { AddCategoryDialog } from './categories/add-category/add-category.dialog';
+import { CategoriesComponent } from './categories/categories.component';
 
 @Component({
   selector: 'app-products',
@@ -13,11 +16,15 @@ import { MenuButton, TableButton } from '../../shared/data-table/data-table.comp
 export class ProductsComponent implements OnInit {
   public productsList!: ProductDisplayDto[];
   public isChoosenElementVisible!: boolean;
+  @ViewChild(CategoriesComponent) child!: CategoriesComponent;
+
   isLoaded = false;
   public isAddMode = false;
 
   constructor(
-    private readonly _productsService: ProductsService
+    private readonly _productsService: ProductsService,
+    public _dialog: MatDialog,
+
   ) { }
 
   public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
@@ -57,5 +64,13 @@ export class ProductsComponent implements OnInit {
 
   async onAddClick() {
     await this._productsService.add(this.newProduct);
+  }
+
+  onAddCategoryClick() {
+    const dialog = this._dialog.open(AddCategoryDialog);
+
+    dialog.afterClosed().subscribe(res => {
+      this.child.refresh();
+    });
   }
 }

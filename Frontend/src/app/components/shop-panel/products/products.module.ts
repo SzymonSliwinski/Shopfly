@@ -17,6 +17,7 @@ import { ProductsService } from 'src/app/services/shop-panel-services/products.s
 import { CategoriesComponent } from './categories/categories.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AddCategoryDialog } from './categories/add-category/add-category.dialog';
+import { CategoriesService } from 'src/app/services/shop-panel-services/categories.service';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { AddCategoryDialog } from './categories/add-category/add-category.dialog
         MatTabsModule
     ],
     providers: [
-        ProductsService
+        ProductsService,
+        CategoriesService
     ],
     exports: [
         ProductsComponent,

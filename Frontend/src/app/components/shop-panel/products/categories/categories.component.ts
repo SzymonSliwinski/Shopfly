@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MenuButton, TableButton } from 'src/app/components/shared/data-table/data-table.component';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Category } from 'src/app/models/shop-models/category.model';
+import { CategoriesService } from 'src/app/services/shop-panel-services/categories.service';
 import { AddCategoryDialog } from './add-category/add-category.dialog';
 
 @Component({
@@ -16,17 +17,18 @@ export class CategoriesComponent implements OnInit {
   isLoaded = false;
 
   constructor(
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private readonly _categoriesService: CategoriesService
   ) { }
 
-  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu, TableButton.Delete];
+  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Delete];
   public menuButtons: MenuButton[] = [];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },
       { title: 'Name', objectField: 'name' },
+      { title: 'Position', objectField: 'position' },
       { title: 'Root', objectField: 'isRoot', contentMode: ContentMode.TrueOrFalse },
-      { title: 'Active', objectField: 'isActive', contentMode: ContentMode.TrueOrFalse },
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
   public columnsNames: string[] = [];
@@ -40,25 +42,23 @@ export class CategoriesComponent implements OnInit {
 
   async refresh() {
     this.isLoaded = false;
-    //  this.employeesList = await this._employeeService.getAll();
+    this.categoriesList = await this._categoriesService.getAll();
     this.isLoaded = true;
   }
 
-  public async onDeleteClick(employee: Category) {
-    //await this._employeeService.delete(employee.id);
-    // this.employeesList = this.employeesList.filter(c => c.id !== employee.id);
+  public async onDeleteClick(category: Category) {
+    await this._categoriesService.delete(category.id);
+    this.categoriesList = this.categoriesList.filter(c => c.id !== category.id);
   }
 
-  public async onEditClick(employee: Category) {
+  public async onEditClick(category: Category) {
     const dialog = this._dialog.open(AddCategoryDialog, {
-      data: employee
+      data: category
     });
 
     dialog.afterClosed().subscribe(() => {
       this.refresh();
     });
   }
-
-
 
 }

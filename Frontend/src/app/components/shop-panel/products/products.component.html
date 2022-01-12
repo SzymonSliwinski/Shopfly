@@ -5,8 +5,7 @@
         <div class="flex-column m-r flex-align-center">
         </div>
         <div class="flex m-r flex-align-center flex-buttons">
-
-            <div class="flex-column">
+            <div *ngIf="tab == 'products'" class="flex-column">
                 <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px"
                     (click)="switchAddMode()">
                     <mat-icon class="i-36 color-blue" *ngIf="!isAddMode">add_circle</mat-icon>
@@ -14,6 +13,13 @@
                 </span>
                 <span class="flex-align-center f-16" *ngIf="!isAddMode">Add new product</span>
                 <span class="flex-align-center f-16" *ngIf="isAddMode">Return to list</span>
+            </div>
+
+            <div *ngIf="tab == 'categories'" class="flex-column" (click)="onAddCategoryClick()">
+                <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
+                    <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+                </span>
+                <span class="flex-align-center f-16">Add new categories</span>
             </div>
         </div>
     </div>

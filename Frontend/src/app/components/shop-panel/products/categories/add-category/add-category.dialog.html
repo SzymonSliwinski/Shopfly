@@ -1,1 +1,17 @@
-<p>add-category works!</p>
+<div class="container flex flex-column">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [maxlength]="30" [minlength]="1" [(ngModel)]="category.name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Position</mat-label>
+        <input matInput type="number" [(ngModel)]="category.position">
+    </mat-form-field>
+
+    <mat-checkbox color="primary" [(ngModel)]="category.isRoot">Is root</mat-checkbox>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onSaveClick()">Save</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>
