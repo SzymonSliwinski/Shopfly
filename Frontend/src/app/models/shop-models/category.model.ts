@@ -9,4 +9,5 @@ export interface Category {
     childrensCategories: Category[] | null;
     position: number;
     products?: Product[] | null;
+    isActive?: boolean;
 }

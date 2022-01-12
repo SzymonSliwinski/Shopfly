@@ -38,7 +38,7 @@ namespace ShopPanelWebApi.Controllers
         {
             var service = new CrudService<Category>(_categoryService);
             var category = await service.GetById(id);
-
+            category.IsActive = false;
             await service.Update(category);
             return Ok();
         }
@@ -47,9 +47,7 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Category>> Add([FromBody] Category category)
         {
             var service = new CrudService<Category>(_categoryService);
-
             category.Name = category.Name.Trim();
-
             return Ok(await service.Insert(category));
         }
 

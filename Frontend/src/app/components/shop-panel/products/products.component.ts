@@ -36,34 +36,19 @@ export class ProductsComponent implements OnInit {
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
   public columnsNames: string[] = [];
+  tab: 'products' | 'categories' = 'products';
 
   async ngOnInit(): Promise<void> {
     this.isLoaded = false;
     this.productsList = await this._productsService.getForTable();
-    // [{
-    //   id: 1,
-    //   name: 'produkt1 produkt1 produkt1 123',
-    //   photo: 'https://i.picsum.photos/id/656/200/200.jpg?hmac=MNTvk8A5MPGsxw6vlhoVkWBGsnwW_UjuWcxVp-gQZI8',
-    //   category: 'kategoria 1',
-    //   nettoPrice: 20.32,
-    //   bruttoPrice: 38.00,
-    //   isVisible: true,
-    //   stock: 322
-    // }, {
-    //   id: 2,
-    //   name: 'produkt2',
-    //   photo: 'https://i.picsum.photos/id/656/200/200.jpg?hmac=MNTvk8A5MPGsxw6vlhoVkWBGsnwW_UjuWcxVp-gQZI8',
-    //   category: 'kategoria 1',
-    //   nettoPrice: 22.32,
-    //   bruttoPrice: 33.00,
-    //   isVisible: false,
-    //   stock: 232
-    // }
-    // ];
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
     });
     this.isLoaded = true;
+  }
+
+  public onTabChange(tab: 'products' | 'categories') {
+    this.tab = tab;
   }
 
   public switchAddMode() {

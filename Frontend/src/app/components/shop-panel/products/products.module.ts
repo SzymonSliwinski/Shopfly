@@ -14,10 +14,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { ProductsService } from 'src/app/services/shop-panel-services/products.service';
+import { CategoriesComponent } from './categories/categories.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AddCategoryDialog } from './categories/add-category/add-category.dialog';
 
 @NgModule({
     declarations: [
         ProductsComponent,
+        CategoriesComponent,
+        AddCategoryDialog,
     ],
     imports: [
         CommonModule,
@@ -32,7 +37,8 @@ import { ProductsService } from 'src/app/services/shop-panel-services/products.s
         MatSelectModule,
         MatCheckboxModule,
         FormsModule,
-        MatInputModule
+        MatInputModule,
+        MatTabsModule
     ],
     providers: [
         ProductsService
