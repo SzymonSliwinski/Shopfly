@@ -22,7 +22,7 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpPost("table-type/{tableTypes}")]
-        public async Task<ActionResult> GetExtension(IFormFile file, TableType tableTypes)
+        public async Task<ActionResult> ImportDataFromFile(IFormFile file, TableType tableTypes)
         {
             if (file.Length > 0)
             {
