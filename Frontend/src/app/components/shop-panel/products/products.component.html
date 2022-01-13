@@ -34,6 +34,11 @@
                 <span (click)="onTabChange('categories')" class="custom-label">Categories</span>
             </ng-template>
         </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span (click)="onTabChange('carriers')" class="custom-label">Carriers</span>
+            </ng-template>
+        </mat-tab>
     </mat-tab-group>
 </div>
 
@@ -43,6 +48,10 @@
 
 <div *ngIf="tab == 'categories'">
     <app-categories></app-categories>
+</div>
+
+<div *ngIf="tab == 'carriers'">
+    <app-carriers></app-carriers>
 </div>
 
 <div *ngIf="tab == 'products' && isLoaded" class="radius white-background w-95 center flex-column flex-space-evenly"

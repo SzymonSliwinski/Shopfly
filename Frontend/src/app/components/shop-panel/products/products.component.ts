@@ -43,7 +43,7 @@ export class ProductsComponent implements OnInit {
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
   public columnsNames: string[] = [];
-  tab: 'products' | 'categories' = 'products';
+  tab: 'products' | 'categories' | 'carriers' = 'products';
 
   async ngOnInit(): Promise<void> {
     this.isLoaded = false;
@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit {
     this.isLoaded = true;
   }
 
-  public onTabChange(tab: 'products' | 'categories') {
+  public onTabChange(tab: 'products' | 'categories' | 'carriers') {
     this.tab = tab;
   }
 
