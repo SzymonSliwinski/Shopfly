@@ -21,6 +21,20 @@
                 </span>
                 <span class="flex-align-center f-16">Add new categories</span>
             </div>
+
+            <div *ngIf="tab == 'carriers'" class="flex-column" (click)="onAddCarriersClick()">
+                <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
+                    <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+                </span>
+                <span class="flex-align-center f-16">Add new carrier</span>
+            </div>
+
+            <div *ngIf="tab == 'lists'" class="flex-column" (click)="onAddListClick()">
+                <span class="flex-align-center pointer hover-opacity" style="margin-right: 10px">
+                    <mat-icon class="i-36 color-blue">add_circle</mat-icon>
+                </span>
+                <span class="flex-align-center f-16">Add new list</span>
+            </div>
         </div>
     </div>
     <mat-tab-group mat-align-tabs="start">
@@ -39,6 +53,11 @@
                 <span (click)="onTabChange('carriers')" class="custom-label">Carriers</span>
             </ng-template>
         </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span (click)="onTabChange('lists')" class="custom-label">Shop home lists</span>
+            </ng-template>
+        </mat-tab>
     </mat-tab-group>
 </div>
 
@@ -52,6 +71,10 @@
 
 <div *ngIf="tab == 'carriers'">
     <app-carriers></app-carriers>
+</div>
+
+<div *ngIf="tab == 'lists'">
+    <app-lists></app-lists>
 </div>
 
 <div *ngIf="tab == 'products' && isLoaded" class="radius white-background w-95 center flex-column flex-space-evenly"
@@ -80,7 +103,11 @@
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
                     <mat-form-field>
-                        <input matInput>
+                        <mat-select [(ngModel)]="newProduct.categoryId">
+                            <mat-option *ngFor="let category of categoriesList" [value]="category.id">
+                                {{category.name}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </span>
             </div>

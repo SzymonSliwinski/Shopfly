@@ -1,1 +1,4 @@
-<p>lists works!</p>
+<shared-data-table *ngIf="isLoaded" [dataSource]="categoriesList" [displayedColumns]="displayedColumns"
+    [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons"
+    (deleteEvent)="onDeleteClick($event)" (editEvent)="onEditClick($event)">
+</shared-data-table>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using ShopPanelWebApi.Dtos;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -33,8 +34,10 @@ namespace ShopPanelWebApi.Controllers
         [HttpGet("get-all")]
         public async Task<ActionResult<Product>> GetAll()
         {
-            var service = new CrudService<Product>(_context);
-            return Ok(await service.GetAll());
+            return Ok(await _context.Products
+                .AsQueryable()
+                .Where(c => c.IsActive)
+                .ToListAsync());
         }
 
         [HttpGet("get-all-as-dtos")]
@@ -72,9 +75,12 @@ namespace ShopPanelWebApi.Controllers
             product.IsActive = true;
             product.CreateDate = DateTime.Now.ToLocalTime();
             product.UpdateDate = DateTime.Now.ToLocalTime();
-            product.CategoryId = 1;
             product.ProductsVariants = new List<ProductVariant>();
-            product.ProductsVariants.Add(new ProductVariant());
+            product.ProductsVariants.Add(new ProductVariant()
+            {
+                Price = product.NettoPrice,
+                Quantity = product.Stock,
+            });
             // to do with photo
             return Ok(await service.Insert(product));
         }

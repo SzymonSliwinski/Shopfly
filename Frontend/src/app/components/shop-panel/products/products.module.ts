@@ -22,6 +22,8 @@ import { ListsComponent } from './lists/lists.component';
 import { CarriersComponent } from './carriers/carriers.component';
 import { AddCarrierDialog } from './carriers/add-carrier/add-carrier.dialog';
 import { CarriersService } from 'src/app/services/shop-panel-services/carriers.service';
+import { AddListsDialog } from './lists/add-lists/add-lists.dialog';
+import { ListsService } from 'src/app/services/shop-panel-services/lists.service';
 
 @NgModule({
     declarations: [
@@ -31,6 +33,7 @@ import { CarriersService } from 'src/app/services/shop-panel-services/carriers.s
         ListsComponent,
         CarriersComponent,
         AddCarrierDialog,
+        AddListsDialog,
     ],
     imports: [
         CommonModule,
@@ -51,7 +54,8 @@ import { CarriersService } from 'src/app/services/shop-panel-services/carriers.s
     providers: [
         ProductsService,
         CategoriesService,
-        CarriersService
+        CarriersService,
+        ListsService
     ],
     exports: [
         ProductsComponent,

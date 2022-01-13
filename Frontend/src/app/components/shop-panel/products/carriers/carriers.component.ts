@@ -29,7 +29,7 @@ export class CarriersComponent implements OnInit {
       { title: 'Name', objectField: 'name' },
       { title: 'Cost', objectField: 'cost' },
       { title: 'Delivery days min', objectField: 'deliveryDaysMinimum' },
-      { title: 'Delivery days min', objectField: 'codeliveryDaysMaximum' },
+      { title: 'Delivery days max', objectField: 'deliveryDaysMaximum' },
       { title: 'isActive', objectField: 'isActive', contentMode: ContentMode.TrueOrFalse },
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
