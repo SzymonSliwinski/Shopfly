@@ -21,7 +21,7 @@ namespace ShopPanelWebApi.Controllers
             _context = context;
         }
 
-        [HttpPost("table-type/{tableTypes}")]
+        [HttpPost("{tableTypes}")]
         public async Task<ActionResult> ImportDataFromFile(IFormFile file, TableType tableTypes)
         {
             if (file.Length > 0)

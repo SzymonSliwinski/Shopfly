@@ -9,24 +9,20 @@ namespace OpenWebApi.Services
 {
     public class KeyAuthenticationService : IKeyAuthenticationService
     {
-        private AppDbContext _context;
+        public KeyAuthenticationService()
+        { }
 
-        public KeyAuthenticationService(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<bool> CheckIsKeyHasAccessToTableAndMethod(string key, TableType table, HttpMethodType method)
+        public async Task<bool> CheckIsKeyHasAccessToTableAndMethod(AppDbContext context, string key, TableType table, HttpMethodType method)
         {
             var dbFromKey =
-            await _context.ApiAccessKeys
+            await context.ApiAccessKeys
                 .Where(a => a.Key == key)
                 .SingleOrDefaultAsync();
 
             if (dbFromKey == null)
                 return false;
 
-            var existingKeyForMethodInTable = _context.ApiKeysTablesMethods
+            var existingKeyForMethodInTable = context.ApiKeysTablesMethods
                 .Where(a => a.ApiAccessKeyId == dbFromKey.Id)
                 .Where(a => a.HttpMethod == method)
                 .Where(a => a.Table == table)
@@ -36,6 +32,7 @@ namespace OpenWebApi.Services
                 return true;
 
             return false;
+
         }
     }
 }
