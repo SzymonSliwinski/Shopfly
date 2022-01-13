@@ -28,7 +28,9 @@ namespace Common.Models.ApiModels
         productsVariantsPhotos,
         photos,
         productColors,
-        productDiemensions
+        productDiemensions,
+        homeLists,
+        homeProductsLists
     }
     public enum HttpMethodType
     {

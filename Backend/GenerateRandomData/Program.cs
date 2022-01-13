@@ -91,8 +91,9 @@ namespace GenerateRandomData
 
         static Faker<EmployeesProfiles> GenerateEmployeesProfiles(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var index = 1;
             var employeesProfilesData = new Faker<EmployeesProfiles>("pl")
-                .RuleFor(ep => ep.EmployeeId, ep => ep.Random.Int(1, numberOfPositions))
+                .RuleFor(ep => ep.EmployeeId, ep => ep.Random.Int(index, index++))
                 .RuleFor(ep => ep.ProfileId, ep => ep.Random.Int(1, numberOfPositions));
 
 
@@ -177,11 +178,12 @@ namespace GenerateRandomData
 
         static Faker<Category> GenerateCategory(int numberOfPositions, bool saveToFile, string savePath, string dateFile)
         {
+            var count = 1;
             // ustawienie właściwości:
             var categoryData = new Faker<Category>("pl")
                 .RuleFor(c => c.Name, c => c.Random.Word().ClampLength(1, 30))
                 .RuleFor(c => c.IsRoot, c => c.Random.Bool())
-                .RuleFor(c => c.ParentCategoryId, c => c.Random.Int(1, numberOfPositions))
+                .RuleFor(c => c.ParentCategoryId, c => c.Random?.Int(1, count++))
                 .RuleFor(c => c.Position, c => c.Random.Int(1, numberOfPositions));
 
             // zapis do pliku:

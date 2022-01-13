@@ -224,6 +224,22 @@ namespace ShopPanelWebApi.Controllers
                             await _context.SaveChangesAsync();
                             return Ok();
 
+                        case TableType.homeLists:
+                            var homeListRepository = new FileRepository<HomeList>(new List<HomeList>());
+                            var homeListsList = await homeListRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(homeListsList);
+
+                            await _context.SaveChangesAsync();
+                            return Ok();
+
+                        case TableType.homeProductsLists:
+                            var homeProductsListsRepository = new FileRepository<HomeProductsLists>(new List<HomeProductsLists>());
+                            var homeProductsListsList = await homeProductsListsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(homeProductsListsList);
+
+                            await _context.SaveChangesAsync();
+                            return Ok();
+
                         default:
                             return new UnsupportedMediaTypeResult();
                     }

@@ -24,7 +24,9 @@ export enum TableType {
     productsVariantsPhotos,
     photos,
     productColors,
-    productDiemensions
+    productDiemensions,
+    homeLists,
+    homeProductsLists
 }
 
 export function TableTypesStringList(): string[] {
@@ -52,7 +54,9 @@ export function TableTypesStringList(): string[] {
         'products variants photos',
         'photos',
         'product colors',
-        'product diemensions'
+        'product diemensions',
+        'home lists',
+        'home products lists'
     ];
 }
 
@@ -82,6 +86,8 @@ export function TableTypeToString(type: TableType): string {
         case TableType.photos: return 'photos';
         case TableType.productColors: return 'productColors';
         case TableType.productDiemensions: return 'productDiemensions';
+        case TableType.homeLists: return 'homeLists';
+        case TableType.homeProductsLists: return 'homeProductsLists';
     }
 }
 
@@ -111,6 +117,8 @@ export function TableTypeToEnum(type: string): TableType | void {
         case 'photos': return TableType.photos;
         case 'productColors': return TableType.productColors;
         case 'productDiemensions': return TableType.productDiemensions;
+        case 'homeLists': return TableType.homeLists;
+        case 'homeProductsLists': return TableType.homeProductsLists;
     }
 }
 
