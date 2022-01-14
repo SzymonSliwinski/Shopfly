@@ -21,7 +21,7 @@ export class ListsComponent implements OnInit {
     private readonly _homeListsService: ListsService
   ) { }
 
-  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Delete];
+  public tableButtons: TableButton[] = [TableButton.Delete];
   public menuButtons: MenuButton[] = [];
   public displayedColumns: TableColumnDto[] =
     [
