@@ -8,19 +8,19 @@ export class ListsService {
     constructor(private _http: HttpClient) { }
 
     public async add(homeList: HomeList): Promise<HomeList> {
-        return this._http.post<HomeList>(environment._shopPanelApiUrl + 'home-list', homeList).toPromise()
+        return this._http.post<HomeList>(environment._shopPanelApiUrl + 'home-lists', homeList).toPromise()
     }
 
     public async getAll(): Promise<HomeList[]> {
-        return this._http.get<HomeList[]>(environment._shopPanelApiUrl + 'home-list/get-all').toPromise()
+        return this._http.get<HomeList[]>(environment._shopPanelApiUrl + 'home-lists/get-all').toPromise()
     }
 
     public async delete(id: number): Promise<void> {
-        return this._http.delete<void>(environment._shopPanelApiUrl + 'home-list/' + id).toPromise()
+        return this._http.delete<void>(environment._shopPanelApiUrl + 'home-lists/' + id).toPromise()
     }
 
     public async edit(homeList: HomeList): Promise<HomeList> {
-        return this._http.patch<HomeList>(environment._shopPanelApiUrl + 'home-list', homeList).toPromise()
+        return this._http.patch<HomeList>(environment._shopPanelApiUrl + 'home-lists', homeList).toPromise()
     }
 
 }

@@ -13,7 +13,7 @@ export class ProductsService {
     }
 
     public async getAll(): Promise<Product[]> {
-        return this._http.get<Product[]>(environment._shopPanelApiUrl + 'get-all').toPromise()
+        return this._http.get<Product[]>(environment._shopPanelApiUrl + 'product/get-all').toPromise()
     }
 
     public async getForTable(): Promise<ProductDisplayDto[]> {
