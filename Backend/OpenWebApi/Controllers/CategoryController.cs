@@ -15,9 +15,11 @@ namespace OpenWebApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private CrudService<Category> _service;
         public CategoryController(AppDbContext context)
         {
             _context = context;
+            _service = new CrudService<Category>(_context);
         }
 
         [KeyAuthenticationFilter(Table = TableType.categories, Method = HttpMethodType.get)]
@@ -34,39 +36,39 @@ namespace OpenWebApi.Controllers
         [HttpGet("get-all")]
         public async Task<ActionResult<Category>> GetAll()
         {
-            var service = new CrudService<Category>(_context);
-            return Ok(await service.GetAll());
+            return Ok(await _context.Categories.AsQueryable().Where(c => c.IsActive).ToListAsync());
         }
-        //todo sprawdzić to
-        //[KeyAuthenticationFilter(Table = TableType.categories, Method = HttpMethodType.delete)]
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult> Delete(int id)
-        //{
-        //    var service = new CrudService<Carrier>(_context);
-        //    var category = await _service.GetById(id);
-        //    category.IsActive = false;
-        //    await _service.Update(category);
-        //    return Ok();
-        //}
 
-        //[HttpPost]
-        //public async Task<ActionResult<Category>> Add([FromBody] Category category)
-        //{
-        //    category.Name = category.Name.Trim();
-        //    return Ok(await _service.Insert(category));
-        //}
+        [KeyAuthenticationFilter(Table = TableType.categories, Method = HttpMethodType.delete)]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var category = await _service.GetById(id);
+            category.IsActive = false;
+            await _service.Update(category);
+            return Ok();
+        }
 
-        //[HttpPatch]
-        //public async Task<ActionResult<Category>> Update([FromBody] Category updatedCategory)
-        //{
-        //    var oldCategory = await _service.GetById(updatedCategory.Id);
+        [KeyAuthenticationFilter(Table = TableType.categories, Method = HttpMethodType.post)]
+        [HttpPost]
+        public async Task<ActionResult<Category>> Add([FromBody] Category category)
+        {
+            category.Name = category.Name.Trim();
+            return Ok(await _service.Insert(category));
+        }
 
-        //    oldCategory.Name = updatedCategory.Name.Trim();
-        //    oldCategory.IsRoot = updatedCategory.IsRoot;
-        //    oldCategory.ParentCategoryId = updatedCategory.ParentCategoryId;
-        //    oldCategory.Position = updatedCategory.Position;
+        [KeyAuthenticationFilter(Table = TableType.categories, Method = HttpMethodType.patch)]
+        [HttpPatch]
+        public async Task<ActionResult<Category>> Update([FromBody] Category updatedCategory)
+        {
+            var oldCategory = await _service.GetById(updatedCategory.Id);
 
-        //    return Ok(await _service.Update(oldCategory));
-        //}
+            oldCategory.Name = updatedCategory.Name.Trim();
+            oldCategory.IsRoot = updatedCategory.IsRoot;
+            oldCategory.ParentCategoryId = updatedCategory.ParentCategoryId;
+            oldCategory.Position = updatedCategory.Position;
+
+            return Ok(await _service.Update(oldCategory));
+        }
     }
 }

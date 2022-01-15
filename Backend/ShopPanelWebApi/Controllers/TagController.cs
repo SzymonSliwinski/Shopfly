@@ -8,7 +8,6 @@ using ShopPanelWebApi.Filters;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
     [ApiController]
     public class TagController : ControllerBase
     {
@@ -38,9 +37,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Tag>> Delete(int id)
         {
             var service = new CrudService<Tag>(_tagService);
-            var tag = await service.GetById(id);
+            await service.Delete(id);
 
-            await service.Update(tag);
             return Ok();
         }
 
@@ -48,6 +46,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Tag>> Add([FromBody] Tag tag)
         {
             var service = new CrudService<Tag>(_tagService);
+
+            tag.Name = tag.Name.Trim();
 
             return Ok(await service.Insert(tag));
         }
@@ -58,7 +58,7 @@ namespace ShopPanelWebApi.Controllers
             var service = new CrudService<Tag>(_tagService);
             var oldTag = await service.GetById(updatedTag.Id);
 
-            oldTag.Name = updatedTag.Name;
+            oldTag.Name = updatedTag.Name.Trim();
 
             return Ok(await service.Update(oldTag));
         }

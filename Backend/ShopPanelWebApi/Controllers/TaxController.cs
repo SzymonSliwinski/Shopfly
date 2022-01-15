@@ -7,7 +7,6 @@ using Common.Services;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
     [ApiController]
     public class TaxController : ControllerBase
     {
@@ -37,9 +36,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Tax>> Delete(int id)
         {
             var service = new CrudService<Tax>(_taxService);
-            var tax = await service.GetById(id);
+            await service.Delete(id);
 
-            await service.Update(tax);
             return Ok();
         }
 
@@ -47,6 +45,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Tax>> Add([FromBody] Tax tax)
         {
             var service = new CrudService<Tax>(_taxService);
+
+            tax.Name = tax.Name.Trim();
 
             return Ok(await service.Insert(tax));
         }
@@ -57,7 +57,7 @@ namespace ShopPanelWebApi.Controllers
             var service = new CrudService<Tax>(_taxService);
             var oldTax = await service.GetById(updatedTax.Id);
 
-            oldTax.Name = updatedTax.Name;
+            oldTax.Name = updatedTax.Name.Trim();
             oldTax.Interest = updatedTax.Interest;
 
             return Ok(await service.Update(oldTax));

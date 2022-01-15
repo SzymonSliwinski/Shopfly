@@ -38,9 +38,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Rating>> Delete(int id)
         {
             var service = new CrudService<Rating>(_ratingService);
-            var rating = await service.GetById(id);
+            await service.Delete(id);
 
-            await service.Update(rating);
             return Ok();
         }
 

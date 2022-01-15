@@ -8,7 +8,6 @@ using Common.Services;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -38,9 +37,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var service = new CrudService<Comment>(_commentService);
-            var comment = await service.GetById(id);
+            await service.Delete(id);
 
-            await service.Update(comment);
             return Ok();
         }
 

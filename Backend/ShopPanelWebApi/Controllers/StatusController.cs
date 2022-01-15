@@ -7,7 +7,6 @@ using Common.Services;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
     [ApiController]
     public class StatusController : ControllerBase
     {
@@ -37,9 +36,8 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Status>> Delete(int id)
         {
             var service = new CrudService<Status>(_statusService);
-            var status = await service.GetById(id);
+            await service.Delete(id);
 
-            await service.Update(status);
             return Ok();
         }
 

@@ -41,9 +41,8 @@ namespace OpenWebApi.Controllers
         public async Task<ActionResult<ProductVariant>> Delete(int id)
         {
             var service = new CrudService<ProductVariant>(_productVariantService);
-            var productVariant = await service.GetById(id);
+            await service.Delete(id);
 
-            await service.Update(productVariant);
             return Ok();
         }
 

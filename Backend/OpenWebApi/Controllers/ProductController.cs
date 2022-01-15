@@ -39,21 +39,6 @@ namespace OpenWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
-        //todo sprawdzić i poprawić
-        //[HttpGet("get-all-as-dtos")]
-        //public async Task<ActionResult<List<ProductDisplayDto>>> GetAllAsDtos()
-        //{
-        //    var results = new List<ProductDisplayDto>();
-        //    var products = await _context.Products
-        //        .AsQueryable()
-        //        .Include(p => p.Category)
-        //        .ToListAsync();
-
-        //    foreach (var product in products)
-        //        results.Add(new ProductDisplayDto(product));
-        //    return Ok(results);
-        //}
-
         [KeyAuthenticationFilter(Table = TableType.products, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> Delete(int id)
