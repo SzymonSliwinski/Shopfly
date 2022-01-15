@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ShopRoutingModule } from '../shop-routing.module';
 import { ShopAuthenticationService } from 'src/app/services/shop/shop-authentication.service';
+import { CustomerService } from 'src/app/services/shop/customer-service';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -26,7 +27,8 @@ import { ShopAuthenticationService } from 'src/app/services/shop/shop-authentica
     ShopRoutingModule
   ],
   providers: [
-    ShopAuthenticationService
+    ShopAuthenticationService,
+    CustomerService
   ],
   exports: [
     NavbarComponent,

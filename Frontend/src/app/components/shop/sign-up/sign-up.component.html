@@ -6,12 +6,12 @@
 
     <div class="form-field-container">
         <p>E-mail</p>
-        <input type="email" id="email" />
+        <input type="email" id="email" [(ngModel)]="newCustomer.email" />
     </div>
 
     <div class="form-field-container">
         <span>Password</span>
-        <input type="password" />
+        <input type="password" [(ngModel)]="newCustomer.password" />
         <span class="info">*Password should contain at least 8 characters</span>
     </div>
 
@@ -19,32 +19,32 @@
         <div class="flex double-field">
             <div class="flex-column">
                 <p>Name</p>
-                <input type="text" />
+                <input type="text" [(ngModel)]="newCustomer.name" />
             </div>
 
             <div class="flex-column">
                 <p>Surname</p>
-                <input type="text" />
+                <input type="text" [(ngModel)]="newCustomer.surname" />
             </div>
         </div>
     </div>
 
     <div class="form-field-container">
         <p>Phone number</p>
-        <input />
+        <input [(ngModel)]="newCustomer.phoneNumber" />
         <span class="info">*Specified in format 123-123-123</span>
     </div>
 
-    <mat-checkbox color="primary">
+    <mat-checkbox color="primary" [(ngModel)]="didUserAgreed">
         I agree with shop <a href="condition-use" target="blank">conditions of use </a>
     </mat-checkbox>
 
-    <mat-checkbox color="primary">
+    <mat-checkbox color="primary" [(ngModel)]="newCustomer.isNewsletterSubscribed">
         I want to receive informations about sales, new products etc.
     </mat-checkbox>
 
     <span class=" center" style="margin-top: 20px">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" (click)="onSaveClick()">
             Submit
         </button>
     </span>

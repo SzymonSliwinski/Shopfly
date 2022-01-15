@@ -18,13 +18,6 @@ namespace ShopPanelWebApi.Services
         {
             _listTokens = new List<Token>();
         }
-        // probably to remove
-        public bool Authenticate(string email, string password)
-        {
-            if (email == null)
-                return false;
-            return (true);
-        }
 
         public Token GenerateToken()
         {

@@ -17,6 +17,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { CartModule } from './cart/cart.module';
 import { FavoritesProductsModule } from './favorites-products/favorites-products.module';
 import { ProductsPageModule } from './products-page/products-page.module';
+import { ListsService } from 'src/app/services/shop/lists.service';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -40,7 +41,8 @@ import { ProductsPageModule } from './products-page/products-page.module';
     ProductsPageModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    ListsService
   ],
   exports: []
 })

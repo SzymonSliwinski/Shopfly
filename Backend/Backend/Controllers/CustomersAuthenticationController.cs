@@ -1,7 +1,11 @@
-﻿using Common.Dtos;
+﻿using Common;
+using Common.Dtos;
 using Common.Interfaces;
+using Common.Utilieties;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopWebApi.Filters;
+using System.Threading.Tasks;
 
 namespace ShopWebApi.Controllers
 {
@@ -10,17 +14,33 @@ namespace ShopWebApi.Controllers
     public class CustomersAuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authService;
-        public CustomersAuthenticationController(IAuthenticationService authService)
+
+        private AppDbContext _context;
+
+        public CustomersAuthenticationController(IAuthenticationService authService, AppDbContext context)
         {
             _authService = authService;
+            _context = context;
         }
 
+
         [HttpPost]
-        public IActionResult Authenticate([FromBody] AuthenticationDto authDto)
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticationDto authDto)
         {
-            if (_authService.Authenticate(authDto.Email, authDto.Password))
-                return Ok(new { Token = _authService.GenerateToken() });
-            //todo after generating token get user from db
+            var hashedPass = Utility.GetHashedPassword(authDto.Password);
+            var customer = await _context.Customers
+                .AsQueryable()
+                .SingleOrDefaultAsync(e => e.Email == authDto.Email);
+
+            if (customer == null)
+                return Unauthorized();
+
+            if (customer.Password == hashedPass)
+            {
+                var token = new { Token = _authService.GenerateToken() };
+                token.Token.UserId = customer.Id;
+                return Ok(token);
+            }
             else
                 return Unauthorized();
         }
