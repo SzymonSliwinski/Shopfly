@@ -53,7 +53,6 @@ namespace ShopPanelWebApi.Controllers
 
             customer.Name = customer.Name.Trim();
             customer.Surname = customer.Surname.Trim();
-            customer.PhoneNumber = customer.PhoneNumber.Trim();
             customer.Email = customer.Email.Trim();
             customer.CreateDate = DateTime.Now.ToLocalTime();
             customer.LastLoginDate = DateTime.Now.ToLocalTime();

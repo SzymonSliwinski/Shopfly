@@ -16,17 +16,6 @@ namespace ShopWebApi.Services
             _listTokens = new List<Token>();
         }
 
-        public bool Authenticate(string email, string password)
-        {
-            var testEmail = "a@a.pl";
-            var testPass = "123";
-            //to do compare with users in db
-
-            return (
-                (email == testEmail) &&
-                 password == testPass);
-        }
-
         public Token GenerateToken()
         {
             var token = new Token
