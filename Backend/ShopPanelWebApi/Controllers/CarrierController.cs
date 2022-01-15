@@ -5,6 +5,8 @@ using Common;
 using Common.Models.ShopModels;
 using Common.Services;
 using ShopPanelWebApi.Filters;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -13,56 +15,52 @@ namespace ShopPanelWebApi.Controllers
     [ApiController]
     public class CarrierController : ControllerBase
     {
-        private readonly AppDbContext _carrierService;
+        private readonly AppDbContext _context;
+        private CrudService<Carrier> _service;
         public CarrierController(AppDbContext context)
         {
-            _carrierService = context;
+            _context = context;
+            _service = new CrudService<Carrier>(_context);
         }
 
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Carrier>> GetById(int id)
         {
-            var service = new CrudService<Carrier>(_carrierService);
-            var carrier = await service.GetById(id);
+            var carrier = await _service.GetById(id);
 
-            return Ok(await service.GetById(carrier.Id));
+            return Ok(await _service.GetById(carrier.Id));
         }
 
         [HttpGet("get-all")]
         public async Task<ActionResult<Carrier>> GetAll()
         {
-            var service = new CrudService<Carrier>(_carrierService);
-            return Ok(await service.GetAll());
+            return Ok(await _context.Carriers.AsQueryable().Where(c => c.IsActive).ToListAsync());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var service = new CrudService<Carrier>(_carrierService);
-            var carrier = await service.GetById(id);
+            var carrier = await _service.GetById(id);
 
             carrier.IsActive = false;
 
-            await service.Update(carrier);
+            await _service.Update(carrier);
             return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<Carrier>> Add([FromBody] Carrier carrier)
         {
-            var service = new CrudService<Carrier>(_carrierService);
-
             carrier.Name = carrier.Name.Trim();
             carrier.IsActive = true;
 
-            return Ok(await service.Insert(carrier));
+            return Ok(await _service.Insert(carrier));
         }
 
         [HttpPatch]
         public async Task<ActionResult<Carrier>> Update([FromBody] Carrier updatedCarrier)
         {
-            var service = new CrudService<Carrier>(_carrierService);
-            var oldCarrier = await service.GetById(updatedCarrier.Id);
+            var oldCarrier = await _service.GetById(updatedCarrier.Id);
 
             oldCarrier.Cost = updatedCarrier.Cost;
             oldCarrier.Name = updatedCarrier.Name.Trim();
@@ -70,7 +68,7 @@ namespace ShopPanelWebApi.Controllers
             oldCarrier.DeliveryDaysMinimum = updatedCarrier.DeliveryDaysMinimum;
             oldCarrier.DeliveryDaysMaximum = updatedCarrier.DeliveryDaysMaximum;
 
-            return Ok(await service.Update(oldCarrier));
+            return Ok(await _service.Update(oldCarrier));
         }
     }
 }

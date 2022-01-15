@@ -1,0 +1,27 @@
+<div class="container flex flex-column">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [maxlength]="30" [minlength]="1" [(ngModel)]="carrier.name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Cost</mat-label>
+        <input matInput type="number" [(ngModel)]="carrier.cost">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Delivery days minimum</mat-label>
+        <input matInput type="number" [(ngModel)]="carrier.deliveryDaysMinimum">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Delivery days maximum</mat-label>
+        <input matInput type="number" [(ngModel)]="carrier.deliveryDaysMaximum">
+    </mat-form-field>
+
+    <mat-checkbox color="primary" [(ngModel)]="carrier.isActive">Is root</mat-checkbox>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onSaveClick()">Save</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>

@@ -18,12 +18,22 @@ import { CategoriesComponent } from './categories/categories.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AddCategoryDialog } from './categories/add-category/add-category.dialog';
 import { CategoriesService } from 'src/app/services/shop-panel-services/categories.service';
+import { ListsComponent } from './lists/lists.component';
+import { CarriersComponent } from './carriers/carriers.component';
+import { AddCarrierDialog } from './carriers/add-carrier/add-carrier.dialog';
+import { CarriersService } from 'src/app/services/shop-panel-services/carriers.service';
+import { AddListsDialog } from './lists/add-lists/add-lists.dialog';
+import { ListsService } from 'src/app/services/shop-panel-services/lists.service';
 
 @NgModule({
     declarations: [
         ProductsComponent,
         CategoriesComponent,
         AddCategoryDialog,
+        ListsComponent,
+        CarriersComponent,
+        AddCarrierDialog,
+        AddListsDialog,
     ],
     imports: [
         CommonModule,
@@ -43,7 +53,9 @@ import { CategoriesService } from 'src/app/services/shop-panel-services/categori
     ],
     providers: [
         ProductsService,
-        CategoriesService
+        CategoriesService,
+        CarriersService,
+        ListsService
     ],
     exports: [
         ProductsComponent,

@@ -1,0 +1,24 @@
+<div class="container flex flex-column">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [maxlength]="30" [minlength]="1" [(ngModel)]="homeList.title">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select (valueChange)="onProductSelect($event)">
+            <mat-option *ngFor="let product of allProducts" [value]="product">
+                {{product.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="p-10">
+    <span *ngFor="let product of selectedProducts" class="flex">
+        {{product.name}}
+    </span>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onSaveClick()">Save</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>

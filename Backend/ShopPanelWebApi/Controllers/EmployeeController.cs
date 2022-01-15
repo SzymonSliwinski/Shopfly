@@ -30,6 +30,7 @@ namespace ShopPanelWebApi.Controllers
         public async Task<ActionResult<Employee>> GetById(int id)
         {
             var employee = await _service.GetById(id);
+
             employee.Password = null;
             return Ok(employee);
         }
