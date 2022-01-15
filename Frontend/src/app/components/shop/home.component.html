@@ -77,8 +77,8 @@
                                 <div class="product-item">
                                     <div class="product-item-content">
                                         <div>
-                                            <img src="{{ productListItem.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path }}"
-                                                [alt]="productListItem.product.name" class="product-image" />
+                                            <!-- src="{{ productListItem.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path }}" -->
+                                            <img [alt]="productListItem.product.name" class="product-image" />
                                         </div>
                                         <div>
                                             <p class="product-name">{{productListItem.product.name}}</p>

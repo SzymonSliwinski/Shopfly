@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Common.Models.ShopModels
 {
@@ -22,12 +23,19 @@ namespace Common.Models.ShopModels
         public string Description { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Rating> Ratings { get; set; }
+        [JsonIgnore]
         public List<CustomerFavouritesProducts> CustomerFavouritesProducts { get; set; }
+        [JsonIgnore]
         public List<OrdersProducts> OrdersProducts { get; set; }
+        [JsonIgnore]
         public List<ProductsPayments> ProductsPayments { get; set; }
+        [JsonIgnore]
         public List<ProductsCarriers> ProductsCarriers { get; set; }
+        [JsonIgnore]
         public List<ProductsTags> ProductsTags { get; set; }
+        [JsonIgnore]
         public List<ProductVariant> ProductsVariants { get; set; }
+        [JsonIgnore]
         public List<HomeProductsLists> HomeProductsLists { get; set; }
     }
 }
