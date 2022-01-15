@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -19,6 +19,7 @@ namespace ShopPanelWebApi.Controllers
             _commentService = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.comments, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Comment>> GetById(int id)
         {
@@ -28,6 +29,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(comment.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.comments, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<Comment>> GetAll()
         {
@@ -35,6 +37,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.comments, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -44,6 +47,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.comments, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Comment>> Add([FromBody] Comment comment)
         {
@@ -55,6 +59,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(comment));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.comments, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Comment>> Update([FromBody] Comment updatedComment)
         {
@@ -65,6 +70,5 @@ namespace ShopPanelWebApi.Controllers
 
             return Ok(await service.Update(oldComment));
         }
-
     }
 }

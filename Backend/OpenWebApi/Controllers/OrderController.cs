@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -19,6 +19,7 @@ namespace ShopPanelWebApi.Controllers
             _orderService = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.orders, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Order>> GetById(int id)
         {
@@ -28,6 +29,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(order.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.orders, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<Order>> GetAll()
         {
@@ -35,6 +37,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.orders, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Order>> Delete(int id)
         {
@@ -47,6 +50,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.orders, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Order>> Add([FromBody] Order order)
         {
@@ -74,6 +78,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(order));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.orders, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Order>> Update([FromBody] Order updatedOrder)
         {

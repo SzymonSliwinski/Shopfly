@@ -5,7 +5,7 @@ namespace GenerateRandomData.Models.ShopPanelModels
 {
     public class Employee
     {
-        public string Name { get; set; }    // todo length of string
+        public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }

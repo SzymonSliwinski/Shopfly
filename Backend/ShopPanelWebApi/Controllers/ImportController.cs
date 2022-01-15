@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
+using ShopPanelWebApi.Filters;
 using ShopPanelWebApi.Repositories;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ImportController : ControllerBase
     {
@@ -220,6 +222,22 @@ namespace ShopPanelWebApi.Controllers
                             var productDimensionRepository = new FileRepository<ProductDimensions>(new List<ProductDimensions>());
                             var productDimensionsList = await productDimensionRepository.ParseModel(file, TableType.employees);
                             await _context.AddRangeAsync(productDimensionsList);
+
+                            await _context.SaveChangesAsync();
+                            return Ok();
+
+                        case TableType.homeLists:
+                            var homeListRepository = new FileRepository<HomeList>(new List<HomeList>());
+                            var homeListsList = await homeListRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(homeListsList);
+
+                            await _context.SaveChangesAsync();
+                            return Ok();
+
+                        case TableType.homeProductsLists:
+                            var homeProductsListsRepository = new FileRepository<HomeProductsLists>(new List<HomeProductsLists>());
+                            var homeProductsListsList = await homeProductsListsRepository.ParseModel(file, TableType.employees);
+                            await _context.AddRangeAsync(homeProductsListsList);
 
                             await _context.SaveChangesAsync();
                             return Ok();

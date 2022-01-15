@@ -5,15 +5,13 @@ using Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using ShopPanelWebApi.Dtos;
+using Common.Models.ApiModels;
 using Microsoft.EntityFrameworkCore;
-using ShopPanelWebApi.Filters;
-using System.Linq;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -23,6 +21,7 @@ namespace ShopPanelWebApi.Controllers
             _context = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.products, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Product>> GetById(int id)
         {
@@ -32,29 +31,15 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(product.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.products, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<Product>> GetAll()
         {
-            return Ok(await _context.Products
-                .AsQueryable()
-                .Where(c => c.IsActive)
-                .ToListAsync());
+            var service = new CrudService<Product>(_context);
+            return Ok(await service.GetAll());
         }
 
-        [HttpGet("get-all-as-dtos")]
-        public async Task<ActionResult<List<ProductDisplayDto>>> GetAllAsDtos()
-        {
-            var results = new List<ProductDisplayDto>();
-            var products = await _context.Products
-                .AsQueryable()
-                .Include(p => p.Category)
-                .ToListAsync();
-
-            foreach (var product in products)
-                results.Add(new ProductDisplayDto(product));
-            return Ok(results);
-        }
-
+        [KeyAuthenticationFilter(Table = TableType.products, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> Delete(int id)
         {
@@ -67,6 +52,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.products, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Product>> Add([FromBody] Product product)
         {
@@ -76,16 +62,13 @@ namespace ShopPanelWebApi.Controllers
             product.IsActive = true;
             product.CreateDate = DateTime.Now.ToLocalTime();
             product.UpdateDate = DateTime.Now.ToLocalTime();
+            product.CategoryId = 1;
             product.ProductsVariants = new List<ProductVariant>();
-            product.ProductsVariants.Add(new ProductVariant()
-            {
-                Price = product.NettoPrice,
-                Quantity = product.Stock,
-            });
-            // to do with photo
+            product.ProductsVariants.Add(new ProductVariant());
             return Ok(await service.Insert(product));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.products, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Product>> Update([FromBody] Product updatedProduct)
         {

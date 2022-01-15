@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductColorController : ControllerBase
     {
@@ -18,6 +18,7 @@ namespace ShopPanelWebApi.Controllers
             _productColorService = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productColors, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<ProductColor>> GetById(int id)
         {
@@ -27,6 +28,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(productColor.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productColors, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<ProductColor>> GetAll()
         {
@@ -34,6 +36,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productColors, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -43,6 +46,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productColors, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<ProductColor>> Add([FromBody] ProductColor productColor)
         {
@@ -53,6 +57,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(productColor));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productColors, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<ProductColor>> Update([FromBody] ProductColor updatedProductColor)
         {

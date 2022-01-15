@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
 using OpenWebApi.Filters;
 using Common.Models.ApiModels;
-namespace ShopPanelWebApi.Controllers
+
+namespace OpenWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -17,6 +17,7 @@ namespace ShopPanelWebApi.Controllers
         {
             _context = context;
         }
+
         [KeyAuthenticationFilter(Table = TableType.carriers, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Carrier>> GetById(int id)

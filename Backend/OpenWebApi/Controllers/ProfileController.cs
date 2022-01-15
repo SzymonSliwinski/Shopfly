@@ -2,16 +2,16 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopPanelModels;
 using Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase
     {
@@ -21,6 +21,7 @@ namespace ShopPanelWebApi.Controllers
             _context = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.profiles, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Profile>> GetById(int id)
         {
@@ -30,6 +31,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(profile.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.profiles, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<Profile>> GetAll()
         {
@@ -37,6 +39,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.profiles, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Profile>> Delete(int id)
         {
@@ -53,6 +56,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.profiles, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Profile>> Add([FromBody] Profile profile)
         {
@@ -62,6 +66,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(profile));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.profiles, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Profile>> Update([FromBody] Profile updatedProfile)
         {
@@ -81,6 +86,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Update(oldProfile));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.profiles, Method = HttpMethodType.get)]
         [HttpGet("get-profiles-for-employee/{employeeId}")]
         public async Task<ActionResult<List<Profile>>> GetProfilesForEmployee(int employeeId)
         {
