@@ -14,7 +14,7 @@ using Common.Dtos;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class EmployeeController : ControllerBase
     {

@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
+using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ProductDimensionsController : ControllerBase
     {

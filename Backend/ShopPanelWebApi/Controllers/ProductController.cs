@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using ShopPanelWebApi.Dtos;
 using Microsoft.EntityFrameworkCore;
+using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ProductController : ControllerBase
     {

@@ -6,11 +6,12 @@ using Common.Models.ShopPanelModels;
 using Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ProfileController : ControllerBase
     {

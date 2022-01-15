@@ -8,6 +8,7 @@ using ShopPanelWebApi.Filters;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class TagController : ControllerBase
     {

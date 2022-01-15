@@ -5,11 +5,12 @@ using Common.Models.ShopModels;
 using Common.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class CategoryController : ControllerBase
     {

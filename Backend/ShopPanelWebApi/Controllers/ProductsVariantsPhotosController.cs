@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Services;
+using ShopPanelWebApi.Filters;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ProductsVariantsPhotosController : ControllerBase
     {

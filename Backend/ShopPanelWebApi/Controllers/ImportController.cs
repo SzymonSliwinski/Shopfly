@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopModels;
 using Common.Models.ShopPanelModels;
+using ShopPanelWebApi.Filters;
 using ShopPanelWebApi.Repositories;
 
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ImportController : ControllerBase
     {

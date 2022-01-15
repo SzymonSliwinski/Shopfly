@@ -10,7 +10,7 @@ using ShopPanelWebApi.Filters;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/employees-profiles")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class EmployeesProfilesController : ControllerBase
     {
