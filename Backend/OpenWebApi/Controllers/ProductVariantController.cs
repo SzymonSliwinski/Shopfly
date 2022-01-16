@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductVariantController : ControllerBase
     {
@@ -18,6 +18,7 @@ namespace ShopPanelWebApi.Controllers
             _productVariantService = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productsVariants, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<ProductVariant>> GetById(int id)
         {
@@ -27,6 +28,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(productVariant.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productsVariants, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<ProductVariant>> GetAll()
         {
@@ -34,6 +36,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productsVariants, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult<ProductVariant>> Delete(int id)
         {
@@ -43,6 +46,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productsVariants, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<ProductVariant>> Add([FromBody] ProductVariant productVariant)
         {
@@ -51,6 +55,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(productVariant));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.productsVariants, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<ProductVariant>> Update([FromBody] ProductVariant updatedProductVariant)
         {

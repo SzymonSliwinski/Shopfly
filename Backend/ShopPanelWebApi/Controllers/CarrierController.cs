@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class CarrierController : ControllerBase
     {

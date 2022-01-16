@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class PhotoController : ControllerBase
     {
@@ -18,6 +18,7 @@ namespace ShopPanelWebApi.Controllers
             _photoService = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.photos, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Photo>> GetById(int id)
         {
@@ -27,6 +28,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(photo.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.photos, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<Photo>> GetAll()
         {
@@ -34,6 +36,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.photos, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -43,6 +46,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.photos, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Photo>> Add([FromBody] Photo photo)
         {
@@ -53,6 +57,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(photo));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.photos, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Photo>> Update([FromBody] Photo updatedPhoto)
         {

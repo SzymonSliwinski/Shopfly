@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Common;
+using Common.Models.ApiModels;
 using Common.Models.ShopModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class TagController : ControllerBase
     {
@@ -18,6 +18,7 @@ namespace ShopPanelWebApi.Controllers
             _tagService = context;
         }
 
+        [KeyAuthenticationFilter(Table = TableType.tags, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Tag>> GetById(int id)
         {
@@ -27,6 +28,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetById(tag.Id));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.tags, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<Tag>> GetAll()
         {
@@ -34,6 +36,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.GetAll());
         }
 
+        [KeyAuthenticationFilter(Table = TableType.tags, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tag>> Delete(int id)
         {
@@ -43,6 +46,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.tags, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Tag>> Add([FromBody] Tag tag)
         {
@@ -53,6 +57,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await service.Insert(tag));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.tags, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Tag>> Update([FromBody] Tag updatedTag)
         {

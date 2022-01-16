@@ -3,18 +3,16 @@ using System.Threading.Tasks;
 using Common;
 using Common.Models.ShopPanelModels;
 using Common.Services;
-using ShopPanelWebApi.Filters;
 using Common.Utilieties;
 using System.Collections.Generic;
 using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Common.Dtos;
+using Common.Models.ApiModels;
+using OpenWebApi.Filters;
 
-namespace ShopPanelWebApi.Controllers
+namespace OpenWebApi.Controllers
 {
-    [Route("shop-panel/[controller]")]
-    [TokenAuthenticationFilter]
+    [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -26,15 +24,16 @@ namespace ShopPanelWebApi.Controllers
             _service = new CrudService<Employee>(_context);
         }
 
+        [KeyAuthenticationFilter(Table = TableType.employees, Method = HttpMethodType.get)]
         [HttpGet("by-id/{id}")]
         public async Task<ActionResult<Employee>> GetById(int id)
         {
             var employee = await _service.GetById(id);
-
             employee.Password = null;
             return Ok(employee);
         }
 
+        [KeyAuthenticationFilter(Table = TableType.employees, Method = HttpMethodType.get)]
         [HttpGet("get-all")]
         public async Task<ActionResult<List<Employee>>> GetAll()
         {
@@ -44,6 +43,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(results);
         }
 
+        [KeyAuthenticationFilter(Table = TableType.employees, Method = HttpMethodType.delete)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -51,6 +51,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok();
         }
 
+        [KeyAuthenticationFilter(Table = TableType.employees, Method = HttpMethodType.post)]
         [HttpPost]
         public async Task<ActionResult<Employee>> Add([FromBody] Employee employee)
         {
@@ -66,6 +67,7 @@ namespace ShopPanelWebApi.Controllers
             return Ok(await _service.Insert(employee));
         }
 
+        [KeyAuthenticationFilter(Table = TableType.employees, Method = HttpMethodType.patch)]
         [HttpPatch]
         public async Task<ActionResult<Employee>> Update([FromBody] Employee updatedEmployee)
         {
@@ -83,6 +85,7 @@ namespace ShopPanelWebApi.Controllers
         }
 
 
+        [KeyAuthenticationFilter(Table = TableType.employees, Method = HttpMethodType.patch)]
         [HttpPatch("change-password")]
         public async Task ChangePassword([FromBody] ChangePasswordDto payload)
         {
