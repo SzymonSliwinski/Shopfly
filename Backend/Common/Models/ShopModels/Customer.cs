@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Common.Models.ShopModels
 {
@@ -16,6 +17,7 @@ namespace Common.Models.ShopModels
         public List<Comment> Comments { get; set; }
         public List<Rating> Ratings { get; set; }
         public List<CustomerFavouritesProducts> CustomerFavouritesProducts { get; set; }
+        public List<CustomerCart> CustomerCart { get; set; }
         public List<Order> Orders { get; set; }
         public bool IsActive { get; set; }
 

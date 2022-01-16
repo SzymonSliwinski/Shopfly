@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
+import { Order } from 'src/app/models/shop-models/order.model';
+import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 
 @Component({
   selector: 'app-cart-products-list',
@@ -7,219 +10,16 @@ import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
   styleUrls: ['./cart-products-list.component.scss']
 })
 export class CartProductsListComponent implements OnInit {
-  public customerCart!: CustomerCart[];
-  constructor() { }
+  @Input() order!: Order;
+  @Input() customerCart!: CustomerCart[];
+  isLoaded = false;
+  constructor(
+    private readonly _customerCartService: CustomerCartService,
+    private readonly _router: Router
+  ) { }
 
-  ngOnInit(): void {
-    this.customerCart = [
-      {
-        productId: 1,
-        customerId: 1,
-        product: {
-          id: 1,
-          categoryId: 1,
-          name: 'produkt 1',
-          isLowStock: false,
-          additionalShippingCost: 27.05,
-          nettoPrice: 123.51,
-          bruttoPrice: 434.0,
-          createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          isActive: false,
-          isVisible: false,
-          updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          description: "Sed maxime ex.\nUt esse ut quia sed.",
-          productsVariants: [
-            {
-              id: 1,
-              price: 754.51,
-              productsVariantsPhotos: [
-                {
-                  productVariantId: 1,
-                  photoId: 1,
-                  photo: {
-                    id: 1,
-                    isCover: true,
-                    path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
-                  }
-                }
-              ]
-            },
-          ]
-        }
-      }, {
-        productId: 1,
-        customerId: 1,
-        product: {
-          id: 1,
-          categoryId: 1,
-          name: 'produkt 1',
-          isLowStock: false,
-          additionalShippingCost: 27.05,
-          nettoPrice: 123.51,
-          bruttoPrice: 434.0,
-          createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          isActive: false,
-          isVisible: false,
-          updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          description: "Sed maxime ex.\nUt esse ut quia sed.",
-          productsVariants: [
-            {
-              id: 1,
-              price: 754.51,
-              productsVariantsPhotos: [
-                {
-                  productVariantId: 1,
-                  photoId: 1,
-                  photo: {
-                    id: 1,
-                    isCover: true,
-                    path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
-                  }
-                }
-              ]
-            },
-          ]
-        }
-      }, {
-        productId: 1,
-        customerId: 1,
-        product: {
-          id: 1,
-          categoryId: 1,
-          name: 'produkt 1',
-          isLowStock: false,
-          additionalShippingCost: 27.05,
-          nettoPrice: 123.51,
-          bruttoPrice: 434.0,
-          createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          isActive: false,
-          isVisible: false,
-          updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          description: "Sed maxime ex.\nUt esse ut quia sed.",
-          productsVariants: [
-            {
-              id: 1,
-              price: 754.51,
-              productsVariantsPhotos: [
-                {
-                  productVariantId: 1,
-                  photoId: 1,
-                  photo: {
-                    id: 1,
-                    isCover: true,
-                    path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
-                  }
-                }
-              ]
-            },
-          ]
-        }
-      }, {
-        productId: 1,
-        customerId: 1,
-        product: {
-          id: 1,
-          categoryId: 1,
-          name: 'produkt 1',
-          isLowStock: false,
-          additionalShippingCost: 27.05,
-          nettoPrice: 123.51,
-          bruttoPrice: 434.0,
-          createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          isActive: false,
-          isVisible: false,
-          updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          description: "Sed maxime ex.\nUt esse ut quia sed.",
-          productsVariants: [
-            {
-              id: 1,
-              price: 754.51,
-              productsVariantsPhotos: [
-                {
-                  productVariantId: 1,
-                  photoId: 1,
-                  photo: {
-                    id: 1,
-                    isCover: true,
-                    path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
-                  }
-                }
-              ]
-            },
-          ]
-        }
-      },
-      {
-        productId: 1,
-        customerId: 1,
-        product: {
-          id: 1,
-          categoryId: 1,
-          name: 'produkt 2',
-          isLowStock: false,
-          additionalShippingCost: 27.05,
-          nettoPrice: 123.51,
-          bruttoPrice: 434.0,
-          createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          isActive: false,
-          isVisible: false,
-          updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          description: "Sed maxime ex.\nUt esse ut quia sed.",
-          productsVariants: [
-            {
-              id: 1,
-              price: 754.51,
-              productsVariantsPhotos: [
-                {
-                  productVariantId: 1,
-                  photoId: 1,
-                  photo: {
-                    id: 1,
-                    isCover: true,
-                    path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
-                  }
-                }
-              ]
-            },
-          ]
-        }
-      },
-      {
-        productId: 1,
-        customerId: 1,
-        product: {
-          id: 1,
-          categoryId: 1,
-          name: 'Sed maxime ex. Ut esse ut quia sed Ut esse ut quia sed',
-          isLowStock: false,
-          additionalShippingCost: 27.05,
-          nettoPrice: 123.51,
-          bruttoPrice: 434.0,
-          createDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          isActive: false,
-          isVisible: false,
-          updateDate: new Date('2021-06-05T18:25:23.1810916+02:00'),
-          description: "Sed maxime ex.\nUt esse ut quia sed.",
-          productsVariants: [
-            {
-              id: 1,
-              price: 754.51,
-              productsVariantsPhotos: [
-                {
-                  productVariantId: 1,
-                  photoId: 1,
-                  photo: {
-                    id: 1,
-                    isCover: true,
-                    path: 'https://i.picsum.photos/id/385/200/300.jpg?hmac=IG8cHDliDmlgbSYX1yquX_5cAHcuS_O378oPs5rZGrU'
-                  }
-                }
-              ]
-            },
-          ]
-        }
-      }
-    ]
+  async ngOnInit(): Promise<void> {
+    this.isLoaded = true;
   }
 
   public getTotalBruttoValue(): number {
@@ -227,9 +27,10 @@ export class CartProductsListComponent implements OnInit {
     this.customerCart.forEach(p => {
       result += p.product!.bruttoPrice;
     });
-
+    this.order.totalPrice = result;
     return result;
   }
+
   getTotalNettoValue(): number {
     var result = 0;
     this.customerCart.forEach(p => {
@@ -237,5 +38,10 @@ export class CartProductsListComponent implements OnInit {
     });
 
     return result;
+  }
+
+  async onClearClick() {
+    await this._customerCartService.clear();
+    this._router.navigate(['']);
   }
 }

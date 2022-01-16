@@ -8,8 +8,8 @@
         <div class="flex-column radius white-background" style="width: 600px">
             <div *ngFor="let customerProduct of products" class="flex p-10 flex-center" style="align-items: center;">
                 <span>
-                    <img class="product-miniature"
-                        src="{{customerProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                    <!-- src="{{customerProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}} -->
+                    <img class="product-miniature">
                 </span>
                 <span class="product-name p-10" style="width: 280px; ">
                     {{customerProduct.product!.name}}
@@ -30,42 +30,46 @@
     <!-- overview -->
     <div class="mat-elevation-z8 radius flex-column p-10 white-background overview-container">
         <span class="bolded" style="font-size: 22px">Shipping details</span>
-        <span class="flex">
+        <!-- <span class="flex">
             <p class=" bolded">Customer:</p>
             <p style="margin-left: 30px;">Jan Kowalski</p>
-        </span>
+        </span> -->
 
         <span class="flex">
             <p class="bolded">Payment:</p>
-            <p style="margin-left: 30px;">Cash</p>
+            <p style="margin-left: 30px;">
+                {{order.paymentType!.name}}
+            </p>
         </span>
         <span class="flex">
             <p class="bolded">Carrier:</p>
-            <p style="margin-left: 30px;">DHL</p>
+            <p style="margin-left: 30px;">
+                {{order.carrier!.name}}
+            </p>
         </span>
         <span class="flex">
             <p class="bolded">Country/City:</p>
-            <p style="margin-left: 30px;">{{order.deliveryAddressCountry}}/{{order.deliveryAddressCity}}
-
+            <p style="margin-left: 30px;" *ngIf="order && order.deliveryAddressCountry && order.deliveryAddressCity">
+                {{order.deliveryAddressCountry}}/{{order.deliveryAddressCity}}
             </p>
         </span>
 
         <span class="flex">
             <p class="bolded">Address:</p>
-            <p style="margin-left: 30px;">
+            <p style="margin-left: 30px;" *ngIf="order && order.deliveryAddressPostal && order.deliveryAddressStreet">
                 {{order.deliveryAddressPostal}}, {{order.deliveryAddressStreet}}
             </p>
         </span>
         <mat-divider></mat-divider>
         <span class="flex">
             <p class="bolded">Total value</p>
-            <p style="margin-left: 30px;">
+            <p style="margin-left: 30px;" *ngIf="order && order.totalPrice">
                 {{order.totalPrice}}
             </p>
         </span>
-        <span class="center">
+        <span class=" center">
             <div style="height: 25px;"></div>
-            <button mat-raised-button color="primary" class="next-button" matStepperNext>
+            <button mat-raised-button color="primary" class="next-button" matStepperNext (click)="onSubmit()">
                 Confirm
             </button>
             <div style="height: 25px;"></div>

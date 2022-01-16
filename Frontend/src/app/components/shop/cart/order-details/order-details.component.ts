@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Carrier } from 'src/app/models/shop-models/carrier.model';
+import { Order } from 'src/app/models/shop-models/order.model';
 import { PaymentType } from 'src/app/models/shop-models/payment-type.model';
+import { CarriersService } from 'src/app/services/shop/carriers.service';
 
 @Component({
   selector: 'app-order-details',
@@ -11,25 +13,19 @@ export class OrderDetailsComponent implements OnInit {
   public carriers!: Carrier[];
   public paymentTypes!: PaymentType[];
   public isVatSelected = false;
-  constructor() { }
+  public ruleAccepted = false;
+  @Input() order!: Order;
 
-  ngOnInit(): void {
-    this.carriers = [
-      {
-        id: 1, name: 'DHL', cost: 20.21, deliveryDaysMaximum: 3, deliveryDaysMinimum: 1,
-        logo: 'https://www.dpdhl-brands.com/dhl/en/guides/design-basics/logo-and-claim/_jcr_content/opener/image.coreimg.100.2048.png/1595554700344/logo-opener.png',
-        isActive: true
-      },
-      {
-        id: 2, name: 'InPost', cost: 19.99, deliveryDaysMaximum: 3, deliveryDaysMinimum: 1,
-        logo: 'https://jakimkurierem.pl/logo_kuriera/inpost_logo.png',
-        isActive: true
-      }
-    ];
+  constructor(
+    private readonly _carriersService: CarriersService
+  ) { }
+
+  async ngOnInit(): Promise<void> {
+    this.carriers = await this._carriersService.getAll();
 
     this.paymentTypes = [
-      { id: 1, name: 'Cash', icon: 'payments', isActive: true },
-      { id: 2, name: 'Credit card', icon: 'credit_card', isActive: true }
+      { id: 1, name: 'Cash', icon: 'payments', isActive: true } as PaymentType,
+      { id: 2, name: 'Credit card', icon: 'credit_card', isActive: true } as PaymentType
     ];
   }
 }

@@ -28,6 +28,8 @@ namespace Common.Models.ShopModels
         [JsonIgnore]
         public List<OrdersProducts> OrdersProducts { get; set; }
         [JsonIgnore]
+        public List<CustomerCart> CustomerCart { get; set; }
+        [JsonIgnore]
         public List<ProductsPayments> ProductsPayments { get; set; }
         [JsonIgnore]
         public List<ProductsCarriers> ProductsCarriers { get; set; }

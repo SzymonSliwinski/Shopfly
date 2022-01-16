@@ -15,7 +15,7 @@ using Common.Models.ShopModels;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/home-lists")]
-    //[TokenAuthenticationFilter]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ShopListsController : ControllerBase
     {

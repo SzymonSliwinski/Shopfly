@@ -6,4 +6,5 @@ export interface CustomerCart {
     customer?: Customer | null;
     productId: number;
     product?: Product | null;
+    quantity?: number;
 }

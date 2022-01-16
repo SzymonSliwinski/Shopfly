@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit {
       const customer = await this._customerService.getById(JSON.parse((sessionStorage[environment._shopStorageKey])).token.userId)
       this.customerName = customer.name;
     }
-    console.log(this.isLogged)
   }
 
   constructor(

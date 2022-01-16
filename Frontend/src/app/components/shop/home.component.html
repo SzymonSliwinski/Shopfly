@@ -62,43 +62,47 @@
             <div class="h-100"></div>
 
             <div class="center" style="width: 80%;" *ngFor="let list of productsLists">
-                <hr>
-                <span class="list-title">{{list.title}}</span>
-                <div style="height: 20px">
-                    <!-- spacer -->
-                </div>
-                <div class="radius white-background center ">
-                    <div class="carousel-inner" role="listbox" let homeProductList>
-                        <p-carousel [value]="list.homeProductsLists" [numVisible]="4" [numScroll]="1"
-                            [circular]="false">
-                            <ng-template pTemplate="header">
-                            </ng-template>
-                            <ng-template let-productListItem pTemplate="item">
-                                <div class="product-item">
-                                    <div class="product-item-content">
-                                        <div>
-                                            <!-- src="{{ productListItem.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path }}" -->
-                                            <img [alt]="productListItem.product.name" class="product-image" />
-                                        </div>
-                                        <div>
-                                            <p class="product-name">{{productListItem.product.name}}</p>
-                                            <p class="product-price">${{productListItem.product.bruttoPrice}}</p>
-                                            <div class="flex flex-center" style="justify-content: center;">
-                                                <button mat-icon-button class="add-button">
-                                                    <mat-icon>add_shopping_cart</mat-icon>
-                                                </button>
-                                                <button mat-icon-button class="fav-button">
-                                                    <mat-icon>favorite</mat-icon>
-                                                </button>
-                                                <button mat-icon-button class="search-button">
-                                                    <mat-icon>search</mat-icon>
-                                                </button>
+                <div *ngIf="list.homeProductsLists.length > 0">
+                    <hr>
+                    <span class="list-title">{{list.title}}</span>
+                    <div style="height: 20px">
+                        <!-- spacer -->
+                    </div>
+                    <div class="radius white-background center ">
+                        <div class="carousel-inner" role="listbox" let homeProductList>
+                            <p-carousel *ngIf="list.homeProductsLists.length > 0" [value]="list.homeProductsLists"
+                                [numVisible]="4" [numScroll]="1" [circular]="false">
+                                <ng-template pTemplate="header">
+                                </ng-template>
+                                <ng-template let-productListItem pTemplate="item">
+                                    <div class="product-item">
+                                        <div class="product-item-content">
+                                            <div>
+                                                <!-- src="{{ productListItem.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path }}" -->
+                                                <img [alt]="productListItem.product.name" class="product-image" />
+                                            </div>
+                                            <div>
+                                                <p class="product-name">{{productListItem.product.name}}</p>
+                                                <p class="product-price">${{productListItem.product.bruttoPrice}}</p>
+                                                <div class="flex flex-center" style="justify-content: center;">
+                                                    <button mat-icon-button class="add-button"
+                                                        (click)="onAddToCartClick(productListItem.product.id)">
+                                                        <mat-icon>add_shopping_cart</mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button class="fav-button"
+                                                        (click)="onAddToFavoritesClick()">
+                                                        <mat-icon>favorite</mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button class="search-button">
+                                                        <mat-icon>search</mat-icon>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </ng-template>
-                        </p-carousel>
+                                </ng-template>
+                            </p-carousel>
+                        </div>
                     </div>
                 </div>
             </div>
