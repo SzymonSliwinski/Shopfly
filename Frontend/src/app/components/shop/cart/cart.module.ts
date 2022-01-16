@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SummaryComponent } from './summary/summary.component';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 import { CarriersService } from 'src/app/services/shop/carriers.service';
+import { OrdersService } from 'src/app/services/shop/orders.service';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { CarriersService } from 'src/app/services/shop/carriers.service';
     ],
     providers: [
         CustomerCartService,
-        CarriersService
+        CarriersService,
+        OrdersService
     ],
     exports: [
     ]
