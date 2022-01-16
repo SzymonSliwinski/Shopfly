@@ -37,6 +37,7 @@ namespace Common
         public DbSet<Tax> Taxes { get; set; }
         public DbSet<HomeList> HomeLists { get; set; }
         public DbSet<HomeProductsLists> HomeProductsLists { get; set; }
+        public DbSet<CustomerCart> CustomersCarts { get; set; }
 
         //ApiModels
         public DbSet<ApiKeysTablesMethods> ApiKeysTablesMethods { get; set; }
@@ -71,6 +72,7 @@ namespace Common
 
             //relations
             SetEmployeesProfilesRelation(modelBuilder);
+            SetCustomersCartRelation(modelBuilder);
             SetCommentsCustomersRelation(modelBuilder);
             SetCustomerFavouriteProductsRelation(modelBuilder);
             SetOrdersProductRelation(modelBuilder);
@@ -326,6 +328,23 @@ namespace Common
 
 
         // ShopModels relations:
+
+        private void SetCustomersCartRelation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomerCart>()
+                .HasKey(c => new { c.CustomerId, c.ProductId });
+            modelBuilder.Entity<CustomerCart>()
+                .HasOne(c => c.Customer)
+                .WithMany(c => c.CustomerCart)
+                .HasForeignKey(c => c.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<CustomerCart>()
+                .HasOne(c => c.Product)
+                .WithMany(c => c.CustomerCart)
+                .HasForeignKey(c => c.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
         private void SetCommentsCustomersRelation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Comment>()

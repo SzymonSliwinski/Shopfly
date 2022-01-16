@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { HomeProductsList } from 'src/app/models/shop-models/home-products-lists.model';
 import { HomeList } from 'src/app/models/shop-models/home-list.model';
 import { ListsService } from 'src/app/services/shop/lists.service';
+import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 interface Node {
   expandable: boolean;
   name: string;
@@ -52,7 +53,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private readonly _router: Router,
-    private readonly _listService: ListsService
+    private readonly _listService: ListsService,
+    private readonly _customerCartService: CustomerCartService
   ) {
     this.dataSource.data;
     _router.events.subscribe((val) => {
@@ -127,5 +129,13 @@ export class HomeComponent implements OnInit {
 
   getActualYear(): string {
     return new Date().getFullYear().toString();
+  }
+
+  onAddToFavoritesClick() {
+
+  }
+
+  async onAddToCartClick(id: number) {
+    await this._customerCartService.add(id);
   }
 }

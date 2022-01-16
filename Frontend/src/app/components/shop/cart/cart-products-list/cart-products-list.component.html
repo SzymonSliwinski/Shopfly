@@ -16,8 +16,8 @@
                 <div *ngFor="let cartPosition of customerCart" class="flex p-10 flex-center"
                     style="align-items: center;">
                     <span>
-                        <img class="product-miniature"
-                            src="{{cartPosition.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                        <!-- src="{{cartPosition.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}" -->
+                        <img class="product-miniature">
                     </span>
                     <span class="product-name p-10" style="width: 280px; ">
                         <a href="#">{{cartPosition.product!.name}}</a>
@@ -26,7 +26,7 @@
                     <span>{{cartPosition.product!.bruttoPrice | number:'1.2-2'}}$</span>
                     <div style="width: 20px;"></div>
                     <mat-form-field style="width: 50px;">
-                        <input matInput maxlength="5">
+                        <input matInput maxlength="5" [(ngModel)]="cartPosition.quantity!">
                     </mat-form-field>
 
                     <span style="margin-left: auto;">
