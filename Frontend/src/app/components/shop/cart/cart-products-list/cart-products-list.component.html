@@ -1,10 +1,10 @@
 <div>
-    <div class="flex flex-column">
+    <div class="flex flex-column" *ngIf="isLoaded">
         <div class="flex flex-center" style="align-items: center; width: 600px; ">
-            <span class="cart-header">Cart ({{customerCart.length}})</span>
+            <span class="cart-header" *ngIf="customerCart">Cart ({{customerCart.length}})</span>
 
             <span class="flex flex-center clear-button" style="align-items: center;">
-                <button mat-button>
+                <button mat-button (click)="onClearClick()">
                     <mat-icon>delete</mat-icon>Clear cart
                 </button>
             </span>
@@ -56,7 +56,8 @@
                 </span>
                 <mat-divider></mat-divider>
                 <span class="center">
-                    <button mat-raised-button color="primary" class="next-button" matStepperNext>
+                    <button mat-raised-button color="primary" class="next-button" matStepperNext
+                        [disabled]="!customerCart || customerCart.length === 0">
                         Go to payment<mat-icon>chevron_right</mat-icon>
                     </button>
                 </span>

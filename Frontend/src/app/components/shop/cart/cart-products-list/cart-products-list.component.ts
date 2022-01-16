@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
+import { Order } from 'src/app/models/shop-models/order.model';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 
 @Component({
@@ -8,13 +10,16 @@ import { CustomerCartService } from 'src/app/services/shop/customer-cart.service
   styleUrls: ['./cart-products-list.component.scss']
 })
 export class CartProductsListComponent implements OnInit {
-  public customerCart!: CustomerCart[];
+  @Input() order!: Order;
+  @Input() customerCart!: CustomerCart[];
+  isLoaded = false;
   constructor(
-    private readonly _customerCartService: CustomerCartService
+    private readonly _customerCartService: CustomerCartService,
+    private readonly _router: Router
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.customerCart = await this._customerCartService.getAllForLoggedUser();
+    this.isLoaded = true;
   }
 
   public getTotalBruttoValue(): number {
@@ -22,9 +27,10 @@ export class CartProductsListComponent implements OnInit {
     this.customerCart.forEach(p => {
       result += p.product!.bruttoPrice;
     });
-
+    this.order.totalPrice = result;
     return result;
   }
+
   getTotalNettoValue(): number {
     var result = 0;
     this.customerCart.forEach(p => {
@@ -32,5 +38,10 @@ export class CartProductsListComponent implements OnInit {
     });
 
     return result;
+  }
+
+  async onClearClick() {
+    await this._customerCartService.clear();
+    this._router.navigate(['']);
   }
 }

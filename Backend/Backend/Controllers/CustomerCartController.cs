@@ -46,5 +46,14 @@ namespace ShopPanelWebApi.Controllers
             payload.Quantity = 1;
             await _service.Insert(payload);
         }
+
+        [HttpDelete("clear-user-cart/{userId}")]
+        public async Task ClearUserCart(int userId)
+        {
+            var db = await _context.CustomersCarts
+                .Where(c => c.CustomerId == userId).ToListAsync();
+            _context.RemoveRange(db);
+            await _context.SaveChangesAsync();
+        }
     }
 }

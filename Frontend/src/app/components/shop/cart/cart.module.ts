@@ -14,6 +14,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SummaryComponent } from './summary/summary.component';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
+import { CarriersService } from 'src/app/services/shop/carriers.service';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { CustomerCartService } from 'src/app/services/shop/customer-cart.service
         MatCheckboxModule
     ],
     providers: [
-        CustomerCartService
+        CustomerCartService,
+        CarriersService
     ],
     exports: [
     ]
