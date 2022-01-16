@@ -1,9 +1,9 @@
 ﻿using Common;
 using Common.Models.ApiModels;
 using Common.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ShopPanelWebApi.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/[controller]")]
+    [TokenAuthenticationFilter]
     [ApiController]
     public class ApiController : ControllerBase
     {
