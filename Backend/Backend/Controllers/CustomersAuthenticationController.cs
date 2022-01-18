@@ -5,6 +5,7 @@ using Common.Utilieties;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopWebApi.Filters;
+using System;
 using System.Threading.Tasks;
 
 namespace ShopWebApi.Controllers
@@ -39,6 +40,8 @@ namespace ShopWebApi.Controllers
             {
                 var token = new { Token = _authService.GenerateToken() };
                 token.Token.UserId = customer.Id;
+                customer.LastLoginDate = DateTime.Now.ToLocalTime();
+                await _context.SaveChangesAsync();
                 return Ok(token);
             }
             else

@@ -4,12 +4,9 @@
 </div>
 
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
-    to do filters
-
     <div class="w-100">
         <shared-data-table *ngIf="isLoaded" [dataSource]="productsList" [displayedColumns]="displayedColumns"
-            [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons"
-            [hasSelectableRows]="true">
+            [columnsNames]="columnsNames" [buttons]="tableButtons" [menuButtons]="menuButtons">
         </shared-data-table>
     </div>
 </div>

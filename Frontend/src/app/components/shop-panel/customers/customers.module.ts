@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from '../../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { CustomersComponent } from './customers.component';
+import { CustomersService } from 'src/app/services/shop-panel-services/customers.service';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { CustomersComponent } from './customers.component';
         MatSelectModule,
     ],
     providers: [
+        CustomersService
     ],
     exports: [
         CustomersComponent,
