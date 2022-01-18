@@ -14,7 +14,7 @@ export interface Order {
     carrier?: Carrier | null;
     customerId: number;
     customer?: Customer | null;
-    totalPrice: number;
+    priceTotal: number;
     date: Date;
     additionalDescription: string;
     ordersProducts?: OrdersProducts[] | null;

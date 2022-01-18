@@ -17,7 +17,6 @@ namespace Common.Models.ShopModels
         public float PriceTotal { get; set; }
         public DateTime Date { get; set; }
         public string AdditionalDescription { get; set; }
-        [JsonIgnore]
         public List<OrdersProducts> OrdersProducts { get; set; }
         public bool IsActive { get; set; }
         public DateTime CompleteDate { get; set; }

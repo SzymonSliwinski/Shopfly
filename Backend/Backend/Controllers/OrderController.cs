@@ -33,8 +33,12 @@ namespace ShopWebApi.Controllers
             order.Date = DateTime.Now.ToLocalTime();
             order.StatusId = 1;
             //  order.AdditionalDescription = order.AdditionalDescription.Trim();
-            order.IsActive = true;
+            foreach (var orderProduct in order.OrdersProducts)
+            {
+                orderProduct.Order = order;
+            }
 
+            order.IsActive = true;
             order.DeliveryAddressStreet = order.DeliveryAddressStreet.Trim();
             order.DeliveryAddressPostal = order.DeliveryAddressPostal.Trim();
             order.DeliveryAddressCity = order.DeliveryAddressCity.Trim();

@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { StatusService } from 'src/app/services/shared/status.service';
 import { MatRadioModule } from '@angular/material/radio';
+import { OrdersService } from 'src/app/services/shop-panel-services/orders.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MatRadioModule } from '@angular/material/radio';
   ],
   providers: [
     OrderService,
-    StatusService
+    StatusService,
+    OrdersService
   ],
   exports: [
     OrdersComponent,
