@@ -25,10 +25,11 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
     this.products = this.customerCart;
     this.order.ordersProducts = [];
+    this.order.priceTotal = 0;
     this.products.forEach(val => {
+      this.order.priceTotal += val.product!.bruttoPrice;
       this.order.ordersProducts!.push(
         {
-          //   order: this.order,
           productId: val.productId,
           productQuantity: val.quantity!
         } as OrdersProducts
@@ -41,7 +42,7 @@ export class SummaryComponent implements OnInit {
 
   async onSubmit() {
     this.order.carrier = null;
-    this.order.paymentType = null;
+    this.order.paymentType = null; console.log(this.order)
     await this._ordersService.add(this.order);
     await this._customerCartService.clear();
     this._router.navigate(['']);

@@ -27,7 +27,7 @@ export class CartProductsListComponent implements OnInit {
     this.customerCart.forEach(p => {
       result += p.product!.bruttoPrice;
     });
-    this.order.totalPrice = result;
+    this.order.priceTotal = result;
     return result;
   }
 
