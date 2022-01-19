@@ -1,21 +1,10 @@
-<mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Change status">
-        <mat-radio-group color="primary" class="container">
-            <mat-radio-button *ngFor="let status of statusesList" value="status.id" [(ngModel)]="selectedStatusId">
-                {{status.name}}
-            </mat-radio-button>
-        </mat-radio-group>
-        <button mat-raised-button color="primary" style="margin-left: 10px" (click)="onSaveClick()">
-            Save
-        </button>
-    </mat-tab>
-    <mat-tab label="Add new status">
-        <mat-form-field>
-            <mat-label>Status name</mat-label>
-            <input matInput maxlength="30" [(ngModel)]="newStatus.name">
-        </mat-form-field>
-        <button mat-raised-button color="primary" style="margin-left: 10px" (click)="onAddClick()">
-            Add
-        </button>
-    </mat-tab>
-</mat-tab-group>
+<div *ngIf="isLoaded">
+    <mat-radio-group color="primary" class="container" [(ngModel)]="selectedStatusId">
+        <mat-radio-button *ngFor="let status of statusesList" [value]="status.id">
+            {{status.name}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <button mat-raised-button color="primary" style="margin-left: 10px" (click)="onSaveClick()">
+        Save
+    </button>
+</div>

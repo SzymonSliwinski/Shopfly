@@ -16,7 +16,7 @@ import { OrdersService } from 'src/app/services/shop-panel-services/orders.servi
 export class OrdersComponent implements OnInit {
   public ordersList: OrderDisplayDto[] = [];
   viewDto!: OrdersDto;
-  public tableButtons: TableButton[] = [TableButton.Delete, TableButton.Details, TableButton.Edit];
+  public tableButtons: TableButton[] = [TableButton.Details, TableButton.Edit];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'ID', objectField: 'id' },
@@ -45,12 +45,16 @@ export class OrdersComponent implements OnInit {
     this.isLoaded = true;
   }
 
-  deleteOrder(order: OrderDisplayDto) {
-    // this._orderService.delete(order.id);
-  }
-
   editStatus(order: OrderDisplayDto) {
-    this.dialog.open(ChangeStatusDialogComponent);
-  }
+    const dialogRef = this.dialog.open(ChangeStatusDialogComponent, {
+      data: {
+        actualStatus: order.status,
+        orderId: order.id
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(res => {
+      order.status = res;
+    })
+  }
 }
