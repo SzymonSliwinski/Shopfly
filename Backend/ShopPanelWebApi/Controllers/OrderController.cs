@@ -75,6 +75,7 @@ namespace ShopPanelWebApi.Controllers
             order.CustomerPhoneNumber = order.CustomerPhoneNumber.Trim();
             order.CustomerEmail = order.CustomerEmail.Trim();
 
+
             return Ok(await service.Insert(order));
         }
 

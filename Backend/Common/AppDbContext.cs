@@ -47,6 +47,7 @@ namespace Common
 
         public AppDbContext(DbContextOptions option) : base(option) { }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //configuration
@@ -257,6 +258,13 @@ namespace Common
             modelBuilder.Entity<Status>()
                .HasIndex(c => c.Name)
                .IsUnique();
+            modelBuilder.Entity<Status>()
+                .HasData(new Status[]{
+                   new Status(){Id = 1, Name = "New" },
+                   new Status(){Id = 2, Name="In progress"},
+                   new Status(){Id = 3, Name="Canceled"},
+                   new Status(){Id = 4, Name="Completed" }
+                });
         }
 
         private void ConfigureTags(ModelBuilder modelBuilder)
