@@ -1,0 +1,9 @@
+<div class="w-90 center" *ngIf="isLoaded">
+    <shared-data-table *ngIf="isLoaded" [dataSource]="productsList" [displayedColumns]="displayedColumns"
+        [columnsNames]="columnsNames">
+    </shared-data-table>
+</div>
+
+<div mat-dialog-actions class="flex">
+    <button mat-button (click)="onCloseClick()" style="margin-left: auto;">Close</button>
+</div>

@@ -18,11 +18,14 @@ import { FormsModule } from '@angular/forms';
 import { StatusService } from 'src/app/services/shared/status.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { OrdersService } from 'src/app/services/shop-panel-services/orders.service';
+import { OrderProductsDialog } from './order-products/order-products.dialog';
+import { OrdersProductsService } from 'src/app/services/shop-panel-services/orders-products.service';
 
 @NgModule({
   declarations: [
     OrdersComponent,
-    ChangeStatusDialogComponent
+    ChangeStatusDialogComponent,
+    OrderProductsDialog
   ],
   entryComponents: [
 
@@ -46,7 +49,8 @@ import { OrdersService } from 'src/app/services/shop-panel-services/orders.servi
   providers: [
     OrderService,
     StatusService,
-    OrdersService
+    OrdersService,
+    OrdersProductsService
   ],
   exports: [
     OrdersComponent,
