@@ -7,6 +7,7 @@ import { ChangeStatusDialogComponent } from './change-status-dialog/change-statu
 import { MatDialog, } from '@angular/material/dialog';
 import { OrdersDto } from 'src/app/dto/orders.dto';
 import { OrdersService } from 'src/app/services/shop-panel-services/orders.service';
+import { OrderProductsDialog } from './order-products/order-products.dialog';
 
 @Component({
   selector: 'app-orders',
@@ -56,5 +57,12 @@ export class OrdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       order.status = res;
     })
+  }
+
+  onDetailsClick(orderDto: OrderDisplayDto) {
+    this.dialog.open(OrderProductsDialog, {
+      data: orderDto.id,
+      width: '800px'
+    });
   }
 }

@@ -27,8 +27,7 @@
             <mat-icon class="i-36" style="color: #d4853a">paid</mat-icon>
         </span>
         <span class="flex-align-center">Orders total value</span>
-        <span class="flex-align-center">{{viewDto.ordersTotalValue}}</span>
-
+        <span class="flex-align-center">{{viewDto.ordersTotalValue}}$</span>
     </div>
 
     <div class="flex-column flex-align-center">
@@ -36,7 +35,7 @@
             <mat-icon class="i-36" style="color: #ce7d78">request_quote</mat-icon>
         </span>
         <span class="flex-align-center">Average order value</span>
-        <span class="flex-align-center">{{viewDto.averageOrderValue}}</span>
+        <span class="flex-align-center">{{viewDto.averageOrderValue}}$</span>
     </div>
 </div>
 
@@ -46,6 +45,7 @@
 
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
     <shared-data-table *ngIf="isLoaded" [dataSource]="ordersList" [displayedColumns]="displayedColumns"
-        [columnsNames]="columnsNames" [buttons]="tableButtons" (editEvent)="editStatus($event)">
+        [columnsNames]="columnsNames" [buttons]="tableButtons" (editEvent)="editStatus($event)"
+        (detailsEvent)="onDetailsClick($event)">
     </shared-data-table>
 </div>
