@@ -16,6 +16,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 import { CarriersService } from 'src/app/services/shop/carriers.service';
 import { OrdersService } from 'src/app/services/shop/orders.service';
+import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { OrdersService } from 'src/app/services/shop/orders.service';
     providers: [
         CustomerCartService,
         CarriersService,
-        OrdersService
+        OrdersService,
+        CustomerFavoritesProductsService
     ],
     exports: [
     ]

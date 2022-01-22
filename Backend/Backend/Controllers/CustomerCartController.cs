@@ -43,8 +43,19 @@ namespace ShopPanelWebApi.Controllers
         [HttpPost]
         public async Task Add([FromBody] CustomerCart payload)
         {
-            payload.Quantity = 1;
-            await _service.Insert(payload);
+            var db = await _context.CustomersCarts
+                .Where(c => c.ProductId == payload.ProductId && c.CustomerId == payload.CustomerId)
+                .SingleOrDefaultAsync();
+            if (db == null)
+            {
+                payload.Quantity = 1;
+                await _service.Insert(payload);
+            }
+            else
+            {
+                db.Quantity++;
+            }
+            await _context.SaveChangesAsync();
         }
 
         [HttpDelete("clear-user-cart/{userId}")]
@@ -53,6 +64,16 @@ namespace ShopPanelWebApi.Controllers
             var db = await _context.CustomersCarts
                 .Where(c => c.CustomerId == userId).ToListAsync();
             _context.RemoveRange(db);
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpDelete("remove/{productId}/{userId}")]
+        public async Task RemoveProduct(int userId, int productId)
+        {
+            var db = await _context.CustomersCarts
+                .Where(c => c.CustomerId == userId && c.ProductId == productId)
+                .SingleAsync();
+            _context.Remove(db);
             await _context.SaveChangesAsync();
         }
     }

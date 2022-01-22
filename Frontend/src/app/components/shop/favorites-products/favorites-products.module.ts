@@ -4,6 +4,7 @@ import { FavoritesProductsComponent } from './favorites-products.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 @NgModule({
     declarations: [
         FavoritesProductsComponent,
@@ -15,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
         MatDividerModule
     ],
     providers: [
+        CustomerFavoritesProductsService
     ],
     exports: [
         FavoritesProductsComponent

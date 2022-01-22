@@ -17,14 +17,17 @@ export class CustomerCartService {
         return this._http.delete<void>(environment._shopApiUrl + `shop/customer-cart/clear-user-cart/${userId}`).toPromise()
     }
 
+    public async removeProduct(productId: number) {
+        const userId = JSON.parse(sessionStorage.getItem(environment._shopStorageKey)!).token.userId;
+        return this._http.delete<void>(environment._shopApiUrl + `shop/customer-cart/remove/${productId}/${userId}`).toPromise()
+    }
+
     public async add(productId: number): Promise<void> {
-        console.log(sessionStorage.getItem(environment._shopStorageKey))
         const userId = JSON.parse(sessionStorage.getItem(environment._shopStorageKey)!).token.userId;
         const payload = {
             customerId: userId,
             productId: productId
         } as CustomerCart
-        console.log(userId);
         return this._http.post<void>(environment._shopApiUrl + 'shop/customer-cart', payload).toPromise()
     }
 
