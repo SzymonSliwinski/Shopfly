@@ -15,34 +15,26 @@ export class OrderProductsDialog implements OnInit {
 
   constructor(
     private readonly _dialogRef: MatDialogRef<OrderProductsDialog>,
-    private readonly _ordersProductsService: OrdersProductsService,
-    @Inject(MAT_DIALOG_DATA) public orderId: number,
+    @Inject(MAT_DIALOG_DATA) private readonly _orderProducts: ProductDisplayDto[],
   ) { }
 
   public displayedColumns: TableColumnDto[] =
     [
-      { title: 'ID', objectField: 'id' },
       { title: 'Photo', objectField: 'photo', contentMode: ContentMode.Photo },
       { title: 'Name', objectField: 'name' },
       { title: 'Category', objectField: 'category' },
       { title: 'Netto', objectField: 'nettoPrice' },
       { title: 'Brutto', objectField: 'bruttoPrice' },
       { title: 'Visible', objectField: 'isVisible', contentMode: ContentMode.TrueOrFalse },
-      { title: 'Stock', objectField: 'stock' },
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
   public columnsNames: string[] = [];
 
   ngOnInit(): void {
-    this.refresh();
+    this.productsList = this._orderProducts;
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
     });
-  }
-
-  async refresh(): Promise<void> {
-    this.isLoaded = false;
-    this.productsList = await this._ordersProductsService.getAllProductsForOrder(this.orderId);
     this.isLoaded = true;
   }
 
