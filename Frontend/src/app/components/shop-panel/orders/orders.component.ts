@@ -8,6 +8,7 @@ import { MatDialog, } from '@angular/material/dialog';
 import { OrdersDto } from 'src/app/dto/orders.dto';
 import { OrdersService } from 'src/app/services/shop-panel-services/orders.service';
 import { OrderProductsDialog } from './order-products/order-products.dialog';
+import { OrdersProductsService } from 'src/app/services/shop-panel-services/orders-products.service';
 
 @Component({
   selector: 'app-orders',
@@ -33,7 +34,8 @@ export class OrdersComponent implements OnInit {
 
   constructor(
     private readonly dialog: MatDialog,
-    private readonly _ordersService: OrdersService
+    private readonly _ordersService: OrdersService,
+    private readonly _ordersProductsService: OrdersProductsService,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -59,9 +61,9 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  onDetailsClick(orderDto: OrderDisplayDto) {
+  async onDetailsClick(orderDto: OrderDisplayDto) {
     this.dialog.open(OrderProductsDialog, {
-      data: orderDto.id,
+      data: await this._ordersProductsService.getAllProductsForOrder(orderDto.id),
       width: '800px'
     });
   }

@@ -19,9 +19,11 @@ import { FavoritesProductsModule } from './favorites-products/favorites-products
 import { ProductsPageModule } from './products-page/products-page.module';
 import { ListsService } from 'src/app/services/shop/lists.service';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
+import { UserOrderListModule } from './user-order-list/user-order-list.module';
+import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 @NgModule({
   declarations: [
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -39,12 +41,14 @@ import { CustomerCartService } from 'src/app/services/shop/customer-cart.service
     CarouselModule,
     CartModule,
     FavoritesProductsModule,
-    ProductsPageModule
+    ProductsPageModule,
+    UserOrderListModule
   ],
   providers: [
     AuthenticationService,
     ListsService,
-    CustomerCartService
+    CustomerCartService,
+    CustomerFavoritesProductsService
   ],
   exports: []
 })

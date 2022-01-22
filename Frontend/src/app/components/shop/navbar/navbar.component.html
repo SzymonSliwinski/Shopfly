@@ -41,8 +41,12 @@
 
 <mat-menu #notLoggedUserMenu="matMenu" yPosition="below">
   <div style="width: 270px;">
-    <h3 class="text-center">Welcome in Shopfly</h3>
-    <p class="note">Please sign in to have fully access to shop functions</p>
+    <h3 class="text-center">
+      Welcome in Shopfly
+    </h3>
+    <p class="note">
+      Please sign in to have fully access to shop functions
+    </p>
     <hr>
     <div class="sign-in-button-wrapper">
       <button mat-flat-button color="primary" class="sign-in-button" [routerLink]="['sign-in']">
@@ -51,7 +55,10 @@
     </div>
 
     <div class="flex" style="gap: 5px;">
-      <p>No account yet?</p> <a href="sign-up">Sign up</a>
+      <p>No account yet?</p>
+      <a href="sign-up">
+        Sign up
+      </a>
     </div>
   </div>
 </mat-menu>
@@ -61,11 +68,15 @@
     <h3 class="text-center">Hi {{customerName}}</h3>
     <hr>
     <div class="sign-in-button-wrapper">
-      <button mat-flat-button class="sign-in-button" color="primary">Orders</button>
+      <button mat-flat-button class="sign-in-button" color="primary" [routerLink]="['my-orders']">
+        Orders
+      </button>
     </div>
     <div style="height: 10px;"></div>
     <div class="sign-in-button-wrapper">
-      <button mat-flat-button class="sign-in-button" (click)="onLogoutClick()" color="primary">Logout</button>
+      <button mat-flat-button class="sign-in-button" (click)="onLogoutClick()" color="primary">
+        Logout
+      </button>
     </div>
   </div>
 </mat-menu>

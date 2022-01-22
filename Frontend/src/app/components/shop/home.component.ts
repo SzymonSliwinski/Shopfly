@@ -9,6 +9,7 @@ import { HomeProductsList } from 'src/app/models/shop-models/home-products-lists
 import { HomeList } from 'src/app/models/shop-models/home-list.model';
 import { ListsService } from 'src/app/services/shop/lists.service';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
+import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 interface Node {
   expandable: boolean;
   name: string;
@@ -54,6 +55,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _listService: ListsService,
+    private readonly _favoritesProductsList: CustomerFavoritesProductsService,
     private readonly _customerCartService: CustomerCartService
   ) {
     this.dataSource.data;
@@ -131,8 +133,8 @@ export class HomeComponent implements OnInit {
     return new Date().getFullYear().toString();
   }
 
-  onAddToFavoritesClick() {
-
+  async onAddToFavoritesClick(id: number) {
+    await this._favoritesProductsList.add(id);
   }
 
   async onAddToCartClick(id: number) {

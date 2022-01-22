@@ -12,15 +12,16 @@
         <div class="product-wrapper flex p-10 flex-center" *ngFor="let favoriteProduct of favoritesProducts"
             style="align-items: center;">
             <span>
-                <img class=" product-miniature"
-                    src="{{favoriteProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                <!-- src="{{favoriteProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}} -->
+                <img class="product-miniature">
             </span>
-            <span class="product-name p-10" style="width: 500px; ">
+            <span class=" product-name p-10" style="width: 500px; ">
                 {{favoriteProduct.product!.name}}
             </span>
             <div style="height: 25px;"></div>
             <span style="margin-left: auto; padding-right: 20px;">
                 {{favoriteProduct.product!.bruttoPrice | number:'1.2-2'}}$</span>
+
             <mat-divider></mat-divider>
         </div>
     </div>
