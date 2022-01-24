@@ -210,11 +210,11 @@ namespace Common
 
         private void ConfigurePhotos(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Photo>()
-                .Property(p => p.Path).HasMaxLength(50);
-            modelBuilder.Entity<Photo>()
-                .HasIndex(c => c.Path)
-                .IsUnique();
+            // modelBuilder.Entity<Photo>()
+            //     .Property(p => p.Path).HasMaxLength(50);
+            //  modelBuilder.Entity<Photo>()
+            //      .HasIndex(c => c.Path)
+            //     .IsUnique();
         }
 
         private void ConfigureProducts(ModelBuilder modelBuilder)

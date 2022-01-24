@@ -15,6 +15,14 @@ export class ProductsService {
             { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
     }
 
+    public async addPhoto(photo: File): Promise<Product> {
+        console.log(photo)
+        const fd = new FormData();
+        fd.append('file', photo);
+        return this._http.post<Product>(environment._shopPanelApiUrl + 'product/photo', fd,
+            { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
+    }
+
     public async getAll(): Promise<Product[]> {
         return this._http.get<Product[]>(environment._shopPanelApiUrl + 'product/get-all',
             { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
@@ -23,5 +31,10 @@ export class ProductsService {
     public async getForTable(): Promise<ProductDisplayDto[]> {
         return this._http.get<ProductDisplayDto[]>(environment._shopPanelApiUrl + 'product/get-all-as-dtos',
             { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
+    }
+
+    public async getPhoto(productId: number): Promise<Blob> {
+        return this._http.get(environment._shopPanelApiUrl + `product/photo/${productId}`,
+            { headers: new HttpHeaders().set('Authorization', this.storage.token.value), responseType: 'blob' }).toPromise();
     }
 }

@@ -1,7 +1,8 @@
+import { SafeUrl } from "@angular/platform-browser";
 
 export interface ProductDisplayDto {
     id: number;
-    photo: string;
+    photo: SafeUrl;
     name: string;
     category: string;
     nettoPrice: number;

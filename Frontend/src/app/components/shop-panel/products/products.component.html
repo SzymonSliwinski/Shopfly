@@ -187,4 +187,4 @@
     </div>
 </div>
 
-<input type="file" accept="image/*" #photo style="display: none;">
+<input type="file" accept="image/*" #photo style="display: none;" (change)="onPhotoUpload($event)">
