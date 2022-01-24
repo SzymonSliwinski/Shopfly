@@ -48,7 +48,7 @@ namespace ShopPanelWebApi.Controllers
         {
             var service = new CrudService<Photo>(_photoService);
 
-            photo.Path = photo.Path.Trim();
+            //photo.Bytes = photo.Bytes.Trim();
 
             return Ok(await service.Insert(photo));
         }
@@ -60,7 +60,7 @@ namespace ShopPanelWebApi.Controllers
             var oldPhoto = await service.GetById(updatedPhoto.Id);
 
             oldPhoto.IsCover = updatedPhoto.IsCover;
-            oldPhoto.Path = updatedPhoto.Path.Trim();
+            //  oldPhoto.Bytes = updatedPhoto.Bytes.Trim();
 
             return Ok(await service.Update(oldPhoto));
         }

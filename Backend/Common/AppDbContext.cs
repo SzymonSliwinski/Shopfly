@@ -83,6 +83,7 @@ namespace Common
             SetProductVariantsPhotosRelation(modelBuilder);
             SetCustomersRatingsRelation(modelBuilder);
             SetHomeProductsLists(modelBuilder);
+            SetCategoriesSelfRelation(modelBuilder);
         }
 
         // ShopPanelModels configuration:
@@ -209,11 +210,11 @@ namespace Common
 
         private void ConfigurePhotos(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Photo>()
-                .Property(p => p.Path).HasMaxLength(50);
-            modelBuilder.Entity<Photo>()
-                .HasIndex(c => c.Path)
-                .IsUnique();
+            // modelBuilder.Entity<Photo>()
+            //     .Property(p => p.Path).HasMaxLength(50);
+            //  modelBuilder.Entity<Photo>()
+            //      .HasIndex(c => c.Path)
+            //     .IsUnique();
         }
 
         private void ConfigureProducts(ModelBuilder modelBuilder)
@@ -494,6 +495,14 @@ namespace Common
                 .WithMany(r => r.HomeProductsLists)
                 .HasForeignKey(r => r.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        public void SetCategoriesSelfRelation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>()
+                .HasOne(c => c.ParentCategory)
+                .WithMany(p => p.ChildrensCategories)
+                .HasForeignKey(c => c.ParentCategoryId);
         }
     }
 }

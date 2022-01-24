@@ -25,7 +25,7 @@
             </span>
             <!-- photo -->
             <span *ngIf="displayedColumn.contentMode === contentMode.Photo">
-                <img width="40" height="40" src="{{ element[displayedColumn.objectField!] }}">
+                <img width="40" height="40" [src]="element[displayedColumn.objectField!]">
             </span>
             <!-- true or false -->
             <span *ngIf="displayedColumn.contentMode === contentMode.TrueOrFalse">

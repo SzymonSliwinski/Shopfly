@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductDisplayDto } from 'src/app/dto/product-display.dto';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { Category } from 'src/app/models/shop-models/category.model';
@@ -21,6 +22,7 @@ export class ProductsComponent implements OnInit {
   public productsList!: ProductDisplayDto[];
   public isChoosenElementVisible!: boolean;
   public categoriesList: Category[] = [];
+  private uploadedFile!: File;
   @ViewChild(CategoriesComponent) child!: CategoriesComponent;
   isLoaded = false;
   public isAddMode = false;
@@ -28,7 +30,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private readonly _productsService: ProductsService,
     private readonly _categoriesService: CategoriesService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private _sanitizer: DomSanitizer
   ) { }
 
   public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
@@ -53,6 +56,9 @@ export class ProductsComponent implements OnInit {
     this.isLoaded = false;
     this.productsList = await this._productsService.getForTable();
     this.categoriesList = await this._categoriesService.getAll();
+    this.productsList.forEach(async product => {
+      product.photo = await this.getPhotoForProduct(product.id);
+    });
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
     });
@@ -69,6 +75,13 @@ export class ProductsComponent implements OnInit {
 
   async onAddClick() {
     await this._productsService.add(this.newProduct);
+    await this._productsService.addPhoto(this.uploadedFile);
+  }
+
+  private async getPhotoForProduct(productId: number): Promise<SafeUrl> {
+    const blob = await this._productsService.getPhoto(productId);
+    const urll = URL.createObjectURL(blob);
+    return this._sanitizer.bypassSecurityTrustUrl(urll);
   }
 
   onAddCategoryClick() {
@@ -93,5 +106,12 @@ export class ProductsComponent implements OnInit {
     dialog.afterClosed().subscribe(res => {
       this.child.refresh();
     });
+  }
+
+  onPhotoUpload(event: any) {
+    if (event.target.files && event.target.files.length == 1) {
+      this.uploadedFile = event.target.files[0];
+      console.log(this.uploadedFile)
+    }
   }
 }

@@ -5,6 +5,14 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+        <mat-select [(ngModel)]="category.parentCategoryId">
+            <mat-option *ngFor="let category of categoriesList" [value]="category.id">
+                {{category.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Position</mat-label>
         <input matInput type="number" [(ngModel)]="category.position">
     </mat-form-field>

@@ -9,6 +9,8 @@ using ShopPanelWebApi.Dtos;
 using Microsoft.EntityFrameworkCore;
 using ShopPanelWebApi.Filters;
 using System.Linq;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -48,11 +50,30 @@ namespace ShopPanelWebApi.Controllers
             var products = await _context.Products
                 .AsQueryable()
                 .Include(p => p.Category)
+                .Include(c => c.ProductsVariants)
+                .ThenInclude(c => c.ProductsVariantsPhotos)
+                .ThenInclude(c => c.Photo)
                 .ToListAsync();
 
             foreach (var product in products)
                 results.Add(new ProductDisplayDto(product));
+
             return Ok(results);
+        }
+
+        [HttpGet("photo/{productId}")]
+        public async Task<ActionResult<Photo>> GetPhotoForProduct(int productId)
+        {
+            var product = await _context.Products
+                .AsQueryable()
+                .Where(c => c.Id == productId)
+                .Include(p => p.Category)
+                .Include(c => c.ProductsVariants)
+                .ThenInclude(c => c.ProductsVariantsPhotos)
+                .ThenInclude(c => c.Photo)
+                .SingleAsync();
+
+            return File(product.ProductsVariants.First().ProductsVariantsPhotos.First().Photo.Bytes, "application/png", "");
         }
 
         [HttpDelete("{id}")]
@@ -82,9 +103,40 @@ namespace ShopPanelWebApi.Controllers
                 Price = product.NettoPrice,
                 Quantity = product.Stock,
             });
-            // to do with photo
             return Ok(await service.Insert(product));
         }
+
+        [HttpPost("photo")]
+        public async Task AddPhoto(IFormFile file)
+        {
+            var product = await _context.Products.Include(c => c.ProductsVariants).OrderByDescending(c => c.Id).FirstOrDefaultAsync();
+            var productVariantPhotos = new List<ProductsVariantsPhotos>();
+            if (file.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await file.CopyToAsync(ms);
+                    var bytes = ms.ToArray();
+
+                    var photo = new Photo()
+                    {
+                        IsCover = true,
+                        Bytes = bytes
+                    };
+                    await _context.Photos.AddAsync(photo);
+                    await _context.SaveChangesAsync();
+
+                    productVariantPhotos.Add(new ProductsVariantsPhotos()
+                    {
+                        ProductVariantId = product.ProductsVariants.First().Id,
+                        PhotoId = photo.Id
+                    });
+                }
+                product.ProductsVariants.First().ProductsVariantsPhotos = productVariantPhotos;
+                await _context.SaveChangesAsync();
+            }
+        }
+
 
         [HttpPatch]
         public async Task<ActionResult<Product>> Update([FromBody] Product updatedProduct)

@@ -10,6 +10,7 @@ import { HomeList } from 'src/app/models/shop-models/home-list.model';
 import { ListsService } from 'src/app/services/shop/lists.service';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
+import { CategoryService } from 'src/app/services/shop/category.service';
 interface Node {
   expandable: boolean;
   name: string;
@@ -56,7 +57,8 @@ export class HomeComponent implements OnInit {
     private readonly _router: Router,
     private readonly _listService: ListsService,
     private readonly _favoritesProductsList: CustomerFavoritesProductsService,
-    private readonly _customerCartService: CustomerCartService
+    private readonly _customerCartService: CustomerCartService,
+    private readonly _categoryService: CategoryService
   ) {
     this.dataSource.data;
     _router.events.subscribe((val) => {
@@ -68,37 +70,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.isLogged = this.checkIsLogged();
     this.productsLists = await this._listService.getAll();
-    this.dataSource.data = [
-      {
-        id: 1, name: 'kategoria 1', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories:
-          [
-            {
-              id: 2, name: 'kategoria 1.1', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: [
-                { id: 6, name: 'kategoria 1.1.1', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-                {
-                  id: 7, name: 'kategoria 1.1.2', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: [
-                    {
-                      id: 8, name: 'kategoria 1.1.1.1', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: [
-                        { id: 10, name: 'kategoria 1.1.1.1.1', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-                        { id: 11, name: 'kategoria 1.1.1.1.2', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-                      ]
-                    },
-                    { id: 9, name: 'kategoria 1.1.1.2', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-                  ]
-                },
-              ]
-            },
-            { id: 3, name: 'kategoria 1.2', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-          ]
-      },
-      {
-        id: 3, name: 'kategoria 2', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories:
-          [
-            { id: 4, name: 'kategoria 2.1', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-            { id: 5, name: 'kategoria 2.2', isRoot: true, parentCategoryId: null, position: 1, parentCategory: null, childrensCategories: null },
-          ]
-      }
-    ]
+    this.dataSource.data = await this._categoryService.getAll();
     this.isLoaded = true;
   }
 

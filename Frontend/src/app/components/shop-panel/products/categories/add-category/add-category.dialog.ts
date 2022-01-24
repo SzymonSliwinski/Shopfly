@@ -10,6 +10,7 @@ import { CategoriesService } from 'src/app/services/shop-panel-services/categori
 })
 export class AddCategoryDialog implements OnInit {
   public category: Category = {} as Category;
+  public categoriesList: Category[] = [];
   private isEditMode = false;
 
   constructor(
@@ -18,8 +19,9 @@ export class AddCategoryDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editCategory?: Category,
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.category.isActive = true;
+    this.categoriesList = await this._categoryService.getAll();
     if (this.editCategory) {
       this.category = JSON.parse(JSON.stringify(this.editCategory));
       this.isEditMode = true;
