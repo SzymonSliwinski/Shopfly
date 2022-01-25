@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductsPageComponent } from './products-page.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CardModule } from 'primeng/card';
+import { ProductsService } from 'src/app/services/shop/product.service';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { CardModule } from 'primeng/card';
         CardModule
     ],
     providers: [
+        ProductsService
     ],
     exports: [
         ProductsPageComponent

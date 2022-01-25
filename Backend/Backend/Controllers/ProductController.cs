@@ -28,8 +28,26 @@ namespace ShopPanelWebApi.Controllers
             _catService = new ShopWebApi.Services.CategoryService();
         }
 
-        [HttpGet("get-related-with/{category}")]
-        public async System.Threading.Tasks.Task<ActionResult<List<Product>>> GetAllRelatedProducts(string category)
+        [HttpGet("get-related-with/{category}/page/{page}")]
+        public async System.Threading.Tasks.Task<ActionResult<List<Product>>> GetAllRelatedProducts(string category, int page)
+        {
+            var relatedCategories = new List<int>();
+            var shopConfig = await _context.ShopSettings.SingleAsync();
+            var db = await _context.Categories
+                .Include(c => c.ChildrensCategories)
+                .Where(c => c.IsActive)
+                .ToListAsync();
+            var categoryTree = db.Where(c => c.Name == category).Single();
+            _catService.TraverseCategories(categoryTree, relatedCategories);
+            var results = await _context.Products
+                .Where(p => relatedCategories.Any(rc => rc == p.CategoryId))
+                .Skip(shopConfig.ProductsPerPage * (page - 1))
+                .ToListAsync();
+            return Ok(results);
+        }
+
+        [HttpGet("get-count-by-category/{category}")]
+        public async System.Threading.Tasks.Task<ActionResult<int>> GetAllRelatedProducts(string category)
         {
             var relatedCategories = new List<int>();
             var db = await _context.Categories
@@ -37,10 +55,24 @@ namespace ShopPanelWebApi.Controllers
                 .Where(c => c.IsActive)
                 .ToListAsync();
             var categoryTree = db.Where(c => c.Name == category).Single();
-            var categoriesQueue = new System.Collections.Generic.Queue<Category>();
             _catService.TraverseCategories(categoryTree, relatedCategories);
-            var results = await _context.Products.Where(p => relatedCategories.Any(rc => rc == p.CategoryId)).ToListAsync();
-            return Ok(results);
+            var result = await _context.Products.Where(p => relatedCategories.Any(rc => rc == p.CategoryId)).CountAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("photo/{productId}")]
+        public async System.Threading.Tasks.Task<ActionResult<Photo>> GetPhotoForProduct(int productId)
+        {
+            var product = await _context.Products
+                .AsQueryable()
+                .Where(c => c.Id == productId)
+                .Include(p => p.Category)
+                .Include(c => c.ProductsVariants)
+                .ThenInclude(c => c.ProductsVariantsPhotos)
+                .ThenInclude(c => c.Photo)
+                .SingleAsync();
+
+            return File(product.ProductsVariants.First().ProductsVariantsPhotos.First().Photo.Bytes, "application/png", "");
         }
     }
 }

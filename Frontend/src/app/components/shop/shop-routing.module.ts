@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'sign-up', component: SignUpComponent },
       { path: 'cart', component: CartComponent },
       { path: 'favorites', component: FavoritesProductsComponent },
-      { path: 'products/:categoryName/:pageNumber', component: ProductsPageComponent },
+      { path: 'products/:page', component: ProductsPageComponent },
       { path: 'my-orders', component: UserOrderListComponent },
     ]
   }

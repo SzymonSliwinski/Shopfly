@@ -118,6 +118,10 @@ export class HomeComponent implements OnInit {
   }
 
   async onCategoryClick(categoryName: string) {
-    await this._productsService.getByAllRelatedWithCategory(categoryName);
+    // await this._productsService.getByAllRelatedWithCategory(categoryName);
+    this._router.navigate(
+      ['/products/1'],
+      { queryParams: { category: `${categoryName}` } }
+    );
   }
 }
