@@ -22,6 +22,7 @@ import { CustomerCartService } from 'src/app/services/shop/customer-cart.service
 import { UserOrderListModule } from './user-order-list/user-order-list.module';
 import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 import { CategoryService } from 'src/app/services/shop/category.service';
+import { ProductsService } from 'src/app/services/shop/product.service';
 @NgModule({
   declarations: [
     HomeComponent
@@ -50,7 +51,8 @@ import { CategoryService } from 'src/app/services/shop/category.service';
     ListsService,
     CustomerCartService,
     CustomerFavoritesProductsService,
-    CategoryService
+    CategoryService,
+    ProductsService
   ],
   exports: []
 })

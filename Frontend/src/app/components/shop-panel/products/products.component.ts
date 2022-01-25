@@ -55,7 +55,7 @@ export class ProductsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.isLoaded = false;
     this.productsList = await this._productsService.getForTable();
-    this.categoriesList = await this._categoriesService.getAll();
+    this.categoriesList = await this._categoriesService.getOnlyChilds();
     this.productsList.forEach(async product => {
       product.photo = await this.getPhotoForProduct(product.id);
     });

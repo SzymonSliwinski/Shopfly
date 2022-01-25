@@ -6,20 +6,19 @@
             <mat-icon>close</mat-icon>
         </button>
     </div>
-    <div class="text-center" style="padding: 20px 10px 20px 0;">
-        <span class="categories-header">Hi to do</span>
-    </div>
-    <hr>
     <div style="padding: 20px 10px 20px 0">
         <span class="categories-header">
             Search by category
         </span>
     </div>
+    <hr>
     <div>
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
                 <button mat-icon-button disabled></button>
-                <button mat-button>{{node.name}}</button>
+                <span class="category" (click)="onCategoryClick(node.name)">
+                    {{node.name}}
+                </span>
             </mat-tree-node>
             <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
                 <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
@@ -27,7 +26,9 @@
                         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                     </mat-icon>
                 </button>
-                {{node.name}}
+                <span class="category" (click)="onCategoryClick(node.name)">
+                    {{node.name}}
+                </span>
             </mat-tree-node>
         </mat-tree>
     </div>

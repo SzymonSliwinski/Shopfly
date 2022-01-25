@@ -1,8 +1,8 @@
 <div class="h-50"></div>
 <div style="width: 1100px;" class="center">
     <div class="flex flex-column">
-        <span>Shopfly <mat-icon>chevron_right</mat-icon> Actual category</span>
-        <span class="header">Actual category (123 results)</span>
+        <!-- <span>Shopfly <mat-icon>chevron_right</mat-icon> Actual category</span> -->
+        <span class="header">Results: {{resultsCount}}</span>
     </div>
 
     <div class="flex">
@@ -21,19 +21,19 @@
                     <input matInput>
                 </mat-form-field>
             </div>
-            <mat-divider></mat-divider>
+            <!-- <mat-divider></mat-divider> -->
             <div style="height: 5px;"></div>
-            <div class="filter-title">Manufacturer</div>
-            <div class="p-10">
+            <!-- <div class="filter-title">Manufacturer</div> -->
+            <!-- <div class="p-10">
                 <mat-checkbox color="primary">Manufacturer 1</mat-checkbox>
                 <mat-checkbox color="primary">Manufacturer 2</mat-checkbox>
-            </div>
+            </div> -->
 
             <span class="filter-header">Sort</span>
             <mat-divider></mat-divider>
-            <mat-checkbox color="primary">Show only product on sale</mat-checkbox>
+            <!-- <mat-checkbox color="primary">Show only product on sale</mat-checkbox> -->
             <div style="height: 15px;"></div>
-            <div class="filter-title">Sort products</div>
+            <!-- <div class="filter-title">Sort products</div> -->
             <mat-form-field class="p-10" style="width: 100%">
                 <mat-label>Sort by</mat-label>
                 <mat-select>
@@ -61,8 +61,7 @@
                     <!--  -->
                     <p-card styleClass="product">
                         <ng-template pTemplate="header">
-                            <img alt="Card" class="product-image"
-                                src="{{productsList[i].productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                            <img alt="Card" class="product-image" [src]="productsUrl[productsList[i].id]">
                             <span class="product-name flex p-10">{{productsList[i].name}}</span>
                         </ng-template>
                         <ng-template pTemplate="footer">
@@ -80,8 +79,7 @@
                     <!--  -->
                     <p-card styleClass="product" *ngIf="i + 1 < productsList.length">
                         <ng-template pTemplate="header">
-                            <img alt="Card" class="product-image"
-                                src="{{productsList[i+1].productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                            <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+1].id]">
                             <span class="product-name flex p-10">{{productsList[i+1].name}}</span>
                         </ng-template>
                         <ng-template pTemplate="footer">
@@ -97,10 +95,9 @@
                         </ng-template>
                     </p-card>
                     <!--  -->
-                    <p-card styleClass="product" *ngIf="i + 2< productsList.length">
+                    <p-card styleClass="product" *ngIf="i + 2 < productsList.length">
                         <ng-template pTemplate="header">
-                            <img alt="Card" class="product-image"
-                                src="{{productsList[i+2].productsVariants![0].productsVariantsPhotos![0].photo!.path}}">
+                            <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+2].id]">
                             <span class="product-name flex p-10">{{productsList[i+2].name}}</span>
                         </ng-template>
                         <ng-template pTemplate="footer">

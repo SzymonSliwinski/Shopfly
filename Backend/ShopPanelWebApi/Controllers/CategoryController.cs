@@ -6,6 +6,7 @@ using Common.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using ShopPanelWebApi.Filters;
+using System.Collections.Generic;
 
 namespace ShopPanelWebApi.Controllers
 {
@@ -32,9 +33,16 @@ namespace ShopPanelWebApi.Controllers
         }
 
         [HttpGet("get-all")]
-        public async Task<ActionResult<Category>> GetAll()
+        public async Task<ActionResult<List<Category>>> GetAll()
         {
             return Ok(await _context.Categories.AsQueryable().Where(c => c.IsActive).ToListAsync());
+        }
+
+
+        [HttpGet("get-childrens")]
+        public async Task<ActionResult<List<Category>>> GetOnlyChilds()
+        {
+            return Ok(await _context.Categories.AsQueryable().Where(c => c.ChildrensCategories.Count == 0 && c.IsActive).OrderBy(c => c.Name).ToListAsync()); ;
         }
 
         [HttpDelete("{id}")]
