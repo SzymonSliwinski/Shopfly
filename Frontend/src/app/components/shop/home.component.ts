@@ -11,6 +11,7 @@ import { ListsService } from 'src/app/services/shop/lists.service';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 import { CategoryService } from 'src/app/services/shop/category.service';
+import { ProductsService } from 'src/app/services/shop/product.service';
 interface Node {
   expandable: boolean;
   name: string;
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   animateSidebar = false;
   isHomeSite = false;
   productsLists: HomeList[] = [];
+  allCategories: Category[] = []
   treeControl = new FlatTreeControl<Node>(
     node => node.level,
     node => node.expandable,
@@ -58,7 +60,8 @@ export class HomeComponent implements OnInit {
     private readonly _listService: ListsService,
     private readonly _favoritesProductsList: CustomerFavoritesProductsService,
     private readonly _customerCartService: CustomerCartService,
-    private readonly _categoryService: CategoryService
+    private readonly _categoryService: CategoryService,
+    private readonly _productsService: ProductsService
   ) {
     this.dataSource.data;
     _router.events.subscribe((val) => {
@@ -70,6 +73,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.isLogged = this.checkIsLogged();
     this.productsLists = await this._listService.getAll();
+    this.allCategories = await this._categoryService.getAll();
     this.dataSource.data = await this._categoryService.getAll();
     this.isLoaded = true;
   }
@@ -111,5 +115,9 @@ export class HomeComponent implements OnInit {
 
   async onAddToCartClick(id: number) {
     await this._customerCartService.add(id);
+  }
+
+  async onCategoryClick(categoryName: string) {
+    await this._productsService.getByAllRelatedWithCategory(categoryName);
   }
 }

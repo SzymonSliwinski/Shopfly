@@ -20,6 +20,11 @@
     left: 45%;
 }
 
+.category:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 #sidebar {
     background-color: #31353D;
     color: #ffffff;

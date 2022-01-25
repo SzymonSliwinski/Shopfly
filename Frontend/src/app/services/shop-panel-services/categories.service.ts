@@ -24,6 +24,11 @@ export class CategoriesService {
             { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
     }
 
+    public async getOnlyChilds() {
+        return this._http.get<Category[]>(environment._shopPanelApiUrl + 'category/get-childrens',
+            { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
+    }
+
     public async edit(category: Category): Promise<Category> {
         return this._http.patch<Category>(environment._shopPanelApiUrl + 'category', category,
             { headers: new HttpHeaders().set('Authorization', this.storage.token.value) }).toPromise()
