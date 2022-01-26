@@ -42,6 +42,7 @@ namespace ShopPanelWebApi.Controllers
             var results = await _context.Products
                 .Where(p => relatedCategories.Any(rc => rc == p.CategoryId))
                 .Skip(shopConfig.ProductsPerPage * (page - 1))
+                .Take(shopConfig.ProductsPerPage)
                 .ToListAsync();
             return Ok(results);
         }

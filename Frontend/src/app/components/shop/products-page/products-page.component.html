@@ -116,6 +116,10 @@
             </div>
         </div>
     </div>
+    {{actualPage}}
+    <p-paginator [first]="actualPage - 1" #paginator class="p-25" [rows]="30" [totalRecords]="resultsCount"
+        (onPageChange)="paginate($event)">
+    </p-paginator>
 </div>
 
 <div class="h-50"></div>

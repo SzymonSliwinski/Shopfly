@@ -20,7 +20,6 @@ using Common.Dtos;
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop-panel/shop-settings")]
-    [TokenAuthenticationFilter]
     [ApiController]
     public class ShopSettingsController : ControllerBase
     {
@@ -58,7 +57,6 @@ namespace ShopPanelWebApi.Controllers
         /// </summary>
         /// <param name="payload">updated ShopSettings</param>
         /// <returns></returns>
-
         [HttpPatch]
         public async Task<ActionResult<ShopSettings>> Update([FromBody] ShopSettings payload)
         {
