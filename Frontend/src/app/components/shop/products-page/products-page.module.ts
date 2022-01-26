@@ -12,6 +12,7 @@ import { ProductsPageComponent } from './products-page.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CardModule } from 'primeng/card';
 import { ProductsService } from 'src/app/services/shop/product.service';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { ProductsService } from 'src/app/services/shop/product.service';
         MatRadioModule,
         MatCheckboxModule,
         MatSelectModule,
-        CardModule
+        CardModule,
+        PaginatorModule
     ],
     providers: [
         ProductsService

@@ -1,4 +1,9 @@
-<table mat-table [dataSource]="dataSource" class="center w-95 mat-elevation-z8">
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="value" #input>
+</mat-form-field>
+
+<table mat-table [dataSource]="fixedDataSource" class="center w-95 mat-elevation-z8">
     <ng-container *ngFor="let displayedColumn of displayedColumns; let i = index"
         [matColumnDef]='displayedColumn.objectField!'>
         <th mat-header-cell *matHeaderCellDef>
@@ -58,7 +63,11 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="columnsNames"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsNames;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
 </table>
+<mat-paginator [pageSizeOptions]="[10, 30, 75, 100]"></mat-paginator>
 
 <mat-menu #moreMenu="matMenu" xPosition="before">
     <button mat-icon-button *ngIf="menuButtons.indexOf(menuButton.Edit) != -1">
