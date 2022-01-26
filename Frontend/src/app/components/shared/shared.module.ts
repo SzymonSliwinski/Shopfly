@@ -9,6 +9,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { PortalModule } from '@angular/cdk/portal';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
     declarations: [
         PanelSubpageHeaderComponent,
@@ -22,7 +26,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatButtonModule,
         PortalModule,
         MatMenuModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatPaginatorModule
     ],
     providers: [
 
