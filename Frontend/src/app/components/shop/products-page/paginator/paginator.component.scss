@@ -1,0 +1,14 @@
+.pagination {
+    font-size: 20px;
+}
+
+button {
+    color: black;
+    padding: 1px;
+    transition: background-color .2s;
+}
+
+.active {
+    background-color: #333;
+    color: white !important;
+}

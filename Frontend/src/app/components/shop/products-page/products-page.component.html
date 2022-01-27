@@ -98,7 +98,9 @@
                     <p-card styleClass="product" *ngIf="i + 2 < productsList.length">
                         <ng-template pTemplate="header">
                             <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+2].id]">
-                            <span class="product-name flex p-10">{{productsList[i+2].name}}</span>
+                            <span class="product-name flex p-10">
+                                {{productsList[i+2].name}}
+                            </span>
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <div class="flex flex-center" style="justify-content: center;">
@@ -114,12 +116,12 @@
                     </p-card>
                 </div>
             </div>
+            <div *ngIf="isLoaded" class="paginator">
+                <app-paginator [pages]="maxPages" [actualPage]="actualPage">
+                </app-paginator>
+            </div>
         </div>
     </div>
-    {{actualPage}}
-    <p-paginator [first]="actualPage - 1" #paginator class="p-25" [rows]="30" [totalRecords]="resultsCount"
-        (onPageChange)="paginate($event)">
-    </p-paginator>
 </div>
 
 <div class="h-50"></div>

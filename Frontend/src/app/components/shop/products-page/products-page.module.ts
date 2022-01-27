@@ -13,10 +13,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { CardModule } from 'primeng/card';
 import { ProductsService } from 'src/app/services/shop/product.service';
 import { PaginatorModule } from 'primeng/paginator';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 @NgModule({
     declarations: [
-        ProductsPageComponent
+        ProductsPageComponent,
+        PaginatorComponent
     ],
     imports: [
         CommonModule,

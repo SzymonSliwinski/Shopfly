@@ -1,0 +1,14 @@
+<div class="pagination">
+    <button mat-icon-button [disabled]="actualPage === 1" (click)="redirectToPage(actualPage - 1)">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <button mat-stroked-button *ngFor="let pageNumber of visiblePages"
+        [ngClass]="actualPage === pageNumber ? 'active' : ''" (click)="redirectToPage(pageNumber)">
+        {{pageNumber}}
+    </button>
+
+    <button mat-icon-button [disabled]="actualPage === lastPage" (click)="redirectToPage(actualPage + 1)">
+        <mat-icon>chevron_right</mat-icon>
+    </button>
+</div>
