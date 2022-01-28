@@ -12,9 +12,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { ProductsService } from 'src/app/services/shop/product.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProductComponent } from './product.component';
+import { CommentsComponent } from './comments/comments.component';
 @NgModule({
     declarations: [
-        ProductComponent
+        ProductComponent,
+        CommentsComponent
     ],
     imports: [
         CommonModule,
