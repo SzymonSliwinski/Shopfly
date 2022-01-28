@@ -9,6 +9,7 @@ import { CartComponent } from './cart/cart.component';
 import { FavoritesProductsComponent } from './favorites-products/favorites-products.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { UserOrderListComponent } from './user-order-list/user-order-list.component';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'favorites', component: FavoritesProductsComponent },
       { path: 'products/:page', component: ProductsPageComponent },
       { path: 'my-orders', component: UserOrderListComponent },
+      { path: 'product/:id', component: ProductComponent }
     ]
   }
 ];
