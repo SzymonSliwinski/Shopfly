@@ -1,10 +1,9 @@
 <div style="height:50px;"></div>
-<main class="container mat-elevation-z8 p-25 white-background" *ngIf="isLoaded">
+<div class="container mat-elevation-z8 p-25 white-background" *ngIf="isLoaded">
     <div class="left-column">
         <img data-image="red" class="active" [src]="imgUrl" alt="">
     </div>
 
-    <!-- Right Column -->
     <div class="right-column">
         <div class="product-description">
             <span> {{product.category!.name!}}</span>
@@ -22,9 +21,9 @@
             <button mat-button class="cart-btn" (click)="onAddToCartClick(product.id)">Add to cart</button>
         </div>
     </div>
-</main>
+</div>
 <div style="height: 200px;"></div>
-<div style="width: 1000px; margin: auto;">
-    <app-comments></app-comments>
+<div style="width: 1000px; margin: auto;" *ngIf="isLoaded">
+    <app-comments [productId]="product.id" [commentsList]="product.comments!"></app-comments>
 </div>
 <div class="h-100"></div>

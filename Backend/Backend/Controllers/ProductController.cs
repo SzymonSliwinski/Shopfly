@@ -40,7 +40,7 @@ namespace ShopPanelWebApi.Controllers
             var categoryTree = db.Where(c => c.Name == category).Single();
             _catService.TraverseCategories(categoryTree, relatedCategories);
             var results = await _context.Products
-                .Where(p => relatedCategories.Any(rc => rc == p.CategoryId))
+                .Where(p => p.IsVisible && relatedCategories.Any(rc => rc == p.CategoryId))
                 .Skip(shopConfig.ProductsPerPage * (page - 1))
                 .Take(shopConfig.ProductsPerPage)
                 .ToListAsync();
@@ -84,7 +84,9 @@ namespace ShopPanelWebApi.Controllers
                 .Where(c => c.Id == productId)
                 .Include(p => p.Category)
                 .Include(p => p.Ratings)
-                .Include(p => p.Comments)
+                .ThenInclude(c => c.Customer)
+                 .Include(p => p.Comments)
+                  .ThenInclude(c => c.Customer)
                 .SingleAsync());
         }
 

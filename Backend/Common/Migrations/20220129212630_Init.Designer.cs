@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Common.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220124162510_SelfReferencingCategories")]
-    partial class SelfReferencingCategories
+    [Migration("20220129212630_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,11 +142,10 @@ namespace Common.Migrations
 
             modelBuilder.Entity("Common.Models.ShopModels.Comment", b =>
                 {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
                         .HasMaxLength(200)
@@ -155,10 +154,15 @@ namespace Common.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.HasKey("CustomerId", "ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("ProductId");
 
@@ -432,18 +436,13 @@ namespace Common.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte[]>("Bytes")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<bool>("IsCover")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Path")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Path")
-                        .IsUnique()
-                        .HasFilter("[Path] IS NOT NULL");
 
                     b.ToTable("Photos");
                 });
@@ -930,13 +929,13 @@ namespace Common.Migrations
                     b.HasOne("Common.Models.ShopModels.Customer", "Customer")
                         .WithMany("Comments")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Common.Models.ShopModels.Product", "Product")
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");

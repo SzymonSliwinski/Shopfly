@@ -14,7 +14,9 @@ namespace Common.Models.ShopModels
         public DateTime CreateDate { get; set; }
         public DateTime LastLoginDate { get; set; }
         public string Password { get; set; }
+        [JsonIgnore]
         public List<Comment> Comments { get; set; }
+        [JsonIgnore]
         public List<Rating> Ratings { get; set; }
         public List<CustomerFavouritesProducts> CustomerFavouritesProducts { get; set; }
         public List<CustomerCart> CustomerCart { get; set; }

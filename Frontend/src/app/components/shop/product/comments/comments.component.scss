@@ -60,52 +60,52 @@
     margin: auto;
 }
 
-.comments .media {
+.comments .comment {
     border-top: 1px dashed #DDDDDD;
     padding: 20px 0;
     margin: 0;
 }
 
-.comments .media>.pull-left {
+.comments .comment>.pull-left {
     margin-right: 20px;
 }
 
 
-.comments .media h4 {
+.comments .comment h4 {
     margin: 0 0 10px;
 }
 
-.comments .media h4 span {
+.comments .comment h4 span {
     font-size: 14px;
     float: right;
     color: .999999;
 }
 
-.comments .media p {
+.comments .comment p {
     margin-bottom: 15px;
     text-align: justify;
 }
 
-.comments .media-detail {
+.comments .comment-detail {
     margin: 0;
 }
 
-.comments .media-detail li {
+.comments .comment-detail li {
     color: #AAAAAA;
     font-size: 12px;
     padding-right: 10px;
     font-weight: 600;
 }
 
-.comments .media-detail a:hover {
+.comments .comment-detail a:hover {
     text-decoration: underline;
 }
 
-.comments .media-detail li:last-child {
+.comments .comment-detail li:last-child {
     padding-right: 0;
 }
 
-.comments .media-detail li i {
+.comments .comment-detail li i {
     color: #666666;
     font-size: 15px;
     margin-right: 10px;

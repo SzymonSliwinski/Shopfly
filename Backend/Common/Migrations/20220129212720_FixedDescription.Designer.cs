@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Common.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220107160252_CreatingDefaultAdminAccount")]
-    partial class CreatingDefaultAdminAccount
+    [Migration("20220129212720_FixedDescription")]
+    partial class FixedDescription
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,6 +117,9 @@ namespace Common.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRoot")
                         .HasColumnType("bit");
 
@@ -139,11 +142,10 @@ namespace Common.Migrations
 
             modelBuilder.Entity("Common.Models.ShopModels.Comment", b =>
                 {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
                         .HasMaxLength(200)
@@ -152,10 +154,15 @@ namespace Common.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.HasKey("CustomerId", "ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("ProductId");
 
@@ -212,6 +219,24 @@ namespace Common.Migrations
                         .HasFilter("[PhoneNumber] IS NOT NULL");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Common.Models.ShopModels.CustomerCart", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CustomersCarts");
                 });
 
             modelBuilder.Entity("Common.Models.ShopModels.CustomerFavouritesProducts", b =>
@@ -411,18 +436,13 @@ namespace Common.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte[]>("Bytes")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<bool>("IsCover")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Path")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Path")
-                        .IsUnique()
-                        .HasFilter("[Path] IS NOT NULL");
 
                     b.ToTable("Photos");
                 });
@@ -447,8 +467,8 @@ namespace Common.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -663,6 +683,28 @@ namespace Common.Migrations
                         .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "New"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "In progress"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Canceled"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Completed"
+                        });
                 });
 
             modelBuilder.Entity("Common.Models.ShopModels.Tag", b =>
@@ -887,11 +929,30 @@ namespace Common.Migrations
                     b.HasOne("Common.Models.ShopModels.Customer", "Customer")
                         .WithMany("Comments")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Common.Models.ShopModels.Product", "Product")
                         .WithMany("Comments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Common.Models.ShopModels.CustomerCart", b =>
+                {
+                    b.HasOne("Common.Models.ShopModels.Customer", "Customer")
+                        .WithMany("CustomerCart")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Common.Models.ShopModels.Product", "Product")
+                        .WithMany("CustomerCart")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1170,6 +1231,8 @@ namespace Common.Migrations
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("CustomerCart");
+
                     b.Navigation("CustomerFavouritesProducts");
 
                     b.Navigation("Orders");
@@ -1202,6 +1265,8 @@ namespace Common.Migrations
             modelBuilder.Entity("Common.Models.ShopModels.Product", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("CustomerCart");
 
                     b.Navigation("CustomerFavouritesProducts");
 
