@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
 import { Order } from 'src/app/models/shop-models/order.model';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
-import { ProductsService } from 'src/app/services/shop/product.service';
 
 @Component({
   selector: 'app-cart-products-list',
@@ -16,27 +15,16 @@ export class CartProductsListComponent implements OnInit {
   @Input() order!: Order;
   @Input() customerCart!: CustomerCart[];
   isLoaded = false;
-  public productsUrl: SafeUrl[] = [];
+  @Input() productsUrl: SafeUrl[] = [];
 
   constructor(
     private readonly _customerCartService: CustomerCartService,
     private readonly _customerFavoritesServices: CustomerFavoritesProductsService,
-    private readonly _productService: ProductsService,
-    private _sanitizer: DomSanitizer,
     private readonly _router: Router
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.customerCart.forEach(async val => {
-      this.productsUrl[val.productId] = await this.getPhotoForProduct(val.productId!);
-    });
     this.isLoaded = true;
-  }
-
-  public async getPhotoForProduct(productId: number): Promise<SafeUrl> {
-    const blob = await this._productService.getPhoto(productId);
-    const urll = URL.createObjectURL(blob);
-    return this._sanitizer.bypassSecurityTrustUrl(urll);
   }
 
   public getTotalBruttoValue(): number {

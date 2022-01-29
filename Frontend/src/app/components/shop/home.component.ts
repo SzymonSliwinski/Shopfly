@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Sanitizer, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
@@ -12,6 +12,7 @@ import { CustomerCartService } from 'src/app/services/shop/customer-cart.service
 import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 import { CategoryService } from 'src/app/services/shop/category.service';
 import { ProductsService } from 'src/app/services/shop/product.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 interface Node {
   expandable: boolean;
   name: string;
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit {
   animateSidebar = false;
   isHomeSite = false;
   productsLists: HomeList[] = [];
-  allCategories: Category[] = []
+  allCategories: Category[] = [];
+  imagesUrls: SafeUrl[] = [];
   treeControl = new FlatTreeControl<Node>(
     node => node.level,
     node => node.expandable,
@@ -44,6 +46,20 @@ export class HomeComponent implements OnInit {
       level: level,
     };
   };
+
+  private async getPhotos() {
+    this.productsLists.forEach(async product => {
+      product.homeProductsLists.forEach(async val => {
+        this.imagesUrls[val.productId] = await this.getPhotoForProduct(val.productId);
+      });
+    });
+  }
+
+  public async getPhotoForProduct(productId: number): Promise<SafeUrl> {
+    const blob = await this._productsService.getPhoto(productId);
+    const urll = URL.createObjectURL(blob);
+    return this._sanitizer.bypassSecurityTrustUrl(urll);
+  }
 
   treeFlattener = new MatTreeFlattener(
     this._transformer,
@@ -61,7 +77,8 @@ export class HomeComponent implements OnInit {
     private readonly _favoritesProductsList: CustomerFavoritesProductsService,
     private readonly _customerCartService: CustomerCartService,
     private readonly _categoryService: CategoryService,
-    private readonly _productsService: ProductsService
+    private readonly _productsService: ProductsService,
+    private _sanitizer: DomSanitizer,
   ) {
     this.dataSource.data;
     _router.events.subscribe((val) => {
@@ -75,6 +92,7 @@ export class HomeComponent implements OnInit {
     this.productsLists = await this._listService.getAll();
     this.allCategories = await this._categoryService.getAll();
     this.dataSource.data = await this._categoryService.getAll();
+    this.getPhotos();
     this.isLoaded = true;
   }
 

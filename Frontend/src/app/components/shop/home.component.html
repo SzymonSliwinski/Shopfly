@@ -61,7 +61,10 @@
                                     <div class="product-item">
                                         <div class="product-item-content">
                                             <div (click)="onProductClick(productListItem.product.id)">
-                                                <img [alt]="productListItem.product.name" class="product-image" />
+                                                <img [src]="imagesUrls[productListItem.product.id]"
+                                                    class="product-image">
+
+                                                <!-- <img [alt]="productListItem.product.name" class="product-image" /> -->
                                             </div>
                                             <div>
                                                 <p class="product-name"
