@@ -1,15 +1,14 @@
 <span class="header p-25">Summary</span>
 <div class="h-50"></div>
 
-<div class="flex flex-center" style="width: 1100px">
+<div class="flex flex-center" style="width: 1100px" *ngIf="isLoaded">
     <!-- order -->
     <div class="mat-elevation-z8 flex-column radius center" style="width: 600px">
         <span class="header" style="font-size: 18px;">Your order</span>
         <div class="flex-column radius white-background" style="width: 600px">
             <div *ngFor="let customerProduct of products" class="flex p-10 flex-center" style="align-items: center;">
                 <span>
-                    <!-- src="{{customerProduct.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path}} -->
-                    <img class="product-miniature">
+                    <img class="product-miniature" [src]="productsUrl[customerProduct.productId]">
                 </span>
                 <span class="product-name p-10" style="width: 280px; ">
                     {{customerProduct.product!.name}}
@@ -18,8 +17,7 @@
                 <span>{{customerProduct.product!.bruttoPrice | number:'1.2-2'}}$</span>
                 <div style="width: 20px;"></div>
                 <span style="width: 50px;">
-                    <!-- // {{customerProduct.quantity}} todo -->
-                    1
+                    x{{customerProduct.quantity}}
                 </span>
             </div>
         </div>
@@ -64,7 +62,7 @@
         <span class="flex">
             <p class="bolded">Total value</p>
             <p style="margin-left: 30px;" *ngIf="order && order.priceTotal">
-                {{order.priceTotal}}
+                {{order.priceTotal}}$
             </p>
         </span>
         <span class=" center">

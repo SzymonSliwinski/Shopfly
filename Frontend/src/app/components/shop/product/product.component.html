@@ -1,29 +1,25 @@
-<main class="container">
+<div style="height:50px;"></div>
+<main class="container mat-elevation-z8 p-25 white-background" *ngIf="isLoaded">
     <div class="left-column">
-        <img data-image="black"
-            src="https://i.picsum.photos/id/1018/200/300.jpg?hmac=IrYgAIczHOxOgmWliW3MlASD3LdAJ_aHAdh5f2aY9Sw" alt="">
-        <img data-image="blue"
-            src="https://i.picsum.photos/id/429/1024/1024.jpg?hmac=Uwy0f5hPpIiqYCyFusrL3_-63UUAel2mCY7jv3gWbWE" alt="">
-        <img data-image="red" class="active"
-            src="https://i.picsum.photos/id/429/1024/1024.jpg?hmac=Uwy0f5hPpIiqYCyFusrL3_-63UUAel2mCY7jv3gWbWE" alt="">
+        <img data-image="red" class="active" [src]="imgUrl" alt="">
     </div>
 
     <!-- Right Column -->
-    <div class="right-column mat-elevation-z8 p-25 white-background">
-
-        <!-- Product Description -->
+    <div class="right-column">
         <div class="product-description">
-            <span>Headphones</span>
-            <h1>Beats EP</h1>
-            <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation.
-                Sturdy headband and on-ear cushions suitable for live performance</p>
+            <span> {{product.category!.name!}}</span>
+            <button mat-icon-button class="fav-button" (click)="onAddToFavoritesClick(product.id)">
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <h1>{{product.name}}</h1>
+            <p>
+                {{product.description}}
+            </p>
         </div>
 
-        <!-- Product Pricing -->
         <div class="product-price">
-            <span>148$</span>
-            <button mat-button class="cart-btn">Add to cart</button>
-            <button mat-button class="fav-btn">Add to favorites</button>
+            <span>{{product.bruttoPrice}}$</span>
+            <button mat-button class="cart-btn" (click)="onAddToCartClick(product.id)">Add to cart</button>
         </div>
     </div>
 </main>

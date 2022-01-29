@@ -75,5 +75,18 @@ namespace ShopPanelWebApi.Controllers
 
             return File(product.ProductsVariants.First().ProductsVariantsPhotos.First().Photo.Bytes, "application/png", "");
         }
+
+        [HttpGet("details/{productId}")]
+        public async System.Threading.Tasks.Task<ActionResult<Photo>> GetProductDetails(int productId)
+        {
+            return Ok(await _context.Products
+                .AsQueryable()
+                .Where(c => c.Id == productId)
+                .Include(p => p.Category)
+                .Include(p => p.Ratings)
+                .Include(p => p.Comments)
+                .SingleAsync());
+        }
+
     }
 }

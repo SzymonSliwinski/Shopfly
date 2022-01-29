@@ -61,8 +61,10 @@
                     <!--  -->
                     <p-card styleClass="product">
                         <ng-template pTemplate="header">
-                            <img alt="Card" class="product-image" [src]="productsUrl[productsList[i].id]">
-                            <span class="product-name flex p-10">{{productsList[i].name}}</span>
+                            <div (click)="onProductClick(productsList[i].id)">
+                                <img alt="Card" class="product-image" [src]="productsUrl[productsList[i].id]">
+                                <span class="product-name flex p-10">{{productsList[i].name}}</span>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <div class="flex flex-center" style="justify-content: center;">
@@ -79,8 +81,10 @@
                     <!--  -->
                     <p-card styleClass="product" *ngIf="i + 1 < productsList.length">
                         <ng-template pTemplate="header">
-                            <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+1].id]">
-                            <span class="product-name flex p-10">{{productsList[i+1].name}}</span>
+                            <div (click)="onProductClick(productsList[i].id)">
+                                <img alt=" Card" class="product-image" [src]="productsUrl[productsList[i+1].id]">
+                                <span class="product-name flex p-10">{{productsList[i+1].name}}</span>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <div class="flex flex-center" style="justify-content: center;">
@@ -97,10 +101,12 @@
                     <!--  -->
                     <p-card styleClass="product" *ngIf="i + 2 < productsList.length">
                         <ng-template pTemplate="header">
-                            <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+2].id]">
-                            <span class="product-name flex p-10">
-                                {{productsList[i+2].name}}
-                            </span>
+                            <div (click)="onProductClick(productsList[i].id)">
+                                <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+2].id]">
+                                <span class="product-name flex p-10">
+                                    {{productsList[i+2].name}}
+                                </span>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <div class="flex flex-center" style="justify-content: center;">

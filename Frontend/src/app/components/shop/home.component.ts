@@ -117,11 +117,14 @@ export class HomeComponent implements OnInit {
     await this._customerCartService.add(id);
   }
 
-  async onCategoryClick(categoryName: string) {
-    // await this._productsService.getByAllRelatedWithCategory(categoryName);
+  onCategoryClick(categoryName: string) {
     this._router.navigate(
       ['/products/1'],
       { queryParams: { category: `${categoryName}` } }
     );
+  }
+
+  public onProductClick(productId: number) {
+    this._router.navigate([`product/${productId}`]);
   }
 }

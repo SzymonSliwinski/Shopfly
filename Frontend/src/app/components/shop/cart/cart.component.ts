@@ -41,6 +41,5 @@ export class CartComponent implements OnInit {
     }
     if (val.selectedIndex === 3)
       this.step3Completed = true;
-
   }
 }

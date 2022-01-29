@@ -13,6 +13,8 @@ import { ProductsService } from 'src/app/services/shop/product.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProductComponent } from './product.component';
 import { CommentsComponent } from './comments/comments.component';
+import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
+import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 @NgModule({
     declarations: [
         ProductComponent,
@@ -32,7 +34,9 @@ import { CommentsComponent } from './comments/comments.component';
         PaginatorModule
     ],
     providers: [
-        ProductsService
+        ProductsService,
+        CustomerCartService,
+        CustomerFavoritesProductsService
     ],
     exports: [
         ProductComponent
