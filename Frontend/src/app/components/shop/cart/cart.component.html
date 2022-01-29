@@ -3,7 +3,8 @@
 <mat-stepper #stepper (selectionChange)="onStepChange($event)">
     <mat-step>
         <ng-template matStepLabel>Products</ng-template>
-        <app-cart-products-list [order]="newOrder" [customerCart]="customerCart"></app-cart-products-list>
+        <app-cart-products-list [order]="newOrder" [customerCart]="customerCart" [productsUrl]="productsUrl">
+        </app-cart-products-list>
     </mat-step>
 
     <mat-step>
@@ -14,7 +15,8 @@
     <mat-step>
         <ng-template matStepLabel>Summary
         </ng-template>
-        <app-summary *ngIf="step2Completed" [order]="newOrder" [customerCart]="customerCart"></app-summary>
+        <app-summary *ngIf="step2Completed" [order]="newOrder" [customerCart]="customerCart"
+            [productsUrl]="productsUrl"></app-summary>
     </mat-step>
 </mat-stepper>
 <div class="h-100"></div>

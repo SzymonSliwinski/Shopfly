@@ -58,4 +58,8 @@ export class ProductsPageComponent implements OnInit {
     const urll = URL.createObjectURL(blob);
     return this._sanitizer.bypassSecurityTrustUrl(urll);
   }
+
+  public onProductClick(productId: number) {
+    this._router.navigate([`product/${productId}`]);
+  }
 }

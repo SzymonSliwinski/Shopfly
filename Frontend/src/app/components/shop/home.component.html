@@ -60,13 +60,18 @@
                                 <ng-template let-productListItem pTemplate="item">
                                     <div class="product-item">
                                         <div class="product-item-content">
-                                            <div>
-                                                <!-- src="{{ productListItem.product!.productsVariants![0].productsVariantsPhotos![0].photo!.path }}" -->
-                                                <img [alt]="productListItem.product.name" class="product-image" />
+                                            <div (click)="onProductClick(productListItem.product.id)">
+                                                <img [src]="imagesUrls[productListItem.product.id]"
+                                                    class="product-image">
+
+                                                <!-- <img [alt]="productListItem.product.name" class="product-image" /> -->
                                             </div>
                                             <div>
-                                                <p class="product-name">{{productListItem.product.name}}</p>
-                                                <p class="product-price">${{productListItem.product.bruttoPrice}}</p>
+                                                <p class="product-name"
+                                                    (click)="onProductClick(productListItem.product.id)">
+                                                    {{productListItem.product.name}}</p>
+                                                <p class="product-price">${{productListItem.product.bruttoPrice}}
+                                                </p>
                                                 <div class="flex flex-center" style="justify-content: center;">
                                                     <button mat-icon-button class="add-button"
                                                         (click)="onAddToCartClick(productListItem.product.id)">
@@ -76,9 +81,9 @@
                                                         (click)="onAddToFavoritesClick(productListItem.product.id)">
                                                         <mat-icon>favorite</mat-icon>
                                                     </button>
-                                                    <button mat-icon-button class="search-button">
+                                                    <!-- <button mat-icon-button class="search-button">
                                                         <mat-icon>search</mat-icon>
-                                                    </button>
+                                                    </button> -->
                                                 </div>
                                             </div>
                                         </div>

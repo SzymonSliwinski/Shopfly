@@ -19,4 +19,8 @@ export class ProductsService {
         return this._http.get(environment._shopApiUrl + `shop/product/photo/${productId}`,
             { responseType: 'blob' }).toPromise();
     }
+
+    public async getDetails(productId: number): Promise<Product> {
+        return this._http.get<Product>(environment._shopApiUrl + `shop/product/details/${productId}`).toPromise()
+    }
 }

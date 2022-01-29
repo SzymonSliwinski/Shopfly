@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
 import { Order } from 'src/app/models/shop-models/order.model';
@@ -14,6 +15,8 @@ export class CartProductsListComponent implements OnInit {
   @Input() order!: Order;
   @Input() customerCart!: CustomerCart[];
   isLoaded = false;
+  @Input() productsUrl: SafeUrl[] = [];
+
   constructor(
     private readonly _customerCartService: CustomerCartService,
     private readonly _customerFavoritesServices: CustomerFavoritesProductsService,
@@ -54,5 +57,9 @@ export class CartProductsListComponent implements OnInit {
   onRemoveClick(id: number) {
     this._customerCartService.removeProduct(id);
     this.customerCart = this.customerCart.filter(c => c.productId !== id);
+  }
+
+  public onProductClick(productId: number) {
+    this._router.navigate([`product/${productId}`]);
   }
 }

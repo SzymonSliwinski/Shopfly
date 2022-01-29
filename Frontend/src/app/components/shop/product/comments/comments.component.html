@@ -3,31 +3,33 @@
     <div class="container">
         <div class="row">
             <div>
-                <div class="flex flex-column">
+                <div class="flex flex-column" *ngIf="isLogged">
                     <h3 class="pull-left">New Comment</h3>
                     <div class="row">
-                        <textarea class="form-control" class="message" placeholder="Your message">
+                        <textarea class="form-control" class="message" placeholder="Your message"
+                            [(ngModel)]="newComment.content">
                     </textarea>
                     </div>
                 </div>
-                <button mat-flat-button color="primary" type="submit" class="btn btn-normal"
-                    style="margin-right: 10px;">
+                <button mat-flat-button color="primary" type="submit" class="btn btn-normal" *ngIf="isLogged"
+                    (click)="onCommentSubmit()" style="margin-right: 10px;">
                     Submit
                 </button>
                 <div class="h-50"></div>
-                <h3>4 Comments</h3>
+                <h3>{{ commentsList.length }} Comments</h3>
 
-                <div class="media">
-                    <a class="pull-left" href="#"></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                            ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                <div class="comment">
+                    <div class="comment-body" style="padding: 10px 0 10px 0;" *ngFor="let comment of commentsList">
+                        <h4 class="comment-heading">{{comment.customer!.name + ' ' + comment.customer!.surname}}
+                        </h4>
+                        <p>{{comment.content}}</p>
+                        <ul class="list-unstyled list-inline comment-detail pull-left">
+                            <li>
+                                <i class="fa fa-calendar"></i>{{comment.createDate | date:'dd/MM/yyyy HH:mm'}}
+                            </li>
                         </ul>
+                        <br />
+                        <hr>
                     </div>
                 </div>
             </div>

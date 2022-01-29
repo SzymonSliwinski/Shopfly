@@ -1,11 +1,13 @@
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthenticationDto } from '../../dto/authentication.dto';
 
 @Injectable()
 export class PanelAuthenticationService {
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient,
+    private readonly router: Router) { }
 
   public async authenticate(authDto: AuthenticationDto): Promise<boolean | never> {
     var isSucceeded = false;
@@ -29,8 +31,14 @@ export class PanelAuthenticationService {
     await this._http.delete<void>(environment._shopPanelApiUrl +
       'employees-authentication/logout/' +
       storage.token.value, { headers: new HttpHeaders().set('Authorization', storage.token.value) }
-    ).toPromise().then(() => {
-      localStorage.removeItem(environment._panelStorageKey);
-    });
+    )
+      .toPromise()
+      .catch(() => {
+        localStorage.removeItem(environment._panelStorageKey);
+        this.router.navigate(['panel/sign-in']);
+      })
+      .then(() => {
+        localStorage.removeItem(environment._panelStorageKey);
+      });
   }
 }

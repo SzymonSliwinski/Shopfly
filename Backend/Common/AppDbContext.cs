@@ -226,7 +226,7 @@ namespace Common
             modelBuilder.Entity<Product>()
                 .Property(p => p.AdditionalShippingCost);
             modelBuilder.Entity<Product>()
-                .Property(p => p.Description).HasMaxLength(300);
+                .Property(p => p.Description).HasMaxLength(1000);
         }
 
         private void ConfigureProductColors(ModelBuilder modelBuilder)
@@ -356,9 +356,9 @@ namespace Common
 
         private void SetCommentsCustomersRelation(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>()
-                .HasKey(cc => new { cc.CustomerId, cc.ProductId });
-            modelBuilder.Entity<Comment>()
+            // modelBuilder.Entity<Comment>()
+            //  .HasKey(cc => cc.Id);
+            /*modelBuilder.Entity<Comment>()
                 .HasOne(cc => cc.Product)
                 .WithMany(cc => cc.Comments)
                 .HasForeignKey(cc => cc.ProductId)
@@ -367,7 +367,7 @@ namespace Common
                 .HasOne(cc => cc.Customer)
                 .WithMany(cc => cc.Comments)
                 .HasForeignKey(cc => cc.CustomerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
         }
 
         private void SetCustomerFavouriteProductsRelation(ModelBuilder modelBuilder)

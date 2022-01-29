@@ -40,7 +40,7 @@ namespace ShopPanelWebApi.Controllers
             var categoryTree = db.Where(c => c.Name == category).Single();
             _catService.TraverseCategories(categoryTree, relatedCategories);
             var results = await _context.Products
-                .Where(p => relatedCategories.Any(rc => rc == p.CategoryId))
+                .Where(p => p.IsVisible && relatedCategories.Any(rc => rc == p.CategoryId))
                 .Skip(shopConfig.ProductsPerPage * (page - 1))
                 .Take(shopConfig.ProductsPerPage)
                 .ToListAsync();
@@ -75,5 +75,20 @@ namespace ShopPanelWebApi.Controllers
 
             return File(product.ProductsVariants.First().ProductsVariantsPhotos.First().Photo.Bytes, "application/png", "");
         }
+
+        [HttpGet("details/{productId}")]
+        public async System.Threading.Tasks.Task<ActionResult<Photo>> GetProductDetails(int productId)
+        {
+            return Ok(await _context.Products
+                .AsQueryable()
+                .Where(c => c.Id == productId)
+                .Include(p => p.Category)
+                .Include(p => p.Ratings)
+                .ThenInclude(c => c.Customer)
+                 .Include(p => p.Comments)
+                  .ThenInclude(c => c.Customer)
+                .SingleAsync());
+        }
+
     }
 }

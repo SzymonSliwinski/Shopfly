@@ -5,6 +5,8 @@ import { CustomerCartService } from 'src/app/services/shop/customer-cart.service
 import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
 import { CartProductsListComponent } from './cart-products-list/cart-products-list.component';
 import { Carrier } from 'src/app/models/shop-models/carrier.model';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ProductsService } from 'src/app/services/shop-panel-services/products.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -18,18 +20,30 @@ import { Carrier } from 'src/app/models/shop-models/carrier.model';
 })
 export class CartComponent implements OnInit {
   @ViewChild(CartProductsListComponent) step1!: CartProductsListComponent;
+  productsUrl: SafeUrl[] = [];
   public newOrder: Order = {} as Order;
   customerCart: CustomerCart[] = [];
   step1Completed = false;
   step2Completed = false;
   step3Completed = false;
 
-  constructor(private readonly _customerCartService: CustomerCartService) {
-
-  }
+  constructor(
+    private readonly _customerCartService: CustomerCartService,
+    private readonly _productService: ProductsService,
+    private _sanitizer: DomSanitizer,
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.customerCart = await this._customerCartService.getAllForLoggedUser();
+    this.customerCart.forEach(async val => {
+      this.productsUrl[val.productId] = await this.getPhotoForProduct(val.productId!);
+    });
+  }
+
+  public async getPhotoForProduct(productId: number): Promise<SafeUrl> {
+    const blob = await this._productService.getPhoto(productId);
+    const urll = URL.createObjectURL(blob);
+    return this._sanitizer.bypassSecurityTrustUrl(urll);
   }
 
   onStepChange(val: any) {
@@ -41,6 +55,5 @@ export class CartComponent implements OnInit {
     }
     if (val.selectedIndex === 3)
       this.step3Completed = true;
-
   }
 }

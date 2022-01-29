@@ -49,7 +49,8 @@ namespace Common.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     IsRoot = table.Column<bool>(type: "bit", nullable: false),
                     ParentCategoryId = table.Column<int>(type: "int", nullable: true),
-                    Position = table.Column<int>(type: "int", nullable: false)
+                    Position = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,7 +76,7 @@ namespace Common.Migrations
                     IsNewsletterSubscribed = table.Column<bool>(type: "bit", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastLoginDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -93,7 +94,8 @@ namespace Common.Migrations
                     Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    IsRoot = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,24 +139,11 @@ namespace Common.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsCover = table.Column<bool>(type: "bit", nullable: false),
-                    Path = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    Bytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Photos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Privileges",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Privileges", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,7 +180,15 @@ namespace Common.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    HasAccessToOrders = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToImports = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToProducts = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToCustomers = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToCharts = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToSettings = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToApi = table.Column<bool>(type: "bit", nullable: false),
+                    HasAccessToEmployees = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,8 +207,8 @@ namespace Common.Migrations
                     ProductsPerPage = table.Column<short>(type: "smallint", nullable: false),
                     DisplayProductQuantity = table.Column<bool>(type: "bit", nullable: false),
                     DefaultSortBy = table.Column<int>(type: "int", nullable: false),
-                    ShopLogoPath = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    FaviconPath = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ShopLogoPath = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    FaviconPath = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     MaxPhotoSize = table.Column<short>(type: "smallint", nullable: false),
                     ImportFileSeparator = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     MultipleValuesInFileSeparator = table.Column<string>(type: "nvarchar(1)", nullable: false)
@@ -307,30 +304,6 @@ namespace Common.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProfilesPrivileges",
-                columns: table => new
-                {
-                    ProfileId = table.Column<int>(type: "int", nullable: false),
-                    PrivilegeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProfilesPrivileges", x => new { x.PrivilegeId, x.ProfileId });
-                    table.ForeignKey(
-                        name: "FK_ProfilesPrivileges_Privileges_PrivilegeId",
-                        column: x => x.PrivilegeId,
-                        principalTable: "Privileges",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProfilesPrivileges_Profiles_ProfileId",
-                        column: x => x.ProfileId,
-                        principalTable: "Profiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -395,7 +368,7 @@ namespace Common.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    TaxId = table.Column<int>(type: "int", nullable: false),
+                    TaxId = table.Column<int>(type: "int", nullable: true),
                     IsLowStock = table.Column<bool>(type: "bit", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     AdditionalShippingCost = table.Column<float>(type: "real", nullable: false),
@@ -421,34 +394,35 @@ namespace Common.Migrations
                         column: x => x.TaxId,
                         principalTable: "Taxes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => new { x.CustomerId, x.ProductId });
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Comments_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -469,6 +443,31 @@ namespace Common.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CustomerFavouritesProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomersCarts",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomersCarts", x => new { x.CustomerId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_CustomersCarts_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CustomersCarts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -602,8 +601,8 @@ namespace Common.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ColorId = table.Column<int>(type: "int", nullable: false),
-                    DimensionId = table.Column<int>(type: "int", nullable: false),
+                    ColorId = table.Column<int>(type: "int", nullable: true),
+                    DimensionId = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
                     IsOnSale = table.Column<bool>(type: "bit", nullable: false),
                     SalePercentage = table.Column<int>(type: "int", nullable: false),
@@ -618,13 +617,13 @@ namespace Common.Migrations
                         column: x => x.ColorId,
                         principalTable: "ProductColors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ProductVariants_ProductDimensions_DimensionId",
                         column: x => x.DimensionId,
                         principalTable: "ProductDimensions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ProductVariants_Products_ProductId",
                         column: x => x.ProductId,
@@ -683,6 +682,22 @@ namespace Common.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "Email", "IsActive", "IsRoot", "Name", "Password", "Surname" },
+                values: new object[] { 1, "admin@shopfly.pl", true, true, "Admin", "d9cf543a5140a41876b6fed780981a1625b48185d73902749e5e4e6b6cc8dba9", null });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "New" },
+                    { 2, "In progress" },
+                    { 3, "Canceled" },
+                    { 4, "Completed" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ApiAccessKeys_Key",
                 table: "ApiAccessKeys",
@@ -715,6 +730,11 @@ namespace Common.Migrations
                 column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_CustomerId",
+                table: "Comments",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ProductId",
                 table: "Comments",
                 column: "ProductId");
@@ -737,6 +757,11 @@ namespace Common.Migrations
                 column: "PhoneNumber",
                 unique: true,
                 filter: "[PhoneNumber] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomersCarts_ProductId",
+                table: "CustomersCarts",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_Email",
@@ -779,20 +804,6 @@ namespace Common.Migrations
                 name: "IX_OrdersProducts_ProductId",
                 table: "OrdersProducts",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Photos_Path",
-                table: "Photos",
-                column: "Path",
-                unique: true,
-                filter: "[Path] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Privileges_Name",
-                table: "Privileges",
-                column: "Name",
-                unique: true,
-                filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductColors_HexValue",
@@ -854,11 +865,6 @@ namespace Common.Migrations
                 filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProfilesPrivileges_ProfileId",
-                table: "ProfilesPrivileges",
-                column: "ProfileId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_ProductId",
                 table: "Ratings",
                 column: "ProductId");
@@ -890,6 +896,9 @@ namespace Common.Migrations
                 name: "CustomerFavouritesProducts");
 
             migrationBuilder.DropTable(
+                name: "CustomersCarts");
+
+            migrationBuilder.DropTable(
                 name: "EmployeesProfiles");
 
             migrationBuilder.DropTable(
@@ -911,9 +920,6 @@ namespace Common.Migrations
                 name: "ProductsVariantsPhotos");
 
             migrationBuilder.DropTable(
-                name: "ProfilesPrivileges");
-
-            migrationBuilder.DropTable(
                 name: "Ratings");
 
             migrationBuilder.DropTable(
@@ -924,6 +930,9 @@ namespace Common.Migrations
 
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Profiles");
 
             migrationBuilder.DropTable(
                 name: "HomeLists");
@@ -939,12 +948,6 @@ namespace Common.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductVariants");
-
-            migrationBuilder.DropTable(
-                name: "Privileges");
-
-            migrationBuilder.DropTable(
-                name: "Profiles");
 
             migrationBuilder.DropTable(
                 name: "Carriers");

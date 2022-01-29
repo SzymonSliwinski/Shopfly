@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
 import { Order } from 'src/app/models/shop-models/order.model';
@@ -16,10 +17,13 @@ export class SummaryComponent implements OnInit {
   public products!: CustomerCart[];
   @Input() order!: Order;
   @Input() customerCart!: CustomerCart[];
+  @Input() productsUrl: SafeUrl[] = [];
+
+  isLoaded = false;
   constructor(
     private readonly _ordersService: OrdersService,
     private readonly _customerCartService: CustomerCartService,
-    private readonly _router: Router
+    private readonly _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -38,8 +42,8 @@ export class SummaryComponent implements OnInit {
     this.order.carrierId = this.order.carrier!.id;
     this.order.paymentTypeId = this.order.paymentType!.id;
     this.order.customerId = JSON.parse(sessionStorage.getItem(environment._shopStorageKey)!).token.userId;
+    this.isLoaded = true;
   }
-
   async onSubmit() {
     this.order.carrier = null;
     this.order.paymentType = null; console.log(this.order)

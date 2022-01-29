@@ -34,10 +34,15 @@ export class ShopAuthenticationService {
             'customers-authentication/logout/' +
             storage.token.value, { headers: new HttpHeaders().set('Authorization', storage.token.value) }
         ).toPromise()
+            .catch(() => {
+                sessionStorage.removeItem(environment._shopStorageKey);
+                this._router.navigate(['']);
+            })
             .finally(() => {
                 sessionStorage.removeItem(environment._shopStorageKey);
                 this._router.navigate(['']);
-            });
+            })
+            ;
     }
 }
 
