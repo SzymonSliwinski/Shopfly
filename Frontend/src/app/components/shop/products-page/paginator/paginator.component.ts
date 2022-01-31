@@ -28,15 +28,24 @@ export class PaginatorComponent implements OnInit {
     this.actualPage = Number(this.actualPage);
   }
 
-  redirectToPage(page: number): void {
+  redirectToPage(page: number) {
+    let query: any = {};
+
     this._route.queryParams.subscribe(async (params: Params) => {
-      if (params['category']) {
-        this._router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-          this._router.navigate(
-            [`/products/${page}`],
-            { queryParams: { category: `${params['category']}` } }));
-      }
+      if (params['category'])
+        query['category'] = params['category'];
+      if (params['min'])
+        query['min'] = params['min'];
+      if (params['max'])
+        query['max'] = params['max'];
+      if (params['sort'])
+        query['sort'] = params['sort'];
     });
+
+    this._router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this._router.navigate(
+        [`/products/${page}`],
+        { queryParams: query }));
     window.scroll({
       top: 0,
       left: 0,

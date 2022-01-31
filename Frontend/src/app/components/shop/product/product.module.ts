@@ -16,6 +16,9 @@ import { CommentsComponent } from './comments/comments.component';
 import { CustomerCartService } from 'src/app/services/shop/customer-cart.service';
 import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer-favorites-products.service';
 import { CommentService } from 'src/app/services/shop/comment.service';
+import { RatingModule } from 'primeng/rating';
+import { RatingService } from 'src/app/services/shop/rating.service';
+
 @NgModule({
     declarations: [
         ProductComponent,
@@ -32,13 +35,15 @@ import { CommentService } from 'src/app/services/shop/comment.service';
         MatRadioModule,
         MatCheckboxModule,
         MatSelectModule,
-        PaginatorModule
+        PaginatorModule,
+        RatingModule
     ],
     providers: [
         ProductsService,
         CustomerCartService,
         CustomerFavoritesProductsService,
-        CommentService
+        CommentService,
+        RatingService
     ],
     exports: [
         ProductComponent

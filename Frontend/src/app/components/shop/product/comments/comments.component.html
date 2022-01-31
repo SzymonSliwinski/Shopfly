@@ -20,8 +20,14 @@
 
                 <div class="comment">
                     <div class="comment-body" style="padding: 10px 0 10px 0;" *ngFor="let comment of commentsList">
-                        <h4 class="comment-heading">{{comment.customer!.name + ' ' + comment.customer!.surname}}
-                        </h4>
+                        <div class="flex" style="gap: 10px;">
+                            <h4 class="comment-heading">{{comment.customer!.name + ' ' + comment.customer!.surname}}
+                            </h4>
+                            <p-rating *ngIf="getUserRating(comment.customerId) !== -1"
+                                [(ngModel)]="ratings[getUserRating(comment.customerId)].rate" [cancel]="false"
+                                [readonly]="true">
+                            </p-rating>
+                        </div>
                         <p>{{comment.content}}</p>
                         <ul class="list-unstyled list-inline comment-detail pull-left">
                             <li>

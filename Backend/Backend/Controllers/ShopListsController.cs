@@ -33,6 +33,8 @@ namespace ShopPanelWebApi.Controllers
                 await _context.HomeLists
                 .Include(c => c.HomeProductsLists)
                 .ThenInclude(c => c.Product)
+                .ThenInclude(c => c.Ratings)
+                .ThenInclude(c => c.Product)
                 .ThenInclude(c => c.ProductsVariants)
                 .ThenInclude(c => c.ProductsVariantsPhotos)
                 .ThenInclude(c => c.Photo)

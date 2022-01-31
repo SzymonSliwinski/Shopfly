@@ -10,6 +10,12 @@
             <button mat-icon-button class="fav-button" (click)="onAddToFavoritesClick(product.id)">
                 <mat-icon>favorite</mat-icon>
             </button>
+            <div class="flex">
+                <p-rating *ngIf="isLogged" [(ngModel)]="userRating.rate" [cancel]="false"
+                    (ngModelChange)="onUserRate($event)">
+                </p-rating>
+                ({{avgRate}})
+            </div>
             <h1>{{product.name}}</h1>
             <p>
                 {{product.description}}
@@ -24,6 +30,7 @@
 </div>
 <div style="height: 200px;"></div>
 <div style="width: 1000px; margin: auto;" *ngIf="isLoaded">
-    <app-comments [productId]="product.id" [commentsList]="product.comments!"></app-comments>
+    <app-comments [productId]="product.id" [commentsList]="product.comments!" [ratings]="product.ratings!">
+    </app-comments>
 </div>
 <div class="h-100"></div>

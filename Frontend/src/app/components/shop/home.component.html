@@ -63,13 +63,17 @@
                                             <div (click)="onProductClick(productListItem.product.id)">
                                                 <img [src]="imagesUrls[productListItem.product.id]"
                                                     class="product-image">
-
-                                                <!-- <img [alt]="productListItem.product.name" class="product-image" /> -->
                                             </div>
                                             <div>
                                                 <p class="product-name"
                                                     (click)="onProductClick(productListItem.product.id)">
-                                                    {{productListItem.product.name}}</p>
+                                                    {{productListItem.product.name}}
+                                                </p>
+
+                                                <p-rating [cancel]="false" [readonly]="true"
+                                                    [(ngModel)]="avarageRates[productListItem.productId]">
+                                                </p-rating>
+
                                                 <p class="product-price">${{productListItem.product.bruttoPrice}}
                                                 </p>
                                                 <div class="flex flex-center" style="justify-content: center;">
@@ -81,9 +85,6 @@
                                                         (click)="onAddToFavoritesClick(productListItem.product.id)">
                                                         <mat-icon>favorite</mat-icon>
                                                     </button>
-                                                    <!-- <button mat-icon-button class="search-button">
-                                                        <mat-icon>search</mat-icon>
-                                                    </button> -->
                                                 </div>
                                             </div>
                                         </div>
