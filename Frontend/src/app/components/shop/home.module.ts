@@ -24,6 +24,8 @@ import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer
 import { CategoryService } from 'src/app/services/shop/category.service';
 import { ProductsService } from 'src/app/services/shop/product.service';
 import { ProductModule } from './product/product.module';
+import { RatingModule } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -46,7 +48,9 @@ import { ProductModule } from './product/product.module';
     FavoritesProductsModule,
     ProductsPageModule,
     UserOrderListModule,
-    ProductModule
+    ProductModule,
+    RatingModule,
+    FormsModule
   ],
   providers: [
     AuthenticationService,

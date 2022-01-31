@@ -14,6 +14,7 @@ import { CardModule } from 'primeng/card';
 import { ProductsService } from 'src/app/services/shop/product.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { PaginatorComponent } from './paginator/paginator.component';
         MatCheckboxModule,
         MatSelectModule,
         CardModule,
-        PaginatorModule
+        PaginatorModule,
+        RatingModule
     ],
     providers: [
         ProductsService

@@ -1,10 +1,10 @@
 import { Customer } from './customer.model';
 import { Product } from './product.model';
-export interface Rating{
-    id: number;
+export interface Rating {
+    id?: number;
     customerId: number;
-    customer: Customer;
+    customer?: Customer;
     productId: number;
-    product: Product;
+    product?: Product;
     rate: number;
 }

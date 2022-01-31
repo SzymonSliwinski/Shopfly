@@ -43,12 +43,13 @@ namespace ShopPanelWebApi.Controllers
                 .Where(p => p.IsVisible && relatedCategories.Any(rc => rc == p.CategoryId))
                 .Skip(shopConfig.ProductsPerPage * (page - 1))
                 .Take(shopConfig.ProductsPerPage)
+                .Include(c => c.Ratings)
                 .ToListAsync();
             return Ok(results);
         }
 
         [HttpGet("get-count-by-category/{category}")]
-        public async System.Threading.Tasks.Task<ActionResult<int>> GetAllRelatedProducts(string category)
+        public async System.Threading.Tasks.Task<ActionResult<int>> GetAllRelatedProductsCount(string category)
         {
             var relatedCategories = new List<int>();
             var db = await _context.Categories

@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Paginator } from 'primeng/paginator';
 import { Product } from 'src/app/models/shop-models/product.model';
+import { Rating } from 'src/app/models/shop-models/rating.model';
 import { ProductsService } from 'src/app/services/shop/product.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class ProductsPageComponent implements OnInit {
   public actualCategoryFilter?: string;
   public maxPages!: number;
   public isLoaded = false;
+  avarageRates: number[] = [];
 
   constructor(
     private _route: ActivatedRoute,
@@ -50,6 +52,8 @@ export class ProductsPageComponent implements OnInit {
   private async getPhotos() {
     this.productsList.forEach(async product => {
       this.productsUrl[product.id] = await this.getPhotoForProduct(product.id);
+      this.getAvgRate(product.ratings!, product.id);
+
     });
   }
 
@@ -62,4 +66,19 @@ export class ProductsPageComponent implements OnInit {
   public onProductClick(productId: number) {
     this._router.navigate([`product/${productId}`]);
   }
+
+  getAvgRate(ratings: Rating[], productId: number) {
+    if (ratings.length === 0) {
+      this.avarageRates[productId] = 0;
+      return;
+    }
+    let sum = 0;
+
+    ratings.forEach(val => {
+      sum += val.rate;
+    });
+    this.avarageRates[productId] = sum / ratings.length;
+
+  }
+
 }

@@ -63,7 +63,14 @@
                         <ng-template pTemplate="header">
                             <div (click)="onProductClick(productsList[i].id)">
                                 <img alt="Card" class="product-image" [src]="productsUrl[productsList[i].id]">
-                                <span class="product-name flex p-10">{{productsList[i].name}}</span>
+                                <span class="product-name flex p-10">
+                                    {{productsList[i].name}}
+                                </span>
+                                <span class="product-name flex p-10">
+                                    <p-rating [cancel]="false" [readonly]="true"
+                                        [(ngModel)]="avarageRates[productsList[i].id]">
+                                    </p-rating>
+                                </span>
                             </div>
                         </ng-template>
                         <ng-template pTemplate="footer">
@@ -84,6 +91,11 @@
                             <div (click)="onProductClick(productsList[i].id)">
                                 <img alt=" Card" class="product-image" [src]="productsUrl[productsList[i+1].id]">
                                 <span class="product-name flex p-10">{{productsList[i+1].name}}</span>
+                                <span class="product-name flex p-10">
+                                    <p-rating [cancel]="false" [readonly]="true"
+                                        [(ngModel)]="avarageRates[productsList[i + 1].id]">
+                                    </p-rating>
+                                </span>
                             </div>
                         </ng-template>
                         <ng-template pTemplate="footer">
@@ -105,6 +117,11 @@
                                 <img alt="Card" class="product-image" [src]="productsUrl[productsList[i+2].id]">
                                 <span class="product-name flex p-10">
                                     {{productsList[i+2].name}}
+                                </span>
+                                <span class="product-name flex p-10">
+                                    <p-rating [cancel]="false" [readonly]="true"
+                                        [(ngModel)]="avarageRates[productsList[i + 2].id]">
+                                    </p-rating>
                                 </span>
                             </div>
                         </ng-template>

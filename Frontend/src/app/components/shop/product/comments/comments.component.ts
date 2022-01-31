@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Comment } from 'src/app/models/shop-models/comment.model';
+import { Rating } from 'src/app/models/shop-models/rating.model';
 import { CommentService } from 'src/app/services/shop/comment.service';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -10,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class CommentsComponent implements OnInit {
   @Input() commentsList: Comment[] = [];
   @Input() productId!: number;
+  @Input() ratings!: Rating[];
   newComment: Comment = {} as Comment;
   isLogged = false;
   constructor(
@@ -17,7 +19,7 @@ export class CommentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (JSON.parse(sessionStorage.getItem(environment._shopStorageKey)!).token)
+    if (sessionStorage.getItem(environment._shopStorageKey) && JSON.parse(sessionStorage.getItem(environment._shopStorageKey)!).token)
       this.isLogged = true;
   }
 
@@ -30,6 +32,10 @@ export class CommentsComponent implements OnInit {
     this.commentsList.push(await this._commentService.add(this.newComment));
     this.newComment.content = '';
 
+  }
+
+  getUserRating(userId: number): number {
+    return this.ratings.findIndex(c => c.customerId === userId);
   }
 
 }

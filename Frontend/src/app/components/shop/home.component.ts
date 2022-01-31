@@ -13,6 +13,7 @@ import { CustomerFavoritesProductsService } from 'src/app/services/shop/customer
 import { CategoryService } from 'src/app/services/shop/category.service';
 import { ProductsService } from 'src/app/services/shop/product.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Rating } from 'src/app/models/shop-models/rating.model';
 interface Node {
   expandable: boolean;
   name: string;
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
   productsLists: HomeList[] = [];
   allCategories: Category[] = [];
   imagesUrls: SafeUrl[] = [];
+  avarageRates: number[] = [];
   treeControl = new FlatTreeControl<Node>(
     node => node.level,
     node => node.expandable,
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
     this.productsLists.forEach(async product => {
       product.homeProductsLists.forEach(async val => {
         this.imagesUrls[val.productId] = await this.getPhotoForProduct(val.productId);
+        this.getAvgRate(val.product!.ratings!, val.productId);
       });
     });
   }
@@ -145,4 +148,19 @@ export class HomeComponent implements OnInit {
   public onProductClick(productId: number) {
     this._router.navigate([`product/${productId}`]);
   }
+
+  getAvgRate(ratings: Rating[], productId: number) {
+    if (ratings.length === 0) {
+      this.avarageRates[productId] = 0;
+      return;
+    }
+    let sum = 0;
+
+    ratings.forEach(val => {
+      sum += val.rate;
+    });
+    this.avarageRates[productId] = sum / ratings.length;
+
+  }
+
 }
