@@ -28,8 +28,8 @@ namespace ShopPanelWebApi.Controllers
             _catService = new ShopWebApi.Services.CategoryService();
         }
 
-        [HttpGet("get-related-with/{category}/page/{page}")]
-        public async System.Threading.Tasks.Task<ActionResult<List<Product>>> GetAllRelatedProducts(string category, int page)
+        [HttpPost("by-filter/page/{page}")]
+        public async System.Threading.Tasks.Task<ActionResult<List<Product>>> GetAllRelatedProducts([FromBody] FilterDto filterDto, int page)
         {
             var relatedCategories = new List<int>();
             var shopConfig = await _context.ShopSettings.SingleAsync();
@@ -37,29 +37,44 @@ namespace ShopPanelWebApi.Controllers
                 .Include(c => c.ChildrensCategories)
                 .Where(c => c.IsActive)
                 .ToListAsync();
-            var categoryTree = db.Where(c => c.Name == category).Single();
+
+            var categoryTree = db.Where(c => c.Name == filterDto.Category).Single();
             _catService.TraverseCategories(categoryTree, relatedCategories);
-            var results = await _context.Products
-                .Where(p => p.IsVisible && relatedCategories.Any(rc => rc == p.CategoryId))
-                .Skip(shopConfig.ProductsPerPage * (page - 1))
-                .Take(shopConfig.ProductsPerPage)
-                .Include(c => c.Ratings)
-                .ToListAsync();
-            return Ok(results);
+            var query = _context.Products.AsQueryable();
+            query = query.Where(p => p.IsVisible && relatedCategories.Any(rc => rc == p.CategoryId));
+            if (filterDto.Min != null && filterDto.Max != null)
+                query = query.Where(p => p.BruttoPrice >= filterDto.Min && p.BruttoPrice <= filterDto.Max);
+
+            switch (filterDto.SortBy)
+            {
+                case 1: query = query.OrderBy(c => c.BruttoPrice); break;
+                case 2: query = query.OrderByDescending(c => c.BruttoPrice); break;
+                case 3: query = query.OrderBy(c => c.Name); break;
+                case 4: query = query.OrderByDescending(c => c.Name); break;
+            }
+
+            query = query.Skip(shopConfig.ProductsPerPage * (page - 1))
+                 .Take(shopConfig.ProductsPerPage)
+                 .Include(c => c.Ratings);
+
+            return Ok(await query.ToListAsync());
         }
 
-        [HttpGet("get-count-by-category/{category}")]
-        public async System.Threading.Tasks.Task<ActionResult<int>> GetAllRelatedProductsCount(string category)
+        [HttpPost("by-filter")]
+        public async System.Threading.Tasks.Task<ActionResult<int>> GetAllRelatedProductsCount([FromBody] FilterDto filterDto)
         {
             var relatedCategories = new List<int>();
             var db = await _context.Categories
                 .Include(c => c.ChildrensCategories)
                 .Where(c => c.IsActive)
                 .ToListAsync();
-            var categoryTree = db.Where(c => c.Name == category).Single();
+            var categoryTree = db.Where(c => c.Name == filterDto.Category).Single();
             _catService.TraverseCategories(categoryTree, relatedCategories);
-            var result = await _context.Products.Where(p => relatedCategories.Any(rc => rc == p.CategoryId)).CountAsync();
-            return Ok(result);
+            var query = _context.Products.AsQueryable();
+            query = query.Where(p => relatedCategories.Any(rc => rc == p.CategoryId));
+            if (filterDto.Min != null && filterDto.Max != null)
+                query = query.Where(p => p.BruttoPrice >= filterDto.Min && p.BruttoPrice <= filterDto.Max);
+            return Ok(await query.CountAsync());
         }
 
         [HttpGet("photo/{productId}")]
@@ -92,4 +107,13 @@ namespace ShopPanelWebApi.Controllers
         }
 
     }
+
+    public class FilterDto
+    {
+        public int? Min { get; set; }
+        public int? Max { get; set; }
+        public string Category { get; set; }
+        public short? SortBy { get; set; }
+    }
+
 }
