@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Common.Dtos;
 using Common.Models.ShopModels;
 using System.Collections;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop/product")]
@@ -21,11 +24,13 @@ namespace ShopPanelWebApi.Controllers
         private readonly AppDbContext _context;
         private CrudService<Product> _service;
         private ShopWebApi.Services.CategoryService _catService;
-        public ProductController(AppDbContext context)
+        private FvService _fvService;
+        public ProductController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _service = new CrudService<Product>(_context);
             _catService = new ShopWebApi.Services.CategoryService();
+            _fvService = new FvService(context, env);
         }
 
         [HttpPost("by-filter/page/{page}")]
@@ -106,6 +111,13 @@ namespace ShopPanelWebApi.Controllers
                 .SingleAsync());
         }
 
+
+
+        [HttpGet("fv/{orderId}")]
+        public async System.Threading.Tasks.Task<ActionResult<byte[]>> GetFvForOrder(int orderId)
+        {
+            return File(await _fvService.GetFVForOrder(orderId), "application/json", "FV.pdf");
+        }
     }
 
     public class FilterDto

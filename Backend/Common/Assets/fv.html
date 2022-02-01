@@ -1,11 +1,8 @@
 ﻿<!DOCTYPE html>
-<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FV template</title>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8" />
 </head>
 <style>
     body {
@@ -15,29 +12,45 @@
         margin: auto;
     }
 
+    * {
+        letter-spacing: 0.1px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 16px;
+    }
+
     .data-information {
         text-align: right;
         font-family: 'Times New Roman', Times, serif;
-        font-size: small;
     }
 
     .logo {
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         color: crimson;
-        font-size: xx-large;
         text-align: center;
     }
 
     .fv-number {
         text-align: center;
-        font: 1em sans-serif;
-        font-size: x-large;
-        /* align-content: center; */
+        font: 20px sans-serif;
     }
 
     .fv-number-additional {
         font: optional;
         text-align: center;
+    }
+
+    .flex {
+        display: flex;
+        -webkit-box-pack: space-between;
+        justify-content: space-between;
+        display: -webkit-box;
+    }
+
+    .flex-center {
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        display: -webkit-box;
     }
 
     heading {
@@ -47,7 +60,6 @@
     }
 
     personal-data {
-        font-size: small;
         font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
@@ -55,19 +67,11 @@
         box-sizing: border-box;
     }
 
-    /* Create two equal columns that floats next to each other */
     .column {
         float: left;
         width: 50%;
         padding: 50px;
     }
-
-    /* Clear floats after the columns */
-    /* .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    } */
 
     td {
         border: 1px solid gray;
@@ -88,6 +92,11 @@
         font-size: medium;
     }
 
+    .font-bolder {
+        font-weight: bold;
+        font-size: 17px;
+    }
+
     .table-product {
         text-align: right;
     }
@@ -95,10 +104,6 @@
     .table-product-name {
         text-align: left;
     }
-
-    /* .summary-table-all {
-        background: lightgray;
-    } */
 
     price-summary {
         font-family: 'Times New Roman', Times, serif;
@@ -109,26 +114,22 @@
 <body>
     <div class="row">
         <div class="column">
-            <div class="logo">ShopFly</div>
-            <div class="fv-number-additional">Możesz kupić tutaj wszystko</div>
+            <!-- <div class="logo">ShopFly</div> -->
         </div>
         <div class="column">
             <div class="data-information">
-                Miejsce wystawienia: _____________<br>
-                Data wystawienia: __.__.____<br>
-                Data sprzedaży / wykonania usługi: __.__.____<br>
-                Data zakończenia: __.__.____
+                $$dateOfOrder$$
             </div>
         </div>
     </div>
 
-    <div class="fv-number">Faktura nr: ____ / ____</div>
-    <div class="fv-number-additional">Wg zamówienia nr: _________</div>
+    <div class="fv-number flex-center" style="width: 100%;">FV No: $$fvNumber$$</div>
 
     <div class="row">
         <div class="column">
-            <heading>Sprzedawca</heading><br>
+            <heading>Seller</heading><br>
             <personal-data>
+                <!-- todo -->
                 _____________________<br>
                 ul. __________________ ____<br>
                 __-__ ______________<br>
@@ -138,21 +139,21 @@
             </personal-data>
         </div>
         <div class="column">
-            <heading>Nabywca</heading><br>
+            <heading>Customer</heading><br>
             <personal-data>
-                _____________________<br>
-                ul. __________________ ____<br>
-                __-__ ______________<br>
-                NIP: ___-___-__-__<br>
-                Telefon: ___-___-___<br>
-                Email: __________________<br>
+                $$customerFullName$$<br>
+                <span class="font-bolder">Address: </span> $$customerStreet$$/$$customerPostal$$<br>
+                $$customerCity$$/$$customerCountry$$<br>
+                $$nip$$
+                <span class="font-bolder">Phone:</span> $$customerPhone$$<br>
+                <span class="font-bolder">Email:</span> $$customerEmail$$<br>
             </personal-data>
         </div>
     </div>
-
-    <table class="order-table">
+    $$content$$
+    <!-- <table class="order-table">
         <tr class="table-main">
-            <td>lp</td>
+            <td>No.</td>
             <td>Nazwa towaru / usługi</td>
             <td>Ilość</td>
             <td>j.m.</td>
@@ -192,37 +193,52 @@
         </tr>
 
         <!-- add more products -->
-    </table>
+    <!-- </table> -->
     <div class="row">
         <div class="column">
-            <table class="summary-table">
+            <h2>Summary</h2>
+            <span class="flex">
+                <span class="font-bolder">
+                    Total VAT:
+                </span>
+                <span style="width: 10px;"></span> $$totalVat$$$
+            </span>
+            <span class="flex">
+                <span class="font-bolder">
+                    Total Netto:
+                </span>
+                <span style="width: 10px;"></span> $$totalNetto$$$
+            </span>
+            <hr>
+            <span class="flex">
+                <span class="font-bolder">
+                    Total Brutto:
+                </span>
+                $$totalBrutto$$$
+            </span>
+            <!-- <table class="summary-table">
                 <tr class="table-main">
-                    <td>Stawka VAT [%]</td>
+                    <td></td>
                     <td>Netto</td>
                     <td>VAT</td>
                     <td>Brutto</td>
                 </tr>
                 <tr class="table-product">
-                    <td>8</td>
-                    <td>13.34</td>
-                    <td>1.07</td>
-                    <td>14.41</td>
-                </tr>
-                <tr class="table-product">
-                    <td>23</td>
+                    <td>23%</td>
                     <td>158.97</td>
                     <td>36.56</td>
                     <td>195.53</td>
                 </tr>
                 <tr class="table-product">
-                    <td class="table-product-name">Razem</td>
+                    <td class="table-product-name"></td>
                     <td>172.31</td>
                     <td>37.63</td>
                     <td>209.94</td>
                 </tr>
-            </table>
+            </table> -->
+
         </div>
-        <div class="column">
+        <!-- <div class="column">
             <heading>Podsumowanie zamówienia</heading><br>
             <price-summary>
                 Pozostało do zapłaty: ___________<br>
@@ -230,21 +246,10 @@
                 Termin zapłaty: ______________<br>
                 Dostawa: ______________<br>
             </price-summary>
-        </div>
+        </div> -->
     </div>
 
     <br><br><br><br><br><br><br><br><br><br><br>
-
-    <div class="row">
-        <div class="column">
-            _________________________________<br>
-            Osoba upoważniona do odbioru faktury
-        </div>
-        <div class="column">
-            _________________________________<br>
-            Osoba upoważniona do wystawienia faktury
-        </div>
-
     </div>
 
 </body>
