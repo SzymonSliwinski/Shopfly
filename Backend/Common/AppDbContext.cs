@@ -193,11 +193,11 @@ namespace Common
             modelBuilder.Entity<Order>()
                 .Property(o => o.Nip).HasMaxLength(10).IsRequired(false);
             modelBuilder.Entity<Order>()
-                .Property(o => o.CompanyName).HasMaxLength(10).IsRequired(false);
+                .Property(o => o.CompanyName).HasMaxLength(30).IsRequired(false);
             modelBuilder.Entity<Order>()
-                .Property(o => o.CustomerPhoneNumber).HasMaxLength(10).IsRequired(false);
+                .Property(o => o.CustomerPhoneNumber).HasMaxLength(30).IsRequired(false);
             modelBuilder.Entity<Order>()
-                .Property(o => o.CustomerEmail).HasMaxLength(10).IsRequired(false);
+                .Property(o => o.CustomerEmail).HasMaxLength(30).IsRequired(false);
         }
 
         private void ConfigurePaymentTypes(ModelBuilder modelBuilder)

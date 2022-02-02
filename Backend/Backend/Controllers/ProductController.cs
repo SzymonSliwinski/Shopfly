@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Common.Dtos;
 using Common.Models.ShopModels;
 using System.Collections;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+
 namespace ShopPanelWebApi.Controllers
 {
     [Route("shop/product")]
@@ -105,7 +108,6 @@ namespace ShopPanelWebApi.Controllers
                   .ThenInclude(c => c.Customer)
                 .SingleAsync());
         }
-
     }
 
     public class FilterDto

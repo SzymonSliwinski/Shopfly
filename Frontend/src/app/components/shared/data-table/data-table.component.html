@@ -50,6 +50,11 @@
                     <button *ngIf="buttons.indexOf(tableButton.Details) != -1" mat-stroked-button
                         (click)="onDetailsClick(element)">Details
                     </button>
+                    <!-- document -->
+                    <button *ngIf="buttons.indexOf(tableButton.Document) != -1" mat-icon-button
+                        (click)="onDocumentClick(element)">
+                        <mat-icon>description</mat-icon>
+                    </button>
                     <!-- menu -->
                     <button *ngIf="buttons.indexOf(tableButton.Menu) != -1" mat-icon-button
                         [matMenuTriggerFor]="moreMenu" (click)="onMenuClick(element)">

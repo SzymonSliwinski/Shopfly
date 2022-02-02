@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ShopPanelWebApi.Dtos;
+using Microsoft.AspNetCore.Hosting;
+using ShopWebApi.Services;
 
 namespace ShopWebApi.Controllers
 {
@@ -17,20 +19,25 @@ namespace ShopWebApi.Controllers
     public class OrderController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public OrderController(AppDbContext context)
+        private FvService _fvService;
+        private MailService _mailService;
+
+        public OrderController(AppDbContext context, IWebHostEnvironment env)
         {
+            _fvService = new FvService(context, env);
             _context = context;
+            _mailService = new MailService();
         }
 
         [HttpGet("get-all")]
-        public async Task<ActionResult<Order>> GetAll()
+        public async System.Threading.Tasks.Task<ActionResult<Order>> GetAll()
         {
             var service = new CrudService<Order>(_context);
             return Ok(await service.GetAll());
         }
 
         [HttpGet("get-user-orders/{userId}")]
-        public async Task<ActionResult<List<OrderDisplayDto>>> GetUserOrders(int userId)
+        public async System.Threading.Tasks.Task<ActionResult<List<OrderDisplayDto>>> GetUserOrders(int userId)
         {
             var result = new List<OrderDisplayDto>();
 
@@ -51,7 +58,7 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpGet("get-all-for-order/{orderId}")]
-        public async Task<ActionResult<List<ProductDisplayDto>>> GetProductsForOrder(int orderId)
+        public async System.Threading.Tasks.Task<ActionResult<List<ProductDisplayDto>>> GetProductsForOrder(int orderId)
         {
             var results = new List<ProductDisplayDto>();
             var ordersProducts = await _context.OrdersProducts
@@ -68,7 +75,7 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> Add([FromBody] Order order)
+        public async System.Threading.Tasks.Task<ActionResult<Order>> Add([FromBody] Order order)
         {
             var service = new CrudService<Order>(_context);
 
@@ -105,10 +112,17 @@ namespace ShopWebApi.Controllers
 
             order.CustomerPhoneNumber = order.CustomerPhoneNumber.Trim();
             order.CustomerEmail = order.CustomerEmail.Trim();
+            await service.Insert(order);
+            await _context.SaveChangesAsync();
+            _mailService.SendEmail(order.CustomerEmail, "New order from shopfly", "Thank you for your purchase", await _fvService.GetFVForOrder(order.Id));
 
-            return Ok(await service.Insert(order));
+            return Ok(order);
         }
 
-
+        [HttpGet("fv/{orderId}")]
+        public async System.Threading.Tasks.Task<ActionResult<byte[]>> GetFvForOrder(int orderId)
+        {
+            return File(await _fvService.GetFVForOrder(orderId), "application/json", "FV.pdf");
+        }
     }
 }

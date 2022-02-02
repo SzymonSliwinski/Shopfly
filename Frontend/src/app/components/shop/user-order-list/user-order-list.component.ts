@@ -5,7 +5,7 @@ import { OrderDisplayDto } from 'src/app/dto/order-display.dto';
 import { OrdersDto } from 'src/app/dto/orders.dto';
 import { ContentMode, TableColumnDto } from 'src/app/dto/table-column.dto';
 import { OrdersService } from 'src/app/services/shop/orders.service';
-import { TableButton } from '../../shared/data-table/data-table.component';
+import { MenuButton, TableButton } from '../../shared/data-table/data-table.component';
 import { OrderProductsDialog } from '../../shop-panel/orders/order-products/order-products.dialog';
 
 @Component({
@@ -15,7 +15,7 @@ import { OrderProductsDialog } from '../../shop-panel/orders/order-products/orde
 })
 export class UserOrderListComponent implements OnInit {
   public ordersList: OrderDisplayDto[] = [];
-  public tableButtons: TableButton[] = [TableButton.Details];
+  public tableButtons: TableButton[] = [TableButton.Details, TableButton.Document];
   public displayedColumns: TableColumnDto[] =
     [
       { title: 'Total value', objectField: 'totalValue' },
@@ -42,6 +42,13 @@ export class UserOrderListComponent implements OnInit {
       this.columnsNames.push(c.objectField!);
     });
     this.isLoaded = true;
+  }
+
+  async onDocumentClick(orderDto: OrderDisplayDto) {
+    const pdfReq = await this._ordersService.getFvForOrder(orderDto.id);
+    const blob = new Blob([pdfReq], { type: 'application/pdf' });
+    const fileURL = URL.createObjectURL(blob);
+    window.open(fileURL, '_blank');
   }
 
   async onDetailsClick(orderDto: OrderDisplayDto) {

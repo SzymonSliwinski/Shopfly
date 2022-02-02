@@ -4,7 +4,7 @@
 <div class="radius white-background center w-95 flex flex-space-evenly p-25 flex-column">
     <shared-data-table *ngIf="isLoaded && ordersList.length > 0 " [dataSource]="ordersList"
         [displayedColumns]="displayedColumns" [columnsNames]="columnsNames" [buttons]="tableButtons"
-        (detailsEvent)="onDetailsClick($event)">
+        (detailsEvent)="onDetailsClick($event)" (documentEvent)="onDocumentClick($event)">
     </shared-data-table>
 
     <h2 *ngIf="ordersList.length === 0">You have no orders</h2>
