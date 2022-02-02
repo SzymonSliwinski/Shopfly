@@ -35,7 +35,6 @@
     }
 
     .fv-number-additional {
-        font: optional;
         text-align: center;
     }
 
@@ -89,7 +88,6 @@
         margin-right: auto;
         font-family: 'Times New Roman', Times, serif;
         font-weight: lighter;
-        font-size: medium;
     }
 
     .font-bolder {
@@ -103,6 +101,15 @@
 
     .table-product-name {
         text-align: left;
+    }
+
+    .table-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        width: 100%;
+        -webkit-box-pack: center;
+        clear: both;
     }
 
     price-summary {
@@ -150,50 +157,11 @@
             </personal-data>
         </div>
     </div>
-    $$content$$
-    <!-- <table class="order-table">
-        <tr class="table-main">
-            <td>No.</td>
-            <td>Nazwa towaru / usługi</td>
-            <td>Ilość</td>
-            <td>j.m.</td>
-            <td>Cena netto</td>
-            <td>Rabat [%]</td>
-            <td>Cena netto po rabacie</td>
-            <td>VAT [%]</td>
-            <td>Kwota netto</td>
-            <td>Kwota VAT</td>
-            <td>Kwota brutto</td>
-        </tr>
-        <tr class="table-product">
-            <td>1</td>
-            <td class="table-product-name">name 1</td>
-            <td>3</td>
-            <td>kg</td>
-            <td>52.99</td>
-            <td>0</td>
-            <td>158.97</td>
-            <td>23</td>
-            <td>158.97</td>
-            <td>36.56‬</td>
-            <td>195.53</td>
-        </tr>
-        <tr class="table-product">
-            <td>2</td>
-            <td class="table-product-name">name 2</td>
-            <td>1.67</td>
-            <td>m</td>
-            <td>8.50</td>
-            <td>6</td>
-            <td>7.99</td>
-            <td>8</td>
-            <td>13.34</td>
-            <td>1.07</td>
-            <td>14.41</td>
-        </tr>
 
-        <!-- add more products -->
-    <!-- </table> -->
+    <div class="table-wrapper">
+        $$content$$
+    </div>
+
     <div class="row">
         <div class="column">
             <h2>Summary</h2>
@@ -216,27 +184,6 @@
                 </span>
                 $$totalBrutto$$$
             </span>
-            <!-- <table class="summary-table">
-                <tr class="table-main">
-                    <td></td>
-                    <td>Netto</td>
-                    <td>VAT</td>
-                    <td>Brutto</td>
-                </tr>
-                <tr class="table-product">
-                    <td>23%</td>
-                    <td>158.97</td>
-                    <td>36.56</td>
-                    <td>195.53</td>
-                </tr>
-                <tr class="table-product">
-                    <td class="table-product-name"></td>
-                    <td>172.31</td>
-                    <td>37.63</td>
-                    <td>209.94</td>
-                </tr>
-            </table> -->
-
         </div>
         <!-- <div class="column">
             <heading>Podsumowanie zamówienia</heading><br>
