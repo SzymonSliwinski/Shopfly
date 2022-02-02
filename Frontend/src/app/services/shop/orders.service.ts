@@ -21,4 +21,9 @@ export class OrdersService {
     public async getAllProductsForOrder(orderId: number): Promise<ProductDisplayDto[]> {
         return this._http.get<ProductDisplayDto[]>(environment._shopApiUrl + `shop/order/get-all-for-order/${orderId}`).toPromise()
     }
+
+    public async getFvForOrder(orderId: number): Promise<Blob> {
+        return this._http.get(environment._shopApiUrl + `shop/order/fv/${orderId}`,
+            { responseType: 'blob' }).toPromise()
+    }
 }

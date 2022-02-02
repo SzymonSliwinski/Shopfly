@@ -8,7 +8,8 @@ export enum TableButton {
   Delete,
   Edit,
   Details,
-  Menu
+  Menu,
+  Document
 };
 
 export enum MenuButton {
@@ -42,6 +43,7 @@ export class DataTableComponent<T> implements OnInit, AfterViewInit {
   @Output() public deleteEvent = new EventEmitter<T>();
   @Output() public editEvent = new EventEmitter<T>();
   @Output() public detailsEvent = new EventEmitter<T>();
+  @Output() public documentEvent = new EventEmitter<T>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private readonly _sanitizer: DomSanitizer) { }
@@ -69,6 +71,10 @@ export class DataTableComponent<T> implements OnInit, AfterViewInit {
 
   public onEditClick(element: T) {
     this.editEvent.emit(element);
+  }
+
+  public onDocumentClick(element: T) {
+    this.documentEvent.emit(element);
   }
 
   public onDetailsClick(element: T): void {

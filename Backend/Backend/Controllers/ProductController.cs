@@ -24,13 +24,11 @@ namespace ShopPanelWebApi.Controllers
         private readonly AppDbContext _context;
         private CrudService<Product> _service;
         private ShopWebApi.Services.CategoryService _catService;
-        private FvService _fvService;
-        public ProductController(AppDbContext context, IWebHostEnvironment env)
+        public ProductController(AppDbContext context)
         {
             _context = context;
             _service = new CrudService<Product>(_context);
             _catService = new ShopWebApi.Services.CategoryService();
-            _fvService = new FvService(context, env);
         }
 
         [HttpPost("by-filter/page/{page}")]
@@ -109,14 +107,6 @@ namespace ShopPanelWebApi.Controllers
                  .Include(p => p.Comments)
                   .ThenInclude(c => c.Customer)
                 .SingleAsync());
-        }
-
-
-
-        [HttpGet("fv/{orderId}")]
-        public async System.Threading.Tasks.Task<ActionResult<byte[]>> GetFvForOrder(int orderId)
-        {
-            return File(await _fvService.GetFVForOrder(orderId), "application/json", "FV.pdf");
         }
     }
 

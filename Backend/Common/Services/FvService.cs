@@ -39,9 +39,9 @@ namespace Common.Services
             html = html.Replace("$$nip$$", order.Nip != null ? "<span class=\"bolded-font\">NIP:</span>" + order.Nip + "<br>" : "");
             html = html.Replace("$$customerPhone$$", order.CustomerPhoneNumber);
             html = html.Replace("$$customerEmail$$", order.CustomerEmail);
-            html = html.Replace("$$totalVat$$", (order.PriceTotal * 0.23).ToString() + "$");
-            html = html.Replace("$$totalNetto$$", (order.PriceTotal * 0.77).ToString() + "$");
-            html = html.Replace("$$totalBrutto$$", order.PriceTotal.ToString() + "$");
+            html = html.Replace("$$totalVat$$", (order.PriceTotal * 0.23).ToString());
+            html = html.Replace("$$totalNetto$$", (order.PriceTotal * 0.77).ToString());
+            html = html.Replace("$$totalBrutto$$", order.PriceTotal.ToString());
             html = html.Replace("$$customerStreet$$", order.BillingAddressStreet == null ? order.DeliveryAddressStreet : order.BillingAddressStreet);
             html = html.Replace("$$customerPostal$$", order.BillingAddressPostal == null ? order.DeliveryAddressPostal : order.DeliveryAddressPostal);
             html = html.Replace("$$customerCity$$", order.BillingAddressCity == null ? order.DeliveryAddressCity : order.BillingAddressCity);
@@ -63,12 +63,12 @@ namespace Common.Services
             //headers
             result.Append("<tr class=\"table-main\">");
             result.Append("<td>No</td>");
-            result.Append("<td>ID</td>");
+            result.Append("<td>Identifier</td>");
             result.Append("<td>Product name</td>");
             result.Append("<td>Quantity</td>");
             result.Append("<td>VAT</td>");
-            result.Append("<td>Netto</td>");
-            result.Append("<td>Brutto</td>");
+            result.Append("<td>Netto Price</td>");
+            result.Append("<td>Brutto Price</td>");
             result.Append("</tr>");
             var iter = 1;
             foreach (var op in order.OrdersProducts)
@@ -78,9 +78,9 @@ namespace Common.Services
                 result.Append("<td>" + op.ProductId + "</td>");
                 result.Append("<td>" + op.Product.Name + "</td>");
                 result.Append("<td>" + op.ProductQuantity + "</td>");
-                result.Append("<td>" + Math.Round((op.Product.BruttoPrice * 0.23), 2).ToString() + "</td>");
-                result.Append("<td>" + Math.Round((op.Product.BruttoPrice * 0.77), 2).ToString() + "</td>");
-                result.Append("<td>" + Math.Round((op.Product.BruttoPrice), 2).ToString() + "</td>");
+                result.Append("<td>" + Math.Round((op.Product.BruttoPrice * 0.23), 2).ToString() + "$</td>");
+                result.Append("<td>" + Math.Round((op.Product.BruttoPrice * 0.77), 2).ToString() + "$</td>");
+                result.Append("<td>" + Math.Round((op.Product.BruttoPrice), 2).ToString() + "$</td>");
                 result.Append("</tr>");
                 iter++;
             }

@@ -25,7 +25,6 @@ export class OrderProductsDialog implements OnInit {
       { title: 'Category', objectField: 'category' },
       { title: 'Netto', objectField: 'nettoPrice' },
       { title: 'Brutto', objectField: 'bruttoPrice' },
-      { title: 'Visible', objectField: 'isVisible', contentMode: ContentMode.TrueOrFalse },
       { title: '', objectField: 'buttons', contentMode: ContentMode.Buttons },
     ];
   public columnsNames: string[] = [];
