@@ -40,7 +40,9 @@ export class SignInComponent implements OnInit {
     let result = { email: this.email!.value, password: this.password!.value } as AuthenticationDto;
     let isSucceeded = await this._authService.authenticate(result);
     if (isSucceeded === true) {
-      this.router.navigate(['']);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['']));
+
       this.wrongCredentialsError = false;
     }
     else {
