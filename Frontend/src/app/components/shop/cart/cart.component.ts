@@ -6,7 +6,8 @@ import { CustomerCart } from 'src/app/models/shop-models/customer-cart.model';
 import { CartProductsListComponent } from './cart-products-list/cart-products-list.component';
 import { Carrier } from 'src/app/models/shop-models/carrier.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ProductsService } from 'src/app/services/shop-panel-services/products.service';
+// import { ProductsService } from 'src/app/services/shop-panel-services/products.service';
+import { ProductsService } from 'src/app/services/shop/product.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
   step1Completed = false;
   step2Completed = false;
   step3Completed = false;
-
+  isLoaded = false;
   constructor(
     private readonly _customerCartService: CustomerCartService,
     private readonly _productService: ProductsService,
@@ -38,11 +39,12 @@ export class CartComponent implements OnInit {
     this.customerCart.forEach(async val => {
       this.productsUrl[val.productId] = await this.getPhotoForProduct(val.productId!);
     });
+    this.isLoaded = true;
   }
 
   public async getPhotoForProduct(productId: number): Promise<SafeUrl> {
     const blob = await this._productService.getPhoto(productId);
-    const urll = URL.createObjectURL(blob);
+    const urll = URL.createObjectURL(blob!);
     return this._sanitizer.bypassSecurityTrustUrl(urll);
   }
 

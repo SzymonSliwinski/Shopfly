@@ -1,6 +1,6 @@
 <div class="h-50"></div>
 
-<mat-stepper #stepper (selectionChange)="onStepChange($event)">
+<mat-stepper #stepper (selectionChange)="onStepChange($event)" *ngIf="isLoaded">
     <mat-step>
         <ng-template matStepLabel>Products</ng-template>
         <app-cart-products-list [order]="newOrder" [customerCart]="customerCart" [productsUrl]="productsUrl">
