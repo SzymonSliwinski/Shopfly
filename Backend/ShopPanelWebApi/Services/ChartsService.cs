@@ -32,7 +32,7 @@ namespace ShopPanelWebApi.Services
                 result.Add(day.Date, 0);
 
             foreach (var orderFromDays in ordersFromDays)
-                result[orderFromDays.Date]++;
+                result[orderFromDays.Date.Date]++;
 
             return result;
         }
@@ -88,7 +88,7 @@ namespace ShopPanelWebApi.Services
                 newUserDaysDictionary.Add(day.Date, 0);
 
             foreach (var customer in newUsersFromDaysList)
-                newUserDaysDictionary[customer.CreateDate]++;
+                newUserDaysDictionary[customer.CreateDate.Date]++;
 
             return newUserDaysDictionary;
         }
@@ -106,7 +106,7 @@ namespace ShopPanelWebApi.Services
                 completeOrdersDaysDictionary.Add(day.Date, 0);
 
             foreach (var order in completeOrdersFromDaysList)
-                completeOrdersDaysDictionary[order.CompleteDate]++;
+                completeOrdersDaysDictionary[order.CompleteDate.Date]++;
 
             return completeOrdersDaysDictionary;
         }
