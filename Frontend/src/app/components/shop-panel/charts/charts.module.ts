@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ChartsComponent } from './charts.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ChartModule } from 'primeng/chart';
+import { ChartService } from 'src/app/services/shop-panel-services/profile.service copy';
 
 @NgModule({
     declarations: [
@@ -25,9 +27,11 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatInputModule,
         MatButtonModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        ChartModule
     ],
     providers: [
+        ChartService
     ],
     exports: [
         ChartsComponent,

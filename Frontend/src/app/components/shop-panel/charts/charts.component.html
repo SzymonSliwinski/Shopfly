@@ -7,94 +7,36 @@
 </div>
 
 <!-- orders -->
-<div class="radius white-background w-60 flex flex-space-evenly  flex-column center">
+<div class="radius white-background w-60 flex flex-space-evenly flex-column center" *ngIf="isLoaded1">
     <span class="flex align-items-center p-l-10 p-t-10">
         <mat-icon style="position:relative; top: -8px;">shopping_basket</mat-icon>
         <h2 class="flex-align-start">Orders chart</h2>
 
         <div class="flex m-r flex-align-center flex-buttons">
-            <span>
+            <span class="flex flex-align-center" style="justify-content: center; align-items: center;">
                 <mat-form-field appearance="fill">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker1">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
+                        <input matStartDate placeholder="Start date" [(ngModel)]="dateRange1.from">
+                        <input matEndDate placeholder="End date" [(ngModel)]="dateRange1.to">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker1></mat-date-range-picker>
                 </mat-form-field>
+                <button mat-icon-button (click)="onDate1Change()">
+                    <mat-icon>
+                        search
+                    </mat-icon>
+                </button>
             </span>
         </div>
     </span>
     <div class="mat-divider w-100">
-        to do
-        <!--divider-->
     </div>
 
-    <div></div>
-
-</div>
-
-<div class="h-50">
-    <!-- spacer -->
-</div>
-
-<!-- carriers -->
-<div class="radius white-background w-60 flex flex-space-evenly flex-column center">
-    <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon style="position:relative; top: -8px;">local_shipping</mat-icon>
-        <h2 class="flex-align-start">Carriers chart</h2>
-        <div class="flex m-r flex-align-center flex-buttons">
-            <span>
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter a date range</mat-label>
-                    <mat-date-range-input [rangePicker]="picker2">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-date-range-picker #picker2></mat-date-range-picker>
-                </mat-form-field>
-            </span>
-        </div>
-    </span>
-    <div class="mat-divider w-100">
-        to do
-        <!--divider-->
+    <div class="w-100">
+        <p-chart type="line" [data]="chart1Data" style="width: 100%"></p-chart>
     </div>
-
-    <div></div>
-</div>
-
-<div class="h-50">
-    <!-- spacer -->
-</div>
-
-<!-- paymetType -->
-<div class="radius white-background w-60 flex flex-space-evenly  flex-column center">
-    <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon style="position:relative; top: -8px;">credit_card</mat-icon>
-        <h2 class="flex-align-start">Payment chart</h2>
-        <div class="flex m-r flex-align-center flex-buttons">
-            <span>
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter a date range</mat-label>
-                    <mat-date-range-input [rangePicker]="picker3">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                    <mat-date-range-picker #picker3></mat-date-range-picker>
-                </mat-form-field>
-            </span>
-        </div>
-    </span>
-    <div class="mat-divider w-100">
-        to do
-        <!--divider-->
-    </div>
-
-    <div></div>
 </div>
 
 <div class="h-50">
@@ -102,30 +44,36 @@
 </div>
 
 <!-- realized order -->
-<div class="radius white-background w-60 flex flex-space-evenly  flex-column center">
+<div class="radius white-background w-60 flex flex-space-evenly  flex-column center" *ngIf="isLoaded4">
     <span class="flex align-items-center p-l-10 p-t-10">
         <mat-icon style="position:relative; top: -8px;">library_add_check</mat-icon>
         <h2 class="flex-align-start">Realized orders chart</h2>
         <div class="flex m-r flex-align-center flex-buttons">
-            <span>
+            <span class="flex flex-align-center" style="justify-content: center; align-items: center;">
                 <mat-form-field appearance="fill">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker4">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
+                        <input matStartDate placeholder="Start date" [(ngModel)]="dateRange4.from">
+                        <input matEndDate placeholder="End date" [(ngModel)]="dateRange4.to">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker4></mat-date-range-picker>
                 </mat-form-field>
+                <button mat-icon-button (click)="onDate4Change()">
+                    <mat-icon>
+                        search
+                    </mat-icon>
+                </button>
             </span>
         </div>
     </span>
     <div class="mat-divider w-100">
-        to do
         <!--divider-->
     </div>
 
-    <div></div>
+    <div>
+        <p-chart type="line" [data]="chart4Data" style="width: 100%"></p-chart>
+    </div>
 </div>
 
 <div class="h-50">
@@ -133,28 +81,35 @@
 </div>
 
 <!-- realized order -->
-<div class="radius white-background w-60 flex flex-space-evenly  flex-column center">
+<div class="radius white-background w-60 flex flex-space-evenly  flex-column center" *ngIf="isLoaded5">
     <span class="flex align-items-center p-l-10 p-t-10">
         <mat-icon style="position:relative; top: -8px;">accessibility_new</mat-icon>
         <h2 class="flex-align-start">New customers</h2>
         <div class="flex m-r flex-align-center flex-buttons">
-            <span>
+            <span class="flex flex-align-center" style="justify-content: center; align-items: center;">
                 <mat-form-field appearance="fill">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker5">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
+                        <input matStartDate placeholder="Start date" [(ngModel)]="dateRange5.from">
+                        <input matEndDate placeholder="End date" [(ngModel)]="dateRange5.to">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker5></mat-date-range-picker>
                 </mat-form-field>
+                <button mat-icon-button (click)="onDate5Change()">
+                    <mat-icon>
+                        search
+                    </mat-icon>
+                </button>
             </span>
         </div>
     </span>
     <div class="mat-divider w-100">
-        to do
         <!--divider-->
     </div>
 
-    <div></div>
+    <div>
+        <p-chart type="line" [data]="chart5Data" style="width: 100%"></p-chart>
+    </div>
 </div>
+<div style="height: 100px;"></div>
