@@ -11,6 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ShopRoutingModule } from '../shop-routing.module';
 import { ShopAuthenticationService } from 'src/app/services/shop/shop-authentication.service';
 import { CustomerService } from 'src/app/services/shop/customer-service';
+import { ShopSettingsService } from 'src/app/services/shop-settings.service';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -28,7 +29,8 @@ import { CustomerService } from 'src/app/services/shop/customer-service';
   ],
   providers: [
     ShopAuthenticationService,
-    CustomerService
+    CustomerService,
+    ShopSettingsService
   ],
   exports: [
     NavbarComponent,

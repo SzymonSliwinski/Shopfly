@@ -5,10 +5,15 @@
     </mat-icon>
     <!-- logo -->
     <div class="logo flex flex-center" [routerLink]="['']">
-      <mat-icon class="shop-icon">
-        storefront
-      </mat-icon>
-      <span class="logo-part">Shop</span>fly
+      <span *ngIf="!settings || !settings.shopLogoPath">
+        <mat-icon class="shop-icon">
+          storefront
+        </mat-icon>
+        <span class="logo-part">Shop</span>fly
+      </span>
+      <span *ngIf="settings && settings.shopLogoPath">
+        <img [src]="'assets/settings/' +settings.shopLogoPath" alt="">
+      </span>
     </div>
 
     <div class="search" *ngIf="displayNavbarContent">

@@ -48,5 +48,10 @@ export interface ShopSettings {
     defaultSortBy: SortOption;
     importFileSeparator: string;
     multipleValuesInFileSeparator: string;
+    shopEmail: string;
+    shopPhone: string;
+    shopNip: string;
+    shopAddress: string;
+
 
 }

@@ -47,7 +47,10 @@ export class SummaryComponent implements OnInit {
   async onSubmit() {
     this.order.carrier = null;
     this.order.paymentType = null; console.log(this.order)
-    await this._ordersService.add(this.order);
+    await this._ordersService.add(this.order).catch(async () => {
+      await this._customerCartService.clear();
+      this._router.navigate(['']);
+    });
     await this._customerCartService.clear();
     this._router.navigate(['']);
   }

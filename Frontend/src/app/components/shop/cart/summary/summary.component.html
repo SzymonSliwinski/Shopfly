@@ -35,13 +35,13 @@
 
         <span class="flex">
             <p class="bolded">Payment:</p>
-            <p style="margin-left: 30px;">
+            <p style="margin-left: 30px;" *ngIf="order.paymentType">
                 {{order.paymentType!.name}}
             </p>
         </span>
         <span class="flex">
             <p class="bolded">Carrier:</p>
-            <p style="margin-left: 30px;">
+            <p style="margin-left: 30px;" *ngIf="order.carrier">
                 {{order.carrier!.name}}
             </p>
         </span>

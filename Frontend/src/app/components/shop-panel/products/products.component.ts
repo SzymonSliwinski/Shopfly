@@ -12,6 +12,7 @@ import { AddCarrierDialog } from './carriers/add-carrier/add-carrier.dialog';
 import { AddCategoryDialog } from './categories/add-category/add-category.dialog';
 import { CategoriesComponent } from './categories/categories.component';
 import { AddListsDialog } from './lists/add-lists/add-lists.dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-products',
@@ -26,15 +27,17 @@ export class ProductsComponent implements OnInit {
   @ViewChild(CategoriesComponent) child!: CategoriesComponent;
   isLoaded = false;
   public isAddMode = false;
+  public isEdit = false;
 
   constructor(
     private readonly _productsService: ProductsService,
     private readonly _categoriesService: CategoriesService,
     public _dialog: MatDialog,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _snackBar: MatSnackBar
   ) { }
 
-  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Menu];
+  public tableButtons: TableButton[] = [TableButton.Edit, TableButton.Delete];
   public menuButtons: MenuButton[] = [MenuButton.Delete, MenuButton.Details];
   public newProduct = {} as Product;
   public displayedColumns: TableColumnDto[] =
@@ -57,7 +60,9 @@ export class ProductsComponent implements OnInit {
     this.productsList = await this._productsService.getForTable();
     this.categoriesList = await this._categoriesService.getOnlyChilds();
     this.productsList.forEach(async product => {
-      product.photo = await this.getPhotoForProduct(product.id);
+      const p = await this.getPhotoForProduct(product.id);
+      if (p)
+        product.photo = p;
     });
     this.displayedColumns.forEach(c => {
       this.columnsNames.push(c.objectField!);
@@ -70,17 +75,39 @@ export class ProductsComponent implements OnInit {
   }
 
   public switchAddMode() {
+    if (this.isAddMode) {
+      this.isEdit = false;
+      this.newProduct = {} as Product;
+    }
     this.isAddMode = !this.isAddMode;
   }
 
   async onAddClick() {
-    await this._productsService.add(this.newProduct);
-    await this._productsService.addPhoto(this.uploadedFile);
+    if (!this.isEdit) {
+      await this._productsService.add(this.newProduct);
+      await this._productsService.addPhoto(this.uploadedFile);
+    }
+    else {
+      await this._productsService.edit(this.newProduct);
+      const v = this.productsList.find(c => c.id == this.newProduct.id);
+      this.isLoaded = false;
+      v!.name = this.newProduct.name;
+      v!.nettoPrice = this.newProduct.nettoPrice;
+      v!.bruttoPrice = this.newProduct.bruttoPrice;
+      v!.isVisible = this.newProduct.isVisible;
+      v!.stock = this.newProduct.stock!;
+      v!.category = this.categoriesList.find(c => c.id == this.newProduct.categoryId)!.name;
+      this.isLoaded = true;
+      //    await this._productsService.editPhoto(this.uploadedFile);
+    }
+    this._snackBar.open("Saved!", "OK", { duration: 5000 });
   }
 
-  private async getPhotoForProduct(productId: number): Promise<SafeUrl> {
+  private async getPhotoForProduct(productId: number): Promise<SafeUrl | void> {
     const blob = await this._productsService.getPhoto(productId);
-    const urll = URL.createObjectURL(blob);
+    if (!blob)
+      return;
+    const urll = URL.createObjectURL(blob!);
     return this._sanitizer.bypassSecurityTrustUrl(urll);
   }
 
@@ -113,5 +140,18 @@ export class ProductsComponent implements OnInit {
       this.uploadedFile = event.target.files[0];
       console.log(this.uploadedFile)
     }
+  }
+
+  async onDeleteClick(product: ProductDisplayDto) {
+    this.isLoaded = false;
+    await this._productsService.remove(product.id);
+    this.productsList = this.productsList.filter(item => item.id !== product.id);
+    this.isLoaded = true;
+  }
+
+  async onEditClick(product: ProductDisplayDto) {
+    this.newProduct = await this._productsService.getById(product.id);
+    this.isAddMode = true;
+    this.isEdit = true;
   }
 }

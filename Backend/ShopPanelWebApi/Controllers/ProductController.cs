@@ -49,6 +49,7 @@ namespace ShopPanelWebApi.Controllers
             var results = new List<ProductDisplayDto>();
             var products = await _context.Products
                 .AsQueryable()
+                .Where(c => c.IsActive)
                 .Include(p => p.Category)
                 .Include(c => c.ProductsVariants)
                 .ThenInclude(c => c.ProductsVariantsPhotos)
@@ -146,14 +147,15 @@ namespace ShopPanelWebApi.Controllers
 
             oldProduct.CategoryId = updatedProduct.CategoryId;
             oldProduct.Name = updatedProduct.Name.Trim();
-            oldProduct.TaxId = updatedProduct.TaxId;
-            oldProduct.IsLowStock = updatedProduct.IsLowStock;
-            oldProduct.AdditionalShippingCost = updatedProduct.AdditionalShippingCost;
+            // oldProduct.TaxId = updatedProduct.TaxId;
+            // oldProduct.IsLowStock = updatedProduct.IsLowStock;
+            // oldProduct.AdditionalShippingCost = updatedProduct.AdditionalShippingCost;
             oldProduct.NettoPrice = updatedProduct.NettoPrice;
             oldProduct.BruttoPrice = updatedProduct.BruttoPrice;
             oldProduct.IsVisible = updatedProduct.IsVisible;
             oldProduct.Description = updatedProduct.Description;
             oldProduct.UpdateDate = DateTime.Now.ToLocalTime();
+            oldProduct.Stock = updatedProduct.Stock;
 
             return Ok(await service.Update(oldProduct));
         }

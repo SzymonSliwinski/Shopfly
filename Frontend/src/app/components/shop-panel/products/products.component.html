@@ -83,7 +83,7 @@
     <div class="w-100">
         <shared-data-table *ngIf="isLoaded && !isAddMode" [dataSource]="productsList"
             [displayedColumns]="displayedColumns" [columnsNames]="columnsNames" [buttons]="tableButtons"
-            [menuButtons]="menuButtons">
+            [menuButtons]="menuButtons" (deleteEvent)="onDeleteClick($event)" (editEvent)="onEditClick($event)">
         </shared-data-table>
         <!-- add form -->
         <div *ngIf="isLoaded && isAddMode" class="flex flex-column">
@@ -161,7 +161,7 @@
                 <span class="list-element">Is visible:</span>
                 <span class="p-l-10 p-r-10"></span>
                 <span class="list-element second-row-element">
-                    <mat-checkbox [(ngModel)]="newProduct.isVisible"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="newProduct.isVisible" color="primary"></mat-checkbox>
                 </span>
             </div>
 
