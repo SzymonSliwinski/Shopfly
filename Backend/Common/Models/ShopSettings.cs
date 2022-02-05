@@ -27,6 +27,13 @@
         public char ImportFileSeparator { get; set; }
         public char MultipleValuesInFileSeparator { get; set; }
 
+        // shop info
+        public string ShopAddress { get; set; }
+        public string ShopNip { get; set; }
+        public string ShopPhone { get; set; }
+        public string ShopEmail { get; set; }
+
+
         /// <summary>
         /// default settings for shop
         /// </summary>
@@ -43,6 +50,10 @@
             MaxPhotoSize = 20;
             ImportFileSeparator = '-';
             MultipleValuesInFileSeparator = ';';
+            ShopAddress = "-";
+            ShopNip = "-";
+            ShopPhone = "-";
+            ShopEmail = "-";
         }
     }
 }

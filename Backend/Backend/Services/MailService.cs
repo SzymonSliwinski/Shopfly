@@ -16,9 +16,10 @@ namespace ShopWebApi.Services
             email.Subject = subject;
             email.Body = body;
             email.Attachments.Add(new System.Net.Mail.Attachment(new MemoryStream(attachment), "fv.pdf", "application/pdf"));
-
+            email.IsBodyHtml = true;
             using SmtpClient client = new SmtpClient
             {
+
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 EnableSsl = true,

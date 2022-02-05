@@ -21,9 +21,11 @@ namespace ShopWebApi.Controllers
         private readonly AppDbContext _context;
         private FvService _fvService;
         private MailService _mailService;
+        private string path;
 
         public OrderController(AppDbContext context, IWebHostEnvironment env)
         {
+            path = env.ContentRootPath;
             _fvService = new FvService(context, env);
             _context = context;
             _mailService = new MailService();
@@ -114,7 +116,8 @@ namespace ShopWebApi.Controllers
             order.CustomerEmail = order.CustomerEmail.Trim();
             await service.Insert(order);
             await _context.SaveChangesAsync();
-            _mailService.SendEmail(order.CustomerEmail, "New order from shopfly", "Thank you for your purchase", await _fvService.GetFVForOrder(order.Id));
+            var html = System.IO.File.ReadAllText(path + "\\..\\Common\\Assets\\email.html");
+            _mailService.SendEmail(order.CustomerEmail, "New order from shopfly", html, await _fvService.GetFVForOrder(order.Id));
 
             return Ok(order);
         }

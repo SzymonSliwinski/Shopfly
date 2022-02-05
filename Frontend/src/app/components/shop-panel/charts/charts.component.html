@@ -9,12 +9,12 @@
 <!-- orders -->
 <div class="radius white-background w-60 flex flex-space-evenly flex-column center" *ngIf="isLoaded1">
     <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon style="position:relative; top: -8px;">shopping_basket</mat-icon>
+        <mat-icon style="position:relative; top: 0px;">shopping_basket</mat-icon>
         <h2 class="flex-align-start">Orders chart</h2>
 
         <div class="flex m-r flex-align-center flex-buttons">
             <span class="flex flex-align-center" style="justify-content: center; align-items: center;">
-                <mat-form-field appearance="fill">
+                <mat-form-field>
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker1">
                         <input matStartDate placeholder="Start date" [(ngModel)]="dateRange1.from">
@@ -46,11 +46,11 @@
 <!-- realized order -->
 <div class="radius white-background w-60 flex flex-space-evenly  flex-column center" *ngIf="isLoaded4">
     <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon style="position:relative; top: -8px;">library_add_check</mat-icon>
+        <mat-icon style="position:relative; top: 0px;">library_add_check</mat-icon>
         <h2 class="flex-align-start">Realized orders chart</h2>
         <div class="flex m-r flex-align-center flex-buttons">
             <span class="flex flex-align-center" style="justify-content: center; align-items: center;">
-                <mat-form-field appearance="fill">
+                <mat-form-field>
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker4">
                         <input matStartDate placeholder="Start date" [(ngModel)]="dateRange4.from">
@@ -83,11 +83,11 @@
 <!-- realized order -->
 <div class="radius white-background w-60 flex flex-space-evenly  flex-column center" *ngIf="isLoaded5">
     <span class="flex align-items-center p-l-10 p-t-10">
-        <mat-icon style="position:relative; top: -8px;">accessibility_new</mat-icon>
+        <mat-icon style="position:relative; top: 0px;">accessibility_new</mat-icon>
         <h2 class="flex-align-start">New customers</h2>
         <div class="flex m-r flex-align-center flex-buttons">
             <span class="flex flex-align-center" style="justify-content: center; align-items: center;">
-                <mat-form-field appearance="fill">
+                <mat-form-field>
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker5">
                         <input matStartDate placeholder="Start date" [(ngModel)]="dateRange5.from">

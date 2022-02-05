@@ -32,11 +32,13 @@ namespace Common.Services
                 .Include(c => c.Customer)
                 .Include(c => c.Carrier)
                 .SingleAsync();
+            var settings = await _context.ShopSettings.SingleAsync();
+
             DateTimeOffset d = order.Date;
             html = html.Replace("$$fvNumber$$", d.ToUnixTimeSeconds().ToString());
             html = html.Replace("$$customerFullName$$", order.Customer.Name + " " + order.Customer.Surname);
             html = html.Replace("$$dateOfOrder$$", order.Date.ToString("dd MM yyyy"));
-            html = html.Replace("$$nip$$", order.Nip != null ? "<span class=\"bolded-font\">NIP:</span>" + order.Nip + "<br>" : "");
+            html = html.Replace("$$nip$$", order.Nip != null ? "<span class=\"font-bolder\">NIP:</span>" + order.Nip + "<br>" : "");
             html = html.Replace("$$customerPhone$$", order.CustomerPhoneNumber);
             html = html.Replace("$$customerEmail$$", order.CustomerEmail);
             html = html.Replace("$$totalVat$$", (order.PriceTotal * 0.23).ToString());
@@ -46,6 +48,11 @@ namespace Common.Services
             html = html.Replace("$$customerPostal$$", order.BillingAddressPostal == null ? order.DeliveryAddressPostal : order.DeliveryAddressPostal);
             html = html.Replace("$$customerCity$$", order.BillingAddressCity == null ? order.DeliveryAddressCity : order.BillingAddressCity);
             html = html.Replace("$$customerCountry$$", order.BillingAddressCountry == null ? order.DeliveryAddressCountry : order.BillingAddressCountry);
+            html = html.Replace("$$shopName$$", settings.ShopName);
+            html = html.Replace("$$shopAddress$$", settings.ShopAddress);
+            html = html.Replace("$$shopEmail$$", settings.ShopEmail);
+            html = html.Replace("$$shopPhone$$", settings.ShopPhone);
+            html = html.Replace("$$shopNip$$", "<span class=\"font-bolder\">NIP:</span>" + settings.ShopNip + "<br>");
             html = html.Replace("$$content$$", GetHtmlTable(order));
             return Pdf
                 .From(html)
