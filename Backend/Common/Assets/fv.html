@@ -58,10 +58,6 @@
         color: slateblue;
     }
 
-    personal-data {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-    }
-
     * {
         box-sizing: border-box;
     }
@@ -136,20 +132,18 @@
         <div class="column">
             <heading>Seller</heading><br>
             <personal-data>
-                <!-- todo -->
-                _____________________<br>
-                ul. __________________ ____<br>
-                __-__ ______________<br>
-                NIP: ___-___-__-__<br>
-                Telefon: ___-___-___<br>
-                Email: __________________<br>
+                $$shopName$$<br>
+                <span class="font-bolder">Address: </span> $$shopAddress$$<br>
+                $$shopNip$$
+                <span class="font-bolder">Phone:</span> $$shopPhone$$<br>
+                <span class="font-bolder">Email:</span> $$shopEmail$$<br>
             </personal-data>
         </div>
         <div class="column">
             <heading>Customer</heading><br>
             <personal-data>
                 $$customerFullName$$<br>
-                <span class="font-bolder">Address: </span> $$customerStreet$$/$$customerPostal$$<br>
+                <span class="font-bolder">Address: </span> $$customerStreet$$<br>$$customerPostal$$
                 $$customerCity$$/$$customerCountry$$<br>
                 $$nip$$
                 <span class="font-bolder">Phone:</span> $$customerPhone$$<br>

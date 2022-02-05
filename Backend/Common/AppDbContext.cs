@@ -306,6 +306,18 @@ namespace Common
                 .Property(ss => ss.FaviconPath)
                 .HasMaxLength(200);
             modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopAddress)
+                .HasMaxLength(100);
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopNip)
+                .HasMaxLength(12);
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopEmail)
+                .HasMaxLength(30);
+            modelBuilder.Entity<ShopSettings>()
+                .Property(ss => ss.ShopPhone)
+                .HasMaxLength(15);
+            modelBuilder.Entity<ShopSettings>()
                 .Property(ss => ss.ShopName)
                 .HasMaxLength(30);
         }

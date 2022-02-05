@@ -15,8 +15,4 @@
     <PackageReference Include="OpenHtmlToPdf" Version="1.12.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
